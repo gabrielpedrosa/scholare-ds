@@ -1,0 +1,29 @@
+/*css*/
+.men{
+    -fx-background-image: url("images/menu_fundo.jpg");
+}
+.fundo{
+    -fx-background-color: lightgrey;
+}
+.but-aluno{
+    -fx-background-color: white;
+    -fx-background-image: url("images/icone-aluno.png");
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;/*Raio da Borda*/
+}
+.but-notas{
+    -fx-background-color: white;
+    -fx-background-image: url("images/icone-notas.png");
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;/*Raio da Borda*/
+}
+.but-frequencia{
+    -fx-background-color: white;
+    -fx-background-image: url("images/icone-frequencia.png");
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;/*Raio da Borda*/
+}
+.but{
+    -fx-background-color: white;
+    -fx-background-radius: 20px;/*Raio da Borda*/
+}
