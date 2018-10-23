@@ -1,6 +1,6 @@
 /*css*/
 .men{
-    -fx-background-image: url("images/menu_fundo.jpg");
+    -fx-background-image: url("images/fundo.jpg");
 }
 .fundo{
     -fx-background-color: lightgrey;
@@ -29,7 +29,7 @@
 }
 .cadastro-fundo{
     -fx-background-color: white;
-    -fx-background-image: url("images/cadastro-fundo.png");
+    -fx-background-image: url("images/fundo.jpg");
     -fx-border-radius: 20px;
     -fx-background-radius: 20px;/*Raio da Borda*/
 }
