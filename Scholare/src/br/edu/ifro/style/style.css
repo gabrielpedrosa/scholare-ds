@@ -35,3 +35,8 @@
     -fx-border-radius: 20px;
     -fx-background-radius: 20px;/*Raio da Borda*/
 }
+
+.but-cadastro{
+    -fx-background-radius: 15px;
+    -fx-background-color: white;
+}
