@@ -29,7 +29,9 @@
 }
 .cadastro-fundo{
     -fx-background-color: white;
-    -fx-background-image: url("images/fundo.jpg");
+    -fx-background-image: url("images/cadastro-fund.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
     -fx-border-radius: 20px;
     -fx-background-radius: 20px;/*Raio da Borda*/
 }

@@ -4,10 +4,10 @@ package br.edu.ifro.model;
 public class Aluno {
     private int alu_id;
     private String alu_nome;
+    private String alu_sexo;
     private String alu_cpf;
     private String alu_rg;
-    private String alu_nascimento;
-    private String alu_sexo;
+    private String alu_nascimento; 
     private String alu_cidade_origem;
     private String alu_estado_origem;
     private String alu_filiacao1;
