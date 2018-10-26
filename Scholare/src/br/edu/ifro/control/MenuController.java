@@ -13,6 +13,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 // @author Gabriel
 public class MenuController implements Initializable {    
@@ -36,6 +38,7 @@ public class MenuController implements Initializable {
     private Button bot_notas;
     @FXML
     private Button bot_frequencia;
+    
 
     /**
      * Initializes the controller class.
@@ -53,8 +56,10 @@ public class MenuController implements Initializable {
     }
 
     @FXML
-    private void cadastrar_aluno(ActionEvent event) {
+    private void cadastrar_aluno(ActionEvent event) throws InterruptedException {
         Open.abrirAluno(getClass());
+        Stage stage = (Stage) bot_marticula.getScene().getWindow();
+        stage.close();
     }
 
     @FXML

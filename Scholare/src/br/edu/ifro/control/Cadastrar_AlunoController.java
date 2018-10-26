@@ -5,8 +5,15 @@
  */
 package br.edu.ifro.control;
 
+import br.edu.ifro.util.Open;
+import br.eti.diegofonseca.MaskFieldUtil;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,6 +23,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -67,7 +75,7 @@ public class Cadastrar_AlunoController implements Initializable {
     @FXML
     private TextField txt__alu_cidade;
     @FXML
-    private ComboBox<?> cbox_alu_estado;
+    private ComboBox cbox_alu_estado;
     @FXML
     private TextField txt__alu_datacadastro;
     @FXML
@@ -94,7 +102,7 @@ public class Cadastrar_AlunoController implements Initializable {
         }
         
         for (int i= 0; i< campo_cbox.length; i++) {
-            if (campo_cbox[i].getValue().equals("") || campo_cbox[i].getValue() == null) {
+            if (campo_cbox[i].getSelectionModel().getSelectedIndex() == -1) {
                 cbox_preenchido = false;
                 break;
             } else {
@@ -107,27 +115,58 @@ public class Cadastrar_AlunoController implements Initializable {
         return preenchido;
     }
     
+    public void addmask(){
+        MaskFieldUtil.cpfField(txt__alu_cpf);
+        MaskFieldUtil.foneField(txt__alu_telefone);
+        MaskFieldUtil.onlyDigitsValue(txt__alu_numero);
+        MaskFieldUtil.dateField(txt__alu_datanascimento);
+        MaskFieldUtil.numericField(txt__alu_rg);
+    }
+    
     @FXML
     private void cadastrar_aluno(ActionEvent event) {
         if(verifica_vazio() == true){
-            System.out.print("Campos obrigatórios preenchidos");
+            System.out.println("Campos obrigatórios preenchidos");
         }
         else{
-            System.out.print("Campos obrigatórios não preenchidos");
+            System.out.println("Campos obrigatórios não preenchidos");
         }
+        
     }
 
     @FXML
     private void limpar_aluno(ActionEvent event) {
+        txt__alu_nome.setText("");
+        txt__alu_cpf.setText("");
+        txt__alu_rg.setText("");
+        txt__alu_datanascimento.setText("");
+        txt__alu_telefone.setText("");
+        txt__alu_filiacao1.setText("");
+        txt__alu_filiacao2.setText("");
+        txt__alu_logradouro.setText("");
+        txt__alu_bairro.setText("");
+        txt__alu_numero.setText("");
+        txt__alu_complemento.setText("");
+        txt__alu_cidade.setText("");
+        cbox_alu_estado.setValue("");
     }
 
     @FXML
     private void sair_aluno(ActionEvent event) {
+        Open.abrirMenu(getClass());
+        Stage stage = (Stage) bot_alu_sair.getScene().getWindow();
+        stage.close();
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+       addmask();
+       java.util.Date d = new java.util.Date();
+       SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
+       String datasrt = (String) f.format(d);
+       txt__alu_datacadastro.setText(datasrt);
+       ObservableList ob_estados = FXCollections.observableArrayList("ACRE", "RONDONIA", "MATO GROSSO", "MATO GROSSO DO SUL");
+       cbox_alu_estado.setItems(ob_estados);
     }    
 
     

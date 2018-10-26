@@ -6,10 +6,25 @@ import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class Open {
     
     public static void abrirMenu(Class cls){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Menu.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setResizable(false);
+            stage.setMaximized(true);
+            stage.setTitle("Menu");
+            stage.setScene(scene);
+            stage.show();
+        }
+        catch(IOException e){
+            System.out.println(e.getMessage());
+        }
     }
     
     public static void abrirAluno(Class cls){
@@ -19,6 +34,7 @@ public class Open {
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
             stage.setResizable(false);
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.setTitle("Cadastrar Aluno");
             stage.setScene(scene);
             stage.show();
@@ -34,6 +50,7 @@ public class Open {
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
             stage.setResizable(false);
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.setTitle("Exibir Aluno");
             stage.setScene(scene);
             stage.show();

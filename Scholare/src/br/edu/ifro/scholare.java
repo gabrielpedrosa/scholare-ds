@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 //@author Gabriel
 public class scholare extends Application {
@@ -18,6 +19,7 @@ public class scholare extends Application {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.setMaximized(true);
+        stage.initStyle(StageStyle.UTILITY);
         stage.setTitle("Menu");
         stage.show();
     }
