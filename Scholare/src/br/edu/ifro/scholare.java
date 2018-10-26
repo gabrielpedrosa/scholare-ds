@@ -17,6 +17,7 @@ public class scholare extends Application {
         
         stage.setScene(scene);
         stage.setResizable(false);
+        stage.setMaximized(true);
         stage.setTitle("Menu");
         stage.show();
     }
