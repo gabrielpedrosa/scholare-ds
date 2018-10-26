@@ -15,11 +15,26 @@ public class Open {
     public static void abrirAluno(Class cls){
         try{
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Aluno.fxml"));
+            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Cadastrar_Aluno.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
             stage.setResizable(false);
             stage.setTitle("Cadastrar Aluno");
+            stage.setScene(scene);
+            stage.show();
+        }
+        catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+    }
+    public static void abrirExibirAluno(Class cls){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Editar_Aluno.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setResizable(false);
+            stage.setTitle("Exibir Aluno");
             stage.setScene(scene);
             stage.show();
         }

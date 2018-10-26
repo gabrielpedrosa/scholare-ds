@@ -11,13 +11,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.151" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifro.view.Editar_AlunoController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.151" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifro.view.Cadastrar_AlunoController">
    <top>
       <MenuBar prefHeight="20.0">
         <menus>
@@ -43,7 +41,7 @@
         </menus>
       </MenuBar>
    </top>
-   <bottom>
+   <left>
       <Pane prefHeight="600.0" prefWidth="800.0" styleClass="cadastro-fundo" stylesheets="@../style/style.css" BorderPane.alignment="CENTER">
          <children>
             <Label layoutX="30.0" layoutY="80.0" text="Nome Aluno: *" textFill="WHITE">
@@ -135,34 +133,9 @@
                   <Font name="Arial" size="18.0" />
                </font>
             </TextField>
-            <Button alignment="BOTTOM_CENTER" layoutX="50.0" layoutY="480.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" styleClass="but-cadastro" stylesheets="@../style/style.css" text="Cadastrar">
-               <effect>
-                  <DropShadow color="#4d4d4d" />
-               </effect>
-               <font>
-                  <Font name="Arial" size="18.0" />
-               </font></Button>
-            <Button alignment="BOTTOM_CENTER" layoutX="250.0" layoutY="480.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" styleClass="but-cadastro" stylesheets="@../style/style.css" text="Limpar">
-               <effect>
-                  <DropShadow color="#4d4d4d" />
-               </effect>
-               <font>
-                  <Font size="18.0" />
-               </font></Button>
-            <Button alignment="BOTTOM_CENTER" layoutX="450.0" layoutY="480.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" styleClass="but-cadastro" stylesheets="@../style/style.css" text="Editar">
-               <effect>
-                  <DropShadow color="#4d4d4d" />
-               </effect>
-               <font>
-                  <Font name="Arial" size="18.0" />
-               </font></Button>
-            <Button alignment="BOTTOM_CENTER" layoutX="650.0" layoutY="480.0" mnemonicParsing="false" prefHeight="80.0" prefWidth="120.0" styleClass="but-cadastro" stylesheets="@../style/style.css" text="Sair">
-               <effect>
-                  <DropShadow color="#4d4d4d" height="20.5" radius="9.625" width="20.0" />
-               </effect>
-               <font>
-                  <Font name="Arial" size="18.0" />
-               </font></Button>
+            <Button layoutX="110.0" layoutY="500.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="Cadastrar" />
+            <Button layoutX="340.0" layoutY="500.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="Limpar" />
+            <Button layoutX="570.0" layoutY="500.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="Sair" />
             <Label layoutX="30.0" layoutY="220.0" text="Filiação 1:" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="18.0" />
@@ -271,26 +244,6 @@
                </effect>
             </Label>
             <ComboBox layoutX="640.0" layoutY="410.0" prefHeight="35.0" prefWidth="140.0" />
-            <ImageView fitHeight="44.0" fitWidth="46.0" layoutX="687.0" layoutY="487.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../style/images/sair.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="54.0" fitWidth="97.0" layoutX="83.0" layoutY="482.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../style/images/icone-confirmar.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="52.0" fitWidth="37.0" layoutX="292.0" layoutY="482.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../style/images/icone-limpar.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="41.0" fitWidth="41.0" layoutX="491.0" layoutY="489.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../style/images/icone-editar.png" />
-               </image>
-            </ImageView>
          </children></Pane>
-   </bottom>
+   </left>
 </BorderPane>

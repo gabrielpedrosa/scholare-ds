@@ -6,23 +6,15 @@
 package br.edu.ifro.control;
 
 import br.edu.ifro.util.Open;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
-import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author Gabriel
- */
+// @author Gabriel
 public class MenuController implements Initializable {    
     @FXML
     private MenuItem cadastrar_aluno;
@@ -56,12 +48,33 @@ public class MenuController implements Initializable {
     }    
 
     @FXML
-    private void aluno(ActionEvent event) {
+    private void matricula(ActionEvent event) {
         Open.abrirAluno(getClass());
     }
 
     @FXML
-    private void matricula(ActionEvent event) {
+    private void cadastrar_aluno(ActionEvent event) {
         Open.abrirAluno(getClass());
+    }
+
+    @FXML
+    private void cadastrar_professor(ActionEvent event) {
+    }
+
+    @FXML
+    private void cadastrar_turma(ActionEvent event) {
+    }
+
+    @FXML
+    private void exibir_alunos(ActionEvent event) {
+        Open.abrirExibirAluno(getClass());
+    }
+
+    @FXML
+    private void exibir_professores(ActionEvent event) {
+    }
+
+    @FXML
+    private void exibir_turmas(ActionEvent event) {
     }
 }
