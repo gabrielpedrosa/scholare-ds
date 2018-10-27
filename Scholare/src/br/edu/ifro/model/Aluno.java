@@ -1,23 +1,32 @@
 package br.edu.ifro.model;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 //@author Gabriel
-public class Aluno {
+@Entity
+public class Aluno implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int alu_id;
+    private String alu_datacadastro;
     private String alu_nome;
     private String alu_sexo;
     private String alu_cpf;
     private String alu_rg;
+    private String alu_telefone;
     private String alu_nascimento; 
-    private String alu_cidade_origem;
-    private String alu_estado_origem;
     private String alu_filiacao1;
     private String alu_filiacao2;
-    private String alu_cidade_atual;
-    private String alu_estado_atual;
     private String alu_logradouro;
     private String alu_bairro;
     private String alu_numero;
-    private String alu_complemento;
+    private String alu_cidade;
+    private String alu_estado;
+    private String alu_deficiencia;
 
     public int getAlu_id() {
         return alu_id;
@@ -27,12 +36,28 @@ public class Aluno {
         this.alu_id = alu_id;
     }
 
+    public String getAlu_datacadastro() {
+        return alu_datacadastro;
+    }
+
+    public void setAlu_datacadastro(String alu_datacadastro) {
+        this.alu_datacadastro = alu_datacadastro;
+    }
+
     public String getAlu_nome() {
         return alu_nome;
     }
 
     public void setAlu_nome(String alu_nome) {
         this.alu_nome = alu_nome;
+    }
+
+    public String getAlu_sexo() {
+        return alu_sexo;
+    }
+
+    public void setAlu_sexo(String alu_sexo) {
+        this.alu_sexo = alu_sexo;
     }
 
     public String getAlu_cpf() {
@@ -51,36 +76,20 @@ public class Aluno {
         this.alu_rg = alu_rg;
     }
 
+    public String getAlu_telefone() {
+        return alu_telefone;
+    }
+
+    public void setAlu_telefone(String alu_telefone) {
+        this.alu_telefone = alu_telefone;
+    }
+
     public String getAlu_nascimento() {
         return alu_nascimento;
     }
 
     public void setAlu_nascimento(String alu_nascimento) {
         this.alu_nascimento = alu_nascimento;
-    }
-
-    public String getAlu_sexo() {
-        return alu_sexo;
-    }
-
-    public void setAlu_sexo(String alu_sexo) {
-        this.alu_sexo = alu_sexo;
-    }
-
-    public String getAlu_cidade_origem() {
-        return alu_cidade_origem;
-    }
-
-    public void setAlu_cidade_origem(String alu_cidade_origem) {
-        this.alu_cidade_origem = alu_cidade_origem;
-    }
-
-    public String getAlu_estado_origem() {
-        return alu_estado_origem;
-    }
-
-    public void setAlu_estado_origem(String alu_estado_origem) {
-        this.alu_estado_origem = alu_estado_origem;
     }
 
     public String getAlu_filiacao1() {
@@ -97,22 +106,6 @@ public class Aluno {
 
     public void setAlu_filiacao2(String alu_filiacao2) {
         this.alu_filiacao2 = alu_filiacao2;
-    }
-
-    public String getAlu_cidade_atual() {
-        return alu_cidade_atual;
-    }
-
-    public void setAlu_cidade_atual(String alu_cidade_atual) {
-        this.alu_cidade_atual = alu_cidade_atual;
-    }
-
-    public String getAlu_estado_atual() {
-        return alu_estado_atual;
-    }
-
-    public void setAlu_estado_atual(String alu_estado_atual) {
-        this.alu_estado_atual = alu_estado_atual;
     }
 
     public String getAlu_logradouro() {
@@ -139,12 +132,29 @@ public class Aluno {
         this.alu_numero = alu_numero;
     }
 
-    public String getAlu_complemento() {
-        return alu_complemento;
+    public String getAlu_cidade() {
+        return alu_cidade;
     }
 
-    public void setAlu_complemento(String alu_complemento) {
-        this.alu_complemento = alu_complemento;
+    public void setAlu_cidade(String alu_cidade) {
+        this.alu_cidade = alu_cidade;
     }
-        
+
+    public String getAlu_estado() {
+        return alu_estado;
+    }
+
+    public void setAlu_estado(String alu_estado) {
+        this.alu_estado = alu_estado;
+    }
+
+    public String getAlu_deficiencia() {
+        return alu_deficiencia;
+    }
+
+    public void setAlu_deficiencia(String alu_deficiencia) {
+        this.alu_deficiencia = alu_deficiencia;
+    }
+    
+    
 }

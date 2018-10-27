@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.191" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifro.control.Cadastrar_AlunoController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.191" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifro.control.Cadastrar_ProfessorController">
    <top>
       <MenuBar prefHeight="20.0">
         <menus>
@@ -48,7 +48,7 @@
    <left>
       <Pane prefHeight="600.0" prefWidth="800.0" styleClass="cadastro-fundo" stylesheets="@../style/style.css" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="30.0" layoutY="90.0" text="Nome Aluno: *" textFill="WHITE">
+            <Label layoutX="30.0" layoutY="70.0" text="Nome Aluno: *" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
@@ -65,11 +65,11 @@
                </effect>
             </Label>
             <Separator layoutX="15.0" layoutY="60.0" prefHeight="1.0" prefWidth="500.0" />
-            <TextField fx:id="txt_alu_nome" layoutX="30.0" layoutY="120.0" prefHeight="30.0" prefWidth="500.0">
+            <TextField fx:id="txt_alu_nome" layoutX="30.0" layoutY="95.0" prefHeight="30.0" prefWidth="500.0">
                <font>
                   <Font name="Arial" size="18.0" />
                </font></TextField>
-            <Label layoutX="30.0" layoutY="160.0" text="CPF: *" textFill="#f5f5f5">
+            <Label layoutX="30.0" layoutY="140.0" text="CPF: *" textFill="#f5f5f5">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
@@ -77,12 +77,12 @@
                   <DropShadow />
                </effect>
             </Label>
-            <TextField fx:id="txt_alu_cpf" layoutX="30.0" layoutY="190.0" prefHeight="30.0" prefWidth="180.0">
+            <TextField fx:id="txt_alu_cpf" layoutX="30.0" layoutY="165.0" prefHeight="30.0" prefWidth="180.0">
                <font>
                   <Font name="Arial" size="18.0" />
                </font>
             </TextField>
-            <Label layoutX="550.0" layoutY="90.0" text="Sexo: *" textFill="WHITE">
+            <Label layoutX="550.0" layoutY="70.0" text="Sexo: *" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
@@ -90,7 +90,7 @@
                   <DropShadow />
                </effect>
             </Label>
-            <RadioButton fx:id="rad_alu_feminino" layoutX="550.0" layoutY="120.0" mnemonicParsing="false" text="Feminino" textFill="WHITE">
+            <RadioButton fx:id="rad_alu_feminino" layoutX="550.0" layoutY="95.0" mnemonicParsing="false" text="Feminino" textFill="WHITE">
                <font>
                   <Font name="Arial" size="16.0" />
                </font>
@@ -101,7 +101,7 @@
                   <ToggleGroup fx:id="tg_alu_sexo" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton layoutX="660.0" layoutY="120.0" mnemonicParsing="false" text="Masculino" textFill="WHITE" toggleGroup="$tg_alu_sexo">
+            <RadioButton layoutX="660.0" layoutY="95.0" mnemonicParsing="false" text="Masculino" textFill="WHITE" toggleGroup="$tg_alu_sexo">
                <font>
                   <Font name="Arial" size="16.0" />
                </font>
@@ -109,7 +109,7 @@
                   <Blend />
                </effect>
             </RadioButton>
-            <Label layoutX="230.0" layoutY="160.0" text="RG: *" textFill="WHITE">
+            <Label layoutX="230.0" layoutY="140.0" text="RG: *" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
@@ -117,17 +117,17 @@
                   <DropShadow />
                </effect>
             </Label>
-            <TextField fx:id="txt_alu_rg" layoutX="230.0" layoutY="190.0" prefHeight="30.0" prefWidth="160.0">
+            <TextField fx:id="txt_alu_rg" layoutX="230.0" layoutY="165.0" prefHeight="30.0" prefWidth="160.0">
                <font>
                   <Font name="Arial" size="18.0" />
                </font>
             </TextField>
-            <TextField fx:id="txt_alu_telefone" layoutX="410.0" layoutY="190.0" prefHeight="30.0" prefWidth="160.0">
+            <TextField fx:id="txt_alu_telefone" layoutX="410.0" layoutY="165.0" prefHeight="30.0" prefWidth="160.0">
                <font>
                   <Font name="Arial" size="18.0" />
                </font>
             </TextField>
-            <Label layoutX="410.0" layoutY="160.0" text="Telefone:" textFill="WHITE">
+            <Label layoutX="410.0" layoutY="140.0" text="Telefone:" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
@@ -135,12 +135,12 @@
                   <DropShadow />
                </effect>
             </Label>
-            <TextField fx:id="txt_alu_datanascimento" layoutX="590.0" layoutY="190.0" prefHeight="30.0" prefWidth="190.0">
+            <TextField fx:id="txt_alu_datanascimento" layoutX="590.0" layoutY="165.0" prefHeight="30.0" prefWidth="190.0">
                <font>
                   <Font name="Arial" size="18.0" />
                </font>
             </TextField>
-            <Label layoutX="30.0" layoutY="230.0" text="Filiação 1:" textFill="WHITE">
+            <Label layoutX="30.0" layoutY="210.0" text="Filiação 1:" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
@@ -148,7 +148,7 @@
                   <DropShadow />
                </effect>
             </Label>
-            <Label layoutX="410.0" layoutY="230.0" text="Filiação 2:" textFill="WHITE">
+            <Label layoutX="410.0" layoutY="210.0" text="Filiação 2:" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
@@ -156,17 +156,17 @@
                   <DropShadow />
                </effect>
             </Label>
-            <TextField fx:id="txt_alu_filiacao1" layoutX="30.0" layoutY="260.0" prefHeight="30.0" prefWidth="360.0">
+            <TextField fx:id="txt_alu_filiacao1" layoutX="30.0" layoutY="235.0" prefHeight="30.0" prefWidth="360.0">
                <font>
                   <Font name="Arial" size="18.0" />
                </font>
             </TextField>
-            <TextField fx:id="txt_alu_filiacao2" layoutX="410.0" layoutY="260.0" prefHeight="30.0" prefWidth="370.0">
+            <TextField fx:id="txt_alu_filiacao2" layoutX="410.0" layoutY="235.0" prefHeight="30.0" prefWidth="370.0">
                <font>
                   <Font name="Arial" size="18.0" />
                </font>
             </TextField>
-            <Label layoutX="30.0" layoutY="300.0" text="Logradouro:" textFill="WHITE">
+            <Label layoutX="30.0" layoutY="280.0" text="Logradouro:" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
@@ -174,12 +174,12 @@
                   <DropShadow />
                </effect>
             </Label>
-            <TextField fx:id="txt_alu_logradouro" layoutX="30.0" layoutY="330.0" prefHeight="30.0" prefWidth="360.0">
+            <TextField fx:id="txt_alu_logradouro" layoutX="30.0" layoutY="305.0" prefHeight="30.0" prefWidth="360.0">
                <font>
                   <Font name="Arial" size="18.0" />
                </font>
             </TextField>
-            <Label layoutX="410.0" layoutY="300.0" text="Bairro: *" textFill="WHITE">
+            <Label layoutX="410.0" layoutY="280.0" text="Bairro: *" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
@@ -187,12 +187,12 @@
                   <DropShadow />
                </effect>
             </Label>
-            <TextField fx:id="txt_alu_bairro" layoutX="410.0" layoutY="330.0" prefHeight="30.0" prefWidth="230.0">
+            <TextField fx:id="txt_alu_bairro" layoutX="410.0" layoutY="305.0" prefHeight="30.0" prefWidth="230.0">
                <font>
                   <Font name="Arial" size="18.0" />
                </font>
             </TextField>
-            <Label layoutX="660.0" layoutY="300.0" text="Número *" textFill="WHITE">
+            <Label layoutX="660.0" layoutY="280.0" text="Número *" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
@@ -200,12 +200,12 @@
                   <DropShadow />
                </effect>
             </Label>
-            <TextField fx:id="txt_alu_numero" layoutX="660.0" layoutY="330.0" prefHeight="30.0" prefWidth="120.0">
+            <TextField fx:id="txt_alu_numero" layoutX="660.0" layoutY="305.0" prefHeight="30.0" prefWidth="120.0">
                <font>
                   <Font name="Arial" size="18.0" />
                </font>
             </TextField>
-            <Label layoutX="590.0" layoutY="160.0" text="Data Nascimento: *" textFill="WHITE">
+            <Label layoutX="590.0" layoutY="140.0" text="Data Nascimento: *" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
@@ -213,7 +213,7 @@
                   <DropShadow />
                </effect>
             </Label>
-            <TextField fx:id="txt_alu_deficiencia" layoutX="410.0" layoutY="400.0" prefHeight="30.0" prefWidth="370.0">
+            <TextField fx:id="txt_alu_deficiencia" layoutX="410.0" layoutY="375.0" prefHeight="30.0" prefWidth="370.0">
                <font>
                   <Font name="Arial" size="18.0" />
                </font>
@@ -231,7 +231,7 @@
                   <DropShadow />
                </effect>
             </Label>
-            <Group layoutX="100.0" layoutY="470.0">
+            <Group layoutX="100.0" layoutY="450.0">
                <children>
                   <Button fx:id="bot_alu_cadastrar" alignment="BOTTOM_CENTER" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#cadastrar_aluno" prefHeight="80.0" prefWidth="120.0" styleClass="but-cadastro" stylesheets="@../style/style.css" text="Cadastrar">
                      <effect>
@@ -248,7 +248,7 @@
                   </ImageView>
                </children>
             </Group>
-            <Group layoutX="330.0" layoutY="470.0">
+            <Group layoutX="330.0" layoutY="450.0">
                <children>
                   <Button fx:id="bot_alu_limpar" alignment="BOTTOM_CENTER" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#limpar_aluno" prefHeight="80.0" prefWidth="120.0" styleClass="but-cadastro" stylesheets="@../style/style.css" text="Limpar">
                      <effect>
@@ -265,7 +265,7 @@
                   </ImageView>
                </children>
             </Group>
-            <Group layoutX="560.0" layoutY="470.0">
+            <Group layoutX="560.0" layoutY="450.0">
                <children>
                   <Button fx:id="bot_alu_sair" alignment="BOTTOM_CENTER" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#sair_aluno" prefHeight="80.0" prefWidth="120.0" styleClass="but-cadastro" stylesheets="@../style/style.css" text="Sair">
                      <effect>
@@ -282,7 +282,7 @@
                   </ImageView>
                </children>
             </Group>
-            <Label layoutX="410.0" layoutY="370.0" text="Deficiência do Aluno: *" textFill="WHITE">
+            <Label layoutX="410.0" layoutY="350.0" text="Deficiência do Aluno: *" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
@@ -290,7 +290,7 @@
                   <DropShadow />
                </effect>
             </Label>
-            <Label layoutX="30.0" layoutY="370.0" text="Cidade: *" textFill="WHITE">
+            <Label layoutX="30.0" layoutY="350.0" text="Cidade: *" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
@@ -298,12 +298,12 @@
                   <DropShadow />
                </effect>
             </Label>
-            <TextField fx:id="txt_alu_cidade" layoutX="30.0" layoutY="400.0" prefHeight="30.0" prefWidth="200.0">
+            <TextField fx:id="txt_alu_cidade" layoutX="30.0" layoutY="375.0" prefHeight="30.0" prefWidth="200.0">
                <font>
                   <Font name="Arial" size="18.0" />
                </font>
             </TextField>
-            <Label layoutX="248.0" layoutY="370.0" text="Estado: *" textFill="WHITE">
+            <Label layoutX="248.0" layoutY="350.0" text="Estado: *" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
@@ -311,7 +311,7 @@
                   <DropShadow />
                </effect>
             </Label>
-            <ComboBox fx:id="cbox_alu_estado" layoutX="248.0" layoutY="400.0" prefHeight="35.0" prefWidth="140.0" />
+            <ComboBox fx:id="cbox_alu_estado" layoutX="248.0" layoutY="375.0" prefHeight="35.0" prefWidth="140.0" />
          </children></Pane>
    </left>
 </BorderPane>
