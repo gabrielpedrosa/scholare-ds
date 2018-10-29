@@ -13,8 +13,6 @@
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
@@ -233,7 +231,7 @@
             </Label>
             <Group layoutX="100.0" layoutY="470.0">
                <children>
-                  <Button fx:id="bot_alu_cadastrar" alignment="BOTTOM_CENTER" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#cadastrar_aluno" prefHeight="80.0" prefWidth="120.0" styleClass="but-cadastro" stylesheets="@../style/style.css" text="Cadastrar">
+                  <Button fx:id="bot_alu_cadastrar" alignment="BOTTOM_CENTER" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#cadastrar_aluno" prefHeight="80.0" prefWidth="120.0" styleClass="but-salvar" stylesheets="@../style/style.css" text="Cadastrar">
                      <effect>
                         <DropShadow color="#4d4d4d" />
                      </effect>
@@ -241,16 +239,11 @@
                         <Font name="Arial" size="18.0" />
                      </font>
                   </Button>
-                  <ImageView fitHeight="54.0" fitWidth="97.0" layoutX="42.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../style/images/icone-confirmar.png" />
-                     </image>
-                  </ImageView>
                </children>
             </Group>
             <Group layoutX="330.0" layoutY="470.0">
                <children>
-                  <Button fx:id="bot_alu_limpar" alignment="BOTTOM_CENTER" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#limpar_aluno" prefHeight="80.0" prefWidth="120.0" styleClass="but-cadastro" stylesheets="@../style/style.css" text="Limpar">
+                  <Button fx:id="bot_alu_limpar" alignment="BOTTOM_CENTER" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#limpar_aluno" prefHeight="80.0" prefWidth="120.0" styleClass="but-limpar" stylesheets="@../style/style.css" text="Limpar">
                      <effect>
                         <DropShadow color="#4d4d4d" />
                      </effect>
@@ -258,16 +251,11 @@
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <ImageView fitHeight="52.0" fitWidth="37.0" layoutX="51.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../style/images/icone-limpar.jpg" />
-                     </image>
-                  </ImageView>
                </children>
             </Group>
             <Group layoutX="560.0" layoutY="470.0">
                <children>
-                  <Button fx:id="bot_alu_sair" alignment="BOTTOM_CENTER" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#sair_aluno" prefHeight="80.0" prefWidth="120.0" styleClass="but-cadastro" stylesheets="@../style/style.css" text="Sair">
+                  <Button fx:id="bot_alu_sair" alignment="BOTTOM_CENTER" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#sair_aluno" prefHeight="80.0" prefWidth="120.0" styleClass="but-cancelar" stylesheets="@../style/style.css" text="Sair">
                      <effect>
                         <DropShadow color="#4d4d4d" height="20.5" radius="9.625" width="20.0" />
                      </effect>
@@ -275,11 +263,6 @@
                         <Font name="Arial" size="18.0" />
                      </font>
                   </Button>
-                  <ImageView fitHeight="44.0" fitWidth="46.0" layoutX="46.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../style/images/sair.jpg" />
-                     </image>
-                  </ImageView>
                </children>
             </Group>
             <Label layoutX="410.0" layoutY="370.0" text="Deficiência do Aluno: *" textFill="WHITE">

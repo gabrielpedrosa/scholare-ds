@@ -11,10 +11,11 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 // @author Gabriel
 public class MenuController implements Initializable {    
@@ -38,8 +39,12 @@ public class MenuController implements Initializable {
     private Button bot_notas;
     @FXML
     private Button bot_frequencia;
+    @FXML
+    private Button bot_sair;
+    @FXML
+    private Label lab_log_nome;
     
-
+    
     /**
      * Initializes the controller class.
      * @param url
@@ -47,7 +52,6 @@ public class MenuController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
     }    
 
     @FXML
@@ -57,9 +61,9 @@ public class MenuController implements Initializable {
 
     @FXML
     private void cadastrar_aluno(ActionEvent event) throws InterruptedException {
-        Open.abrirAluno(getClass());
+        Scene novascene = Open.abrirAluno(getClass()); 
         Stage stage = (Stage) bot_marticula.getScene().getWindow();
-        stage.close();
+        stage.setScene(novascene);
     }
 
     @FXML
@@ -72,7 +76,9 @@ public class MenuController implements Initializable {
 
     @FXML
     private void exibir_alunos(ActionEvent event) {
-        Open.abrirExibirAluno(getClass());
+        Scene novascene = Open.abrirExibirAluno(getClass()); 
+        Stage stage = (Stage) bot_marticula.getScene().getWindow();
+        stage.setScene(novascene);
     }
 
     @FXML
@@ -80,6 +86,20 @@ public class MenuController implements Initializable {
     }
 
     @FXML
-    private void exibir_turmas(ActionEvent event) {
+    private void exibir_turmas(ActionEvent event) {   
+    }
+
+    @FXML
+    private void notas(ActionEvent event) {   
+    }
+
+    @FXML
+    private void frequencia(ActionEvent event) {
+    }
+
+    @FXML
+    private void sair(ActionEvent event) {
+        Stage stage = (Stage) bot_sair.getScene().getWindow();
+        stage.close();
     }
 }

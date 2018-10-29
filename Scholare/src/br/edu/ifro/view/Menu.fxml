@@ -5,13 +5,16 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.181" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifro.control.MenuController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.191" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifro.control.MenuController">
    <top>
       <VBox prefHeight="140.0" prefWidth="100.0" styleClass="fundo" stylesheets="@../style/style.css" BorderPane.alignment="CENTER">
          <children>
@@ -50,22 +53,22 @@
                         <Font name="Times New Roman" size="18.0" />
                      </font></Button>
                   <VBox prefHeight="100.0" prefWidth="20.0" />
-                  <Button fx:id="bot_notas" alignment="BOTTOM_CENTER" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0" styleClass="but-notas" stylesheets="@../style/style.css" text="Notas">
+                  <Button fx:id="bot_notas" alignment="BOTTOM_CENTER" mnemonicParsing="false" onAction="#notas" prefHeight="100.0" prefWidth="150.0" styleClass="but-notas" stylesheets="@../style/style.css" text="Notas">
                      <font>
                         <Font name="Times New Roman" size="18.0" />
                      </font></Button>
                   <VBox prefHeight="100.0" prefWidth="20.0" />
-                  <Button fx:id="bot_frequencia" alignment="BOTTOM_CENTER" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0" styleClass="but-frequencia" stylesheets="@../style/style.css" text="Frequência">
-                     <font>
-                        <Font name="Times New Roman" size="18.0" />
-                     </font></Button>
-                  <VBox prefHeight="100.0" prefWidth="20.0" />
-                  <Button alignment="BOTTOM_CENTER" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0" styleClass="but" stylesheets="@../style/style.css" text="Button">
+                  <Button fx:id="bot_frequencia" alignment="BOTTOM_CENTER" mnemonicParsing="false" onAction="#frequencia" prefHeight="100.0" prefWidth="150.0" styleClass="but-frequencia" stylesheets="@../style/style.css" text="Frequência">
                      <font>
                         <Font name="Times New Roman" size="18.0" />
                      </font></Button>
                   <VBox prefHeight="100.0" prefWidth="20.0" />
                   <Button alignment="BOTTOM_CENTER" mnemonicParsing="false" prefHeight="100.0" prefWidth="150.0" styleClass="but" stylesheets="@../style/style.css" text="Button">
+                     <font>
+                        <Font name="Times New Roman" size="18.0" />
+                     </font></Button>
+                  <VBox prefHeight="100.0" prefWidth="20.0" />
+                  <Button fx:id="bot_sair" alignment="BOTTOM_CENTER" mnemonicParsing="false" onAction="#sair" prefHeight="100.0" prefWidth="150.0" styleClass="but-sair" stylesheets="@../style/style.css" text="Sair">
                      <font>
                         <Font name="Times New Roman" size="18.0" />
                      </font></Button>
@@ -80,6 +83,30 @@
       <Pane prefHeight="200.0" prefWidth="800.0" styleClass="men" stylesheets="@../style/style.css" BorderPane.alignment="CENTER">
          <children>
             <Label layoutX="335.0" layoutY="161.0" text="Label" />
+            <ImageView fitHeight="300.0" fitWidth="600.0" layoutX="120.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../style/images/logo.png" />
+               </image>
+               <effect>
+                  <DropShadow color="WHITE" />
+               </effect>
+            </ImageView>
+            <Label layoutX="430.0" layoutY="15.0" text="Você está logado como:" textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+               <effect>
+                  <DropShadow color="WHITE" />
+               </effect>
+            </Label>
+            <Label fx:id="lab_log_nome" layoutX="630.0" layoutY="15.0" text="Nome" textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="18.0" />
+               </font>
+               <effect>
+                  <DropShadow color="WHITE" />
+               </effect>
+            </Label>
          </children>
       </Pane>
    </center>

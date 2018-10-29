@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.191" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifro.control.LoginController">
+   <center>
+      <Pane prefHeight="200.0" prefWidth="600.0" styleClass="men" stylesheets="@../style/style.css" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="335.0" layoutY="161.0" text="Label" />
+            <ImageView fitHeight="120.0" fitWidth="340.0" layoutX="130.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../style/images/logo.png" />
+               </image>
+               <effect>
+                  <DropShadow color="WHITE" />
+               </effect>
+            </ImageView>
+            <Pane layoutX="120.0" layoutY="125.0" prefHeight="250.0" prefWidth="360.0" styleClass="login">
+               <children>
+                  <Label layoutX="25.0" layoutY="10.0" text="LOGIN">
+                     <font>
+                        <Font name="Arial Bold" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="35.0" layoutY="40.0" text="Usuário:">
+                     <font>
+                        <Font name="Arial" size="16.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txt_log_usuario" layoutX="35.0" layoutY="60.0" prefHeight="30.0" prefWidth="290.0" styleClass="txt-login" stylesheets="@../style/style.css" />
+                  <Label layoutX="35.0" layoutY="100.0" text="Senha:">
+                     <font>
+                        <Font name="Arial" size="16.0" />
+                     </font>
+                  </Label>
+                  <PasswordField fx:id="pw_log_senha" layoutX="35.0" layoutY="120.0" prefHeight="30.0" prefWidth="290.0" styleClass="txt-login" stylesheets="@../style/style.css" />
+                  <TextField fx:id="txt_log_senha" layoutX="35.0" layoutY="120.0" prefHeight="30.0" prefWidth="290.0" styleClass="txt-login" stylesheets="@../style/style.css" visible="false" />
+                  <CheckBox fx:id="chk_log_mostrarsenha" layoutX="35.0" layoutY="160.0" mnemonicParsing="false" onAction="#mostra_senha" text="Mostrar senha">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                  </CheckBox>
+                  <Button fx:id="bot_log_login" layoutX="155.0" layoutY="200.0" mnemonicParsing="false" onAction="#login" prefHeight="40.0" prefWidth="80.0" styleClass="but-login" stylesheets="@../style/style.css" text="Login" />
+                  <Button fx:id="bot_log_cancelar" layoutX="245.0" layoutY="200.0" mnemonicParsing="false" onAction="#cancelar" prefHeight="40.0" prefWidth="80.0" styleClass="but-login-cancelar" stylesheets="@../style/style.css" text="Cancelar" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </center>
+</BorderPane>

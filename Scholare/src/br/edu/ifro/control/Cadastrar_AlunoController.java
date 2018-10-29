@@ -10,14 +10,13 @@ import br.edu.ifro.util.Open;
 import br.eti.diegofonseca.MaskFieldUtil;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuItem;
@@ -163,7 +162,6 @@ public class Cadastrar_AlunoController implements Initializable {
         else{
             System.out.println("Campos obrigatórios não preenchidos");
         }
-        
     }
 
     @FXML
@@ -185,9 +183,9 @@ public class Cadastrar_AlunoController implements Initializable {
 
     @FXML
     private void sair_aluno(ActionEvent event) {
-        Open.abrirMenu(getClass());
+        Scene novascene = Open.abrirMenu(getClass()); 
         Stage stage = (Stage) bot_alu_sair.getScene().getWindow();
-        stage.close();
+        stage.setScene(novascene);
     }
     
     @Override

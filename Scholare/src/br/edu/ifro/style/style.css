@@ -1,42 +1,96 @@
 /*css*/
+/*FUNDOS*/
 .men{
-    -fx-background-image: url("images/fundo.jpg");
-}
-.fundo{
-    -fx-background-color: lightgrey;
-}
-.but-aluno{
-    -fx-background-color: white;
-    -fx-background-image: url("images/icone-aluno.png");
-    -fx-border-radius: 20px;
-    -fx-background-radius: 20px;/*Raio da Borda*/
-}
-.but-notas{
-    -fx-background-color: white;
-    -fx-background-image: url("images/icone-notas.png");
-    -fx-border-radius: 20px;
-    -fx-background-radius: 20px;/*Raio da Borda*/
-}
-.but-frequencia{
-    -fx-background-color: white;
-    -fx-background-image: url("images/icone-frequencia.png");
-    -fx-border-radius: 20px;
-    -fx-background-radius: 20px;/*Raio da Borda*/
-}
-.but{
-    -fx-background-color: white;
-    -fx-background-radius: 20px;/*Raio da Borda*/
+    -fx-background-image: url("images/fundos/fundo-menu.jpg");
 }
 .cadastro-fundo{
     -fx-background-color: white;
-    -fx-background-image: url("images/cadastro-fund.jpg");
+    -fx-background-image: url("images/fundos/fundo-cadastro.jpg");
     -fx-background-repeat: no-repeat;
     -fx-background-size: cover;
     -fx-border-radius: 20px;
     -fx-background-radius: 20px;/*Raio da Borda*/
 }
-
-.but-cadastro{
-    -fx-background-radius: 15px;
+.fundo{
+    -fx-background-color: lightgrey;
+}
+.login{
+    -fx-background-color: lightgray;
+    -fx-background-radius: 20px;/*Raio da Borda*/
+}
+/*BOTÕES MENU*/
+.but-aluno{
     -fx-background-color: white;
+    -fx-background-image: url("images/icones/icone-aluno.png");
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;/*Raio da Borda*/
+}
+.but-notas{
+    -fx-background-color: white;
+    -fx-background-image: url("images/icones/icone-notas.png");
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;/*Raio da Borda*/
+}
+.but-frequencia{
+    -fx-background-color: white;
+    -fx-background-image: url("images/icones/icone-frequencia.png");
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;/*Raio da Borda*/
+}
+.but-sair{
+    -fx-background-color: white;
+    -fx-background-image: url("images/icones/icone-sair.png");
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;/*Raio da Borda*/
+}
+/*BOTÕES CADASTROS E EXIBIR*/
+.but{
+    -fx-background-color: white;
+    -fx-background-radius: 20px;/*Raio da Borda*/
+}
+.but-login{
+    -fx-background-color: white;
+    -fx-background-radius: 10px;/*Raio da Borda*/
+}
+.but-login-cancelar{
+    -fx-background-color: white;
+    -fx-background-radius: 10px;/*Raio da Borda*/
+}
+.but-login:hover{
+    -fx-background-color: DeepSkyBlue;
+}
+.but-login-cancelar:hover{
+    -fx-background-color: Coral;
+}
+.but-salvar{
+    -fx-background-color: white;
+    -fx-background-image: url("images/icones/icone-salvar.png");
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;/*Raio da Borda*/
+}
+.but-limpar{
+    -fx-background-color: white;
+    -fx-background-image: url("images/icones/icone-limpar.png");
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;/*Raio da Borda*/
+}
+.but-editar{
+    -fx-background-color: white;
+    -fx-background-image: url("images/icones/icone-editar.png");
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;/*Raio da Borda*/
+}
+.but-cancelar{
+    -fx-background-color: white;
+    -fx-background-image: url("images/icones/icone-cancelar.png");
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;/*Raio da Borda*/
+}
+/*TEXTFIELD*/
+.txt-login{
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+.txt-login:focused{
+    -fx-border-color: MediumBlue;
 }
