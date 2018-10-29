@@ -86,8 +86,9 @@ public class LoginController implements Initializable {
             System.out.println("Usuário Incorreto");            
         }
         else{
+            Login l = (Login) query.getSingleResult();
             if(pw_log_senha.isVisible()){
-                if(pw_log_senha.getText().equals("1234")){
+                if(l.getLog_senha().equals(pw_log_senha.getText())){
                     abremenu();
                 }
                 else{
@@ -95,7 +96,7 @@ public class LoginController implements Initializable {
                 }
             }
             else{
-                if(txt_log_senha.getText().equals("1234")){
+                if(l.getLog_senha().equals(pw_log_senha.getText())){
                     abremenu();
                 }
                 else{
