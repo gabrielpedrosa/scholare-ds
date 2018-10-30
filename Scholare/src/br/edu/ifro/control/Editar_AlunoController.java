@@ -5,6 +5,7 @@
  */
 package br.edu.ifro.control;
 
+import br.edu.ifro.model.Aluno;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -15,6 +16,10 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 /**
  * FXML Controller class
@@ -40,7 +45,7 @@ public class Editar_AlunoController implements Initializable {
     @FXML
     private Label window_nome;
     @FXML
-    private TextField txt_alu_nome;
+    private TextField cbox_alu_nome;
     @FXML
     private TextField txt_alu_cpf;
     @FXML
@@ -83,6 +88,19 @@ public class Editar_AlunoController implements Initializable {
     }
     
     public void select(){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("shcolare");
+        EntityManager em = emf.createEntityManager();
+        
+        Query query =em.createQuery("select a from Aluno as a where a.alu_nome = :alu_nome");
+        query.setParameter("alu_nome", cbox_alu_nome.getText());
+        
+        if(query.getResultList().isEmpty()){
+            System.out.println("Erro");
+        }
+        else{
+            Aluno a = (Aluno) query.getSingleResult();
+            txt_alu_cpf.setText(a.getAlu_cpf());
+        }
         
     }
     
