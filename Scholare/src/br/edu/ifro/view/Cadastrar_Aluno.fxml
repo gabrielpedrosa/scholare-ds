@@ -88,7 +88,7 @@
                   <DropShadow />
                </effect>
             </Label>
-            <RadioButton fx:id="rad_alu_feminino" layoutX="550.0" layoutY="120.0" mnemonicParsing="false" text="Feminino" textFill="WHITE">
+            <RadioButton fx:id="rad_alu_feminino" layoutX="550.0" layoutY="120.0" mnemonicParsing="false" selected="true" text="Feminino" textFill="WHITE">
                <font>
                   <Font name="Arial" size="16.0" />
                </font>

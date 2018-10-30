@@ -1,5 +1,6 @@
 package br.edu.ifro;
 
+import br.edu.ifro.util.Admin;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,6 +23,8 @@ public class scholare extends Application {
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setTitle("Menu");
         stage.show();
+        
+        Admin ad = new Admin();
     }
     
     public static void main(String[] args) {

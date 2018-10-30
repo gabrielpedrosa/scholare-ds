@@ -68,6 +68,9 @@ public class MenuController implements Initializable {
 
     @FXML
     private void cadastrar_professor(ActionEvent event) {
+        Scene novascene = Open.abrirProfessor(getClass()); 
+        Stage stage = (Stage) bot_marticula.getScene().getWindow();
+        stage.setScene(novascene);
     }
 
     @FXML

@@ -2,6 +2,7 @@ drop database if exists scholare;
 create database if not exists scholare;
 use scholare;
 
-insert into login values(null,'1234','Gabriel');
+select * from Professor;
+select * from Login;
 
-select * from login;
+insert into Login values (null, '1234', 'Gabriel');
