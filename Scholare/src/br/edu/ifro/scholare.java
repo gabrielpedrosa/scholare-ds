@@ -21,7 +21,7 @@ public class scholare extends Application {
         stage.setResizable(false);
         
         stage.initStyle(StageStyle.UNDECORATED);
-        stage.setTitle("Menu");
+        stage.setTitle("Scholare");
         stage.show();
         
         Admin ad = new Admin();

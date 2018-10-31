@@ -27,6 +27,10 @@ public class Aluno implements Serializable {
     private String alu_cidade;
     private String alu_estado;
     private String alu_deficiencia;
+    
+    public String toString(){
+        return this.alu_nome;
+    }
 
     public int getAlu_id() {
         return alu_id;
