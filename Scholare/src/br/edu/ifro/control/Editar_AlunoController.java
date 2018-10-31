@@ -93,6 +93,12 @@ public class Editar_AlunoController implements Initializable {
     private Group bot_ed_alu_editar;
     @FXML
     private Button bot_ed_alu_cancelar;
+    @FXML
+    private Button bot_ed_al_editar;
+    @FXML
+    private TextField txt_alu_nome;
+    @FXML
+    private ComboBox<?> cbox_alu_turma;
 
     /**
      * Initializes the controller class.
@@ -156,6 +162,10 @@ public class Editar_AlunoController implements Initializable {
             //cbox_alu_estado.setValue(a.getAlu_estado());
             txt_alu_deficiencia.setText(a.getAlu_deficiencia());
         }
+    }
+
+    @FXML
+    private void selecionar_turma(ActionEvent event) {
     }
     
 }

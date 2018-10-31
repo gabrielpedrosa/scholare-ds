@@ -68,19 +68,87 @@ public class Open {
         }
         return cena;
     }
-    
-    public static void abrirNotas(Class cls){
+    public static Scene abrirTurma(Class cls){
+        Scene cena = null;
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Cadastrar_Turma.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            cena = scene;
+        }
+        catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+        return cena;
     }
     
-    public static void abrirMatricula(Class cls){
+    public static Scene abrirNotas(Class cls){
+        Scene cena = null;
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Cadastrar_Turma.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            cena = scene;
+        }
+        catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+        return cena;
     }
     
-    public static void abrirFrequencia(Class cls){
+    public static Scene abrirMatricula(Class cls){
+        Scene cena = null;
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Cadastrar_Turma.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            cena = scene;
+        }
+        catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+        return cena;
     }
     
-    public static void abrirErro(Class cls){
+    public static Scene abrirFrequencia(Class cls){
+        Scene cena = null;
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Cadastrar_Turma.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            cena = scene;
+        }
+        catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+        return cena;
     }
     
-    public static void abrirConfirmacao(Class cls){
+    public static Scene abrirErro(Class cls){
+        Scene cena = null;
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Cadastrar_Turma.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            cena = scene;
+        }
+        catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+        return cena;
+    }
+    
+    public static Scene abrirConfirmacao(Class cls){
+        Scene cena = null;
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Cadastrar_Turma.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            cena = scene;
+        }
+        catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+        return cena;
     }
 }

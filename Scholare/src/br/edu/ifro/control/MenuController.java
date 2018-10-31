@@ -75,6 +75,9 @@ public class MenuController implements Initializable {
 
     @FXML
     private void cadastrar_turma(ActionEvent event) {
+        Scene novascene = Open.abrirTurma(getClass()); 
+        Stage stage = (Stage) bot_marticula.getScene().getWindow();
+        stage.setScene(novascene);
     }
 
     @FXML

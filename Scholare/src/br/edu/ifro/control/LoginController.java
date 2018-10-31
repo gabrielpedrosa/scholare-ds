@@ -103,8 +103,9 @@ public class LoginController implements Initializable {
                     System.out.println("Senha Incorreta");
                 }
             }
-            
         }
+        em.close();
+        emf.close();
     }
 
     

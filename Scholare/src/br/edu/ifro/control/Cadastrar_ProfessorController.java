@@ -86,9 +86,9 @@ public class Cadastrar_ProfessorController implements Initializable {
     @FXML
     private TextField txt_pro_cidade;
     @FXML
-    private ComboBox<?> cbox_pro_estado;
+    private ComboBox cbox_pro_estado;
     @FXML
-    private ComboBox<?> cbox_pro_disciplina;
+    private ComboBox cbox_pro_disciplina;
     @FXML
     private TextField txt_pro_usuario;
     @FXML
@@ -196,10 +196,13 @@ public class Cadastrar_ProfessorController implements Initializable {
                 l.setLog_senha(pw_pro_senha.getText());
                 p.setLogin(l);
 
+                limpar_professor(event);
+                
                 em.getTransaction().begin();
                 em.persist(p);
                 em.getTransaction().commit();
                 em.close();
+                emf.close();
             }
             else{
                 System.out.println("Senhas não Conferem");
@@ -214,6 +217,20 @@ public class Cadastrar_ProfessorController implements Initializable {
 
     @FXML
     private void limpar_professor(ActionEvent event) {
+        txt_pro_nome.setText("");
+        txt_pro_cpf.setText("");
+        txt_pro_rg.setText("");
+        txt_pro_telefone.setText("");
+        txt_pro_datanascimento.setText("");
+        txt_pro_cidade.setText("");
+        cbox_pro_estado.setValue("");
+        txt_pro_email.setText("");
+        txt_pro_logradouro.setText("");
+        txt_pro_bairro.setText("");
+        txt_pro_numero.setText("");
+        txt_pro_usuario.setText("");
+        pw_pro_senha.setText("");
+        pw_pro_confirmarsenha.setText("");
     }
 
     @FXML

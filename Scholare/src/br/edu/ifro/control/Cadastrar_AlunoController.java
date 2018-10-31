@@ -158,6 +158,7 @@ public class Cadastrar_AlunoController implements Initializable {
             em.persist(a);
             em.getTransaction().commit();
             em.close();
+            emf.close();
         }
         else{
             System.out.println("Campos obrigatórios não preenchidos");

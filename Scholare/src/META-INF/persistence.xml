@@ -7,6 +7,7 @@
     <class>br.edu.ifro.model.Aluno</class>
     <class>br.edu.ifro.model.Professor</class>
     <class>br.edu.ifro.model.Login</class>
+    <class>br.edu.ifro.model.Turma</class>
     <properties>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <!-- Banco de dados host/database -->

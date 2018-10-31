@@ -30,6 +30,10 @@ public class Professor implements Serializable {
     private String pro_estado;
     @OneToOne(cascade = CascadeType.ALL)
     private Login login;
+    
+    public String toString(){
+        return this.pro_nome;
+    }
 
     public int getPro_id() {
         return pro_id;
