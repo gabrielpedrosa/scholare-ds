@@ -79,7 +79,7 @@
                   </Button>
                </children>
             </Group>
-            <Group fx:id="bot_ed_alu_editar" layoutX="440.0" layoutY="470.0">
+            <Group layoutX="440.0" layoutY="470.0">
                <children>
                   <Button fx:id="bot_ed_alu_editar" alignment="BOTTOM_CENTER" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#editar_editar_aluno" prefHeight="80.0" prefWidth="120.0" styleClass="but-editar" stylesheets="@../style/style.css" text="Editar">
                      <effect>
@@ -132,7 +132,7 @@
                   <DropShadow />
                </effect>
             </Label>
-            <RadioButton fx:id="rad_alu_feminino" disable="true" layoutX="550.0" layoutY="170.0" mnemonicParsing="false" text="Feminino" textFill="WHITE">
+            <RadioButton fx:id="rad_ed_alu_feminino" disable="true" layoutX="550.0" layoutY="170.0" mnemonicParsing="false" text="Feminino" textFill="WHITE">
                <font>
                   <Font name="Arial" size="16.0" />
                </font>
@@ -143,10 +143,7 @@
                   <ToggleGroup fx:id="tg_alu_sexo" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton disable="true" layoutX="660.0" layoutY="170.0" mnemonicParsing="false" text="Masculino" textFill="WHITE">
-               <toggleGroup>
-                  <ToggleGroup fx:id="tg_alu_sexo" />
-               </toggleGroup>
+            <RadioButton fx:id="rad_ed_alu_masculino" disable="true" layoutX="660.0" layoutY="170.0" mnemonicParsing="false" text="Masculino" textFill="WHITE" toggleGroup="$tg_alu_sexo">
                <font>
                   <Font name="Arial" size="16.0" />
                </font>

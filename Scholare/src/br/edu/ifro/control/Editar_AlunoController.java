@@ -15,7 +15,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -56,8 +55,6 @@ public class Editar_AlunoController implements Initializable {
     @FXML
     private TextField txt_alu_cpf;
     @FXML
-    private RadioButton rad_alu_feminino;
-    @FXML
     private ToggleGroup tg_alu_sexo;
     @FXML
     private TextField txt_alu_rg;
@@ -90,15 +87,17 @@ public class Editar_AlunoController implements Initializable {
     @FXML
     private Button bot_ed_alu_deletar;
     @FXML
-    private Group bot_ed_alu_editar;
+    private Button bot_ed_alu_editar;
     @FXML
     private Button bot_ed_alu_cancelar;
-    @FXML
-    private Button bot_ed_al_editar;
     @FXML
     private TextField txt_alu_nome;
     @FXML
     private ComboBox<?> cbox_alu_turma;
+    @FXML
+    private RadioButton rad_ed_alu_feminino;
+    @FXML
+    private RadioButton rad_ed_alu_masculino;
 
     /**
      * Initializes the controller class.
@@ -127,19 +126,28 @@ public class Editar_AlunoController implements Initializable {
 
     @FXML
     private void editar_editar_aluno(ActionEvent event) {
-        txt_alu_nome.setDisable(true);
-        txt_alu_cpf.setDisable(true);
-        txt_alu_rg.setDisable(true);
-        txt_alu_telefone.setDisable(true);
-        txt_alu_datanascimento.setDisable(true);
-        txt_alu_filiacao1.setDisable(true);
-        txt_alu_filiacao2.setDisable(true);
-        txt_alu_logradouro.setDisable(true);
-        txt_alu_bairro.setDisable(true);
-        txt_alu_numero.setDisable(true);
-        txt_alu_cidade.setDisable(true);
-        cbox_alu_estado.setDisable(true);
-        txt_alu_deficiencia.setDisable(true);
+        if(cbox_alu_nome.getSelectionModel().getSelectedIndex()==-1){
+            System.out.println("Selecione um Aluno");
+        }
+        else{
+            txt_alu_nome.setDisable(false);
+            rad_ed_alu_feminino.setDisable(false);
+            rad_ed_alu_masculino.setDisable(false);
+            txt_alu_cpf.setDisable(false);
+            txt_alu_rg.setDisable(false);
+            txt_alu_telefone.setDisable(false);
+            txt_alu_datanascimento.setDisable(false);
+            txt_alu_filiacao1.setDisable(false);
+            txt_alu_filiacao2.setDisable(false);
+            txt_alu_logradouro.setDisable(false);
+            txt_alu_bairro.setDisable(false);
+            txt_alu_numero.setDisable(false);
+            txt_alu_cidade.setDisable(false);
+            cbox_alu_estado.setDisable(false);
+            txt_alu_deficiencia.setDisable(false);
+            bot_ed_alu_salvar.setDisable(false);
+        }
+        
     }
 
     @FXML
@@ -163,6 +171,12 @@ public class Editar_AlunoController implements Initializable {
         else{
             Aluno a = (Aluno) query.getSingleResult();
             txt_alu_nome.setText(a.getAlu_nome());
+            if(a.getAlu_sexo().equals("Feminino")){
+                rad_ed_alu_feminino.setSelected(true);
+            }
+            else{
+                rad_ed_alu_masculino.setSelected(true);
+            }
             txt_alu_cpf.setText(a.getAlu_cpf());
             txt_alu_rg.setText(a.getAlu_rg());
             txt_alu_telefone.setText(a.getAlu_telefone());

@@ -68,8 +68,6 @@ public class Cadastrar_AlunoController implements Initializable {
     @FXML
     private TextField txt_alu_filiacao2;
     @FXML
-    private TextField txt_alu_logradouro;
-    @FXML
     private TextField txt_alu_bairro;
     @FXML
     private TextField txt_alu_numero;
@@ -87,12 +85,14 @@ public class Cadastrar_AlunoController implements Initializable {
     private Button bot_alu_limpar;
     @FXML
     private Button bot_alu_sair;
+    @FXML
+    private TextField txt_alu_rua;
     
     public boolean verifica_vazio(){
         boolean preenchido;
         boolean txt_preenchido = false;
         boolean cbox_preenchido = false;
-        TextField[] campo_txt = {txt_alu_nome, txt_alu_cpf, txt_alu_rg, txt_alu_telefone, txt_alu_datanascimento, txt_alu_logradouro, txt_alu_bairro, txt_alu_numero, txt_alu_cidade, txt_alu_deficiencia};
+        TextField[] campo_txt = {txt_alu_nome, txt_alu_cpf, txt_alu_rg, txt_alu_telefone, txt_alu_datanascimento, txt_alu_rua, txt_alu_bairro, txt_alu_numero, txt_alu_cidade, txt_alu_deficiencia};
         ComboBox[] campo_cbox = {cbox_alu_estado};
         
         for (int i= 0; i< campo_txt.length; i++) {
@@ -145,7 +145,7 @@ public class Cadastrar_AlunoController implements Initializable {
             a.setAlu_nascimento(txt_alu_datanascimento.getText());
             a.setAlu_filiacao1(txt_alu_filiacao1.getText());
             a.setAlu_filiacao2(txt_alu_filiacao2.getText());
-            a.setAlu_logradouro(txt_alu_logradouro.getText());
+            a.setAlu_logradouro(txt_alu_rua.getText());
             a.setAlu_bairro(txt_alu_bairro.getText());
             a.setAlu_numero(txt_alu_numero.getText());
             a.setAlu_cidade(txt_alu_cidade.getText());
@@ -168,13 +168,14 @@ public class Cadastrar_AlunoController implements Initializable {
     @FXML
     private void limpar_aluno(ActionEvent event) {
         txt_alu_nome.setText("");
+        rad_alu_feminino.setSelected(true);
         txt_alu_cpf.setText("");
         txt_alu_rg.setText("");
         txt_alu_datanascimento.setText("");
         txt_alu_telefone.setText("");
         txt_alu_filiacao1.setText("");
         txt_alu_filiacao2.setText("");
-        txt_alu_logradouro.setText("");
+        txt_alu_rua.setText("");
         txt_alu_bairro.setText("");
         txt_alu_numero.setText("");
         txt_alu_deficiencia.setText("");

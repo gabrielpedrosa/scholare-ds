@@ -74,23 +74,13 @@ public class Cadastrar_TurmaController implements Initializable {
     @FXML
     private Button bot_tur_cancelar;
     @FXML
-    private TextField txt_tur_serie_ano;
+    private ComboBox cbox_tur_serie_ano;
     
     public boolean verifica_vazio(){
         boolean preenchido;
-        boolean txt_preenchido = false;
         boolean cbox_preenchido = false;
-        TextField[] campo_txt = {txt_tur_serie_ano};
-        ComboBox[] campo_cbox = {cbox_tur_ano, cbox_tur_tipo};
+        ComboBox[] campo_cbox = {cbox_tur_ano, cbox_tur_tipo, cbox_tur_serie_ano};
         
-        for (int i= 0; i< campo_txt.length; i++) {
-            if (campo_txt[i].getText().equals("") || campo_txt[i].getText() == null) {
-                txt_preenchido = false;
-                break;
-            } else {
-                txt_preenchido = true;
-            }
-        }
         
         for (int i= 0; i< campo_cbox.length; i++) {
             if (campo_cbox[i].getSelectionModel().getSelectedIndex() == -1) {
@@ -101,13 +91,15 @@ public class Cadastrar_TurmaController implements Initializable {
             }
         }
         
-        preenchido = txt_preenchido == true && cbox_preenchido == true;
+        preenchido = cbox_preenchido == true;
         
         return preenchido;
     }
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -117,13 +109,17 @@ public class Cadastrar_TurmaController implements Initializable {
     public void add_cbox_turma(){
         ObservableList ob_anos = FXCollections.observableArrayList("2015", "2016", "2017", "2018");
         cbox_tur_ano.setItems(ob_anos);
+        
         ObservableList ob_tipo = FXCollections.observableArrayList("Educação Infantil", "Ensino Fundamental I", "EJA", "HFB");
         cbox_tur_tipo.setItems(ob_tipo);
+        
+        ObservableList ob_serie = FXCollections.observableArrayList("1", "2", "3", "4");
+        cbox_tur_serie_ano.setItems(ob_serie);
         
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
         EntityManager em = emf.createEntityManager();
         
-        Query query = em.createQuery("select p from Professor as p");
+        Query query = em.createQuery("select f from Funcionario as f");
         List<Funcionario> list_professor = query.getResultList();
         
         ObservableList<Funcionario> ob_professor = FXCollections.observableArrayList(list_professor);
@@ -161,7 +157,7 @@ public class Cadastrar_TurmaController implements Initializable {
             
             Turma t = new Turma();
             t.setTur_ano(cbox_tur_ano.getSelectionModel().getSelectedItem().toString());
-            t.setTur_serie_ano(txt_tur_serie_ano.getText());
+            t.setTur_serie_ano(cbox_tur_serie_ano.getSelectionModel().getSelectedItem().toString());
             RadioButton radioselected = (RadioButton) tg_tur_turno.getSelectedToggle();
             String rad_tur_turno = radioselected.getText();
             t.setTur_turno(rad_tur_turno);
@@ -183,7 +179,7 @@ public class Cadastrar_TurmaController implements Initializable {
 
     @FXML
     private void limpar_turma(ActionEvent event) {
-        txt_tur_serie_ano.setText("");
+        cbox_tur_serie_ano.setValue("");
         cbox_tur_ano.setValue("");
         cbox_tur_tipo.setValue("");
         cbox_tur_professor.setValue("");

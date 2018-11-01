@@ -11,7 +11,6 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.effect.Blend?>
@@ -66,7 +65,7 @@
                </effect>
             </Label>
             <Separator layoutX="15.0" layoutY="60.0" prefHeight="1.0" prefWidth="500.0" />
-            <Label layoutX="190.0" layoutY="90.0" text="Série / Ano: *" textFill="#f5f5f5">
+            <Label layoutX="450.0" layoutY="90.0" text="Série / Ano: *" textFill="#f5f5f5">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
@@ -74,11 +73,6 @@
                   <DropShadow />
                </effect>
             </Label>
-            <TextField fx:id="txt_tur_serie_ano" layoutX="190.0" layoutY="120.0" prefHeight="30.0" prefWidth="180.0">
-               <font>
-                  <Font name="Arial" size="18.0" />
-               </font>
-            </TextField>
             <Label layoutX="640.0" layoutY="90.0" text="Turno: *" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="18.0" />
@@ -143,8 +137,8 @@
                </children>
             </Group>
             <ComboBox fx:id="cbox_tur_ano" layoutX="30.0" layoutY="120.0" prefHeight="35.0" prefWidth="140.0" />
-            <ComboBox fx:id="cbox_tur_tipo" layoutX="390.0" layoutY="120.0" prefHeight="35.0" prefWidth="220.0" />
-            <Label layoutX="390.0" layoutY="90.0" text="Nível de Educação: *" textFill="WHITE">
+            <ComboBox fx:id="cbox_tur_tipo" layoutX="200.0" layoutY="120.0" prefHeight="35.0" prefWidth="220.0" />
+            <Label layoutX="200.0" layoutY="90.0" text="Nível de Educação: *" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
@@ -170,16 +164,17 @@
               <columns>
                 <TableColumn maxWidth="50.0" minWidth="50.0" prefWidth="50.0" text="Código">
                 <cellValueFactory>
-                        <PropertyValueFactory property="pro_id" />
+                        <PropertyValueFactory property="fun_id" />
                   </cellValueFactory>
                 </TableColumn>
                 <TableColumn maxWidth="300.0" minWidth="300.0" prefWidth="300.0" text="Nome">
                 <cellValueFactory>
-                        <PropertyValueFactory property="pro_nome" />
+                        <PropertyValueFactory property="fun_nome" />
                   </cellValueFactory>
                 </TableColumn>
               </columns>
             </TableView>
+            <ComboBox fx:id="cbox_tur_serie_ano" layoutX="450.0" layoutY="120.0" prefHeight="35.0" prefWidth="150.0" />
          </children></Pane>
    </left>
 </BorderPane>
