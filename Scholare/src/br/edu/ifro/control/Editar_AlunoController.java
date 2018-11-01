@@ -98,6 +98,45 @@ public class Editar_AlunoController implements Initializable {
     private RadioButton rad_ed_alu_feminino;
     @FXML
     private RadioButton rad_ed_alu_masculino;
+    
+    public void deshabilita_campos(){
+        txt_alu_nome.setDisable(true);
+        rad_ed_alu_feminino.setDisable(true);
+        rad_ed_alu_masculino.setDisable(true);
+        txt_alu_cpf.setDisable(true);
+        txt_alu_rg.setDisable(true);
+        txt_alu_telefone.setDisable(true);
+        txt_alu_datanascimento.setDisable(true);
+        txt_alu_filiacao1.setDisable(true);
+        txt_alu_filiacao2.setDisable(true);
+        txt_alu_logradouro.setDisable(true);
+        txt_alu_bairro.setDisable(true);
+        txt_alu_numero.setDisable(true);
+        txt_alu_cidade.setDisable(true);
+        cbox_alu_estado.setDisable(true);
+        txt_alu_deficiencia.setDisable(true);
+        bot_ed_alu_salvar.setDisable(true);
+        
+    }
+    
+    public void habilita_campos(){
+        txt_alu_nome.setDisable(false);
+        rad_ed_alu_feminino.setDisable(false);
+        rad_ed_alu_masculino.setDisable(false);
+        txt_alu_cpf.setDisable(false);
+        txt_alu_rg.setDisable(false);
+        txt_alu_telefone.setDisable(false);
+        txt_alu_datanascimento.setDisable(false);
+        txt_alu_filiacao1.setDisable(false);
+        txt_alu_filiacao2.setDisable(false);
+        txt_alu_logradouro.setDisable(false);
+        txt_alu_bairro.setDisable(false);
+        txt_alu_numero.setDisable(false);
+        txt_alu_cidade.setDisable(false);
+        cbox_alu_estado.setDisable(false);
+        txt_alu_deficiencia.setDisable(false);
+        bot_ed_alu_salvar.setDisable(false);
+    }
 
     /**
      * Initializes the controller class.
@@ -122,6 +161,22 @@ public class Editar_AlunoController implements Initializable {
 
     @FXML
     private void deletar_editar_Aluno(ActionEvent event) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
+        EntityManager em = emf.createEntityManager();
+        
+        Aluno aluno = (Aluno) cbox_alu_nome.getSelectionModel().getSelectedItem();
+        
+        Query query =em.createQuery("select a from Aluno as a where a.alu_id = :alu_id");
+        query.setParameter("alu_id", aluno.getAlu_id());
+        
+        Aluno a = (Aluno) query.getSingleResult();
+        
+        em.getTransaction().begin();
+        em.remove(a);
+        em.getTransaction().commit();
+        
+        em.close();
+        
     }
 
     @FXML
@@ -130,22 +185,7 @@ public class Editar_AlunoController implements Initializable {
             System.out.println("Selecione um Aluno");
         }
         else{
-            txt_alu_nome.setDisable(false);
-            rad_ed_alu_feminino.setDisable(false);
-            rad_ed_alu_masculino.setDisable(false);
-            txt_alu_cpf.setDisable(false);
-            txt_alu_rg.setDisable(false);
-            txt_alu_telefone.setDisable(false);
-            txt_alu_datanascimento.setDisable(false);
-            txt_alu_filiacao1.setDisable(false);
-            txt_alu_filiacao2.setDisable(false);
-            txt_alu_logradouro.setDisable(false);
-            txt_alu_bairro.setDisable(false);
-            txt_alu_numero.setDisable(false);
-            txt_alu_cidade.setDisable(false);
-            cbox_alu_estado.setDisable(false);
-            txt_alu_deficiencia.setDisable(false);
-            bot_ed_alu_salvar.setDisable(false);
+            habilita_campos();
         }
         
     }
@@ -169,6 +209,8 @@ public class Editar_AlunoController implements Initializable {
             System.out.println("Erro");
         }
         else{
+            deshabilita_campos();
+            
             Aluno a = (Aluno) query.getSingleResult();
             txt_alu_nome.setText(a.getAlu_nome());
             if(a.getAlu_sexo().equals("Feminino")){
@@ -189,6 +231,7 @@ public class Editar_AlunoController implements Initializable {
             txt_alu_cidade.setText(a.getAlu_cidade());
             cbox_alu_estado.setValue(a.getAlu_estado());
             txt_alu_deficiencia.setText(a.getAlu_deficiencia());
+            bot_ed_alu_deletar.setDisable(false);
         }
     }
 
