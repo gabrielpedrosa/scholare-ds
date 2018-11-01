@@ -5,8 +5,7 @@
  */
 package br.edu.ifro.control;
 
-import br.edu.ifro.model.Aluno;
-import br.edu.ifro.model.Professor;
+import br.edu.ifro.model.Funcionario;
 import br.edu.ifro.model.Turma;
 import br.edu.ifro.util.Open;
 import java.net.URL;
@@ -125,9 +124,9 @@ public class Cadastrar_TurmaController implements Initializable {
         EntityManager em = emf.createEntityManager();
         
         Query query = em.createQuery("select p from Professor as p");
-        List<Professor> list_professor = query.getResultList();
+        List<Funcionario> list_professor = query.getResultList();
         
-        ObservableList<Professor> ob_professor = FXCollections.observableArrayList(list_professor);
+        ObservableList<Funcionario> ob_professor = FXCollections.observableArrayList(list_professor);
         cbox_tur_professor.setItems(ob_professor);
     }
 
@@ -135,18 +134,18 @@ public class Cadastrar_TurmaController implements Initializable {
     @FXML
     private void inserir_professor(ActionEvent event) {
         String cbox_professor = cbox_tur_professor.getSelectionModel().getSelectedItem().toString();
-        ObservableList<Professor> ob_lastprofessor = FXCollections.observableArrayList(tb_tur_professores.getItems());
+        ObservableList<Funcionario> ob_lastprofessor = FXCollections.observableArrayList(tb_tur_professores.getItems());
         
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
         EntityManager em = emf.createEntityManager();
         
-        Query query = em.createQuery("select p from Professor as p where p.pro_nome = :pro_nome");
-        query.setParameter("pro_nome", cbox_professor);
+        Query query = em.createQuery("select f from Funcionario as f where f.fun_nome = :fun_nome");
+        query.setParameter("fun_nome", cbox_professor);
         
-        List<Professor> list_professor = query.getResultList();
+        List<Funcionario> list_professor = query.getResultList();
         list_professor.addAll(ob_lastprofessor);
         
-        ObservableList<Professor> ob_professor = FXCollections.observableArrayList(list_professor);
+        ObservableList<Funcionario> ob_professor = FXCollections.observableArrayList(list_professor);
 
         tb_tur_professores.setItems(ob_professor);
         

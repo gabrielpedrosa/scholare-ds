@@ -127,6 +127,19 @@ public class Editar_AlunoController implements Initializable {
 
     @FXML
     private void editar_editar_aluno(ActionEvent event) {
+        txt_alu_nome.setDisable(true);
+        txt_alu_cpf.setDisable(true);
+        txt_alu_rg.setDisable(true);
+        txt_alu_telefone.setDisable(true);
+        txt_alu_datanascimento.setDisable(true);
+        txt_alu_filiacao1.setDisable(true);
+        txt_alu_filiacao2.setDisable(true);
+        txt_alu_logradouro.setDisable(true);
+        txt_alu_bairro.setDisable(true);
+        txt_alu_numero.setDisable(true);
+        txt_alu_cidade.setDisable(true);
+        cbox_alu_estado.setDisable(true);
+        txt_alu_deficiencia.setDisable(true);
     }
 
     @FXML
@@ -149,6 +162,7 @@ public class Editar_AlunoController implements Initializable {
         }
         else{
             Aluno a = (Aluno) query.getSingleResult();
+            txt_alu_nome.setText(a.getAlu_nome());
             txt_alu_cpf.setText(a.getAlu_cpf());
             txt_alu_rg.setText(a.getAlu_rg());
             txt_alu_telefone.setText(a.getAlu_telefone());
@@ -159,7 +173,7 @@ public class Editar_AlunoController implements Initializable {
             txt_alu_bairro.setText(a.getAlu_bairro());
             txt_alu_numero.setText(a.getAlu_numero());
             txt_alu_cidade.setText(a.getAlu_cidade());
-            //cbox_alu_estado.setValue(a.getAlu_estado());
+            cbox_alu_estado.setValue(a.getAlu_estado());
             txt_alu_deficiencia.setText(a.getAlu_deficiencia());
         }
     }

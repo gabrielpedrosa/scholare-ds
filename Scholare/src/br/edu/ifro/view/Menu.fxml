@@ -25,7 +25,7 @@
                       <Menu mnemonicParsing="false" text="Cadastros">
                         <items>
                           <MenuItem fx:id="cadastrar_aluno" mnemonicParsing="false" onAction="#cadastrar_aluno" text="Aluno" />
-                              <MenuItem fx:id="cadastrar_professor" mnemonicParsing="false" onAction="#cadastrar_professor" text="Professor" />
+                              <MenuItem fx:id="cadastrar_professor" mnemonicParsing="false" onAction="#cadastrar_funcionario" text="Funcionario" />
                               <MenuItem fx:id="cadastrar_turma" mnemonicParsing="false" onAction="#cadastrar_turma" text="Turma" />
                         </items>
                       </Menu>

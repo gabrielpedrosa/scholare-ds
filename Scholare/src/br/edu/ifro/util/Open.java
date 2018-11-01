@@ -55,11 +55,11 @@ public class Open {
         return cena;
     }
     
-    public static Scene abrirProfessor(Class cls){
+    public static Scene abrirFuncionario(Class cls){
         Scene cena = null ;
         try{
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Cadastrar_Professor.fxml"));
+            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Cadastrar_Funcionario.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             cena = scene;
         }
@@ -100,7 +100,7 @@ public class Open {
         Scene cena = null;
         try{
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Cadastrar_Turma.fxml"));
+            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Matricular.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             cena = scene;
         }

@@ -6,7 +6,7 @@
 package br.edu.ifro.control;
 
 import br.edu.ifro.model.Login;
-import br.edu.ifro.model.Professor;
+import br.edu.ifro.model.Funcionario;
 import br.edu.ifro.util.Open;
 import br.eti.diegofonseca.MaskFieldUtil;
 import java.net.URL;
@@ -35,7 +35,7 @@ import javax.persistence.Persistence;
  *
  * @author Gabriel
  */
-public class Cadastrar_ProfessorController implements Initializable {
+public class Cadastrar_FuncionarioController implements Initializable {
 
     @FXML
     private MenuItem cadastrar_aluno;
@@ -52,49 +52,49 @@ public class Cadastrar_ProfessorController implements Initializable {
     @FXML
     private MenuItem ajuda_sobre;
     @FXML
-    private TextField txt_pro_nome;
-    @FXML
-    private TextField txt_pro_cpf;
-    @FXML
-    private RadioButton rad_pro_feminino;
-    @FXML
-    private RadioButton rad_pro_masculino;
-    @FXML
-    private ToggleGroup tg_pro_sexo;
-    @FXML
-    private TextField txt_pro_rg;
-    @FXML
-    private TextField txt_pro_telefone;
-    @FXML
-    private TextField txt_pro_email;
-    @FXML
-    private TextField txt_pro_datanascimento;
-    @FXML
-    private TextField txt_pro_logradouro;
-    @FXML
-    private TextField txt_pro_bairro;
-    @FXML
-    private TextField txt_pro_numero;
-    @FXML
-    private TextField txt_pro_datacadastro;
-    @FXML
     private Button bot_pro_cadastrar;
     @FXML
     private Button bot_pro_limpar;
     @FXML
     private Button bot_pro_sair;
     @FXML
-    private TextField txt_pro_cidade;
+    private TextField txt_fun_datacadastro;
     @FXML
-    private ComboBox cbox_pro_estado;
+    private TextField txt_fun_nome;
     @FXML
-    private ComboBox cbox_pro_disciplina;
+    private RadioButton rad_fun_feminino;
     @FXML
-    private TextField txt_pro_usuario;
+    private ToggleGroup tg_fun_sexo;
     @FXML
-    private PasswordField pw_pro_senha;
+    private RadioButton rad_fun_masculino;
     @FXML
-    private PasswordField pw_pro_confirmarsenha;
+    private TextField txt_fun_cpf;
+    @FXML
+    private TextField txt_fun_rg;
+    @FXML
+    private TextField txt_fun_telefone;
+    @FXML
+    private TextField txt_fun_datanascimento;
+    @FXML
+    private TextField txt_fun_cidade;
+    @FXML
+    private ComboBox cbox_fun_estado;
+    @FXML
+    private TextField txt_fun_email;
+    @FXML
+    private TextField txt_fun_logradouro;
+    @FXML
+    private TextField txt_fun_bairro;
+    @FXML
+    private TextField txt_fun_numero;
+    @FXML
+    private ComboBox cbox_fun_funcao;
+    @FXML
+    private TextField txt_fun_usuario;
+    @FXML
+    private PasswordField pw_fun_senha;
+    @FXML
+    private PasswordField pw_fun_confirmarsenha;
     
     
 
@@ -102,8 +102,8 @@ public class Cadastrar_ProfessorController implements Initializable {
         boolean preenchido;
         boolean txt_preenchido = false;
         boolean cbox_preenchido = false;
-        TextField[] campo_txt = {txt_pro_nome, txt_pro_cpf, txt_pro_rg, txt_pro_telefone, txt_pro_email, txt_pro_datanascimento, txt_pro_logradouro, txt_pro_bairro, txt_pro_numero, txt_pro_cidade, txt_pro_usuario, pw_pro_senha, pw_pro_confirmarsenha};
-        ComboBox[] campo_cbox = {cbox_pro_estado, cbox_pro_disciplina};
+        TextField[] campo_txt = {txt_fun_nome, txt_fun_cpf, txt_fun_rg, txt_fun_telefone, txt_fun_email, txt_fun_datanascimento, txt_fun_logradouro, txt_fun_bairro, txt_fun_numero, txt_fun_cidade, txt_fun_usuario, pw_fun_senha, pw_fun_confirmarsenha};
+        ComboBox[] campo_cbox = {cbox_fun_estado, cbox_fun_funcao};
         
         for (int i= 0; i< campo_txt.length; i++) {
             if (campo_txt[i].getText().equals("") || campo_txt[i].getText() == null) {
@@ -129,7 +129,7 @@ public class Cadastrar_ProfessorController implements Initializable {
     }
     public boolean verifica_senha(){
         boolean igual = false;
-        if(pw_pro_senha.getText().equals(pw_pro_confirmarsenha.getText())){
+        if(pw_fun_senha.getText().equals(pw_fun_confirmarsenha.getText())){
             igual = true;
         }
         else{
@@ -140,11 +140,11 @@ public class Cadastrar_ProfessorController implements Initializable {
     }
     
     public void addmask(){
-        MaskFieldUtil.cpfField(txt_pro_cpf);
-        MaskFieldUtil.foneField(txt_pro_telefone);
-        MaskFieldUtil.numericField(txt_pro_rg);
-        MaskFieldUtil.numericField(txt_pro_numero);
-        MaskFieldUtil.dateField(txt_pro_datanascimento);
+        MaskFieldUtil.cpfField(txt_fun_cpf);
+        MaskFieldUtil.foneField(txt_fun_telefone);
+        MaskFieldUtil.numericField(txt_fun_rg);
+        MaskFieldUtil.numericField(txt_fun_numero);
+        MaskFieldUtil.dateField(txt_fun_datanascimento);
     }
     /**
      * Initializes the controller class.
@@ -157,11 +157,11 @@ public class Cadastrar_ProfessorController implements Initializable {
         java.util.Date d = new java.util.Date();
         SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
         String datasrt = (String) f.format(d);
-        txt_pro_datacadastro.setText(datasrt);
+        txt_fun_datacadastro.setText(datasrt);
         ObservableList ob_estados = FXCollections.observableArrayList("ACRE", "RONDONIA", "MATO GROSSO", "MATO GROSSO DO SUL");
-        cbox_pro_estado.setItems(ob_estados);
-        ObservableList ob_disciplina = FXCollections.observableArrayList("Artes","Ciências", "Educação Física", "Ensino Religioso", "Geografia", "História", "Matematica", "Portugues");
-        cbox_pro_disciplina.setItems(ob_disciplina);
+        cbox_fun_estado.setItems(ob_estados);
+        ObservableList ob_disciplina = FXCollections.observableArrayList("Secretária", "Professor");
+        cbox_fun_funcao.setItems(ob_disciplina);
     }    
 
     @FXML
@@ -173,27 +173,27 @@ public class Cadastrar_ProfessorController implements Initializable {
                 EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
                 EntityManager em = emf.createEntityManager();
 
-                Professor p = new Professor();
-                p.setPro_nome(txt_pro_nome.getText());
-                p.setPro_cpf(txt_pro_cpf.getText());
-                p.setPro_rg(txt_pro_rg.getText());
-                RadioButton radioselected = (RadioButton) tg_pro_sexo.getSelectedToggle();
+                Funcionario p = new Funcionario();
+                p.setFun_nome(txt_fun_nome.getText());
+                p.setFun_cpf(txt_fun_cpf.getText());
+                p.setFun_rg(txt_fun_rg.getText());
+                RadioButton radioselected = (RadioButton) tg_fun_sexo.getSelectedToggle();
                 String rad_pro_sexo = radioselected.getText();
-                p.setPro_sexo(rad_pro_sexo);
-                p.setPro_nascimento(txt_pro_datanascimento.getText());
-                p.setPro_telefone(txt_pro_telefone.getText());
-                p.setPro_email(txt_pro_email.getText());
-                p.setPro_disciplina(cbox_pro_disciplina.getSelectionModel().getSelectedItem().toString());
-                p.setPro_logradouro(txt_pro_logradouro.getText());
-                p.setPro_bairro(txt_pro_bairro.getText());
-                p.setPro_numero(txt_pro_numero.getText());
-                p.setPro_cidade(txt_pro_cidade.getText());
-                p.setPro_estado(cbox_pro_estado.getSelectionModel().getSelectedItem().toString());
-                p.setPro_datacadastro(txt_pro_datacadastro.getText());
+                p.setFun_sexo(rad_pro_sexo);
+                p.setFun_nascimento(txt_fun_datanascimento.getText());
+                p.setFun_telefone(txt_fun_telefone.getText());
+                p.setFun_email(txt_fun_email.getText());
+                p.setFun_disciplina(cbox_fun_funcao.getSelectionModel().getSelectedItem().toString());
+                p.setFun_logradouro(txt_fun_logradouro.getText());
+                p.setFun_bairro(txt_fun_bairro.getText());
+                p.setFun_numero(txt_fun_numero.getText());
+                p.setFun_cidade(txt_fun_cidade.getText());
+                p.setFun_estado(cbox_fun_estado.getSelectionModel().getSelectedItem().toString());
+                p.setFun_datacadastro(txt_fun_datacadastro.getText());
 
                 Login l = new Login();
-                l.setLog_usuario(txt_pro_usuario.getText());
-                l.setLog_senha(pw_pro_senha.getText());
+                l.setLog_usuario(txt_fun_usuario.getText());
+                l.setLog_senha(pw_fun_senha.getText());
                 p.setLogin(l);
 
                 limpar_professor(event);
@@ -217,20 +217,21 @@ public class Cadastrar_ProfessorController implements Initializable {
 
     @FXML
     private void limpar_professor(ActionEvent event) {
-        txt_pro_nome.setText("");
-        txt_pro_cpf.setText("");
-        txt_pro_rg.setText("");
-        txt_pro_telefone.setText("");
-        txt_pro_datanascimento.setText("");
-        txt_pro_cidade.setText("");
-        cbox_pro_estado.setValue("");
-        txt_pro_email.setText("");
-        txt_pro_logradouro.setText("");
-        txt_pro_bairro.setText("");
-        txt_pro_numero.setText("");
-        txt_pro_usuario.setText("");
-        pw_pro_senha.setText("");
-        pw_pro_confirmarsenha.setText("");
+        txt_fun_nome.setText("");
+        txt_fun_cpf.setText("");
+        txt_fun_rg.setText("");
+        txt_fun_telefone.setText("");
+        txt_fun_datanascimento.setText("");
+        txt_fun_cidade.setText("");
+        cbox_fun_estado.setValue("");
+        txt_fun_email.setText("");
+        txt_fun_logradouro.setText("");
+        txt_fun_bairro.setText("");
+        txt_fun_numero.setText("");
+        cbox_fun_funcao.setValue("");
+        txt_fun_usuario.setText("");
+        pw_fun_senha.setText("");
+        pw_fun_confirmarsenha.setText("");
     }
 
     @FXML

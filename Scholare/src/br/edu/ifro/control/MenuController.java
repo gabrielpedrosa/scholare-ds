@@ -56,7 +56,9 @@ public class MenuController implements Initializable {
 
     @FXML
     private void matricula(ActionEvent event) {
-        Open.abrirAluno(getClass());
+        Scene novascene = Open.abrirMatricula(getClass()); 
+        Stage stage = (Stage) bot_marticula.getScene().getWindow();
+        stage.setScene(novascene);
     }
 
     @FXML
@@ -67,8 +69,8 @@ public class MenuController implements Initializable {
     }
 
     @FXML
-    private void cadastrar_professor(ActionEvent event) {
-        Scene novascene = Open.abrirProfessor(getClass()); 
+    private void cadastrar_funcionario(ActionEvent event) {
+        Scene novascene = Open.abrirFuncionario(getClass()); 
         Stage stage = (Stage) bot_marticula.getScene().getWindow();
         stage.setScene(novascene);
     }
