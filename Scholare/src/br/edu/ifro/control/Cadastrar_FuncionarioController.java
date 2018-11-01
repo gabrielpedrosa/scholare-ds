@@ -183,7 +183,7 @@ public class Cadastrar_FuncionarioController implements Initializable {
                 p.setFun_nascimento(txt_fun_datanascimento.getText());
                 p.setFun_telefone(txt_fun_telefone.getText());
                 p.setFun_email(txt_fun_email.getText());
-                p.setFun_disciplina(cbox_fun_funcao.getSelectionModel().getSelectedItem().toString());
+                p.setFun_funcao(cbox_fun_funcao.getSelectionModel().getSelectedItem().toString());
                 p.setFun_logradouro(txt_fun_logradouro.getText());
                 p.setFun_bairro(txt_fun_bairro.getText());
                 p.setFun_numero(txt_fun_numero.getText());
@@ -194,12 +194,12 @@ public class Cadastrar_FuncionarioController implements Initializable {
                 Login l = new Login();
                 l.setLog_usuario(txt_fun_usuario.getText());
                 l.setLog_senha(pw_fun_senha.getText());
-                p.setLogin(l);
+                l.setFuncionario(p);
 
                 limpar_professor(event);
                 
                 em.getTransaction().begin();
-                em.persist(p);
+                em.persist(l);
                 em.getTransaction().commit();
                 em.close();
                 emf.close();

@@ -116,7 +116,6 @@ public class Editar_AlunoController implements Initializable {
         cbox_alu_estado.setDisable(true);
         txt_alu_deficiencia.setDisable(true);
         bot_ed_alu_salvar.setDisable(true);
-        
     }
     
     public void habilita_campos(){
@@ -138,6 +137,22 @@ public class Editar_AlunoController implements Initializable {
         bot_ed_alu_salvar.setDisable(false);
     }
 
+       public void limpar_aluno(ActionEvent event) {
+        txt_alu_nome.setText("");
+        rad_ed_alu_feminino.setSelected(true);
+        txt_alu_cpf.setText("");
+        txt_alu_rg.setText("");
+        txt_alu_datanascimento.setText("");
+        txt_alu_telefone.setText("");
+        txt_alu_filiacao1.setText("");
+        txt_alu_filiacao2.setText("");
+        txt_alu_logradouro.setText("");
+        txt_alu_bairro.setText("");
+        txt_alu_numero.setText("");
+        txt_alu_deficiencia.setText("");
+        txt_alu_cidade.setText("");
+        cbox_alu_estado.setValue("");
+    }
     /**
      * Initializes the controller class.
      * @param url
@@ -157,6 +172,40 @@ public class Editar_AlunoController implements Initializable {
 
     @FXML
     private void salvar_editar_aluno(ActionEvent event) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
+        EntityManager em = emf.createEntityManager();
+        
+        Aluno alu = (Aluno) cbox_alu_nome.getSelectionModel().getSelectedItem();
+        
+        Query query =em.createQuery("select a from Aluno as a where a.alu_id = :alu_id");
+        query.setParameter("alu_id", alu.getAlu_id());
+        
+        alu = (Aluno) query.getSingleResult();
+        
+        alu.setAlu_nome(txt_alu_nome.getText());
+        RadioButton radioselected = (RadioButton) tg_alu_sexo.getSelectedToggle();
+        String rad_alu_sexo = radioselected.getText();
+        alu.setAlu_sexo(rad_alu_sexo);
+        alu.setAlu_cpf(txt_alu_cpf.getText());
+        alu.setAlu_rg(txt_alu_rg.getText());
+        alu.setAlu_nascimento(txt_alu_datanascimento.getText());
+        alu.setAlu_telefone(txt_alu_telefone.getText());
+        alu.setAlu_filiacao1(txt_alu_filiacao1.getText());
+        alu.setAlu_filiacao2(txt_alu_filiacao2.getText());
+        alu.setAlu_logradouro(txt_alu_logradouro.getText());
+        alu.setAlu_bairro(txt_alu_bairro.getText());
+        alu.setAlu_numero(txt_alu_numero.getText());
+        alu.setAlu_cidade(txt_alu_cidade.getText());
+        alu.setAlu_estado(cbox_alu_estado.getSelectionModel().getSelectedItem().toString());
+        alu.setAlu_deficiencia(txt_alu_deficiencia.getText());
+        
+        limpar_aluno(event);
+        
+        em.getTransaction().begin();
+        em.persist(alu);
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
     }
 
     @FXML

@@ -3,10 +3,12 @@ package br.edu.ifro.model;
 //@author Gabriel
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Login implements Serializable {
@@ -15,6 +17,16 @@ public class Login implements Serializable {
     private int log_id;
     private String log_usuario;
     private String log_senha;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Funcionario funcionario;
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
 
     public int getLog_id() {
         return log_id;

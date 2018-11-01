@@ -60,7 +60,7 @@ public class Cadastrar_TurmaController implements Initializable {
     @FXML
     private ComboBox cbox_tur_tipo;
     @FXML
-    private ComboBox cbox_tur_professor;
+    private ComboBox<Funcionario> cbox_tur_professor;
     @FXML
     private Button bot_tur_inserir;
     @FXML
@@ -145,6 +145,10 @@ public class Cadastrar_TurmaController implements Initializable {
 
         tb_tur_professores.setItems(ob_professor);
         
+        Funcionario p = cbox_tur_professor.getSelectionModel().getSelectedItem();
+        ObservableList a = cbox_tur_professor.getItems();
+        a.remove(p);
+        cbox_tur_professor.setItems(a);
         
     }
 
@@ -182,7 +186,7 @@ public class Cadastrar_TurmaController implements Initializable {
         cbox_tur_serie_ano.setValue("");
         cbox_tur_ano.setValue("");
         cbox_tur_tipo.setValue("");
-        cbox_tur_professor.setValue("");
+        cbox_tur_professor.setValue(null);
     }
 
     @FXML

@@ -22,7 +22,7 @@ public class Funcionario implements Serializable {
     private String fun_telefone;
     private String fun_email;
     private String fun_nascimento; 
-    private String fun_disciplina;
+    private String fun_funcao;
     private String fun_logradouro;
     private String fun_bairro;
     private String fun_numero;
@@ -108,12 +108,12 @@ public class Funcionario implements Serializable {
         this.fun_nascimento = fun_nascimento;
     }
 
-    public String getFun_disciplina() {
-        return fun_disciplina;
+    public String getFun_funcao() {
+        return fun_funcao;
     }
 
-    public void setFun_disciplina(String fun_disciplina) {
-        this.fun_disciplina = fun_disciplina;
+    public void setFun_funcao(String fun_funcao) {
+        this.fun_funcao = fun_funcao;
     }
 
     public String getFun_logradouro() {
