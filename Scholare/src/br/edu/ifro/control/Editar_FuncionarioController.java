@@ -171,6 +171,10 @@ public class Editar_FuncionarioController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        inicia();
+    }
+
+    public void inicia(){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
         EntityManager em = emf.createEntityManager();
         
@@ -179,10 +183,45 @@ public class Editar_FuncionarioController implements Initializable {
         
         ObservableList<Funcionario> obfuncionario = FXCollections.observableArrayList(list_funcionario);
         cbox_fun_nome.setItems(obfuncionario);
-    }    
+    }
 
     @FXML
     private void salvar_editar_funcionario(ActionEvent event) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
+        EntityManager em = emf.createEntityManager();
+        
+        Funcionario fun = (Funcionario) cbox_fun_nome.getSelectionModel().getSelectedItem();
+        
+        Query query = em.createQuery("select f from Funcionario as f where f.fun_id = :fun_id");
+        query.setParameter("fun_id", fun.getFun_id());
+        
+        fun = (Funcionario) query.getSingleResult();
+        
+        fun.setFun_nome(txt_fun_nome.getText());
+        RadioButton radioselected = (RadioButton) tg_fun_sexo.getSelectedToggle();
+        String rad_fun_sexo = radioselected.getText();
+        fun.setFun_sexo(rad_fun_sexo);
+        fun.setFun_cpf(txt_fun_cpf.getText());
+        fun.setFun_rg(txt_fun_rg.getText());
+        fun.setFun_telefone(txt_fun_telefone.getText());
+        fun.setFun_nascimento(txt_fun_datanascimento.getText());
+        fun.setFun_funcao(cbox_fun_funcao.getSelectionModel().getSelectedItem().toString());
+        fun.setFun_logradouro(txt_fun_logradouro.getText());
+        fun.setFun_bairro(txt_fun_bairro.getText());
+        fun.setFun_numero(txt_fun_numero.getText());
+        fun.setFun_cidade(txt_fun_cidade.getText());
+        fun.setFun_estado(cbox_fun_estado.getSelectionModel().getSelectedItem().toString());
+        fun.setFun_email(txt_fun_email.getText());
+        
+        limpar_professor(event);
+        
+        em.getTransaction().begin();
+        em.persist(fun);
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
+        
+        inicia();
     }
 
     @FXML

@@ -160,6 +160,10 @@ public class Editar_AlunoController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        inicia();
+    }
+    
+    public void inicia(){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
         EntityManager em = emf.createEntityManager();
         
@@ -206,6 +210,8 @@ public class Editar_AlunoController implements Initializable {
         em.getTransaction().commit();
         em.close();
         emf.close();
+        
+        inicia();
     }
 
     @FXML
@@ -248,39 +254,46 @@ public class Editar_AlunoController implements Initializable {
 
     @FXML
     private void selecionar(ActionEvent event) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
-        EntityManager em = emf.createEntityManager();
-        
-        Query query =em.createQuery("select a from Aluno as a where a.alu_nome = :alu_nome");
-        query.setParameter("alu_nome", cbox_alu_nome.getSelectionModel().getSelectedItem().toString());
-        
-        if(query.getResultList().isEmpty()){
-            System.out.println("Erro");
+        String cbox_nome = cbox_alu_nome.getSelectionModel().getSelectedItem().toString();
+        System.out.println(cbox_nome);
+        if(cbox_nome == null){
+            
         }
         else{
-            deshabilita_campos();
-            
-            Aluno a = (Aluno) query.getSingleResult();
-            txt_alu_nome.setText(a.getAlu_nome());
-            if(a.getAlu_sexo().equals("Feminino")){
-                rad_ed_alu_feminino.setSelected(true);
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
+            EntityManager em = emf.createEntityManager();
+
+            Query query =em.createQuery("select a from Aluno as a where a.alu_nome = :alu_nome");
+            query.setParameter("alu_nome", cbox_nome);
+
+            if(query.getResultList().isEmpty()){
+                System.out.println("Erro");
             }
             else{
-                rad_ed_alu_masculino.setSelected(true);
+                deshabilita_campos();
+
+                Aluno a = (Aluno) query.getSingleResult();
+                txt_alu_nome.setText(a.getAlu_nome());
+                if(a.getAlu_sexo().equals("Feminino")){
+                    rad_ed_alu_feminino.setSelected(true);
+                }
+                else{
+                    rad_ed_alu_masculino.setSelected(true);
+                }
+                txt_alu_cpf.setText(a.getAlu_cpf());
+                txt_alu_rg.setText(a.getAlu_rg());
+                txt_alu_telefone.setText(a.getAlu_telefone());
+                txt_alu_datanascimento.setText(a.getAlu_nascimento());
+                txt_alu_filiacao1.setText(a.getAlu_filiacao1());
+                txt_alu_filiacao2.setText(a.getAlu_filiacao2());
+                txt_alu_logradouro.setText(a.getAlu_logradouro());
+                txt_alu_bairro.setText(a.getAlu_bairro());
+                txt_alu_numero.setText(a.getAlu_numero());
+                txt_alu_cidade.setText(a.getAlu_cidade());
+                cbox_alu_estado.setValue(a.getAlu_estado());
+                txt_alu_deficiencia.setText(a.getAlu_deficiencia());
+                bot_ed_alu_deletar.setDisable(false);
             }
-            txt_alu_cpf.setText(a.getAlu_cpf());
-            txt_alu_rg.setText(a.getAlu_rg());
-            txt_alu_telefone.setText(a.getAlu_telefone());
-            txt_alu_datanascimento.setText(a.getAlu_nascimento());
-            txt_alu_filiacao1.setText(a.getAlu_filiacao1());
-            txt_alu_filiacao2.setText(a.getAlu_filiacao2());
-            txt_alu_logradouro.setText(a.getAlu_logradouro());
-            txt_alu_bairro.setText(a.getAlu_bairro());
-            txt_alu_numero.setText(a.getAlu_numero());
-            txt_alu_cidade.setText(a.getAlu_cidade());
-            cbox_alu_estado.setValue(a.getAlu_estado());
-            txt_alu_deficiencia.setText(a.getAlu_deficiencia());
-            bot_ed_alu_deletar.setDisable(false);
         }
     }
 

@@ -19,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -87,6 +88,8 @@ public class Cadastrar_AlunoController implements Initializable {
     private Button bot_alu_sair;
     @FXML
     private TextField txt_alu_rua;
+    
+    private String alu_mensagem;
     
     public boolean verifica_vazio(){
         boolean preenchido;
@@ -159,6 +162,12 @@ public class Cadastrar_AlunoController implements Initializable {
             em.getTransaction().commit();
             em.close();
             emf.close();
+            
+            alu_mensagem = "Cadastro Realizado com Sucesso" ;
+            
+            Open.abrirSucesso(getClass(), alu_mensagem); 
+            Stage stage = (Stage) bot_alu_sair.getScene().getWindow();
+            stage.close();
         }
         else{
             System.out.println("Campos obrigatórios não preenchidos");

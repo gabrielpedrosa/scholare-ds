@@ -2,9 +2,12 @@ package br.edu.ifro.util;
 
 // @author Gabriel
 
+import br.edu.ifro.control.SucessoController;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 public class Open {
     
@@ -150,6 +153,19 @@ public class Open {
             System.out.println(e.getMessage());
         }
         return cena;
+    }
+    public static void abrirSucesso(Class cls, String mensagem){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Sucesso.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.showAndWait();
+        }
+        catch(IOException e){
+            System.out.println(e.getMessage());
+        }
     }
     
     public static Scene abrirConfirmacao(Class cls){
