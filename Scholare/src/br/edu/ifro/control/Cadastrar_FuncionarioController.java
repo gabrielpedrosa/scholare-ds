@@ -203,6 +203,8 @@ public class Cadastrar_FuncionarioController implements Initializable {
                 em.getTransaction().commit();
                 em.close();
                 emf.close();
+                
+                Open.abrirSucesso(getClass()); 
             }
             else{
                 System.out.println("Senhas não Conferem");

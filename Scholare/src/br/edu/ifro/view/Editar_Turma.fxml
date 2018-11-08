@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.cell.*?>
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -7,19 +14,18 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.191" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifro.control.Editar_TurmaController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifro.control.Editar_FuncionarioController">
    <top>
       <MenuBar prefHeight="20.0">
         <menus>
@@ -45,18 +51,10 @@
         </menus>
       </MenuBar>
    </top>
-   <left>
+   <bottom>
       <Pane prefHeight="600.0" prefWidth="800.0" styleClass="cadastro-fundo" stylesheets="@../style/style.css" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="30.0" layoutY="90.0" text="Ano: *" textFill="WHITE">
-               <font>
-                  <Font name="Arial Bold" size="18.0" />
-               </font>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Label>
-            <Label layoutX="15.0" layoutY="5.0" text="Cadastrar Turma" textFill="#d3d3d3" textOverrun="CLIP">
+            <Label fx:id="window_nome" layoutX="15.0" text="Exibir Turma" textFill="#d3d3d3" textOverrun="CLIP">
                <font>
                   <Font name="System Bold" size="40.0" />
                </font>
@@ -64,45 +62,10 @@
                   <DropShadow />
                </effect>
             </Label>
-            <Separator layoutX="15.0" layoutY="60.0" prefHeight="1.0" prefWidth="500.0" />
-            <Label layoutX="450.0" layoutY="90.0" text="Série / Ano: *" textFill="#f5f5f5">
-               <font>
-                  <Font name="Arial Bold" size="18.0" />
-               </font>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Label>
-            <Label layoutX="640.0" layoutY="90.0" text="Turno: *" textFill="WHITE">
-               <font>
-                  <Font name="Arial Bold" size="18.0" />
-               </font>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Label>
-            <RadioButton fx:id="rad_tur_a" layoutX="640.0" layoutY="120.0" mnemonicParsing="false" selected="true" text="A" textFill="WHITE">
-               <font>
-                  <Font name="Arial" size="16.0" />
-               </font>
-               <effect>
-                  <Blend />
-               </effect>
-               <toggleGroup>
-                  <ToggleGroup fx:id="tg_tur_turno" />
-               </toggleGroup>
-            </RadioButton>
-            <RadioButton fx:id="rad_tur_b" layoutX="720.0" layoutY="120.0" mnemonicParsing="false" text="B" textFill="WHITE" toggleGroup="$tg_tur_turno">
-               <font>
-                  <Font name="Arial" size="16.0" />
-               </font>
-               <effect>
-                  <Blend />
-               </effect>
-            </RadioButton>
-            <Group layoutX="100.0" layoutY="470.0">
+            <Separator layoutX="15.0" layoutY="130.0" prefHeight="1.0" prefWidth="770.0" />
+            <Group layoutX="40.0" layoutY="470.0">
                <children>
-                  <Button fx:id="bot_tur_cadastrar" alignment="BOTTOM_CENTER" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#cadastrar_turma" prefHeight="80.0" prefWidth="120.0" styleClass="but-salvar" stylesheets="@../style/style.css" text="Cadastrar">
+                  <Button fx:id="bot_tur_salvar" alignment="BOTTOM_CENTER" disable="true" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#salvar_editar_turma" prefHeight="80.0" prefWidth="120.0" styleClass="but-salvar" stylesheets="@../style/style.css" text="Salvar">
                      <effect>
                         <DropShadow color="#4d4d4d" />
                      </effect>
@@ -112,9 +75,9 @@
                   </Button>
                </children>
             </Group>
-            <Group layoutX="330.0" layoutY="470.0">
+            <Group layoutX="240.0" layoutY="470.0">
                <children>
-                  <Button fx:id="bot_tur_limpar" alignment="BOTTOM_CENTER" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#limpar_turma" prefHeight="80.0" prefWidth="120.0" styleClass="but-limpar" stylesheets="@../style/style.css" text="Limpar">
+                  <Button fx:id="bot_tur_deletar" alignment="BOTTOM_CENTER" disable="true" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#deletar_editar_turma" prefHeight="80.0" prefWidth="120.0" styleClass="but-limpar" stylesheets="@../style/style.css" text="Deletar">
                      <effect>
                         <DropShadow color="#4d4d4d" />
                      </effect>
@@ -124,9 +87,21 @@
                   </Button>
                </children>
             </Group>
-            <Group layoutX="560.0" layoutY="470.0">
+            <Group layoutX="440.0" layoutY="470.0">
                <children>
-                  <Button fx:id="bot_tur_cancelar" alignment="BOTTOM_CENTER" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#cancelar_turma" prefHeight="80.0" prefWidth="120.0" styleClass="but-cancelar" stylesheets="@../style/style.css" text="Sair">
+                  <Button fx:id="bot_tur_editar" alignment="BOTTOM_CENTER" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#editar_editar_turma" prefHeight="80.0" prefWidth="120.0" styleClass="but-editar" stylesheets="@../style/style.css" text="Editar">
+                     <effect>
+                        <DropShadow color="#4d4d4d" />
+                     </effect>
+                     <font>
+                        <Font name="Arial" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Group>
+            <Group layoutX="640.0" layoutY="470.0">
+               <children>
+                  <Button fx:id="bot_tur_cancelar" alignment="BOTTOM_CENTER" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#cancelar_editar_turma" prefHeight="80.0" prefWidth="120.0" styleClass="but-cancelar" stylesheets="@../style/style.css" text="Sair">
                      <effect>
                         <DropShadow color="#4d4d4d" height="20.5" radius="9.625" width="20.0" />
                      </effect>
@@ -136,9 +111,7 @@
                   </Button>
                </children>
             </Group>
-            <ComboBox fx:id="cbox_tur_ano" layoutX="30.0" layoutY="120.0" prefHeight="35.0" prefWidth="140.0" />
-            <ComboBox fx:id="cbox_tur_tipo" layoutX="200.0" layoutY="120.0" prefHeight="35.0" prefWidth="220.0" />
-            <Label layoutX="200.0" layoutY="90.0" text="Nível de Educação: *" textFill="WHITE">
+            <Label layoutX="30.0" layoutY="65.0" text="Selecionar Turma:" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
@@ -146,7 +119,12 @@
                   <DropShadow />
                </effect>
             </Label>
-            <Label layoutX="30.0" layoutY="170.0" text="Professor: *" textFill="WHITE">
+            <TextField fx:id="txt_tur_datacadastro" alignment="CENTER" editable="false" layoutX="630.0" layoutY="20.0" prefHeight="30.0" prefWidth="150.0">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </TextField>
+            <Label layoutX="570.0" layoutY="26.0" text="Data:" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
@@ -154,27 +132,75 @@
                   <DropShadow />
                </effect>
             </Label>
-            <ComboBox fx:id="cbox_tur_professor" layoutX="30.0" layoutY="200.0" prefHeight="35.0" prefWidth="500.0" />
-            <Button fx:id="bot_tur_inserir" layoutX="560.0" layoutY="200.0" mnemonicParsing="false" onAction="#inserir_professor" prefHeight="40.0" prefWidth="150.0" styleClass="but" stylesheets="@../style/style.css" text="Inserir Professor">
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Button>
-            <TableView fx:id="tb_tur_professores" layoutX="30.0" layoutY="260.0" prefHeight="200.0" prefWidth="360.0">
-              <columns>
-                <TableColumn maxWidth="50.0" minWidth="50.0" prefWidth="50.0" text="Código">
-                <cellValueFactory>
+            <ComboBox fx:id="cbox_tur_nome" layoutX="30.0" layoutY="90.0" onAction="#selecionar" prefHeight="30.0" prefWidth="460.0" />
+            <ComboBox fx:id="cbox_tur_serie_ano" disable="true" layoutX="460.0" layoutY="180.0" prefHeight="35.0" prefWidth="150.0" />
+            <TableView fx:id="tb_tur_professores" disable="true" layoutX="40.0" layoutY="250.0" prefHeight="200.0" prefWidth="360.0">
+               <columns>
+                  <TableColumn maxWidth="50.0" minWidth="50.0" prefWidth="50.0" text="Código">
+                     <cellValueFactory>
                         <PropertyValueFactory property="fun_id" />
-                  </cellValueFactory>
-                </TableColumn>
-                <TableColumn maxWidth="300.0" minWidth="300.0" prefWidth="300.0" text="Nome">
-                <cellValueFactory>
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn maxWidth="300.0" minWidth="300.0" prefWidth="300.0" text="Nome">
+                     <cellValueFactory>
                         <PropertyValueFactory property="fun_nome" />
-                  </cellValueFactory>
-                </TableColumn>
-              </columns>
+                     </cellValueFactory>
+                  </TableColumn>
+               </columns>
             </TableView>
-            <ComboBox fx:id="cbox_tur_serie_ano" layoutX="450.0" layoutY="120.0" prefHeight="35.0" prefWidth="150.0" />
+            <Label layoutX="210.0" layoutY="150.0" text="Nível de Educação: *" textFill="WHITE">
+               <effect>
+                  <DropShadow />
+               </effect>
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="cbox_tur_tipo" disable="true" layoutX="210.0" layoutY="180.0" prefHeight="35.0" prefWidth="220.0" />
+            <ComboBox fx:id="cbox_tur_ano" disable="true" layoutX="40.0" layoutY="180.0" prefHeight="35.0" prefWidth="140.0" />
+            <RadioButton fx:id="rad_tur_b" disable="true" layoutX="730.0" layoutY="180.0" mnemonicParsing="false" text="B" textFill="WHITE">
+               <toggleGroup>
+                  <ToggleGroup fx:id="tg_tur_turno" />
+               </toggleGroup>
+               <effect>
+                  <Blend />
+               </effect>
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </RadioButton>
+            <RadioButton fx:id="rad_tur_a" disable="true" layoutX="650.0" layoutY="180.0" mnemonicParsing="false" selected="true" text="A" textFill="WHITE" toggleGroup="$tg_tur_turno">
+               <effect>
+                  <Blend />
+               </effect>
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+            </RadioButton>
+            <Label layoutX="650.0" layoutY="150.0" text="Turno: *" textFill="WHITE">
+               <effect>
+                  <DropShadow />
+               </effect>
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="460.0" layoutY="150.0" text="Série / Ano: *" textFill="#f5f5f5">
+               <effect>
+                  <DropShadow />
+               </effect>
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="40.0" layoutY="150.0" text="Ano: *" textFill="WHITE">
+               <effect>
+                  <DropShadow />
+               </effect>
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+            </Label>
          </children></Pane>
-   </left>
+   </bottom>
 </BorderPane>

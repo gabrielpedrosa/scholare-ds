@@ -5,11 +5,18 @@
  */
 package br.edu.ifro.control;
 
+import br.edu.ifro.model.Aluno;
+import br.edu.ifro.model.Matricula;
+import br.edu.ifro.util.Open;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuItem;
@@ -18,6 +25,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.stage.Stage;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 /**
  * FXML Controller class
@@ -55,7 +67,7 @@ public class MatricularController implements Initializable {
     @FXML
     private TextField txt_mat_responsavel;
     @FXML
-    private ComboBox<?> cbox_mat_aluno;
+    private ComboBox cbox_mat_aluno;
     @FXML
     private ComboBox<?> cbox_mat_turma;
     @FXML
@@ -69,14 +81,33 @@ public class MatricularController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+    }
+    
+    public void inicia(){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
+        EntityManager em = emf.createEntityManager();
+        
+        Query query = em.createQuery("select a from Aluno as a");
+        List<Aluno> list_alunos = query.getResultList();
+        
+        ObservableList<Aluno> obaluno = FXCollections.observableArrayList(list_alunos);
+        cbox_mat_aluno.setItems(obaluno);
+    }
+    
 
     @FXML
     private void matricular_matricula(ActionEvent event) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
+        EntityManager em = emf.createEntityManager();
+        
+        Matricula m = new Matricula();
+        
+        
     }
 
     @FXML
@@ -85,6 +116,9 @@ public class MatricularController implements Initializable {
 
     @FXML
     private void cancelar_matricula(ActionEvent event) {
+        Scene novascene = Open.abrirMenu(getClass()); 
+        Stage stage = (Stage) bot_mat_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
     }
 
     @FXML

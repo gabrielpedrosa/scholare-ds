@@ -154,7 +154,7 @@ public class Open {
         }
         return cena;
     }
-    public static void abrirSucesso(Class cls, String mensagem){
+    public static void abrirSucesso(Class cls){
         try{
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Sucesso.fxml"));

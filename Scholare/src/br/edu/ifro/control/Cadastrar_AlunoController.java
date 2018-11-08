@@ -162,12 +162,9 @@ public class Cadastrar_AlunoController implements Initializable {
             em.getTransaction().commit();
             em.close();
             emf.close();
+                        
+            Open.abrirSucesso(getClass()); 
             
-            alu_mensagem = "Cadastro Realizado com Sucesso" ;
-            
-            Open.abrirSucesso(getClass(), alu_mensagem); 
-            Stage stage = (Stage) bot_alu_sair.getScene().getWindow();
-            stage.close();
         }
         else{
             System.out.println("Campos obrigatórios não preenchidos");
