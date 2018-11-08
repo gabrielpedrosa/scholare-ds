@@ -6,7 +6,9 @@
 package br.edu.ifro.control;
 
 import br.edu.ifro.model.Aluno;
+import br.edu.ifro.model.Funcionario;
 import br.edu.ifro.model.Matricula;
+import br.edu.ifro.model.Turma;
 import br.edu.ifro.util.Open;
 import java.net.URL;
 import java.util.List;
@@ -67,9 +69,9 @@ public class MatricularController implements Initializable {
     @FXML
     private TextField txt_mat_responsavel;
     @FXML
-    private ComboBox cbox_mat_aluno;
+    private ComboBox<Aluno> cbox_mat_aluno;
     @FXML
-    private ComboBox<?> cbox_mat_turma;
+    private ComboBox<Turma> cbox_mat_turma;
     @FXML
     private TextField txt_mat_telefone;
     @FXML
@@ -77,7 +79,7 @@ public class MatricularController implements Initializable {
     @FXML
     private ToggleGroup tg_mat_triagem;
     @FXML
-    private TextField txt_mat_datacadastro1;
+    private ComboBox<Funcionario> cbox_mat_funcionario;
 
     /**
      * Initializes the controller class.
@@ -86,6 +88,7 @@ public class MatricularController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        inicia();
     }
     
     public void inicia(){
@@ -97,6 +100,9 @@ public class MatricularController implements Initializable {
         
         ObservableList<Aluno> obaluno = FXCollections.observableArrayList(list_alunos);
         cbox_mat_aluno.setItems(obaluno);
+        
+        ObservableList ob_fun = FXCollections.observableArrayList("EU");
+        cbox_mat_funcionario.setItems(ob_fun);
     }
     
 
@@ -106,6 +112,28 @@ public class MatricularController implements Initializable {
         EntityManager em = emf.createEntityManager();
         
         Matricula m = new Matricula();
+        m.setAluno(cbox_mat_aluno.getSelectionModel().getSelectedItem());
+        m.setMat_data(txt_mat_datacadastro.getText());
+        RadioButton radioselected = (RadioButton) tg_mat_triagem.getSelectedToggle();
+        String rad_fun_triangem = radioselected.getText();
+        m.setMat_triagem(rad_fun_triangem);
+        m.setMat_telefone_responsavel(txt_mat_responsavel.getText());
+        m.setFuncionario(null);
+        m.setMat_observacoes(txa_mat_observacoes.getText());
+        m.setMat_responsavel(txt_mat_responsavel.getText());
+        if(radioselected.getText() == "Sim"){
+            m.setTurma(null);
+        }
+        else{
+            m.setTurma(cbox_mat_turma.getSelectionModel().getSelectedItem());
+        }
+        
+        
+        em.getTransaction().begin();
+        em.persist(m);
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
         
         
     }
