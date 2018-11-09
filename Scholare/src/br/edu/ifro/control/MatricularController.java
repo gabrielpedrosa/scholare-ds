@@ -95,14 +95,19 @@ public class MatricularController implements Initializable {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
         EntityManager em = emf.createEntityManager();
         
-        Query query = em.createQuery("select a from Aluno as a");
-        List<Aluno> list_alunos = query.getResultList();
+        Query queryaluno = em.createQuery("select a from Aluno as a");
+        Query queryturma = em.createQuery("select t from Turma as t");
+        List<Aluno> list_alunos = queryaluno.getResultList();
+        List<Turma> list_turma = queryturma.getResultList();
         
         ObservableList<Aluno> obaluno = FXCollections.observableArrayList(list_alunos);
         cbox_mat_aluno.setItems(obaluno);
         
         ObservableList ob_fun = FXCollections.observableArrayList("EU");
         cbox_mat_funcionario.setItems(ob_fun);
+        
+        ObservableList<Turma> obturma = FXCollections.observableArrayList(list_turma);
+        cbox_mat_turma.setItems(obturma);
     }
     
 
