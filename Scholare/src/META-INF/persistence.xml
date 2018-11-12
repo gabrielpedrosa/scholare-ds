@@ -9,6 +9,7 @@
     <class>br.edu.ifro.model.Turma</class>
     <class>br.edu.ifro.model.Funcionario</class>
     <class>br.edu.ifro.model.Matricula</class>
+    <class>br.edu.ifro.model.Disciplina</class>
     <properties>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <!-- Banco de dados host/database -->

@@ -23,6 +23,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
@@ -95,6 +96,16 @@ public class Cadastrar_FuncionarioController implements Initializable {
     private PasswordField pw_fun_senha;
     @FXML
     private PasswordField pw_fun_confirmarsenha;
+    @FXML
+    private TextField txt_fun_complemento;
+    @FXML
+    private TableView<?> tb_fun_disciplina;
+    @FXML
+    private ComboBox<?> cbox_fun_disciplina;
+    @FXML
+    private TextField txt_fun_resposta;
+    @FXML
+    private ComboBox<?> cbox_fun_pergunta;
     
     
 
