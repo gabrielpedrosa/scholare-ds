@@ -1,11 +1,14 @@
 package br.edu.ifro.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 //@author Gabriel Pedrosa
@@ -30,6 +33,11 @@ public class Funcionario implements Serializable {
     private String fun_estado;
     @OneToOne(cascade = CascadeType.ALL)
     private Login login;
+    @OneToMany(
+        cascade = CascadeType.ALL, 
+        orphanRemoval = true
+    )
+    private List<Disciplina> disciplina = new ArrayList<>();
     
     @Override
     public String toString(){
@@ -147,7 +155,7 @@ public class Funcionario implements Serializable {
     public void setFun_cidade(String fun_cidade) {
         this.fun_cidade = fun_cidade;
     }
-
+ 
     public String getFun_estado() {
         return fun_estado;
     }
@@ -163,6 +171,13 @@ public class Funcionario implements Serializable {
     public void setLogin(Login login) {
         this.login = login;
     }
-    
+
+    public List<Disciplina> getDisciplina() {
+        return disciplina;
+    }
+
+    public void setDisciplina(List<Disciplina> disciplina) {
+        this.disciplina = disciplina;
+    }    
     
 }

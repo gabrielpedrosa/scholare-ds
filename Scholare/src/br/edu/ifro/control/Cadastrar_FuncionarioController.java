@@ -5,12 +5,16 @@
  */
 package br.edu.ifro.control;
 
+import br.edu.ifro.model.Aluno;
+import br.edu.ifro.model.Disciplina;
 import br.edu.ifro.model.Login;
 import br.edu.ifro.model.Funcionario;
+import br.edu.ifro.model.Turma;
 import br.edu.ifro.util.Open;
 import br.eti.diegofonseca.MaskFieldUtil;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,6 +34,7 @@ import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 /**
  * FXML Controller class
@@ -101,11 +106,13 @@ public class Cadastrar_FuncionarioController implements Initializable {
     @FXML
     private TableView<?> tb_fun_disciplina;
     @FXML
-    private ComboBox<?> cbox_fun_disciplina;
+    private ComboBox<Disciplina> cbox_fun_disciplina;
     @FXML
     private TextField txt_fun_resposta;
     @FXML
     private ComboBox<?> cbox_fun_pergunta;
+    @FXML
+    private Button bot_fun_disciplina;
     
     
 
@@ -171,8 +178,23 @@ public class Cadastrar_FuncionarioController implements Initializable {
         txt_fun_datacadastro.setText(datasrt);
         ObservableList ob_estados = FXCollections.observableArrayList("ACRE", "RONDONIA", "MATO GROSSO", "MATO GROSSO DO SUL");
         cbox_fun_estado.setItems(ob_estados);
-        ObservableList ob_disciplina = FXCollections.observableArrayList("Secretária", "Professor");
-        cbox_fun_funcao.setItems(ob_disciplina);
+        ObservableList ob_funcao = FXCollections.observableArrayList("Secretária", "Professor");
+        cbox_fun_funcao.setItems(ob_funcao);
+        
+        ObservableList ob_disciplina = FXCollections.observableArrayList("dis", "Dis");
+        cbox_fun_disciplina.setItems(ob_disciplina);
+        
+        ObservableList ob_pergunta = FXCollections.observableArrayList("Pergunta", "Pergunta 02");
+        cbox_fun_pergunta.setItems(ob_disciplina);
+        
+         EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
+        EntityManager em = emf.createEntityManager();
+        
+        Query querydisciplina = em.createQuery("select d from Disciplina as d");
+        List<Disciplina> list_disciplina = querydisciplina.getResultList();
+        
+        ObservableList<Disciplina> obdisciplina = FXCollections.observableArrayList(list_disciplina);
+        cbox_fun_disciplina.setItems(obdisciplina);
     }    
 
     @FXML
@@ -205,12 +227,14 @@ public class Cadastrar_FuncionarioController implements Initializable {
                 Login l = new Login();
                 l.setLog_usuario(txt_fun_usuario.getText());
                 l.setLog_senha(pw_fun_senha.getText());
-                l.setFuncionario(p);
+                l.setLog_pergunta(cbox_fun_pergunta.getSelectionModel().getSelectedItem().toString());
+                l.setLog_resposta(txt_fun_resposta.getText());
+                p.setLogin(l);
 
                 limpar_professor(event);
                 
                 em.getTransaction().begin();
-                em.persist(l);
+                em.persist(p);
                 em.getTransaction().commit();
                 em.close();
                 emf.close();
@@ -252,6 +276,21 @@ public class Cadastrar_FuncionarioController implements Initializable {
         Scene novascene = Open.abrirMenu(getClass()); 
         Stage stage = (Stage) bot_pro_sair.getScene().getWindow();
         stage.setScene(novascene);
+    }
+
+    @FXML
+    private void fun_inserir(ActionEvent event) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
+        EntityManager em = emf.createEntityManager();
+        
+        Funcionario f = new Funcionario();
+        f.getDisciplina().add(cbox_fun_disciplina.getSelectionModel().getSelectedItem());
+        
+        em.getTransaction().begin();
+        em.persist(f);
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
     }
     
 }

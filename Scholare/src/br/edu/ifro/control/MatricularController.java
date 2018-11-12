@@ -126,7 +126,7 @@ public class MatricularController implements Initializable {
         m.setFuncionario(null);
         m.setMat_observacoes(txa_mat_observacoes.getText());
         m.setMat_responsavel(txt_mat_responsavel.getText());
-        if(radioselected.getText() == "Sim"){
+        if(radioselected.getText().equals("Sim")){
             m.setTurma(null);
         }
         else{

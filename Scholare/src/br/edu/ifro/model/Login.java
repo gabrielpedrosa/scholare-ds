@@ -17,6 +17,8 @@ public class Login implements Serializable {
     private int log_id;
     private String log_usuario;
     private String log_senha;
+    private String log_pergunta;
+    private String log_resposta;
     @OneToOne(cascade = CascadeType.ALL)
     private Funcionario funcionario;
 
@@ -50,6 +52,22 @@ public class Login implements Serializable {
 
     public void setLog_senha(String log_senha) {
         this.log_senha = log_senha;
+    }
+
+    public String getLog_pergunta() {
+        return log_pergunta;
+    }
+
+    public void setLog_pergunta(String log_pergunta) {
+        this.log_pergunta = log_pergunta;
+    }
+
+    public String getLog_resposta() {
+        return log_resposta;
+    }
+
+    public void setLog_resposta(String log_resposta) {
+        this.log_resposta = log_resposta;
     }
     
     
