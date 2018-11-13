@@ -240,7 +240,7 @@ public class Cadastrar_FuncionarioController implements Initializable {
                 limpar_professor(event);
                 
                 em.getTransaction().begin();
-                em.merge(p);
+                em.persist(p);
                 em.getTransaction().commit();
                 em.close();
                 emf.close();
