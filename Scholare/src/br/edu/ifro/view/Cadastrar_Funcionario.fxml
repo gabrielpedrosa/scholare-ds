@@ -28,6 +28,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifro.control.Cadastrar_FuncionarioController">
    <top>
@@ -297,8 +298,16 @@
                            <children>
                               <TableView fx:id="tb_fun_disciplina" layoutX="380.0" layoutY="10.0" prefHeight="170.0" prefWidth="350.0">
                                 <columns>
-                                  <TableColumn prefWidth="75.0" text="Código" />
-                                  <TableColumn prefWidth="200.0" text="Disciplina" />
+                                  <TableColumn prefWidth="75.0" text="Código" >
+                                    <cellValueFactory>
+                                          <PropertyValueFactory property="dis_id" />
+                                    </cellValueFactory>
+                                  </TableColumn>
+                                  <TableColumn prefWidth="200.0" text="Disciplina" >
+                                    <cellValueFactory>
+                                          <PropertyValueFactory property="dis_nome" />
+                                    </cellValueFactory>
+                                  </TableColumn>
                                 </columns>
                               </TableView>
                               <Label layoutX="15.0" layoutY="15.0" text="Função" textFill="WHITE">

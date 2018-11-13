@@ -38,7 +38,7 @@ public class Funcionario implements Serializable {
         orphanRemoval = true
     )
     private List<Disciplina> disciplina = new ArrayList<>();
-    
+
     @Override
     public String toString(){
         return this.fun_nome;

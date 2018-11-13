@@ -104,7 +104,7 @@ public class Cadastrar_FuncionarioController implements Initializable {
     @FXML
     private TextField txt_fun_complemento;
     @FXML
-    private TableView<?> tb_fun_disciplina;
+    private TableView<Disciplina> tb_fun_disciplina;
     @FXML
     private ComboBox<Disciplina> cbox_fun_disciplina;
     @FXML
@@ -223,6 +223,12 @@ public class Cadastrar_FuncionarioController implements Initializable {
                 p.setFun_cidade(txt_fun_cidade.getText());
                 p.setFun_estado(cbox_fun_estado.getSelectionModel().getSelectedItem().toString());
                 p.setFun_datacadastro(txt_fun_datacadastro.getText());
+                
+
+                ObservableList<Disciplina> ob_disciplinas= FXCollections.observableArrayList(tb_fun_disciplina.getItems());
+        
+                List<Disciplina> list_disciplina = ob_disciplinas;
+                p.setDisciplina(list_disciplina);               
 
                 Login l = new Login();
                 l.setLog_usuario(txt_fun_usuario.getText());
@@ -234,7 +240,7 @@ public class Cadastrar_FuncionarioController implements Initializable {
                 limpar_professor(event);
                 
                 em.getTransaction().begin();
-                em.persist(p);
+                em.merge(p);
                 em.getTransaction().commit();
                 em.close();
                 emf.close();
@@ -280,17 +286,31 @@ public class Cadastrar_FuncionarioController implements Initializable {
 
     @FXML
     private void fun_inserir(ActionEvent event) {
+        String cbox_disciplina = cbox_fun_disciplina.getSelectionModel().getSelectedItem().toString();
+        ObservableList<Disciplina> ob_lastdisciplina = FXCollections.observableArrayList(tb_fun_disciplina.getItems());
+        
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
         EntityManager em = emf.createEntityManager();
         
-        Funcionario f = new Funcionario();
-        f.getDisciplina().add(cbox_fun_disciplina.getSelectionModel().getSelectedItem());
+        Query query = em.createQuery("select d from Disciplina as d where d.dis_nome = :dis_nome");
+        query.setParameter("dis_nome", cbox_disciplina);
         
-        em.getTransaction().begin();
-        em.persist(f);
-        em.getTransaction().commit();
-        em.close();
-        emf.close();
+        List<Disciplina> list_disciplina = query.getResultList();
+        list_disciplina.addAll(ob_lastdisciplina);
+        
+        ObservableList<Disciplina> ob_disciplina = FXCollections.observableArrayList(list_disciplina);
+
+        tb_fun_disciplina.setItems(ob_disciplina);
+        
+        Disciplina d = cbox_fun_disciplina.getSelectionModel().getSelectedItem();
+        ObservableList a = cbox_fun_disciplina.getItems();
+        a.remove(d);
+        cbox_fun_disciplina.setItems(a);
+        
+        
+       
+        
+  
     }
     
 }
