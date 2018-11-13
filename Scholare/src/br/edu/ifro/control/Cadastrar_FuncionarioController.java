@@ -227,9 +227,9 @@ public class Cadastrar_FuncionarioController implements Initializable {
 
                 ObservableList<Disciplina> ob_disciplinas= FXCollections.observableArrayList(tb_fun_disciplina.getItems());
         
-                List<Disciplina> list_disciplina = ob_disciplinas;
-                p.setDisciplina(list_disciplina);               
-
+                Disciplina d = new Disciplina();
+                d.setFuncionario(p);
+                
                 Login l = new Login();
                 l.setLog_usuario(txt_fun_usuario.getText());
                 l.setLog_senha(pw_fun_senha.getText());
@@ -241,6 +241,7 @@ public class Cadastrar_FuncionarioController implements Initializable {
                 
                 em.getTransaction().begin();
                 em.persist(p);
+                em.persist(d);
                 em.getTransaction().commit();
                 em.close();
                 emf.close();

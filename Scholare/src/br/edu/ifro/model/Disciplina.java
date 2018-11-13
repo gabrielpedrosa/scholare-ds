@@ -1,10 +1,15 @@
 package br.edu.ifro.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -17,6 +22,8 @@ public class Disciplina implements Serializable {
     private int dis_id;
     private String dis_nome;
     private String dis_cargahoraria;
+    @ManyToOne
+    private Funcionario funcionario;
     
     
     @Override
@@ -46,6 +53,14 @@ public class Disciplina implements Serializable {
 
     public void setDis_cargahoraria(String dis_cargahoraria) {
         this.dis_cargahoraria = dis_cargahoraria;
-    }   
-    
+    }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+   
 }

@@ -33,11 +33,6 @@ public class Funcionario implements Serializable {
     private String fun_estado;
     @OneToOne(cascade = CascadeType.ALL)
     private Login login;
-    @OneToMany(
-        cascade = CascadeType.ALL, 
-        orphanRemoval = true
-    )
-    private List<Disciplina> disciplina = new ArrayList<>();
 
     @Override
     public String toString(){
@@ -171,13 +166,4 @@ public class Funcionario implements Serializable {
     public void setLogin(Login login) {
         this.login = login;
     }
-
-    public List<Disciplina> getDisciplina() {
-        return disciplina;
-    }
-
-    public void setDisciplina(List<Disciplina> disciplina) {
-        this.disciplina = disciplina;
-    }    
-    
 }
