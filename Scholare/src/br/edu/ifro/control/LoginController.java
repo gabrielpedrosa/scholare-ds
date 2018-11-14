@@ -1,5 +1,6 @@
 package br.edu.ifro.control;
 
+import br.edu.ifro.model.Funcionario;
 import br.edu.ifro.model.Login;
 import br.edu.ifro.util.Open;
 import java.net.URL;
@@ -35,8 +36,8 @@ public class LoginController implements Initializable {
     @FXML
     private PasswordField pw_log_senha;
     
-    public void abremenu(){
-        Scene novascene = Open.abrirMenu(getClass());
+    public void abremenu(String c){
+        Scene novascene = Open.abrirMenuLog(getClass(),c);
         Stage stage = (Stage) bot_log_login.getScene().getWindow();
         stage.setScene(novascene);
         stage.centerOnScreen();
@@ -79,25 +80,28 @@ public class LoginController implements Initializable {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
         EntityManager em = emf.createEntityManager();        
         
-        Query query = em.createQuery("select l from Login as l where l.log_usuario = :log_usuario");
-        query.setParameter("log_usuario", txt_log_usuario.getText());
+        Query query = em.createQuery("select f from Funcionario as f where f.log_usuario = :user");
+        query.setParameter("user", this.txt_log_usuario.getText() );
+        Funcionario ff= (Funcionario) query.getResultList().get(0);
         
-        if(query.getResultList().isEmpty()){
+        if(ff==null){
             System.out.println("Usuário Incorreto");            
         }
         else{
-            Login l = (Login) query.getSingleResult();
+            
             if(pw_log_senha.isVisible()){
-                if(l.getLog_senha().equals(pw_log_senha.getText())){
-                    abremenu();
+                if(ff.getLog_senha().equals(pw_log_senha.getText())){      
+        
+                    abremenu(ff.getFun_nome());
                 }
                 else{
                     System.out.println("Senha Incorreta");
                 }
             }
             else{
-                if(l.getLog_senha().equals(pw_log_senha.getText())){
-                    abremenu();
+                if(ff.getLog_senha().equals(pw_log_senha.getText())){
+                    
+                    abremenu(ff.getFun_nome());
                 }
                 else{
                     System.out.println("Senha Incorreta");

@@ -119,7 +119,8 @@ public class Cadastrar_TurmaController implements Initializable {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
         EntityManager em = emf.createEntityManager();
         
-        Query query = em.createQuery("select f from Funcionario as f");
+        Query query = em.createQuery("select f from Funcionario as f where f.fun_funcao=:tipo");
+        query.setParameter("tipo", "Professor");
         List<Funcionario> list_professor = query.getResultList();
         
         ObservableList<Funcionario> ob_professor = FXCollections.observableArrayList(list_professor);

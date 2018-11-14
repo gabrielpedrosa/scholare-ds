@@ -1,10 +1,13 @@
 package br.edu.ifro.model;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 //@author Gabriel
 @Entity
@@ -16,6 +19,9 @@ public class Turma implements Serializable {
     private String tur_serie_ano;
     private String tur_turno;
     private String tur_tipo;
+    @Column
+    @ManyToMany
+    private List<Funcionario> professor;
 
     public int getTur_id() {
         return tur_id;

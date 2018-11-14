@@ -1,14 +1,14 @@
 package br.edu.ifro.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 //@author Gabriel Pedrosa
@@ -31,8 +31,13 @@ public class Funcionario implements Serializable {
     private String fun_numero;
     private String fun_cidade;
     private String fun_estado;
-    @OneToOne(cascade = CascadeType.ALL)
-    private Login login;
+    private String log_usuario;
+    private String log_senha;
+    private String log_pergunta;
+    private String log_resposta;
+    @Column
+    @ManyToMany
+    private List<Disciplina> disciplina;
 
     @Override
     public String toString(){
@@ -159,11 +164,44 @@ public class Funcionario implements Serializable {
         this.fun_estado = fun_estado;
     }
 
-    public Login getLogin() {
-        return login;
+    public String getLog_usuario() {
+        return log_usuario;
     }
 
-    public void setLogin(Login login) {
-        this.login = login;
+    public void setLog_usuario(String log_usuario) {
+        this.log_usuario = log_usuario;
     }
+
+    public String getLog_senha() {
+        return log_senha;
+    }
+
+    public void setLog_senha(String log_senha) {
+        this.log_senha = log_senha;
+    }
+
+    public String getLog_pergunta() {
+        return log_pergunta;
+    }
+
+    public void setLog_pergunta(String log_pergunta) {
+        this.log_pergunta = log_pergunta;
+    }
+
+    public String getLog_resposta() {
+        return log_resposta;
+    }
+
+    public void setLog_resposta(String log_resposta) {
+        this.log_resposta = log_resposta;
+    }
+
+    public List<Disciplina> getDisciplina() {
+        return disciplina;
+    }
+
+    public void setDisciplina(List<Disciplina> disciplina) {
+        this.disciplina = disciplina;
+    }
+    
 }

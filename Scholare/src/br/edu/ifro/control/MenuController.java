@@ -113,4 +113,8 @@ public class MenuController implements Initializable {
         Stage stage = (Stage) bot_sair.getScene().getWindow();
         stage.close();
     }
+
+    public void setarNome(String nome) {
+        lab_log_nome.setText(nome);
+    }
 }

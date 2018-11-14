@@ -224,24 +224,19 @@ public class Cadastrar_FuncionarioController implements Initializable {
                 p.setFun_estado(cbox_fun_estado.getSelectionModel().getSelectedItem().toString());
                 p.setFun_datacadastro(txt_fun_datacadastro.getText());
                 
-
                 ObservableList<Disciplina> ob_disciplinas= FXCollections.observableArrayList(tb_fun_disciplina.getItems());
-        
-                Disciplina d = new Disciplina();
-                d.setFuncionario(p);
+                List<Disciplina> listaDis = ob_disciplinas.subList(0, ob_disciplinas.size());
+                p.setDisciplina(listaDis);
                 
-                Login l = new Login();
-                l.setLog_usuario(txt_fun_usuario.getText());
-                l.setLog_senha(pw_fun_senha.getText());
-                l.setLog_pergunta(cbox_fun_pergunta.getSelectionModel().getSelectedItem().toString());
-                l.setLog_resposta(txt_fun_resposta.getText());
-                p.setLogin(l);
+                p.setLog_usuario(txt_fun_usuario.getText());
+                p.setLog_senha(pw_fun_senha.getText());
+                p.setLog_pergunta(cbox_fun_pergunta.getSelectionModel().getSelectedItem().toString());
+                p.setLog_resposta(txt_fun_resposta.getText());
 
                 limpar_professor(event);
                 
                 em.getTransaction().begin();
                 em.persist(p);
-                em.persist(d);
                 em.getTransaction().commit();
                 em.close();
                 emf.close();

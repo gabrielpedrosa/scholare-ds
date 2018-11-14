@@ -2,6 +2,7 @@ package br.edu.ifro.util;
 
 // @author Gabriel
 
+import br.edu.ifro.control.MenuController;
 import br.edu.ifro.control.SucessoController;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,21 @@ public class Open {
         try{
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Menu.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            cena = scene;
+        }
+        catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+        return cena;
+    }
+    public static Scene abrirMenuLog(Class cls,String nome){
+        Scene cena = null ;
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Menu.fxml"));
+            MenuController m=fxmlLoader.getController();
+            m.setarNome(nome);
             Scene scene = new Scene(fxmlLoader.load());
             cena = scene;
         }

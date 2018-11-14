@@ -5,7 +5,6 @@
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     <!-- Aqui são listadas todas as entidades -->
     <class>br.edu.ifro.model.Aluno</class>
-    <class>br.edu.ifro.model.Login</class>
     <class>br.edu.ifro.model.Turma</class>
     <class>br.edu.ifro.model.Funcionario</class>
     <class>br.edu.ifro.model.Matricula</class>

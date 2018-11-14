@@ -1,5 +1,6 @@
 package br.edu.ifro.util;
 
+import br.edu.ifro.model.Funcionario;
 import br.edu.ifro.model.Login;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,16 +17,16 @@ public class Admin {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
         EntityManager em = emf.createEntityManager();
         
-        Query query = em.createQuery("SELECT count(l) FROM Login as l");
+        Query query = em.createQuery("SELECT count(f) FROM Funcionario as f");
         long result = (long) query.getSingleResult();
         if (result == 0) {
-            Login login = new Login();
+            Funcionario f = new Funcionario();
             
-            login.setLog_usuario("admin");
-            login.setLog_senha("admin");
+            f.setLog_usuario("admin");
+            f.setLog_senha("admin");
 
             em.getTransaction().begin();
-            em.persist(login);
+            em.persist(f);
             em.getTransaction().commit();
         }
     }
