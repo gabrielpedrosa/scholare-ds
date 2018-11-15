@@ -35,9 +35,11 @@ public class LoginController implements Initializable {
     private Button bot_log_login;
     @FXML
     private PasswordField pw_log_senha;
+    private String nomeeeee;
     
-    public void abremenu(String c){
-        Scene novascene = Open.abrirMenuLog(getClass(),c);
+    
+    public void abremenu(String nome){
+        Scene novascene = Open.abrirMenuLog(getClass(),nome);
         Stage stage = (Stage) bot_log_login.getScene().getWindow();
         stage.setScene(novascene);
         stage.centerOnScreen();
@@ -82,7 +84,7 @@ public class LoginController implements Initializable {
         
         Query query = em.createQuery("select f from Funcionario as f where f.log_usuario = :user");
         query.setParameter("user", this.txt_log_usuario.getText() );
-        Funcionario ff= (Funcionario) query.getResultList().get(0);
+        Funcionario ff = (Funcionario) query.getSingleResult();
         
         if(ff==null){
             System.out.println("Usuário Incorreto");            
@@ -90,9 +92,11 @@ public class LoginController implements Initializable {
         else{
             
             if(pw_log_senha.isVisible()){
-                if(ff.getLog_senha().equals(pw_log_senha.getText())){      
-        
-                    abremenu(ff.getFun_nome());
+                if(ff.getLog_senha().equals(pw_log_senha.getText())){ 
+                    String nome = ff.getLog_usuario();
+                    setNomeeeee(ff.getLog_usuario());
+                    //System.out.println(nome);
+                    abremenu(nome);
                 }
                 else{
                     System.out.println("Senha Incorreta");
@@ -110,6 +114,14 @@ public class LoginController implements Initializable {
         }
         em.close();
         emf.close();
+    }
+
+    public String getNomeeeee() {
+        return nomeeeee;
+    }
+
+    public void setNomeeeee(String nomeeeee) {
+        this.nomeeeee = nomeeeee;
     }
 
     

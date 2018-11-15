@@ -25,13 +25,14 @@ public class Open {
         }
         return cena;
     }
-    public static Scene abrirMenuLog(Class cls,String nome){
+    public static Scene abrirMenuLog(Class cls, String nome){
         Scene cena = null ;
         try{
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Menu.fxml"));
-            MenuController m=fxmlLoader.getController();
-            m.setarNome(nome);
+            MenuController m = new MenuController();
+            System.out.println(nome);
+            m.setNome(nome);
             Scene scene = new Scene(fxmlLoader.load());
             cena = scene;
         }

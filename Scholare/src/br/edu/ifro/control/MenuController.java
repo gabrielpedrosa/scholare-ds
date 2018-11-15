@@ -43,8 +43,9 @@ public class MenuController implements Initializable {
     private Button bot_sair;
     @FXML
     private Label lab_log_nome;
+    private String nome;
     
-    
+    LoginController l = new LoginController();
     /**
      * Initializes the controller class.
      * @param url
@@ -52,6 +53,7 @@ public class MenuController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        System.out.println(getNome());
     }    
 
     @FXML
@@ -114,7 +116,15 @@ public class MenuController implements Initializable {
         stage.close();
     }
 
-    public void setarNome(String nome) {
-        lab_log_nome.setText(nome);
+    public String getNome() {
+        return nome;
     }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+        
+    }
+    
+
+    
 }
