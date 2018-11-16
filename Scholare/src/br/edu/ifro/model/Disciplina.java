@@ -6,10 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-/**
- *
- * @author 80923755268
- */
+//@author Gabriel Pedrosa
 @Entity
 public class Disciplina implements Serializable {
     @Id
@@ -17,7 +14,6 @@ public class Disciplina implements Serializable {
     private int dis_id;
     private String dis_nome;
     private String dis_cargahoraria;
-    
     
     @Override
     public String toString(){
@@ -47,5 +43,4 @@ public class Disciplina implements Serializable {
     public void setDis_cargahoraria(String dis_cargahoraria) {
         this.dis_cargahoraria = dis_cargahoraria;
     }
-   
 }

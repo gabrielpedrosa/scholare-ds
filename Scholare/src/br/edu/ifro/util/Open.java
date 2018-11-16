@@ -158,18 +158,18 @@ public class Open {
         return cena;
     }
     
-    public static Scene abrirErro(Class cls){
-        Scene cena = null;
+    public static void abrirErro(Class cls){
         try{
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Cadastrar_Turma.fxml"));
+            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Erro.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
-            cena = scene;
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.showAndWait();
         }
         catch(IOException e){
             System.out.println(e.getMessage());
         }
-        return cena;
     }
     public static void abrirSucesso(Class cls){
         try{

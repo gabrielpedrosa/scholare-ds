@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-//@author Gabriel
+//@author Gabriel Pedrosa
 @Entity
 public class Turma implements Serializable {
     @Id
@@ -23,6 +23,11 @@ public class Turma implements Serializable {
     @ManyToMany
     private List<Funcionario> professor;
 
+    @Override
+    public String toString() {
+        return "" + tur_ano + " - " + tur_serie_ano + " - " + tur_turno + " - " + tur_tipo;
+    }
+    
     public int getTur_id() {
         return tur_id;
     }
@@ -62,8 +67,12 @@ public class Turma implements Serializable {
     public void setTur_tipo(String tur_tipo) {
         this.tur_tipo = tur_tipo;
     }
-    
-    
-    
-    
+
+    public List<Funcionario> getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(List<Funcionario> professor) {
+        this.professor = professor;
+    }
 }

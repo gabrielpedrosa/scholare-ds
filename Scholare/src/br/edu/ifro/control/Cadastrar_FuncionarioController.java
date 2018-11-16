@@ -1,15 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.edu.ifro.control;
 
-import br.edu.ifro.model.Aluno;
 import br.edu.ifro.model.Disciplina;
-import br.edu.ifro.model.Login;
 import br.edu.ifro.model.Funcionario;
-import br.edu.ifro.model.Turma;
+import br.edu.ifro.util.Essencial;
 import br.edu.ifro.util.Open;
 import br.eti.diegofonseca.MaskFieldUtil;
 import java.net.URL;
@@ -36,13 +29,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-/**
- * FXML Controller class
- *
- * @author Gabriel
- */
-public class Cadastrar_FuncionarioController implements Initializable {
-
+//@author Gabriel Pedrosa
+public class Cadastrar_FuncionarioController implements Initializable, Essencial {
     @FXML
     private MenuItem cadastrar_aluno;
     @FXML
@@ -113,18 +101,60 @@ public class Cadastrar_FuncionarioController implements Initializable {
     private ComboBox<?> cbox_fun_pergunta;
     @FXML
     private Button bot_fun_disciplina;
+    private final ObservableList ob_nulo = FXCollections.observableArrayList("");
     
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        inicia();
+    }
     
-
+    @Override
+    public void inicia(){
+        add_mask();
+        add_disciplinas();
+        add_cbox();
+        add_data();
+    }
+    
+    @Override
+    public void add_cbox(){
+        ObservableList ob_estados = FXCollections.observableArrayList("ACRE", "RONDONIA", "MATO GROSSO", "MATO GROSSO DO SUL");
+        cbox_fun_estado.setItems(ob_estados);
+        
+        ObservableList ob_funcao = FXCollections.observableArrayList("Secretária", "Professor");
+        cbox_fun_funcao.setItems(ob_funcao);
+        
+        ObservableList ob_disciplina = FXCollections.observableArrayList("dis", "Dis");
+        cbox_fun_disciplina.setItems(ob_disciplina);
+        
+        ObservableList ob_pergunta = FXCollections.observableArrayList("Pergunta", "Pergunta 02");
+        cbox_fun_pergunta.setItems(ob_disciplina);
+    }
+    
+    public void add_mask(){
+        MaskFieldUtil.cpfField(txt_fun_cpf);
+        MaskFieldUtil.foneField(txt_fun_telefone);
+        MaskFieldUtil.numericField(txt_fun_rg);
+        MaskFieldUtil.numericField(txt_fun_numero);
+        MaskFieldUtil.dateField(txt_fun_datanascimento);
+    }
+    
+    public void add_data(){
+        java.util.Date d = new java.util.Date();
+        SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
+        String datasrt = (String) f.format(d);
+        txt_fun_datacadastro.setText(datasrt);
+    }
+    
     public boolean verifica_vazio(){
         boolean preenchido;
         boolean txt_preenchido = false;
         boolean cbox_preenchido = false;
-        TextField[] campo_txt = {txt_fun_nome, txt_fun_cpf, txt_fun_rg, txt_fun_telefone, txt_fun_email, txt_fun_datanascimento, txt_fun_logradouro, txt_fun_bairro, txt_fun_numero, txt_fun_cidade, txt_fun_usuario, pw_fun_senha, pw_fun_confirmarsenha};
-        ComboBox[] campo_cbox = {cbox_fun_estado, cbox_fun_funcao};
+        TextField[] campo_txt = {txt_fun_nome, txt_fun_cpf, txt_fun_rg, txt_fun_datanascimento, txt_fun_logradouro, txt_fun_bairro, txt_fun_numero, txt_fun_cidade, txt_fun_usuario, pw_fun_senha, pw_fun_confirmarsenha};
+        ComboBox[] campo_cbox = {cbox_fun_estado, cbox_fun_funcao, cbox_fun_pergunta};
         
-        for (int i= 0; i< campo_txt.length; i++) {
-            if (campo_txt[i].getText().equals("") || campo_txt[i].getText() == null) {
+        for (TextField campo_txt1 : campo_txt) {
+            if (campo_txt1.getText().equals("") || campo_txt1.getText() == null) {
                 txt_preenchido = false;
                 break;
             } else {
@@ -132,8 +162,8 @@ public class Cadastrar_FuncionarioController implements Initializable {
             }
         }
         
-        for (int i= 0; i< campo_cbox.length; i++) {
-            if (campo_cbox[i].getSelectionModel().getSelectedIndex() == -1) {
+        for (ComboBox campo_cbox1 : campo_cbox) {
+            if (campo_cbox1.getSelectionModel().getSelectedIndex() == -1) {
                 cbox_preenchido = false;
                 break;
             } else {
@@ -145,49 +175,22 @@ public class Cadastrar_FuncionarioController implements Initializable {
         
         return preenchido;
     }
+    
     public boolean verifica_senha(){
-        boolean igual = false;
-        if(pw_fun_senha.getText().equals(pw_fun_confirmarsenha.getText())){
-            igual = true;
-        }
-        else{
-            igual = false;
-        }
+        boolean igual;
+        igual = pw_fun_senha.getText().equals(pw_fun_confirmarsenha.getText());
         
         return igual;
     }
     
-    public void addmask(){
-        MaskFieldUtil.cpfField(txt_fun_cpf);
-        MaskFieldUtil.foneField(txt_fun_telefone);
-        MaskFieldUtil.numericField(txt_fun_rg);
-        MaskFieldUtil.numericField(txt_fun_numero);
-        MaskFieldUtil.dateField(txt_fun_datanascimento);
+    public void desabilita(){
+        cbox_fun_disciplina.setDisable(true);
+        tb_fun_disciplina.setDisable(true);
+        bot_fun_disciplina.setDisable(true);
     }
-    /**
-     * Initializes the controller class.
-     * @param url
-     * @param rb
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        addmask();
-        java.util.Date d = new java.util.Date();
-        SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
-        String datasrt = (String) f.format(d);
-        txt_fun_datacadastro.setText(datasrt);
-        ObservableList ob_estados = FXCollections.observableArrayList("ACRE", "RONDONIA", "MATO GROSSO", "MATO GROSSO DO SUL");
-        cbox_fun_estado.setItems(ob_estados);
-        ObservableList ob_funcao = FXCollections.observableArrayList("Secretária", "Professor");
-        cbox_fun_funcao.setItems(ob_funcao);
-        
-        ObservableList ob_disciplina = FXCollections.observableArrayList("dis", "Dis");
-        cbox_fun_disciplina.setItems(ob_disciplina);
-        
-        ObservableList ob_pergunta = FXCollections.observableArrayList("Pergunta", "Pergunta 02");
-        cbox_fun_pergunta.setItems(ob_disciplina);
-        
-         EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
+    
+    public void add_disciplinas(){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
         EntityManager em = emf.createEntityManager();
         
         Query querydisciplina = em.createQuery("select d from Disciplina as d");
@@ -195,8 +198,9 @@ public class Cadastrar_FuncionarioController implements Initializable {
         
         ObservableList<Disciplina> obdisciplina = FXCollections.observableArrayList(list_disciplina);
         cbox_fun_disciplina.setItems(obdisciplina);
-    }    
-
+    }
+    
+    //Funções FXML<--
     @FXML
     private void cadastrar_professor(ActionEvent event) {
         if(verifica_vazio() == true){
@@ -224,10 +228,14 @@ public class Cadastrar_FuncionarioController implements Initializable {
                 p.setFun_estado(cbox_fun_estado.getSelectionModel().getSelectedItem().toString());
                 p.setFun_datacadastro(txt_fun_datacadastro.getText());
                 
-                ObservableList<Disciplina> ob_disciplinas= FXCollections.observableArrayList(tb_fun_disciplina.getItems());
-                List<Disciplina> listaDis = ob_disciplinas.subList(0, ob_disciplinas.size());
-                p.setDisciplina(listaDis);
-                
+                if(cbox_fun_funcao.getSelectionModel().getSelectedItem().equals("Secretária")){
+                    p.setDisciplina(null);
+                }else{
+                    ObservableList<Disciplina> ob_disciplinas= FXCollections.observableArrayList(tb_fun_disciplina.getItems());
+                    List<Disciplina> listaDis = ob_disciplinas.subList(0, ob_disciplinas.size());
+                    p.setDisciplina(listaDis);
+                }
+
                 p.setLog_usuario(txt_fun_usuario.getText());
                 p.setLog_senha(pw_fun_senha.getText());
                 p.setLog_pergunta(cbox_fun_pergunta.getSelectionModel().getSelectedItem().toString());
@@ -249,9 +257,8 @@ public class Cadastrar_FuncionarioController implements Initializable {
             
         }
         else{
-             System.out.println("Campos obrigatórios não preenchidos");
-        }
-        
+             Open.abrirErro(getClass());
+        } 
     }
 
     @FXML
@@ -267,10 +274,18 @@ public class Cadastrar_FuncionarioController implements Initializable {
         txt_fun_logradouro.setText("");
         txt_fun_bairro.setText("");
         txt_fun_numero.setText("");
+        txt_fun_complemento.setText("");
         cbox_fun_funcao.setValue("");
         txt_fun_usuario.setText("");
         pw_fun_senha.setText("");
         pw_fun_confirmarsenha.setText("");
+        cbox_fun_pergunta.setValue(null);
+        txt_fun_resposta.setText("");
+        tb_fun_disciplina.setItems(ob_nulo);
+        cbox_fun_disciplina.setDisable(true);
+        tb_fun_disciplina.setDisable(true);
+        bot_fun_disciplina.setDisable(true);
+        add_disciplinas();
     }
 
     @FXML
@@ -279,7 +294,7 @@ public class Cadastrar_FuncionarioController implements Initializable {
         Stage stage = (Stage) bot_pro_sair.getScene().getWindow();
         stage.setScene(novascene);
     }
-
+    
     @FXML
     private void fun_inserir(ActionEvent event) {
         String cbox_disciplina = cbox_fun_disciplina.getSelectionModel().getSelectedItem().toString();
@@ -302,11 +317,20 @@ public class Cadastrar_FuncionarioController implements Initializable {
         ObservableList a = cbox_fun_disciplina.getItems();
         a.remove(d);
         cbox_fun_disciplina.setItems(a);
-        
-        
-       
-        
-  
     }
-    
+
+    @FXML
+    private void verifica_funcao(ActionEvent event) {
+        if(cbox_fun_funcao.getSelectionModel().getSelectedItem().equals("Secretária")){
+            cbox_fun_disciplina.setDisable(true);
+            tb_fun_disciplina.setDisable(true);
+            bot_fun_disciplina.setDisable(true);
+        }
+        else{
+            cbox_fun_disciplina.setDisable(false);
+            tb_fun_disciplina.setDisable(false);
+            bot_fun_disciplina.setDisable(false);
+        }
+    }
+    //Funções FXML-->
 }

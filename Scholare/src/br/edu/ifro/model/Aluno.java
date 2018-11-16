@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-//@author Gabriel
+//@author Gabriel Pedrosa
 @Entity
 public class Aluno implements Serializable {
     @Id
@@ -28,6 +28,7 @@ public class Aluno implements Serializable {
     private String alu_estado;
     private String alu_deficiencia;
     
+    @Override
     public String toString(){
         return this.alu_nome;
     }
@@ -159,6 +160,4 @@ public class Aluno implements Serializable {
     public void setAlu_deficiencia(String alu_deficiencia) {
         this.alu_deficiencia = alu_deficiencia;
     }
-    
-    
 }

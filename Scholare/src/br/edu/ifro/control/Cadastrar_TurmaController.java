@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.edu.ifro.control;
 
 import br.edu.ifro.model.Funcionario;
 import br.edu.ifro.model.Turma;
+import br.edu.ifro.util.Essencial;
 import br.edu.ifro.util.Open;
 import java.net.URL;
 import java.util.List;
@@ -22,7 +18,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import javax.persistence.EntityManager;
@@ -30,13 +25,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-/**
- * FXML Controller class
- *
- * @author Gabriel
- */
-public class Cadastrar_TurmaController implements Initializable {
-
+//@author Gabriel Pedrosa
+public class Cadastrar_TurmaController implements Initializable, Essencial {
     @FXML
     private MenuItem cadastrar_aluno;
     @FXML
@@ -76,37 +66,17 @@ public class Cadastrar_TurmaController implements Initializable {
     @FXML
     private ComboBox cbox_tur_serie_ano;
     
-    public boolean verifica_vazio(){
-        boolean preenchido;
-        boolean cbox_preenchido = false;
-        ComboBox[] campo_cbox = {cbox_tur_ano, cbox_tur_tipo, cbox_tur_serie_ano};
-        
-        
-        for (int i= 0; i< campo_cbox.length; i++) {
-            if (campo_cbox[i].getSelectionModel().getSelectedIndex() == -1) {
-                cbox_preenchido = false;
-                break;
-            } else {
-                cbox_preenchido = true;
-            }
-        }
-        
-        preenchido = cbox_preenchido == true;
-        
-        return preenchido;
-    }
-
-    /**
-     * Initializes the controller class.
-     * @param url
-     * @param rb
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        add_cbox_turma();
-    }    
+        inicia();
+    }
+    @Override
+    public void inicia(){
+        add_cbox();
+    }
     
-    public void add_cbox_turma(){
+    @Override
+    public void add_cbox(){
         ObservableList ob_anos = FXCollections.observableArrayList("2015", "2016", "2017", "2018");
         cbox_tur_ano.setItems(ob_anos);
         
@@ -126,8 +96,80 @@ public class Cadastrar_TurmaController implements Initializable {
         ObservableList<Funcionario> ob_professor = FXCollections.observableArrayList(list_professor);
         cbox_tur_professor.setItems(ob_professor);
     }
+    
+    public boolean verifica_vazio(){
+        boolean preenchido;
+        boolean cbox_preenchido = false;
+        ComboBox[] campo_cbox = {cbox_tur_ano, cbox_tur_tipo, cbox_tur_serie_ano};
+        
+        for (ComboBox campo_cbox1 : campo_cbox) {
+            if (campo_cbox1.getSelectionModel().getSelectedIndex() == -1) {
+                cbox_preenchido = false;
+                break;
+            } else {
+                cbox_preenchido = true;
+            }
+        }
+        
+        preenchido = cbox_preenchido == true;
+        
+        return preenchido;
+    }
+    
+    //Funções FXML<--
+    @FXML
+    private void cadastrar_turma(ActionEvent event) {
+        if(verifica_vazio() == true){
+            System.out.println("Campos obrigatórios preenchidos");
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
+            EntityManager em = emf.createEntityManager();
+            
+            Turma t = new Turma();
+            t.setTur_ano(cbox_tur_ano.getSelectionModel().getSelectedItem().toString());
+            t.setTur_serie_ano(cbox_tur_serie_ano.getSelectionModel().getSelectedItem().toString());
+            RadioButton radioselected = (RadioButton) tg_tur_turno.getSelectedToggle();
+            String rad_tur_turno = radioselected.getText();
+            t.setTur_turno(rad_tur_turno);
+            t.setTur_tipo(cbox_tur_tipo.getSelectionModel().getSelectedItem().toString());
+            
+            ObservableList<Funcionario> ob_professores = FXCollections.observableArrayList(tb_tur_professores.getItems());
+            List<Funcionario> lista_professor = ob_professores.subList(0, ob_professores.size());
+            t.setProfessor(lista_professor);
+            
+            limpar_turma(event);
+            
+            em.getTransaction().begin();
+            em.persist(t);
+            em.getTransaction().commit();
+            em.close();
+            emf.close();
+            
+            Open.abrirSucesso(getClass());
+            
+            add_cbox();
+        }
+        else{
+            Open.abrirErro(getClass());
+        }
+    }
 
+    @FXML
+    private void limpar_turma(ActionEvent event) {
+        cbox_tur_serie_ano.setValue("");
+        cbox_tur_ano.setValue("");
+        cbox_tur_tipo.setValue("");
+        cbox_tur_professor.setValue(null);
+        tb_tur_professores.getItems().clear();
+        rad_tur_a.setSelected(true);
+    }
 
+    @FXML
+    private void cancelar_turma(ActionEvent event) {
+        Scene novascene = Open.abrirMenu(getClass()); 
+        Stage stage = (Stage) bot_tur_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    
     @FXML
     private void inserir_professor(ActionEvent event) {
         String cbox_professor = cbox_tur_professor.getSelectionModel().getSelectedItem().toString();
@@ -150,51 +192,6 @@ public class Cadastrar_TurmaController implements Initializable {
         ObservableList a = cbox_tur_professor.getItems();
         a.remove(p);
         cbox_tur_professor.setItems(a);
-        
     }
-
-    @FXML
-    private void cadastrar_turma(ActionEvent event) {
-        if(verifica_vazio() == true){
-            System.out.println("Campos obrigatórios preenchidos");
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
-            EntityManager em = emf.createEntityManager();
-            
-            Turma t = new Turma();
-            t.setTur_ano(cbox_tur_ano.getSelectionModel().getSelectedItem().toString());
-            t.setTur_serie_ano(cbox_tur_serie_ano.getSelectionModel().getSelectedItem().toString());
-            RadioButton radioselected = (RadioButton) tg_tur_turno.getSelectedToggle();
-            String rad_tur_turno = radioselected.getText();
-            t.setTur_turno(rad_tur_turno);
-            t.setTur_tipo(cbox_tur_tipo.getSelectionModel().getSelectedItem().toString());
-            
-            limpar_turma(event);
-            
-            em.getTransaction().begin();
-            em.persist(t);
-            em.getTransaction().commit();
-            em.close();
-            emf.close();
-            
-        }
-        else{
-            System.out.println("Campos obrigatórios não preenchidos");
-        }
-    }
-
-    @FXML
-    private void limpar_turma(ActionEvent event) {
-        cbox_tur_serie_ano.setValue("");
-        cbox_tur_ano.setValue("");
-        cbox_tur_tipo.setValue("");
-        cbox_tur_professor.setValue(null);
-    }
-
-    @FXML
-    private void cancelar_turma(ActionEvent event) {
-        Scene novascene = Open.abrirMenu(getClass()); 
-        Stage stage = (Stage) bot_tur_cancelar.getScene().getWindow();
-        stage.setScene(novascene);
-    }
-    
+    //Funções FXML-->
 }

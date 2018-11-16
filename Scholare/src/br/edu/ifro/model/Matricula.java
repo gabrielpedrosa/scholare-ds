@@ -1,20 +1,13 @@
 package br.edu.ifro.model;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import org.hibernate.annotations.ManyToAny;
 
-/**
- *
- * @author Gabriel
- */
+//@author Gabriel Pedrosa
 @Entity
 public class Matricula implements Serializable {
     @Id
@@ -103,6 +96,4 @@ public class Matricula implements Serializable {
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
     }
-    
-    
 }

@@ -1,16 +1,12 @@
 package br.edu.ifro.util;
 
 import br.edu.ifro.model.Funcionario;
-import br.edu.ifro.model.Login;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-/**
- *
- * @author Gabriel
- */
+//@author Gabriel Pedrosa
 public class Admin {
 
     public Admin() {
@@ -28,8 +24,8 @@ public class Admin {
             em.getTransaction().begin();
             em.persist(f);
             em.getTransaction().commit();
+            em.close();
+            emf.close();
         }
     }
-    
-    
 }

@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.edu.ifro.control;
 
 import br.edu.ifro.model.Aluno;
+import br.edu.ifro.util.Essencial;
 import br.edu.ifro.util.Open;
 import br.eti.diegofonseca.MaskFieldUtil;
 import java.net.URL;
@@ -19,7 +15,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -29,13 +24,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-/**
- * FXML Controller class
- *
- * @author Gabriel Pedrosa
- */
-public class Cadastrar_AlunoController implements Initializable {
-
+//@author Gabriel Pedrosa
+public class Cadastrar_AlunoController implements Initializable, Essencial {
     @FXML
     private MenuItem cadastrar_aluno;
     @FXML
@@ -89,17 +79,48 @@ public class Cadastrar_AlunoController implements Initializable {
     @FXML
     private TextField txt_alu_rua;
     
-    private String alu_mensagem;
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+       inicia();
+    }
+    
+    @Override
+    public void inicia(){
+       add_mask();
+       add_data();
+       add_cbox();
+    }
+    
+    @Override
+    public void add_cbox(){
+       ObservableList ob_estados = FXCollections.observableArrayList("ACRE", "RONDONIA", "MATO GROSSO", "MATO GROSSO DO SUL");
+       cbox_alu_estado.setItems(ob_estados);
+    }
+    
+    public void add_mask(){
+        MaskFieldUtil.cpfField(txt_alu_cpf);
+        MaskFieldUtil.foneField(txt_alu_telefone);
+        MaskFieldUtil.numericField(txt_alu_rg);
+        MaskFieldUtil.numericField(txt_alu_numero);
+        MaskFieldUtil.dateField(txt_alu_datanascimento);
+    }
+    
+    private void add_data(){
+       java.util.Date d = new java.util.Date();
+       SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
+       String datasrt = (String) f.format(d);
+       txt_alu_datacadastro.setText(datasrt);
+    }
     
     public boolean verifica_vazio(){
         boolean preenchido;
         boolean txt_preenchido = false;
         boolean cbox_preenchido = false;
-        TextField[] campo_txt = {txt_alu_nome, txt_alu_cpf, txt_alu_rg, txt_alu_telefone, txt_alu_datanascimento, txt_alu_rua, txt_alu_bairro, txt_alu_numero, txt_alu_cidade, txt_alu_deficiencia};
+        TextField[] campo_txt = {txt_alu_nome, txt_alu_datanascimento, txt_alu_rua, txt_alu_bairro, txt_alu_numero, txt_alu_cidade, txt_alu_deficiencia};
         ComboBox[] campo_cbox = {cbox_alu_estado};
         
-        for (int i= 0; i< campo_txt.length; i++) {
-            if (campo_txt[i].getText().equals("") || campo_txt[i].getText() == null) {
+        for (TextField campo_txt1 : campo_txt) {
+            if (campo_txt1.getText().equals("") || campo_txt1.getText() == null) {
                 txt_preenchido = false;
                 break;
             } else {
@@ -107,8 +128,8 @@ public class Cadastrar_AlunoController implements Initializable {
             }
         }
         
-        for (int i= 0; i< campo_cbox.length; i++) {
-            if (campo_cbox[i].getSelectionModel().getSelectedIndex() == -1) {
+        for (ComboBox campo_cbox1 : campo_cbox) {
+            if (campo_cbox1.getSelectionModel().getSelectedIndex() == -1) {
                 cbox_preenchido = false;
                 break;
             } else {
@@ -121,14 +142,7 @@ public class Cadastrar_AlunoController implements Initializable {
         return preenchido;
     }
     
-    public void addmask(){
-        MaskFieldUtil.cpfField(txt_alu_cpf);
-        MaskFieldUtil.foneField(txt_alu_telefone);
-        MaskFieldUtil.numericField(txt_alu_rg);
-        MaskFieldUtil.numericField(txt_alu_numero);
-        MaskFieldUtil.dateField(txt_alu_datanascimento);
-    }
-    
+    //Funções FXML<--
     @FXML
     private void cadastrar_aluno(ActionEvent event) {
         if(verifica_vazio() == true){
@@ -164,10 +178,9 @@ public class Cadastrar_AlunoController implements Initializable {
             emf.close();
                         
             Open.abrirSucesso(getClass()); 
-            
         }
         else{
-            System.out.println("Campos obrigatórios não preenchidos");
+            Open.abrirErro(getClass());
         }
     }
 
@@ -195,18 +208,5 @@ public class Cadastrar_AlunoController implements Initializable {
         Stage stage = (Stage) bot_alu_sair.getScene().getWindow();
         stage.setScene(novascene);
     }
-    
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-       addmask();
-       java.util.Date d = new java.util.Date();
-       SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
-       String datasrt = (String) f.format(d);
-       txt_alu_datacadastro.setText(datasrt);
-       ObservableList ob_estados = FXCollections.observableArrayList("ACRE", "RONDONIA", "MATO GROSSO", "MATO GROSSO DO SUL");
-       cbox_alu_estado.setItems(ob_estados);
-    }    
-
-    
-    
+    //Funções FXML-->
 }
