@@ -70,6 +70,20 @@ public class Open {
         return cena;
     }
     
+    public static Scene abrirListarAluno(Class cls){
+        Scene cena = null ;
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Listar_Alunos.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            cena = scene;
+        }
+        catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+        return cena;
+    }
+    
     public static Scene abrirFuncionario(Class cls){
         Scene cena = null ;
         try{

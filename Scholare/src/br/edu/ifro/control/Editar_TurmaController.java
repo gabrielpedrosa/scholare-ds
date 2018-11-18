@@ -61,6 +61,20 @@ public class Editar_TurmaController implements Initializable {
     private MenuItem turmas;
     @FXML
     private MenuItem sobre;
+    @FXML
+    private MenuItem listar_alunos;
+    @FXML
+    private MenuItem listar_funcionarios;
+    @FXML
+    private MenuItem listar_turmas;
+    @FXML
+    private MenuItem lsitar_matriculas;
+    @FXML
+    private MenuItem matriculas;
+    @FXML
+    private MenuItem relatorio_diario;
+    @FXML
+    private MenuItem ata_de_resultados;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -138,4 +152,28 @@ public class Editar_TurmaController implements Initializable {
     private void sobre(ActionEvent event) {
     }
     //Funções Menu-->
+
+    @FXML
+    private void listar_alunos(ActionEvent event) {
+    }
+
+    @FXML
+    private void listar_funcionarios(ActionEvent event) {
+    }
+
+    @FXML
+    private void listar_turmas(ActionEvent event) {
+    }
+
+    @FXML
+    private void lsitar_matriculas(ActionEvent event) {
+    }
+
+    @FXML
+    private void relatorio_diario(ActionEvent event) {
+    }
+
+    @FXML
+    private void ata_de_resultados(ActionEvent event) {
+    }
 }

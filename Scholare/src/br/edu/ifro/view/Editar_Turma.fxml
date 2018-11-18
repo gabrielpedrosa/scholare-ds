@@ -21,32 +21,7 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.181" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifro.control.Editar_TurmaController">
-   <top>
-      <MenuBar prefHeight="20.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="Cadastros">
-            <items>
-              <MenuItem fx:id="aluno" mnemonicParsing="false" onAction="#aluno" text="Aluno" />
-                  <MenuItem fx:id="funcionario" mnemonicParsing="false" onAction="#funcionario" text="Funcionário" />
-                  <MenuItem fx:id="turma" mnemonicParsing="false" onAction="#turma" text="Turma" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Exibir">
-            <items>
-              <MenuItem fx:id="alunos" mnemonicParsing="false" onAction="#alunos" text="Alunos" />
-                  <MenuItem fx:id="funcionarios" mnemonicParsing="false" onAction="#funcionarios" text="Funcionários" />
-                  <MenuItem fx:id="turmas" mnemonicParsing="false" onAction="#turmas" text="Turmas" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Ajuda">
-            <items>
-              <MenuItem fx:id="sobre" mnemonicParsing="false" onAction="#sobre" text="Sobre" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-   </top>
-   <bottom>
+   <center>
       <Pane prefHeight="600.0" prefWidth="800.0" styleClass="cadastro-fundo" stylesheets="@../style/style.css" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="window_nome" layoutX="15.0" text="Exibir Turma" textFill="#d3d3d3" textOverrun="CLIP">
@@ -197,5 +172,45 @@
                </font>
             </Label>
          </children></Pane>
-   </bottom>
+   </center>
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+         <menus>
+            <Menu mnemonicParsing="false" text="Cadastros">
+               <items>
+                  <MenuItem fx:id="aluno" mnemonicParsing="false" onAction="#aluno" text="Aluno" />
+                  <MenuItem fx:id="funcionario" mnemonicParsing="false" onAction="#funcionario" text="Funcionario" />
+                  <MenuItem fx:id="turma" mnemonicParsing="false" onAction="#turma" text="Turma" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Listar">
+               <items>
+                  <MenuItem fx:id="listar_alunos" mnemonicParsing="false" onAction="#listar_alunos" text="Listar Alunos" />
+                  <MenuItem fx:id="listar_funcionarios" mnemonicParsing="false" onAction="#listar_funcionarios" text="Listar Funcionários" />
+                  <MenuItem fx:id="listar_turmas" mnemonicParsing="false" onAction="#listar_turmas" text="Listar Turmas" />
+                  <MenuItem fx:id="lsitar_matriculas" mnemonicParsing="false" onAction="#lsitar_matriculas" text="Listar Matriculas" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Exibir">
+               <items>
+                  <MenuItem fx:id="alunos" mnemonicParsing="false" onAction="#alunos" text="Alunos" />
+                  <MenuItem fx:id="funcionarios" mnemonicParsing="false" onAction="#funcionarios" text="Professores" />
+                  <MenuItem fx:id="turmas" mnemonicParsing="false" onAction="#turmas" text="Turmas" />
+                  <MenuItem fx:id="matriculas" mnemonicParsing="false" text="Matriculas" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Relatórios">
+               <items>
+                  <MenuItem fx:id="relatorio_diario" mnemonicParsing="false" onAction="#relatorio_diario" text="Relatório Diário" />
+                  <MenuItem fx:id="ata_de_resultados" mnemonicParsing="false" onAction="#ata_de_resultados" text="Ata de Resultados" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Ajuda">
+               <items>
+                  <MenuItem fx:id="sobre" mnemonicParsing="false" onAction="#sobre" text="Sobre" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+   </top>
 </BorderPane>

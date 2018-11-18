@@ -62,14 +62,6 @@ public class Editar_AlunoController implements Initializable {
     @FXML
     private ComboBox cbox_alu_nome;
     @FXML
-    private Button bot_ed_alu_salvar;
-    @FXML
-    private Button bot_ed_alu_deletar;
-    @FXML
-    private Button bot_ed_alu_editar;
-    @FXML
-    private Button bot_ed_alu_cancelar;
-    @FXML
     private TextField txt_alu_nome;
     @FXML
     private ComboBox<Turma> cbox_alu_turma;
@@ -77,21 +69,43 @@ public class Editar_AlunoController implements Initializable {
     private RadioButton rad_ed_alu_feminino;
     @FXML
     private RadioButton rad_ed_alu_masculino;
-    @FXML
-    private MenuItem aluno;
-    @FXML
-    private MenuItem funcionario;
-    @FXML
-    private MenuItem turma;
-    @FXML
-    private MenuItem alunos;
-    @FXML
-    private MenuItem funcionarios;
-    @FXML
-    private MenuItem turmas;
-    @FXML
-    private MenuItem sobre;
     private final ObservableList ob_nulo = FXCollections.observableArrayList("");
+    @FXML
+    private MenuItem aluno1;
+    @FXML
+    private MenuItem funcionario1;
+    @FXML
+    private MenuItem turma1;
+    @FXML
+    private MenuItem listar_alunos;
+    @FXML
+    private MenuItem listar_funcionarios;
+    @FXML
+    private MenuItem listar_turmas;
+    @FXML
+    private MenuItem lsitar_matriculas;
+    @FXML
+    private MenuItem alunos1;
+    @FXML
+    private MenuItem funcionarios1;
+    @FXML
+    private MenuItem turmas1;
+    @FXML
+    private MenuItem matriculas;
+    @FXML
+    private MenuItem relatorio_diario;
+    @FXML
+    private MenuItem ata_de_resultados;
+    @FXML
+    private MenuItem sobre1;
+    @FXML
+    private Button bot_alu_salvar;
+    @FXML
+    private Button bot_alu_deletar;
+    @FXML
+    private Button bot_alu_editar;
+    @FXML
+    private Button bot_alu_cancelar;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         inicia();
@@ -144,7 +158,7 @@ public class Editar_AlunoController implements Initializable {
         txt_alu_cidade.setDisable(true);
         cbox_alu_estado.setDisable(true);
         txt_alu_deficiencia.setDisable(true);
-        bot_ed_alu_salvar.setDisable(true);
+        bot_alu_salvar.setDisable(true);
     }
     
     public void habilita_campos(){
@@ -163,7 +177,7 @@ public class Editar_AlunoController implements Initializable {
         txt_alu_cidade.setDisable(false);
         cbox_alu_estado.setDisable(false);
         txt_alu_deficiencia.setDisable(false);
-        bot_ed_alu_salvar.setDisable(false);
+        bot_alu_salvar.setDisable(false);
     }
 
     public void limpar_aluno(ActionEvent event) {
@@ -263,7 +277,7 @@ public class Editar_AlunoController implements Initializable {
     @FXML
     private void cancelar_editar_aluno(ActionEvent event) {
         Scene novascene = Open.abrirMenu(getClass()); 
-        Stage stage = (Stage) bot_ed_alu_cancelar.getScene().getWindow();
+        Stage stage = (Stage) bot_alu_cancelar.getScene().getWindow();
         stage.setScene(novascene);
     }
 
@@ -301,7 +315,7 @@ public class Editar_AlunoController implements Initializable {
                 txt_alu_cidade.setText(a.getAlu_cidade());
                 cbox_alu_estado.setValue(a.getAlu_estado());
                 txt_alu_deficiencia.setText(a.getAlu_deficiencia());
-                bot_ed_alu_deletar.setDisable(false);
+                bot_alu_deletar.setDisable(false);
             }
         
     }
@@ -325,44 +339,61 @@ public class Editar_AlunoController implements Initializable {
     @FXML
     private void aluno(ActionEvent event){
         Scene novascene = Open.abrirAluno(getClass()); 
-        Stage stage = (Stage) bot_ed_alu_editar.getScene().getWindow();
+        Stage stage = (Stage) bot_alu_cancelar.getScene().getWindow();
         stage.setScene(novascene);
     }
-
     @FXML
     private void funcionario(ActionEvent event) {
         Scene novascene = Open.abrirFuncionario(getClass()); 
-        Stage stage = (Stage) bot_ed_alu_editar.getScene().getWindow();
+        Stage stage = (Stage) bot_alu_cancelar.getScene().getWindow();
         stage.setScene(novascene);
     }
-
     @FXML
     private void turma(ActionEvent event) {
         Scene novascene = Open.abrirTurma(getClass()); 
-        Stage stage = (Stage) bot_ed_alu_editar.getScene().getWindow();
+        Stage stage = (Stage) bot_alu_cancelar.getScene().getWindow();
         stage.setScene(novascene);
     }
-
     @FXML
     private void alunos(ActionEvent event) {
         Scene novascene = Open.abrirExibirAluno(getClass()); 
-        Stage stage = (Stage) bot_ed_alu_editar.getScene().getWindow();
+        Stage stage = (Stage) bot_alu_cancelar.getScene().getWindow();
         stage.setScene(novascene);
     }
-
     @FXML
     private void funcionarios(ActionEvent event) {
         Scene novascene = Open.abrirExibirFuncionario(getClass()); 
-        Stage stage = (Stage) bot_ed_alu_editar.getScene().getWindow();
+        Stage stage = (Stage) bot_alu_cancelar.getScene().getWindow();
         stage.setScene(novascene);
     }
-    
     @FXML
     private void turmas(ActionEvent event) {
+        
     }
-
     @FXML
     private void sobre(ActionEvent event) {
+        
+    }
+    @FXML
+    private void listar_alunos(ActionEvent event) {
+        Scene novascene = Open.abrirListarAluno(getClass()); 
+        Stage stage = (Stage) bot_alu_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void listar_funcionarios(ActionEvent event) {
+    }
+    @FXML
+    private void listar_turmas(ActionEvent event) {
+    }
+    @FXML
+    private void lsitar_matriculas(ActionEvent event) {
+    }
+    @FXML
+    private void relatorio_diario(ActionEvent event) {
+    }
+    @FXML
+    private void ata_de_resultados(ActionEvent event) {
     }
     //Funções Menu-->
 }

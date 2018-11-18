@@ -18,8 +18,26 @@ public class Admin {
         if (result == 0) {
             Funcionario f = new Funcionario();
             
+            f.setFun_nome("admin");
+            f.setFun_sexo("admin");
+            f.setFun_cpf("admin");
+            f.setFun_rg("admin");
+            f.setFun_telefone("admin");
+            f.setFun_nascimento("admin");
+            f.setFun_funcao("admin");
+            f.setFun_logradouro("admin");
+            f.setFun_bairro("admin");
+            f.setFun_numero("admin");
+            f.setFun_cidade("admin");
+            f.setFun_estado("admin");
+            f.setFun_email("admin");
             f.setLog_usuario("admin");
             f.setLog_senha("admin");
+            f.setLog_pergunta("admin");
+            f.setLog_resposta("admin");
+            f.setLog_usuario("admin");
+            f.setLog_senha("admin");
+            f.setFun_datacadastro("admin");
 
             em.getTransaction().begin();
             em.persist(f);
