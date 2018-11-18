@@ -211,6 +211,7 @@ public class Editar_FuncionarioController implements Initializable {
         emf.close();
         
         add_cbox();
+        deshabilita_campos();
     }
 
     @FXML
@@ -234,7 +235,12 @@ public class Editar_FuncionarioController implements Initializable {
 
     @FXML
     private void editar_editar_funcionario(ActionEvent event) {
-        habilita_campos();
+        if(cbox_fun_nome.getSelectionModel().getSelectedIndex()==-1){
+            System.out.println("Selecione um Aluno");
+        }
+        else{
+            habilita_campos();
+        } 
     }
 
     @FXML
@@ -281,6 +287,7 @@ public class Editar_FuncionarioController implements Initializable {
             txt_fun_cidade.setText(f.getFun_cidade());
             cbox_fun_estado.setValue(f.getFun_estado());
             txt_fun_email.setText(f.getFun_email());
+            bot_fun_deletar.setDisable(false);
         }
     }
     //Funções FXML-->

@@ -227,7 +227,8 @@ public class Cadastrar_FuncionarioController implements Initializable, Essencial
                 if(cbox_fun_funcao.getSelectionModel().getSelectedItem().equals("Secretária")){
                     p.setDisciplina(null);
                 }else{
-                    ObservableList<Disciplina> ob_disciplinas= FXCollections.observableArrayList(tb_fun_disciplina.getItems());
+                    ObservableList<Disciplina> ob_disciplinas;
+                    ob_disciplinas = FXCollections.observableArrayList(tb_fun_disciplina.getItems());
                     List<Disciplina> listaDis = ob_disciplinas.subList(0, ob_disciplinas.size());
                     p.setDisciplina(listaDis);
                 }

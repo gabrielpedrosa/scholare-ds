@@ -19,11 +19,11 @@ public class Matricula implements Serializable {
     private String mat_responsavel;
     private String mat_telefone_responsavel;
     private String mat_observacoes;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Aluno aluno;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Turma turma;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Funcionario funcionario;
 
     public int getMat_id() {
