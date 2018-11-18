@@ -28,19 +28,7 @@ import javax.persistence.Query;
 //@author Gabriel Pedrosa
 public class Cadastrar_TurmaController implements Initializable, Essencial {
     @FXML
-    private MenuItem cadastrar_aluno;
-    @FXML
-    private MenuItem cadastrar_professor;
-    @FXML
     private MenuItem cadastrar_turma;
-    @FXML
-    private MenuItem exibir_alunos;
-    @FXML
-    private MenuItem exibir_professores;
-    @FXML
-    private MenuItem exibir_turna;
-    @FXML
-    private MenuItem ajuda_sobre;
     @FXML
     private RadioButton rad_tur_a;
     @FXML
@@ -65,6 +53,28 @@ public class Cadastrar_TurmaController implements Initializable, Essencial {
     private Button bot_tur_cancelar;
     @FXML
     private ComboBox cbox_tur_serie_ano;
+    @FXML
+    private MenuItem aluno;
+    @FXML
+    private MenuItem funcionario;
+    @FXML
+    private MenuItem alunos;
+    @FXML
+    private MenuItem funcionarios;
+    @FXML
+    private MenuItem turmas;
+    @FXML
+    private MenuItem sobre;
+    @FXML
+    private RadioButton rad_tur_c;
+    @FXML
+    private RadioButton rad_tur_d;
+    @FXML
+    private RadioButton rad_tur_f;
+    @FXML
+    private ComboBox<?> cbox_tur_turno;
+    @FXML
+    private Button bot_tur_remover;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -85,6 +95,9 @@ public class Cadastrar_TurmaController implements Initializable, Essencial {
         
         ObservableList ob_serie = FXCollections.observableArrayList("1", "2", "3", "4");
         cbox_tur_serie_ano.setItems(ob_serie);
+        
+        ObservableList ob_turno = FXCollections.observableArrayList("Matutino","Verpertino");
+        cbox_tur_turno.setItems(ob_turno);
         
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
         EntityManager em = emf.createEntityManager();
@@ -128,8 +141,9 @@ public class Cadastrar_TurmaController implements Initializable, Essencial {
             t.setTur_ano(cbox_tur_ano.getSelectionModel().getSelectedItem().toString());
             t.setTur_serie_ano(cbox_tur_serie_ano.getSelectionModel().getSelectedItem().toString());
             RadioButton radioselected = (RadioButton) tg_tur_turno.getSelectedToggle();
-            String rad_tur_turno = radioselected.getText();
-            t.setTur_turno(rad_tur_turno);
+            String rad_tur_classe = radioselected.getText();
+            t.setTur_classe(rad_tur_classe);
+            t.setTur_turno(cbox_tur_turno.getSelectionModel().getSelectedItem().toString());
             t.setTur_tipo(cbox_tur_tipo.getSelectionModel().getSelectedItem().toString());
             
             ObservableList<Funcionario> ob_professores = FXCollections.observableArrayList(tb_tur_professores.getItems());
@@ -194,4 +208,48 @@ public class Cadastrar_TurmaController implements Initializable, Essencial {
         cbox_tur_professor.setItems(a);
     }
     //Funções FXML-->
+
+    //Funções Menu<--
+    @FXML
+    private void aluno(ActionEvent event){
+        Scene novascene = Open.abrirAluno(getClass()); 
+        Stage stage = (Stage) bot_tur_cadastrar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void funcionario(ActionEvent event) {
+        Scene novascene = Open.abrirFuncionario(getClass()); 
+        Stage stage = (Stage) bot_tur_cadastrar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void turma(ActionEvent event) {
+        Scene novascene = Open.abrirTurma(getClass()); 
+        Stage stage = (Stage) bot_tur_cadastrar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void alunos(ActionEvent event) {
+        Scene novascene = Open.abrirExibirAluno(getClass()); 
+        Stage stage = (Stage) bot_tur_cadastrar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void funcionarios(ActionEvent event) {
+        Scene novascene = Open.abrirExibirFuncionario(getClass()); 
+        Stage stage = (Stage) bot_tur_cadastrar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void turmas(ActionEvent event) {
+    }
+
+    @FXML
+    private void sobre(ActionEvent event) {
+    }
+    //Funções Menu-->
+
+    @FXML
+    private void remover_professor(ActionEvent event) {
+    }
 }

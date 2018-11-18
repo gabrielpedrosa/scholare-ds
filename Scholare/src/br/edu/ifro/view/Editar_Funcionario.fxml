@@ -18,27 +18,27 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.151" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifro.control.Editar_FuncionarioController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.181" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifro.control.Editar_FuncionarioController">
    <top>
       <MenuBar prefHeight="20.0">
         <menus>
           <Menu mnemonicParsing="false" text="Cadastros">
             <items>
-              <MenuItem fx:id="cadastrar_aluno" mnemonicParsing="false" text="Aluno" />
-                  <MenuItem fx:id="cadastrar_professor" mnemonicParsing="false" text="Professor" />
-                  <MenuItem fx:id="cadastrar_turma" mnemonicParsing="false" text="Turma" />
+              <MenuItem fx:id="aluno" mnemonicParsing="false" onAction="#aluno" text="Aluno" />
+                  <MenuItem fx:id="funcionario" mnemonicParsing="false" onAction="#funcionario" text="Funcionário" />
+                  <MenuItem fx:id="turma" mnemonicParsing="false" onAction="#turma" text="Turma" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Exibir">
             <items>
-              <MenuItem fx:id="exibir_alunos" mnemonicParsing="false" text="Alunos" />
-                  <MenuItem fx:id="exibir_professores" mnemonicParsing="false" text="Professores" />
-                  <MenuItem fx:id="exibir_turna" mnemonicParsing="false" text="Turmas" />
+              <MenuItem fx:id="alunos" mnemonicParsing="false" onAction="#alunos" text="Alunos" />
+                  <MenuItem fx:id="funcionarios" mnemonicParsing="false" onAction="#funcionarios" text="Funcionários" />
+                  <MenuItem fx:id="turmas" mnemonicParsing="false" onAction="#turmas" text="Turmas" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Ajuda">
             <items>
-              <MenuItem fx:id="ajuda_sobre" mnemonicParsing="false" text="Sobre" />
+              <MenuItem fx:id="sobre" mnemonicParsing="false" onAction="#sobre" text="Sobre" />
             </items>
           </Menu>
         </menus>

@@ -9,33 +9,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author 80923755268
- */
+//@author Gabriel Pedrosa
 public class Editar_TurmaController implements Initializable {
-
-    @FXML
-    private MenuItem cadastrar_aluno;
-    @FXML
-    private MenuItem cadastrar_professor;
-    @FXML
-    private MenuItem cadastrar_turma;
-    @FXML
-    private MenuItem exibir_alunos;
-    @FXML
-    private MenuItem exibir_professores;
-    @FXML
-    private MenuItem exibir_turna;
-    @FXML
-    private MenuItem ajuda_sobre;
     @FXML
     private RadioButton rad_tur_a;
     @FXML
@@ -43,51 +26,116 @@ public class Editar_TurmaController implements Initializable {
     @FXML
     private RadioButton rad_tur_b;
     @FXML
-    private Button bot_tur_cadastrar;
-    @FXML
-    private Button bot_tur_limpar;
-    @FXML
     private Button bot_tur_cancelar;
     @FXML
     private ComboBox<?> cbox_tur_ano;
     @FXML
     private ComboBox<?> cbox_tur_tipo;
     @FXML
-    private ComboBox<?> cbox_tur_professor;
-    @FXML
-    private Button bot_tur_inserir;
-    @FXML
     private TableView<?> tb_tur_professores;
     @FXML
     private ComboBox<?> cbox_tur_serie_ano;
+    @FXML
+    private Label window_nome;
+    @FXML
+    private Button bot_tur_salvar;
+    @FXML
+    private Button bot_tur_deletar;
+    @FXML
+    private Button bot_tur_editar;
+    @FXML
+    private TextField txt_tur_datacadastro;
+    @FXML
+    private ComboBox<?> cbox_tur_nome;
+    @FXML
+    private MenuItem aluno;
+    @FXML
+    private MenuItem funcionario;
+    @FXML
+    private MenuItem turma;
+    @FXML
+    private MenuItem alunos;
+    @FXML
+    private MenuItem funcionarios;
+    @FXML
+    private MenuItem turmas;
+    @FXML
+    private MenuItem sobre;
 
-    /**
-     * Initializes the controller class.
-     * @param url
-     * @param rb
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
+    
+    public void inicia(){
+        
+    }
+    
+    public void add_cbox(){
+    
+    }
 
+    //Funções FXML<--
     @FXML
-    private void cadastrar_turma(ActionEvent event) {
+    private void salvar_editar_turma(ActionEvent event) {
     }
 
     @FXML
-    private void limpar_turma(ActionEvent event) {
+    private void deletar_editar_turma(ActionEvent event) {
     }
 
     @FXML
-    private void cancelar_turma(ActionEvent event) {
+    private void editar_editar_turma(ActionEvent event) {
+    }
+
+    @FXML
+    private void cancelar_editar_turma(ActionEvent event) {
         Scene novascene = Open.abrirMenu(getClass()); 
         Stage stage = (Stage) bot_tur_cancelar.getScene().getWindow();
         stage.setScene(novascene);
     }
 
     @FXML
-    private void inserir_professor(ActionEvent event) {
+    private void selecionar(ActionEvent event) {
     }
-    
+    //Funções FXML-->
+
+    //Funções Menu<--
+    @FXML
+    private void aluno(ActionEvent event){
+        Scene novascene = Open.abrirAluno(getClass()); 
+        Stage stage = (Stage) bot_tur_editar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void funcionario(ActionEvent event) {
+        Scene novascene = Open.abrirFuncionario(getClass()); 
+        Stage stage = (Stage) bot_tur_editar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void turma(ActionEvent event) {
+        Scene novascene = Open.abrirTurma(getClass()); 
+        Stage stage = (Stage) bot_tur_editar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void alunos(ActionEvent event) {
+        Scene novascene = Open.abrirExibirAluno(getClass()); 
+        Stage stage = (Stage) bot_tur_editar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void funcionarios(ActionEvent event) {
+        Scene novascene = Open.abrirExibirFuncionario(getClass()); 
+        Stage stage = (Stage) bot_tur_editar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void turmas(ActionEvent event) {
+    }
+    @FXML
+    private void sobre(ActionEvent event) {
+    }
+    //Funções Menu-->
 }

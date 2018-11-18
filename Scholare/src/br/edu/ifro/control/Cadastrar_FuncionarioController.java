@@ -32,20 +32,6 @@ import javax.persistence.Query;
 //@author Gabriel Pedrosa
 public class Cadastrar_FuncionarioController implements Initializable, Essencial {
     @FXML
-    private MenuItem cadastrar_aluno;
-    @FXML
-    private MenuItem cadastrar_professor;
-    @FXML
-    private MenuItem cadastrar_turma;
-    @FXML
-    private MenuItem exibir_alunos;
-    @FXML
-    private MenuItem exibir_professores;
-    @FXML
-    private MenuItem exibir_turna;
-    @FXML
-    private MenuItem ajuda_sobre;
-    @FXML
     private Button bot_pro_cadastrar;
     @FXML
     private Button bot_pro_limpar;
@@ -101,8 +87,21 @@ public class Cadastrar_FuncionarioController implements Initializable, Essencial
     private ComboBox<?> cbox_fun_pergunta;
     @FXML
     private Button bot_fun_disciplina;
+    @FXML
+    private MenuItem aluno;
+    @FXML
+    private MenuItem funcionario;
+    @FXML
+    private MenuItem turma;
+    @FXML
+    private MenuItem alunos;
+    @FXML
+    private MenuItem funcionarios;
+    @FXML
+    private MenuItem turmas;
+    @FXML
+    private MenuItem sobre;
     private final ObservableList ob_nulo = FXCollections.observableArrayList("");
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         inicia();
@@ -123,12 +122,9 @@ public class Cadastrar_FuncionarioController implements Initializable, Essencial
         
         ObservableList ob_funcao = FXCollections.observableArrayList("Secretária", "Professor");
         cbox_fun_funcao.setItems(ob_funcao);
-        
-        ObservableList ob_disciplina = FXCollections.observableArrayList("dis", "Dis");
-        cbox_fun_disciplina.setItems(ob_disciplina);
-        
+                
         ObservableList ob_pergunta = FXCollections.observableArrayList("Pergunta", "Pergunta 02");
-        cbox_fun_pergunta.setItems(ob_disciplina);
+        cbox_fun_pergunta.setItems(ob_pergunta);
     }
     
     public void add_mask(){
@@ -333,4 +329,45 @@ public class Cadastrar_FuncionarioController implements Initializable, Essencial
         }
     }
     //Funções FXML-->
+
+    //Funções Menu<--
+    @FXML
+    private void aluno(ActionEvent event){
+        Scene novascene = Open.abrirAluno(getClass()); 
+        Stage stage = (Stage) bot_pro_cadastrar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void funcionario(ActionEvent event) {
+        Scene novascene = Open.abrirFuncionario(getClass()); 
+        Stage stage = (Stage) bot_pro_cadastrar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void turma(ActionEvent event) {
+        Scene novascene = Open.abrirTurma(getClass()); 
+        Stage stage = (Stage) bot_pro_cadastrar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void alunos(ActionEvent event) {
+        Scene novascene = Open.abrirExibirAluno(getClass()); 
+        Stage stage = (Stage) bot_pro_cadastrar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void funcionarios(ActionEvent event) {
+        Scene novascene = Open.abrirExibirFuncionario(getClass()); 
+        Stage stage = (Stage) bot_pro_cadastrar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    
+    @FXML
+    private void turmas(ActionEvent event) {
+    }
+
+    @FXML
+    private void sobre(ActionEvent event) {
+    }
+    //Funções Menu-->
 }

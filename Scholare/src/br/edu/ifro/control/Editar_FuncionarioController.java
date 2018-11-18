@@ -1,13 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.edu.ifro.control;
 
-import br.edu.ifro.model.Aluno;
 import br.edu.ifro.model.Funcionario;
-import br.edu.ifro.model.Login;
 import br.edu.ifro.util.Open;
 import java.net.URL;
 import java.util.List;
@@ -32,27 +25,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-/**
- * FXML Controller class
- *
- * @author 80923755268
- */
+//@author Gabriel Pedrosa
 public class Editar_FuncionarioController implements Initializable {
-
-    @FXML
-    private MenuItem cadastrar_aluno;
-    @FXML
-    private MenuItem cadastrar_professor;
-    @FXML
-    private MenuItem cadastrar_turma;
-    @FXML
-    private MenuItem exibir_alunos;
-    @FXML
-    private MenuItem exibir_professores;
-    @FXML
-    private MenuItem exibir_turna;
-    @FXML
-    private MenuItem ajuda_sobre;
     @FXML
     private Label window_nome;
     @FXML
@@ -78,8 +52,6 @@ public class Editar_FuncionarioController implements Initializable {
     @FXML
     private TextField txt_fun_email;
     @FXML
-    private TextField txt_fun_datacadastro;
-    @FXML
     private TextField txt_fun_cidade;
     @FXML
     private ComboBox cbox_fun_estado;
@@ -102,7 +74,43 @@ public class Editar_FuncionarioController implements Initializable {
     @FXML
     private Button bot_fun_deletar;
     @FXML
+    private MenuItem aluno;
+    @FXML
+    private MenuItem funcionario;
+    @FXML
+    private MenuItem turma;
+    @FXML
+    private MenuItem alunos;
+    @FXML
+    private MenuItem funcionarios;
+    @FXML
+    private MenuItem turmas;
+    @FXML
+    private MenuItem sobre;
+    @FXML
     private Button bot_fun_editar;
+    @FXML
+    private TextField txt_fun_datacadastro;
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        inicia();
+    }
+
+    public void inicia(){
+        add_cbox();
+    }
+    
+    public void add_cbox(){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
+        EntityManager em = emf.createEntityManager();
+        
+        Query query = em.createQuery("select f from Funcionario as f");
+        List<Funcionario> list_funcionario = query.getResultList();
+        
+        ObservableList<Funcionario> obfuncionario = FXCollections.observableArrayList(list_funcionario);
+        cbox_fun_nome.setItems(obfuncionario);
+    }
     
     public void deshabilita_campos(){
         txt_fun_nome.setDisable(true);
@@ -164,27 +172,8 @@ public class Editar_FuncionarioController implements Initializable {
         pw_fun_senha.setText("");
         pw_fun_confirmarsenha.setText("");
     }
-    /**
-     * Initializes the controller class.
-     * @param url
-     * @param rb
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        inicia();
-    }
-
-    public void inicia(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
-        EntityManager em = emf.createEntityManager();
-        
-        Query query = em.createQuery("select f from Funcionario as f");
-        List<Funcionario> list_funcionario = query.getResultList();
-        
-        ObservableList<Funcionario> obfuncionario = FXCollections.observableArrayList(list_funcionario);
-        cbox_fun_nome.setItems(obfuncionario);
-    }
-
+    
+    //Funções FXML<--
     @FXML
     private void salvar_editar_funcionario(ActionEvent event) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
@@ -221,7 +210,7 @@ public class Editar_FuncionarioController implements Initializable {
         em.close();
         emf.close();
         
-        inicia();
+        add_cbox();
     }
 
     @FXML
@@ -229,10 +218,10 @@ public class Editar_FuncionarioController implements Initializable {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
         EntityManager em = emf.createEntityManager();
         
-        Funcionario funcionario = (Funcionario) cbox_fun_nome.getSelectionModel().getSelectedItem();
+        Funcionario func = (Funcionario) cbox_fun_nome.getSelectionModel().getSelectedItem();
         
         Query query =em.createQuery("select a from Aluno as a where a.alu_id = :alu_id");
-        query.setParameter("alu_id", funcionario.getFun_id());
+        query.setParameter("alu_id", func.getFun_id());
         
         Funcionario f = (Funcionario) query.getSingleResult();
         
@@ -270,11 +259,7 @@ public class Editar_FuncionarioController implements Initializable {
             deshabilita_campos();
             
             Funcionario f = (Funcionario) query.getSingleResult();
-            
-            //Query querylogin = em.createQuery("select l from Login as l where l.funcionario = :fun_id");
-            //query.setParameter("fun_id", f.getFun_nome());
-            
-            //Login l = (Login) querylogin.getSingleResult();
+
             txt_fun_nome.setText(f.getFun_nome());
             if(f.getFun_sexo().equals("Feminino")){
                 rad_fun_feminino.setSelected(true);
@@ -287,9 +272,9 @@ public class Editar_FuncionarioController implements Initializable {
             txt_fun_telefone.setText(f.getFun_telefone());
             txt_fun_datanascimento.setText(f.getFun_nascimento());
             cbox_fun_funcao.setValue(f.getFun_funcao());
-            //txt_fun_usuario.setText(l.getLog_usuario());
-            //pw_fun_senha.setText(l.getLog_senha());
-            //pw_fun_confirmarsenha.setText(l.getLog_senha());
+            txt_fun_usuario.setText(f.getLog_usuario());
+            pw_fun_senha.setText(f.getLog_senha());
+            pw_fun_confirmarsenha.setText(f.getLog_senha());
             txt_fun_logradouro.setText(f.getFun_logradouro());
             txt_fun_bairro.setText(f.getFun_bairro());
             txt_fun_numero.setText(f.getFun_numero());
@@ -298,5 +283,44 @@ public class Editar_FuncionarioController implements Initializable {
             txt_fun_email.setText(f.getFun_email());
         }
     }
+    //Funções FXML-->
     
+    //Funções Menu<--
+    @FXML
+    private void aluno(ActionEvent event){
+        Scene novascene = Open.abrirAluno(getClass()); 
+        Stage stage = (Stage) bot_fun_editar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void funcionario(ActionEvent event) {
+        Scene novascene = Open.abrirFuncionario(getClass()); 
+        Stage stage = (Stage) bot_fun_editar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void turma(ActionEvent event) {
+        Scene novascene = Open.abrirTurma(getClass()); 
+        Stage stage = (Stage) bot_fun_editar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void alunos(ActionEvent event) {
+        Scene novascene = Open.abrirExibirAluno(getClass()); 
+        Stage stage = (Stage) bot_fun_editar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void funcionarios(ActionEvent event) {
+        Scene novascene = Open.abrirExibirFuncionario(getClass()); 
+        Stage stage = (Stage) bot_fun_editar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void turmas(ActionEvent event) {
+    }
+    @FXML
+    private void sobre(ActionEvent event) {
+    }
+    //Funções Menu-->
 }

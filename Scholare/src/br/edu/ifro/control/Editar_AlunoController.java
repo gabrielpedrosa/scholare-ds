@@ -1,12 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.edu.ifro.control;
 
 import br.edu.ifro.model.Aluno;
+import br.edu.ifro.model.Matricula;
+import br.edu.ifro.model.Turma;
 import br.edu.ifro.util.Open;
+import br.eti.diegofonseca.MaskFieldUtil;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -29,27 +27,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-/**
- * FXML Controller class
- *
- * @author Gabriel Pedrosa
- */
+//@author Gabriel Pedrosa
 public class Editar_AlunoController implements Initializable {
-
-    @FXML
-    private MenuItem cadastrar_aluno;
-    @FXML
-    private MenuItem cadastrar_professor;
-    @FXML
-    private MenuItem cadastrar_turma;
-    @FXML
-    private MenuItem exibir_alunos;
-    @FXML
-    private MenuItem exibir_professores;
-    @FXML
-    private MenuItem exibir_turna;
-    @FXML
-    private MenuItem ajuda_sobre;
     @FXML
     private Label window_nome;
     @FXML
@@ -93,11 +72,61 @@ public class Editar_AlunoController implements Initializable {
     @FXML
     private TextField txt_alu_nome;
     @FXML
-    private ComboBox<?> cbox_alu_turma;
+    private ComboBox<Turma> cbox_alu_turma;
     @FXML
     private RadioButton rad_ed_alu_feminino;
     @FXML
     private RadioButton rad_ed_alu_masculino;
+    @FXML
+    private MenuItem aluno;
+    @FXML
+    private MenuItem funcionario;
+    @FXML
+    private MenuItem turma;
+    @FXML
+    private MenuItem alunos;
+    @FXML
+    private MenuItem funcionarios;
+    @FXML
+    private MenuItem turmas;
+    @FXML
+    private MenuItem sobre;
+    private final ObservableList ob_nulo = FXCollections.observableArrayList("");
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        inicia();
+    }
+    
+    public void inicia(){
+        add_cbox();
+        add_mask();
+    }
+    
+    public void add_cbox(){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
+        EntityManager em = emf.createEntityManager();
+        
+        /*Query query = em.createQuery("select a.alu_nome from Aluno a, Matricula m where a.alu_id = m.aluno and m.turma = :turma");
+        query.setParameter("turma", cbox_alu_turma);
+        List<Aluno> list_alunos = query.getResultList();
+        
+        ObservableList<Aluno> obaluno = FXCollections.observableArrayList(list_alunos);
+        cbox_alu_nome.setItems(obaluno);*/
+        
+        Query queryturma = em.createQuery("select t from Turma as t");
+        List<Turma> list_turma = queryturma.getResultList();
+        
+        ObservableList<Turma> obturma = FXCollections.observableArrayList(list_turma);
+        cbox_alu_turma.setItems(obturma);
+    }
+    
+    public void add_mask(){
+        MaskFieldUtil.cpfField(txt_alu_cpf);
+        MaskFieldUtil.foneField(txt_alu_telefone);
+        MaskFieldUtil.numericField(txt_alu_rg);
+        MaskFieldUtil.numericField(txt_alu_numero);
+        MaskFieldUtil.dateField(txt_alu_datanascimento);
+    }
     
     public void deshabilita_campos(){
         txt_alu_nome.setDisable(true);
@@ -137,7 +166,7 @@ public class Editar_AlunoController implements Initializable {
         bot_ed_alu_salvar.setDisable(false);
     }
 
-       public void limpar_aluno(ActionEvent event) {
+    public void limpar_aluno(ActionEvent event) {
         txt_alu_nome.setText("");
         rad_ed_alu_feminino.setSelected(true);
         txt_alu_cpf.setText("");
@@ -152,28 +181,10 @@ public class Editar_AlunoController implements Initializable {
         txt_alu_deficiencia.setText("");
         txt_alu_cidade.setText("");
         cbox_alu_estado.setValue("");
-    }
-    /**
-     * Initializes the controller class.
-     * @param url
-     * @param rb
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        inicia();
+        cbox_alu_nome.setItems(ob_nulo);
     }
     
-    public void inicia(){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
-        EntityManager em = emf.createEntityManager();
-        
-        Query query = em.createQuery("select a from Aluno as a");
-        List<Aluno> list_alunos = query.getResultList();
-        
-        ObservableList<Aluno> obaluno = FXCollections.observableArrayList(list_alunos);
-        cbox_alu_nome.setItems(obaluno);
-    }
-
+    //Funções FXML<--
     @FXML
     private void salvar_editar_aluno(ActionEvent event) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
@@ -181,7 +192,7 @@ public class Editar_AlunoController implements Initializable {
         
         Aluno alu = (Aluno) cbox_alu_nome.getSelectionModel().getSelectedItem();
         
-        Query query =em.createQuery("select a from Aluno as a where a.alu_id = :alu_id");
+        Query query = em.createQuery("select a from Aluno as a where a.alu_id = :alu_id");
         query.setParameter("alu_id", alu.getAlu_id());
         
         alu = (Aluno) query.getSingleResult();
@@ -203,15 +214,15 @@ public class Editar_AlunoController implements Initializable {
         alu.setAlu_estado(cbox_alu_estado.getSelectionModel().getSelectedItem().toString());
         alu.setAlu_deficiencia(txt_alu_deficiencia.getText());
         
-        limpar_aluno(event);
-        
         em.getTransaction().begin();
         em.persist(alu);
         em.getTransaction().commit();
         em.close();
         emf.close();
         
-        inicia();
+        add_cbox();
+        limpar_aluno(event);
+        deshabilita_campos();
     }
 
     @FXML
@@ -219,19 +230,24 @@ public class Editar_AlunoController implements Initializable {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
         EntityManager em = emf.createEntityManager();
         
-        Aluno aluno = (Aluno) cbox_alu_nome.getSelectionModel().getSelectedItem();
+        Aluno alun = (Aluno) cbox_alu_nome.getSelectionModel().getSelectedItem();
         
-        Query query =em.createQuery("select a from Aluno as a where a.alu_id = :alu_id");
-        query.setParameter("alu_id", aluno.getAlu_id());
+        Query query = em.createQuery("select a from Aluno as a where a.alu_id = :alu_id");
+        query.setParameter("alu_id", alun.getAlu_id());
+        
+        Query querymatricula = em.createQuery("select m from Matricula as m where m.aluno = :alu_id");
+        querymatricula.setParameter("alu_id", cbox_alu_nome.getSelectionModel().getSelectedItem());
         
         Aluno a = (Aluno) query.getSingleResult();
+        Matricula m = (Matricula) querymatricula.getSingleResult();
         
         em.getTransaction().begin();
+        em.remove(m);
         em.remove(a);
         em.getTransaction().commit();
         
         em.close();
-        
+        limpar_aluno(event);
     }
 
     @FXML
@@ -241,8 +257,7 @@ public class Editar_AlunoController implements Initializable {
         }
         else{
             habilita_campos();
-        }
-        
+        }   
     }
 
     @FXML
@@ -254,17 +269,11 @@ public class Editar_AlunoController implements Initializable {
 
     @FXML
     private void selecionar(ActionEvent event) {
-        String cbox_nome = cbox_alu_nome.getSelectionModel().getSelectedItem().toString();
-        System.out.println(cbox_nome);
-        if(cbox_nome == null){
-            
-        }
-        else{
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
             EntityManager em = emf.createEntityManager();
 
-            Query query =em.createQuery("select a from Aluno as a where a.alu_nome = :alu_nome");
-            query.setParameter("alu_nome", cbox_nome);
+            Query query = em.createQuery("select a from Aluno as a where a.alu_nome = :alu_nome");
+            query.setParameter("alu_nome", cbox_alu_nome.getSelectionModel().getSelectedItem().toString());
 
             if(query.getResultList().isEmpty()){
                 System.out.println("Erro");
@@ -294,11 +303,66 @@ public class Editar_AlunoController implements Initializable {
                 txt_alu_deficiencia.setText(a.getAlu_deficiencia());
                 bot_ed_alu_deletar.setDisable(false);
             }
-        }
+        
     }
 
     @FXML
     private void selecionar_turma(ActionEvent event) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
+        EntityManager em = emf.createEntityManager();
+        
+        Query query = em.createQuery("select a from Aluno as a, Matricula m where a.alu_id = m.aluno and m.turma = :turma");
+        query.setParameter("turma", cbox_alu_turma.getSelectionModel().getSelectedItem());
+        List<Aluno> list_alunos = query.getResultList();
+        
+        ObservableList<Aluno> obaluno = FXCollections.observableArrayList(list_alunos);
+        cbox_alu_nome.setItems(obaluno);
+        cbox_alu_nome.setDisable(false);
+    }
+    //Funções FXML-->
+    
+    //Funções Menu<--
+    @FXML
+    private void aluno(ActionEvent event){
+        Scene novascene = Open.abrirAluno(getClass()); 
+        Stage stage = (Stage) bot_ed_alu_editar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+
+    @FXML
+    private void funcionario(ActionEvent event) {
+        Scene novascene = Open.abrirFuncionario(getClass()); 
+        Stage stage = (Stage) bot_ed_alu_editar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+
+    @FXML
+    private void turma(ActionEvent event) {
+        Scene novascene = Open.abrirTurma(getClass()); 
+        Stage stage = (Stage) bot_ed_alu_editar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+
+    @FXML
+    private void alunos(ActionEvent event) {
+        Scene novascene = Open.abrirExibirAluno(getClass()); 
+        Stage stage = (Stage) bot_ed_alu_editar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+
+    @FXML
+    private void funcionarios(ActionEvent event) {
+        Scene novascene = Open.abrirExibirFuncionario(getClass()); 
+        Stage stage = (Stage) bot_ed_alu_editar.getScene().getWindow();
+        stage.setScene(novascene);
     }
     
+    @FXML
+    private void turmas(ActionEvent event) {
+    }
+
+    @FXML
+    private void sobre(ActionEvent event) {
+    }
+    //Funções Menu-->
 }

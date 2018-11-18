@@ -1,7 +1,6 @@
 package br.edu.ifro.control;
 
 import br.edu.ifro.model.Funcionario;
-import br.edu.ifro.model.Login;
 import br.edu.ifro.util.Open;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,7 +17,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-
 
 //@author Gabriel
 public class LoginController implements Initializable {
@@ -37,19 +35,13 @@ public class LoginController implements Initializable {
     private PasswordField pw_log_senha;
     private String nomeeeee;
     
-    
     public void abremenu(String nome){
-        Scene novascene = Open.abrirMenuLog(getClass(),nome);
+        Scene novascene = Open.abrirMenu(getClass());
         Stage stage = (Stage) bot_log_login.getScene().getWindow();
         stage.setScene(novascene);
         stage.centerOnScreen();
     }
-
-    /**
-     * Initializes the controller class.
-     * @param url
-     * @param rb
-     */
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
@@ -59,6 +51,7 @@ public class LoginController implements Initializable {
     private void cancelar(ActionEvent event) {
         Stage stage = (Stage) bot_log_cancelar.getScene().getWindow();
         stage.close();
+        System.exit(0);
     }
 
     @FXML

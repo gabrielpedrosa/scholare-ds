@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.edu.ifro.control;
 
 import br.edu.ifro.util.Open;
+import com.sun.media.jfxmediaimpl.platform.Platform;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -17,22 +13,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 
-// @author Gabriel
+// @author Gabriel Pedrosa
 public class MenuController implements Initializable {    
-    @FXML
-    private MenuItem cadastrar_aluno;
-    @FXML
-    private MenuItem cadastrar_professor;
-    @FXML
-    private MenuItem cadastrar_turma;
-    @FXML
-    private MenuItem exibir_alunos;
-    @FXML
-    private MenuItem exibir_professores;
-    @FXML
-    private MenuItem exibir_turna;
-    @FXML
-    private MenuItem ajuda_sobre;
     @FXML
     private Button bot_marticula;
     @FXML
@@ -44,16 +26,24 @@ public class MenuController implements Initializable {
     @FXML
     private Label lab_log_nome;
     private String nome;
+    @FXML
+    private MenuItem aluno;
+    @FXML
+    private MenuItem funcionario;
+    @FXML
+    private MenuItem turma;
+    @FXML
+    private MenuItem alunos;
+    @FXML
+    private MenuItem funcionarios;
+    @FXML
+    private MenuItem turmas;
+    @FXML
+    private MenuItem sobre;
     
-    LoginController l = new LoginController();
-    /**
-     * Initializes the controller class.
-     * @param url
-     * @param rb
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println(getNome());
+        System.out.println();
     }    
 
     @FXML
@@ -62,46 +52,7 @@ public class MenuController implements Initializable {
         Stage stage = (Stage) bot_marticula.getScene().getWindow();
         stage.setScene(novascene);
     }
-
-    @FXML
-    private void cadastrar_aluno(ActionEvent event) throws InterruptedException {
-        Scene novascene = Open.abrirAluno(getClass()); 
-        Stage stage = (Stage) bot_marticula.getScene().getWindow();
-        stage.setScene(novascene);
-    }
-
-    @FXML
-    private void cadastrar_funcionario(ActionEvent event) {
-        Scene novascene = Open.abrirFuncionario(getClass()); 
-        Stage stage = (Stage) bot_marticula.getScene().getWindow();
-        stage.setScene(novascene);
-    }
-
-    @FXML
-    private void cadastrar_turma(ActionEvent event) {
-        Scene novascene = Open.abrirTurma(getClass()); 
-        Stage stage = (Stage) bot_marticula.getScene().getWindow();
-        stage.setScene(novascene);
-    }
-
-    @FXML
-    private void exibir_alunos(ActionEvent event) {
-        Scene novascene = Open.abrirExibirAluno(getClass()); 
-        Stage stage = (Stage) bot_marticula.getScene().getWindow();
-        stage.setScene(novascene);
-    }
-
-    @FXML
-    private void exibir_professores(ActionEvent event) {
-        Scene novascene = Open.abrirExibirFuncionario(getClass()); 
-        Stage stage = (Stage) bot_marticula.getScene().getWindow();
-        stage.setScene(novascene);
-    }
-
-    @FXML
-    private void exibir_turmas(ActionEvent event) {   
-    }
-
+    
     @FXML
     private void notas(ActionEvent event) {   
     }
@@ -114,17 +65,47 @@ public class MenuController implements Initializable {
     private void sair(ActionEvent event) {
         Stage stage = (Stage) bot_sair.getScene().getWindow();
         stage.close();
+        System.exit(0);
     }
-
-    public String getNome() {
-        return nome;
+    
+    //Funções Menu<--
+    @FXML
+    private void aluno(ActionEvent event){
+        Scene novascene = Open.abrirAluno(getClass()); 
+        Stage stage = (Stage) bot_marticula.getScene().getWindow();
+        stage.setScene(novascene);
     }
-
-    public void setNome(String nome) {
-        this.nome = nome;
+    @FXML
+    private void funcionario(ActionEvent event) {
+        Scene novascene = Open.abrirFuncionario(getClass()); 
+        Stage stage = (Stage) bot_marticula.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void turma(ActionEvent event) {
+        Scene novascene = Open.abrirTurma(getClass()); 
+        Stage stage = (Stage) bot_marticula.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void alunos(ActionEvent event) {
+        Scene novascene = Open.abrirExibirAluno(getClass()); 
+        Stage stage = (Stage) bot_marticula.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void funcionarios(ActionEvent event) {
+        Scene novascene = Open.abrirExibirFuncionario(getClass()); 
+        Stage stage = (Stage) bot_marticula.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void turmas(ActionEvent event) {
         
     }
-    
-
-    
+    @FXML
+    private void sobre(ActionEvent event) {
+        
+    }
+    //Funções Menu-->
 }

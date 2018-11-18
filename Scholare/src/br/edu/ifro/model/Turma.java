@@ -19,6 +19,7 @@ public class Turma implements Serializable {
     private String tur_serie_ano;
     private String tur_turno;
     private String tur_tipo;
+    private String tur_classe;
     @Column
     @ManyToMany
     private List<Funcionario> professor;
@@ -74,5 +75,13 @@ public class Turma implements Serializable {
 
     public void setProfessor(List<Funcionario> professor) {
         this.professor = professor;
+    }
+
+    public String getTur_classe() {
+        return tur_classe;
+    }
+
+    public void setTur_classe(String tur_classe) {
+        this.tur_classe = tur_classe;
     }
 }

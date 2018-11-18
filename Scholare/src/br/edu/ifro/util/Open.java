@@ -2,13 +2,11 @@ package br.edu.ifro.util;
 
 // @author Gabriel
 
-import br.edu.ifro.control.MenuController;
-import br.edu.ifro.control.SucessoController;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class Open {
     
@@ -25,14 +23,11 @@ public class Open {
         }
         return cena;
     }
-    public static Scene abrirMenuLog(Class cls, String nome){
+    /*public static Scene abrirMenuLog(Class cls, String nome){
         Scene cena = null ;
         try{
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Menu.fxml"));
-            MenuController m = new MenuController();
-            System.out.println(nome);
-            m.setNome(nome);
             Scene scene = new Scene(fxmlLoader.load());
             cena = scene;
         }
@@ -40,7 +35,7 @@ public class Open {
             System.out.println(e.getMessage());
         }
         return cena;
-    }
+    }*/
     
     public static Scene abrirAluno(Class cls){
         Scene cena = null ;
@@ -164,6 +159,7 @@ public class Open {
             fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Erro.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.setScene(scene);
             stage.showAndWait();
         }
@@ -177,6 +173,7 @@ public class Open {
             fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Sucesso.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.setScene(scene);
             stage.showAndWait();
         }

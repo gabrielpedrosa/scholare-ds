@@ -1,6 +1,7 @@
 package br.edu.ifro.model;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,11 +19,11 @@ public class Matricula implements Serializable {
     private String mat_responsavel;
     private String mat_telefone_responsavel;
     private String mat_observacoes;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Aluno aluno;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Turma turma;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Funcionario funcionario;
 
     public int getMat_id() {

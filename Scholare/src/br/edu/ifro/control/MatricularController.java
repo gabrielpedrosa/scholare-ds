@@ -32,20 +32,6 @@ import javax.persistence.Query;
 //@author Gabriel Pedrosa
 public class MatricularController implements Initializable {
     @FXML
-    private MenuItem cadastrar_aluno;
-    @FXML
-    private MenuItem cadastrar_professor;
-    @FXML
-    private MenuItem cadastrar_turma;
-    @FXML
-    private MenuItem exibir_alunos;
-    @FXML
-    private MenuItem exibir_professores;
-    @FXML
-    private MenuItem exibir_turna;
-    @FXML
-    private MenuItem ajuda_sobre;
-    @FXML
     private Button bot_mat_matricular;
     @FXML
     private Button bot_mat_limpar;
@@ -71,24 +57,33 @@ public class MatricularController implements Initializable {
     private ToggleGroup tg_mat_triagem;
     @FXML
     private ComboBox<Funcionario> cbox_mat_funcionario;
-    /**
-     * Initializes the controller class.
-     * @param url
-     * @param rb
-     */
+    @FXML
+    private MenuItem aluno;
+    @FXML
+    private MenuItem funcionario;
+    @FXML
+    private MenuItem turma;
+    @FXML
+    private MenuItem alunos;
+    @FXML
+    private MenuItem funcionarios;
+    @FXML
+    private MenuItem turmas;
+    @FXML
+    private MenuItem sobre;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         inicia();
     }
-     public void addmask(){
-        MaskFieldUtil.foneField(txt_mat_telefone);
-    }
     
     public void inicia(){
-        java.util.Date d = new java.util.Date();
-        SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
-        String datasrt = (String) f.format(d);
-        txt_mat_datacadastro.setText(datasrt);
+       add_cbox();
+       add_data();
+       add_mask();
+    }
+    
+    public void add_cbox(){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
         EntityManager em = emf.createEntityManager();
         
@@ -104,7 +99,18 @@ public class MatricularController implements Initializable {
         cbox_mat_funcionario.setItems(ob_fun);
         
         ObservableList<Turma> obturma = FXCollections.observableArrayList(list_turma);
-        cbox_mat_turma.setItems(obturma);
+        cbox_mat_turma.setItems(obturma); 
+    }
+    
+    public void add_mask(){
+        MaskFieldUtil.foneField(txt_mat_telefone);
+    }
+    
+    public void add_data(){
+        java.util.Date d = new java.util.Date();
+        SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
+        String datasrt = (String) f.format(d);
+        txt_mat_datacadastro.setText(datasrt);
     }
     
     public boolean verifica_vazio(){
@@ -114,8 +120,8 @@ public class MatricularController implements Initializable {
         TextField[] campo_txt = {txt_mat_responsavel, txt_mat_telefone};
         ComboBox[] campo_cbox = {cbox_mat_aluno, cbox_mat_funcionario};
         
-        for (int i= 0; i< campo_txt.length; i++) {
-            if (campo_txt[i].getText().equals("") || campo_txt[i].getText() == null) {
+        for (TextField campo_txt1 : campo_txt) {
+            if (campo_txt1.getText().equals("") || campo_txt1.getText() == null) {
                 txt_preenchido = false;
                 break;
             } else {
@@ -123,8 +129,8 @@ public class MatricularController implements Initializable {
             }
         }
         
-        for (int i= 0; i< campo_cbox.length; i++) {
-            if (campo_cbox[i].getSelectionModel().getSelectedIndex() == -1) {
+        for (ComboBox campo_cbox1 : campo_cbox) {
+            if (campo_cbox1.getSelectionModel().getSelectedIndex() == -1) {
                 cbox_preenchido = false;
                 break;
             } else {
@@ -136,7 +142,7 @@ public class MatricularController implements Initializable {
         
         return preenchido;
     }
-    
+    //Funções FXML<--
     @FXML
     private void matricular_matricula(ActionEvent event) {
         if(verifica_vazio() == true){
@@ -200,5 +206,51 @@ public class MatricularController implements Initializable {
     @FXML
     private void nao(ActionEvent event) {
         cbox_mat_turma.setDisable(false);
-    } 
+    }
+    //Funções FXML-->
+
+    //Funções Menu<--
+    @FXML
+    private void aluno(ActionEvent event){
+        Scene novascene = Open.abrirAluno(getClass()); 
+        Stage stage = (Stage) bot_mat_matricular.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+
+    @FXML
+    private void funcionario(ActionEvent event) {
+        Scene novascene = Open.abrirFuncionario(getClass()); 
+        Stage stage = (Stage) bot_mat_matricular.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+
+    @FXML
+    private void turma(ActionEvent event) {
+        Scene novascene = Open.abrirTurma(getClass()); 
+        Stage stage = (Stage) bot_mat_matricular.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+
+    @FXML
+    private void alunos(ActionEvent event) {
+        Scene novascene = Open.abrirExibirAluno(getClass()); 
+        Stage stage = (Stage) bot_mat_matricular.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+
+    @FXML
+    private void funcionarios(ActionEvent event) {
+        Scene novascene = Open.abrirExibirFuncionario(getClass()); 
+        Stage stage = (Stage) bot_mat_matricular.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    
+    @FXML
+    private void turmas(ActionEvent event) {
+    }
+
+    @FXML
+    private void sobre(ActionEvent event) {
+    }
+    //Funções Menu-->
 }
