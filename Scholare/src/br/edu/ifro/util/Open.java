@@ -72,7 +72,7 @@ public class Open {
         return cena;
     }
     
-     public static Scene abrirEditarAluno(Class cls, Aluno alu){
+    public static Scene abrirEditarAluno(Class cls, Aluno alu){
         Scene cena = null ;
         try{
             FXMLLoader fxmlLoader = new FXMLLoader();
@@ -129,11 +129,86 @@ public class Open {
         }
         return cena;
     }
+    
+    public static Scene abrirEditarFuncionario(Class cls, Aluno alu){
+        Scene cena = null ;
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Editar_Aluno.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            cena = scene;
+            Editar_AlunoController edc = fxmlLoader.getController();
+            edc.editar(alu);
+        }
+        catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+        return cena;
+    }
+    
+    public static Scene abrirListarFuncionario(Class cls){
+        Scene cena = null ;
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Listar_Funcionarios.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            cena = scene;
+        }
+        catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+        return cena;
+    }
+    
     public static Scene abrirTurma(Class cls){
         Scene cena = null;
         try{
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Cadastrar_Turma.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            cena = scene;
+        }
+        catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+        return cena;
+    }
+    
+    public static Scene abrirExibirTurma(Class cls){
+        Scene cena = null ;
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Editar_Turma.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            cena = scene;
+        }
+        catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+        return cena;
+    }
+    
+    public static Scene abrirEditarTurma(Class cls, Aluno alu){
+        Scene cena = null ;
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Editar_Aluno.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            cena = scene;
+            Editar_AlunoController edc = fxmlLoader.getController();
+            edc.editar(alu);
+        }
+        catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+        return cena;
+    }
+    
+    public static Scene abrirListarTurma(Class cls){
+        Scene cena = null ;
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Listar_Turmas.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             cena = scene;
         }
@@ -171,7 +246,93 @@ public class Open {
         return cena;
     }
     
+    public static Scene abrirExibirMatricula(Class cls){
+        Scene cena = null ;
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Editar_Matricula.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            cena = scene;
+        }
+        catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+        return cena;
+    }
+    
+    public static Scene abrirEditarMatricula(Class cls, Aluno alu){
+        Scene cena = null ;
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Editar_Aluno.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            cena = scene;
+            Editar_AlunoController edc = fxmlLoader.getController();
+            edc.editar(alu);
+        }
+        catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+        return cena;
+    }
+    
+    public static Scene abrirListarMatricula(Class cls){
+        Scene cena = null ;
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Listar_Matriculas.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            cena = scene;
+        }
+        catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+        return cena;
+    }
+    
     public static Scene abrirFrequencia(Class cls){
+        Scene cena = null;
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Cadastrar_Turma.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            cena = scene;
+        }
+        catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+        return cena;
+    }
+    
+    public static Scene abrirAtadeResultado(Class cls){
+        Scene cena = null;
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Cadastrar_Turma.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            cena = scene;
+        }
+        catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+        return cena;
+    }
+    
+    public static Scene abrirDiario(Class cls){
+        Scene cena = null;
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Cadastrar_Turma.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            cena = scene;
+        }
+        catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+        return cena;
+    }
+    
+    public static Scene abrirSobre(Class cls){
         Scene cena = null;
         try{
             FXMLLoader fxmlLoader = new FXMLLoader();

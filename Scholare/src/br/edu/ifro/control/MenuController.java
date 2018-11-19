@@ -1,7 +1,6 @@
 package br.edu.ifro.control;
 
 import br.edu.ifro.util.Open;
-import com.sun.media.jfxmediaimpl.platform.Platform;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -115,10 +114,16 @@ public class MenuController implements Initializable {
     }
     @FXML
     private void turmas(ActionEvent event) {
+        Scene novascene = Open.abrirExibirTurma(getClass()); 
+        Stage stage = (Stage) bot_marticula.getScene().getWindow();
+        stage.setScene(novascene);
         
     }
     @FXML
     private void sobre(ActionEvent event) {
+        Scene novascene = Open.abrirSobre(getClass()); 
+        Stage stage = (Stage) bot_marticula.getScene().getWindow();
+        stage.setScene(novascene);
         
     }
     @FXML
@@ -129,18 +134,33 @@ public class MenuController implements Initializable {
     }
     @FXML
     private void listar_funcionarios(ActionEvent event) {
+        Scene novascene = Open.abrirListarFuncionario(getClass()); 
+        Stage stage = (Stage) bot_marticula.getScene().getWindow();
+        stage.setScene(novascene);
     }
     @FXML
     private void listar_turmas(ActionEvent event) {
+        Scene novascene = Open.abrirListarTurma(getClass()); 
+        Stage stage = (Stage) bot_marticula.getScene().getWindow();
+        stage.setScene(novascene);
     }
     @FXML
     private void lsitar_matriculas(ActionEvent event) {
+        Scene novascene = Open.abrirListarMatricula(getClass()); 
+        Stage stage = (Stage) bot_marticula.getScene().getWindow();
+        stage.setScene(novascene);
     }
     @FXML
     private void relatorio_diario(ActionEvent event) {
+        Scene novascene = Open.abrirDiario(getClass()); 
+        Stage stage = (Stage) bot_marticula.getScene().getWindow();
+        stage.setScene(novascene);
     }
     @FXML
     private void ata_de_resultados(ActionEvent event) {
+        Scene novascene = Open.abrirAtadeResultado(getClass()); 
+        Stage stage = (Stage) bot_marticula.getScene().getWindow();
+        stage.setScene(novascene);
     }
     //Funções Menu-->
 }
