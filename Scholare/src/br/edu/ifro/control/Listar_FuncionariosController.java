@@ -2,7 +2,9 @@ package br.edu.ifro.control;
 
 import br.edu.ifro.model.Aluno;
 import br.edu.ifro.model.Funcionario;
+import br.edu.ifro.model.Matricula;
 import br.edu.ifro.util.Essencial;
+import br.edu.ifro.util.Open;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -11,11 +13,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableView;
+import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -69,60 +72,91 @@ public class Listar_FuncionariosController implements Initializable, Essencial {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        inicia();
     }    
 
+    //Funções Menu<--
     @FXML
-    private void aluno(ActionEvent event) {
+    private void aluno(ActionEvent event){
+        Scene novascene = Open.abrirAluno(getClass()); 
+        Stage stage = (Stage) bot_fun_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
     }
-
     @FXML
     private void funcionario(ActionEvent event) {
+        Scene novascene = Open.abrirFuncionario(getClass()); 
+        Stage stage = (Stage) bot_fun_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
     }
-
     @FXML
     private void turma(ActionEvent event) {
+        Scene novascene = Open.abrirTurma(getClass()); 
+        Stage stage = (Stage) bot_fun_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
     }
-
-    @FXML
-    private void listar_alunos(ActionEvent event) {
-    }
-
-    @FXML
-    private void listar_funcionarios(ActionEvent event) {
-    }
-
-    @FXML
-    private void listar_turmas(ActionEvent event) {
-    }
-
-    @FXML
-    private void listar_matriculas(ActionEvent event) {
-    }
-
     @FXML
     private void alunos(ActionEvent event) {
+        Scene novascene = Open.abrirExibirAluno(getClass()); 
+        Stage stage = (Stage) bot_fun_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
     }
-
     @FXML
     private void funcionarios(ActionEvent event) {
+        Scene novascene = Open.abrirExibirFuncionario(getClass()); 
+        Stage stage = (Stage) bot_fun_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
     }
-
     @FXML
     private void turmas(ActionEvent event) {
+        Scene novascene = Open.abrirExibirTurma(getClass()); 
+        Stage stage = (Stage) bot_fun_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+        
     }
-
-    @FXML
-    private void relatorio_diario(ActionEvent event) {
-    }
-
-    @FXML
-    private void ata_de_resultados(ActionEvent event) {
-    }
-
     @FXML
     private void sobre(ActionEvent event) {
+        Scene novascene = Open.abrirSobre(getClass()); 
+        Stage stage = (Stage) bot_fun_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+        
     }
+    @FXML
+    private void listar_alunos(ActionEvent event) {
+        Scene novascene = Open.abrirListarAluno(getClass()); 
+        Stage stage = (Stage) bot_fun_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void listar_funcionarios(ActionEvent event) {
+        Scene novascene = Open.abrirListarFuncionario(getClass()); 
+        Stage stage = (Stage) bot_fun_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void listar_turmas(ActionEvent event) {
+        Scene novascene = Open.abrirListarTurma(getClass()); 
+        Stage stage = (Stage) bot_fun_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void listar_matriculas(ActionEvent event) {
+        Scene novascene = Open.abrirListarMatricula(getClass()); 
+        Stage stage = (Stage) bot_fun_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void relatorio_diario(ActionEvent event) {
+        Scene novascene = Open.abrirDiario(getClass()); 
+        Stage stage = (Stage) bot_fun_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void ata_de_resultados(ActionEvent event) {
+        Scene novascene = Open.abrirAtadeResultado(getClass()); 
+        Stage stage = (Stage) bot_fun_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    //Funções Menu-->
 
 
     private void selecionar_funcionario(ActionEvent event) {
@@ -139,24 +173,63 @@ public class Listar_FuncionariosController implements Initializable, Essencial {
 
     @FXML
     private void deletar_listar_funcionario(ActionEvent event) {
+        if(tb_fun_funcionario.getSelectionModel().getSelectedItem() == null){
+            System.out.println("vazio");
+        }
+        else{        
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
+            EntityManager em = emf.createEntityManager();
+
+            Funcionario fun = (Funcionario) tb_fun_funcionario.getSelectionModel().getSelectedItem();
+
+            Query query = em.createQuery("select f from Funcionario as f where f.fun_id = :fun_id");
+            query.setParameter("fun_id", fun.getFun_id());
+
+            Funcionario f = (Funcionario) query.getSingleResult();
+
+            em.getTransaction().begin();
+            em.remove(f);
+            em.getTransaction().commit();
+
+            em.close();
+            add_cbox();
+        }
     }
 
     @FXML
     private void editar_listar_funcionario(ActionEvent event) {
+        if(tb_fun_funcionario.getSelectionModel().getSelectedItem() == null){
+            System.out.println("vazio");
+        }
+        else{
+            Scene novascene = Open.abrirEditarFuncionario(getClass(),tb_fun_funcionario.getSelectionModel().getSelectedItem()); 
+            Stage stage = (Stage) bot_fun_cancelar.getScene().getWindow();
+            stage.setScene(novascene);
+        }
     }
 
     @FXML
     private void cancelar_listar_funcionario(ActionEvent event) {
+        Scene novascene = Open.abrirMenu(getClass()); 
+        Stage stage = (Stage) bot_fun_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
     }
 
     @Override
     public void inicia() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        add_cbox();
     }
 
     @Override
     public void add_cbox() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
+        EntityManager em = emf.createEntityManager();
+        
+        Query query = em.createQuery("select f from Funcionario as f");
+        List<Funcionario> list_professor = query.getResultList();
+        
+        ObservableList<Funcionario> ob_professor = FXCollections.observableArrayList(list_professor);
+        tb_fun_funcionario.setItems(ob_professor);  
     }
     
 }

@@ -3,7 +3,13 @@ package br.edu.ifro.util;
 // @author Gabriel
 
 import br.edu.ifro.control.Editar_AlunoController;
+import br.edu.ifro.control.Editar_FuncionarioController;
+import br.edu.ifro.control.Editar_MatriculaController;
+import br.edu.ifro.control.Editar_TurmaController;
 import br.edu.ifro.model.Aluno;
+import br.edu.ifro.model.Funcionario;
+import br.edu.ifro.model.Matricula;
+import br.edu.ifro.model.Turma;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -130,15 +136,15 @@ public class Open {
         return cena;
     }
     
-    public static Scene abrirEditarFuncionario(Class cls, Aluno alu){
+    public static Scene abrirEditarFuncionario(Class cls, Funcionario fun){
         Scene cena = null ;
         try{
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Editar_Aluno.fxml"));
+            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Editar_Funcionario.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             cena = scene;
-            Editar_AlunoController edc = fxmlLoader.getController();
-            edc.editar(alu);
+            Editar_FuncionarioController edc = fxmlLoader.getController();
+            edc.editar(fun);
         }
         catch(IOException e){
             System.out.println(e.getMessage());
@@ -188,15 +194,15 @@ public class Open {
         return cena;
     }
     
-    public static Scene abrirEditarTurma(Class cls, Aluno alu){
+    public static Scene abrirEditarTurma(Class cls, Turma tur){
         Scene cena = null ;
         try{
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Editar_Aluno.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             cena = scene;
-            Editar_AlunoController edc = fxmlLoader.getController();
-            edc.editar(alu);
+            Editar_TurmaController edc = fxmlLoader.getController();
+            edc.editar(tur);
         }
         catch(IOException e){
             System.out.println(e.getMessage());
@@ -260,15 +266,15 @@ public class Open {
         return cena;
     }
     
-    public static Scene abrirEditarMatricula(Class cls, Aluno alu){
+    public static Scene abrirEditarMatricula(Class cls, Matricula mat){
         Scene cena = null ;
         try{
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Editar_Aluno.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             cena = scene;
-            Editar_AlunoController edc = fxmlLoader.getController();
-            edc.editar(alu);
+            Editar_MatriculaController edc = fxmlLoader.getController();
+            edc.editar(mat);
         }
         catch(IOException e){
             System.out.println(e.getMessage());

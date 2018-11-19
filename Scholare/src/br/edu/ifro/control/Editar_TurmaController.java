@@ -1,8 +1,13 @@
 package br.edu.ifro.control;
 
+import br.edu.ifro.model.Funcionario;
+import br.edu.ifro.model.Turma;
 import br.edu.ifro.util.Open;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,6 +21,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 //@author Gabriel Pedrosa
 public class Editar_TurmaController implements Initializable {
@@ -28,13 +37,13 @@ public class Editar_TurmaController implements Initializable {
     @FXML
     private Button bot_tur_cancelar;
     @FXML
-    private ComboBox<?> cbox_tur_ano;
+    private ComboBox cbox_tur_ano;
     @FXML
-    private ComboBox<?> cbox_tur_tipo;
+    private ComboBox cbox_tur_tipo;
     @FXML
     private TableView<?> tb_tur_professores;
     @FXML
-    private ComboBox<?> cbox_tur_serie_ano;
+    private ComboBox cbox_tur_serie_ano;
     @FXML
     private Label window_nome;
     @FXML
@@ -46,7 +55,7 @@ public class Editar_TurmaController implements Initializable {
     @FXML
     private TextField txt_tur_datacadastro;
     @FXML
-    private ComboBox<?> cbox_tur_nome;
+    private ComboBox<Turma> cbox_tur_nome;
     @FXML
     private MenuItem aluno;
     @FXML
@@ -78,16 +87,45 @@ public class Editar_TurmaController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        inicia();
     }
     
     public void inicia(){
-        
+        add_cbox();
     }
     
     public void add_cbox(){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
+        EntityManager em = emf.createEntityManager();
+        
+        Query query = em.createQuery("select t from Turma as t");
+        List<Turma> list_turma = query.getResultList();
+        
+        ObservableList<Turma> obturma = FXCollections.observableArrayList(list_turma);
+        cbox_tur_nome.setItems(obturma);
     
     }
+    
+    public void desabilita_campos(){
+        cbox_tur_ano.setDisable(true);
+        cbox_tur_serie_ano.setDisable(true);
+        cbox_tur_tipo.setDisable(true);
+    }
+    
+    public void habilita_campos(){
+        cbox_tur_ano.setDisable(false);
+        cbox_tur_serie_ano.setDisable(false);
+        cbox_tur_tipo.setDisable(false);
+        bot_tur_deletar.setDisable(false);
+        bot_tur_salvar.setDisable(false);
+    }
+    
+    public void limpar_turma(){
+        cbox_tur_ano.setValue(null);
+        cbox_tur_serie_ano.setValue(null);
+        cbox_tur_tipo.setValue(null);
+    }
+    
 
     //Funções FXML<--
     @FXML
@@ -96,10 +134,31 @@ public class Editar_TurmaController implements Initializable {
 
     @FXML
     private void deletar_editar_turma(ActionEvent event) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
+        EntityManager em = emf.createEntityManager();
+        
+        Turma tur = (Turma) cbox_tur_nome.getSelectionModel().getSelectedItem();
+        
+        Query query =em.createQuery("select t from Turma as t where t.tur_id = :tur_id");
+        query.setParameter("tur_id", tur.getTur_id());
+        
+        Turma t = (Turma) query.getSingleResult();
+        
+        em.getTransaction().begin();
+        em.remove(t);
+        em.getTransaction().commit();
+        
+        em.close();
     }
 
     @FXML
     private void editar_editar_turma(ActionEvent event) {
+        if(cbox_tur_nome.getSelectionModel().getSelectedIndex()==-1){
+            System.out.println("Selecione uma Turma");
+        }
+        else{
+            habilita_campos();
+        } 
     }
 
     @FXML
@@ -111,6 +170,30 @@ public class Editar_TurmaController implements Initializable {
 
     @FXML
     private void selecionar(ActionEvent event) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
+        EntityManager em = emf.createEntityManager();
+        
+        Turma tur = (Turma) cbox_tur_nome.getSelectionModel().getSelectedItem();
+        
+        Query query =em.createQuery("select t from Turma as t where t.tur_id = :tur_id");
+        query.setParameter("tur_id", tur.getTur_id());
+        
+        if(query.getResultList().isEmpty()){
+            System.out.println("Erro");
+        }
+        else{
+            //deshabilita_campos();
+            
+            Turma t = (Turma) query.getSingleResult();
+            editar(t);
+        }
+    }
+    
+    public void editar(Turma t){
+        cbox_tur_ano.setValue(t.getTur_ano());
+        cbox_tur_serie_ano.setValue(t.getTur_serie_ano());
+        cbox_tur_tipo.setValue(t.getTur_tipo());
+        
     }
     //Funções FXML-->
 

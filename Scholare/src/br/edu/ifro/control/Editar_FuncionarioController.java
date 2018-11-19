@@ -284,7 +284,11 @@ public class Editar_FuncionarioController implements Initializable {
             deshabilita_campos();
             
             Funcionario f = (Funcionario) query.getSingleResult();
-
+            editar(f);
+        }
+    }
+    
+    public void editar(Funcionario f){;
             txt_fun_nome.setText(f.getFun_nome());
             if(f.getFun_sexo().equals("Feminino")){
                 rad_fun_feminino.setSelected(true);
@@ -307,7 +311,7 @@ public class Editar_FuncionarioController implements Initializable {
             cbox_fun_estado.setValue(f.getFun_estado());
             txt_fun_email.setText(f.getFun_email());
             bot_fun_deletar.setDisable(false);
-        }
+        
     }
     //Funções FXML-->
     
