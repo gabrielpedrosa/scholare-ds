@@ -1,6 +1,7 @@
 package br.edu.ifro.control;
 
 import br.edu.ifro.model.Aluno;
+import br.edu.ifro.model.Matricula;
 import br.edu.ifro.model.Turma;
 import br.edu.ifro.util.Essencial;
 import br.edu.ifro.util.Open;
@@ -99,10 +100,44 @@ public class Listar_AlunosController implements Initializable, Essencial {
 
     @FXML
     private void deletar_listar_Aluno(ActionEvent event) {
+        if(tb_alu_alunos.getSelectionModel().getSelectedItem() == null){
+            System.out.println("vazio");
+        }
+        else{        
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
+            EntityManager em = emf.createEntityManager();
+
+            Aluno alun = (Aluno) tb_alu_alunos.getSelectionModel().getSelectedItem();
+
+            Query query = em.createQuery("select a from Aluno as a where a.alu_id = :alu_id");
+            query.setParameter("alu_id", alun.getAlu_id());
+
+            Query querymatricula = em.createQuery("select m from Matricula as m where m.aluno = :alu_id");
+            querymatricula.setParameter("alu_id", tb_alu_alunos.getSelectionModel().getSelectedItem());
+
+            Aluno a = (Aluno) query.getSingleResult();
+            Matricula m = (Matricula) querymatricula.getSingleResult();
+
+            em.getTransaction().begin();
+            em.remove(m);
+            em.remove(a);
+            em.getTransaction().commit();
+
+            em.close();
+            selecionar_turma(event);
+        }
     }
 
     @FXML
     private void editar_listar_aluno(ActionEvent event) {
+        if(tb_alu_alunos.getSelectionModel().getSelectedItem() == null){
+            System.out.println("vazio");
+        }
+        else{
+            Scene novascene = Open.abrirEditarAluno(getClass(),tb_alu_alunos.getSelectionModel().getSelectedItem()); 
+            Stage stage = (Stage) bot_alu_cancelar.getScene().getWindow();
+            stage.setScene(novascene);
+        }
         
     }
     @FXML
@@ -110,6 +145,10 @@ public class Listar_AlunosController implements Initializable, Essencial {
         Scene novascene = Open.abrirMenu(getClass()); 
         Stage stage = (Stage) bot_alu_cancelar.getScene().getWindow();
         stage.setScene(novascene);
+    }
+    
+    public void selecionado(){
+        
     }
     
     //Funções Menu<--

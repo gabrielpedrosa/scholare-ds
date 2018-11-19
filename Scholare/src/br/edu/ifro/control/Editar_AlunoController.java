@@ -293,31 +293,33 @@ public class Editar_AlunoController implements Initializable {
                 System.out.println("Erro");
             }
             else{
-                deshabilita_campos();
-
                 Aluno a = (Aluno) query.getSingleResult();
-                txt_alu_nome.setText(a.getAlu_nome());
-                if(a.getAlu_sexo().equals("Feminino")){
-                    rad_ed_alu_feminino.setSelected(true);
-                }
-                else{
-                    rad_ed_alu_masculino.setSelected(true);
-                }
-                txt_alu_cpf.setText(a.getAlu_cpf());
-                txt_alu_rg.setText(a.getAlu_rg());
-                txt_alu_telefone.setText(a.getAlu_telefone());
-                txt_alu_datanascimento.setText(a.getAlu_nascimento());
-                txt_alu_filiacao1.setText(a.getAlu_filiacao1());
-                txt_alu_filiacao2.setText(a.getAlu_filiacao2());
-                txt_alu_logradouro.setText(a.getAlu_logradouro());
-                txt_alu_bairro.setText(a.getAlu_bairro());
-                txt_alu_numero.setText(a.getAlu_numero());
-                txt_alu_cidade.setText(a.getAlu_cidade());
-                cbox_alu_estado.setValue(a.getAlu_estado());
-                txt_alu_deficiencia.setText(a.getAlu_deficiencia());
-                bot_alu_deletar.setDisable(false);
+                editar(a);
             }
         
+    }
+    
+    public void editar(Aluno a){
+        txt_alu_nome.setText(a.getAlu_nome());
+        if(a.getAlu_sexo().equals("Feminino")){
+            rad_ed_alu_feminino.setSelected(true);
+        }
+        else{
+            rad_ed_alu_masculino.setSelected(true);
+        }
+        txt_alu_cpf.setText(a.getAlu_cpf());
+        txt_alu_rg.setText(a.getAlu_rg());
+        txt_alu_telefone.setText(a.getAlu_telefone());
+        txt_alu_datanascimento.setText(a.getAlu_nascimento());
+        txt_alu_filiacao1.setText(a.getAlu_filiacao1());
+        txt_alu_filiacao2.setText(a.getAlu_filiacao2());
+        txt_alu_logradouro.setText(a.getAlu_logradouro());
+        txt_alu_bairro.setText(a.getAlu_bairro());
+        txt_alu_numero.setText(a.getAlu_numero());
+        txt_alu_cidade.setText(a.getAlu_cidade());
+        cbox_alu_estado.setValue(a.getAlu_estado());
+        txt_alu_deficiencia.setText(a.getAlu_deficiencia());
+        bot_alu_deletar.setDisable(false);
     }
 
     @FXML
@@ -330,6 +332,7 @@ public class Editar_AlunoController implements Initializable {
         List<Aluno> list_alunos = query.getResultList();
         
         ObservableList<Aluno> obaluno = FXCollections.observableArrayList(list_alunos);
+        limpar_aluno(event);
         cbox_alu_nome.setItems(obaluno);
         cbox_alu_nome.setDisable(false);
     }

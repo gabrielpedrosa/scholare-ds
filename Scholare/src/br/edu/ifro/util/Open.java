@@ -2,6 +2,8 @@ package br.edu.ifro.util;
 
 // @author Gabriel
 
+import br.edu.ifro.control.Editar_AlunoController;
+import br.edu.ifro.model.Aluno;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -63,6 +65,22 @@ public class Open {
             fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Editar_Aluno.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             cena = scene;
+        }
+        catch(IOException e){
+            System.out.println(e.getMessage());
+        }
+        return cena;
+    }
+    
+     public static Scene abrirEditarAluno(Class cls, Aluno alu){
+        Scene cena = null ;
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Editar_Aluno.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            cena = scene;
+            Editar_AlunoController edc = fxmlLoader.getController();
+            edc.editar(alu);
         }
         catch(IOException e){
             System.out.println(e.getMessage());
