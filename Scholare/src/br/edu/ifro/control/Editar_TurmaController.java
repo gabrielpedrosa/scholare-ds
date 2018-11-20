@@ -29,20 +29,11 @@ import javax.persistence.Query;
 //@author Gabriel Pedrosa
 public class Editar_TurmaController implements Initializable {
     @FXML
-    private RadioButton rad_tur_a;
-    @FXML
-    private ToggleGroup tg_tur_turno;
-    @FXML
-    private RadioButton rad_tur_b;
-    @FXML
     private Button bot_tur_cancelar;
-    @FXML
     private ComboBox cbox_tur_ano;
-    @FXML
     private ComboBox cbox_tur_tipo;
     @FXML
-    private TableView<?> tb_tur_professores;
-    @FXML
+    private TableView<Funcionario> tb_tur_professores;
     private ComboBox cbox_tur_serie_ano;
     @FXML
     private Label window_nome;
@@ -84,6 +75,34 @@ public class Editar_TurmaController implements Initializable {
     private MenuItem relatorio_diario;
     @FXML
     private MenuItem ata_de_resultados;
+    @FXML
+    private RadioButton rad_tur_a1;
+    @FXML
+    private ToggleGroup tg_tur_turno1;
+    @FXML
+    private RadioButton rad_tur_b1;
+    @FXML
+    private ComboBox<?> cbox_tur_ano1;
+    @FXML
+    private ComboBox<?> cbox_tur_tipo1;
+    @FXML
+    private ComboBox<?> cbox_tur_serie_ano1;
+    @FXML
+    private RadioButton rad_tur_c1;
+    @FXML
+    private RadioButton rad_tur_d1;
+    @FXML
+    private RadioButton rad_tur_e1;
+    @FXML
+    private RadioButton rad_tur_f1;
+    @FXML
+    private ComboBox<?> cbox_tur_turno1;
+    @FXML
+    private ComboBox<Funcionario> cbox_tur_professor;
+    @FXML
+    private Button bot_tur_inserir;
+    @FXML
+    private Button bot_tur_remover;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -174,8 +193,9 @@ public class Editar_TurmaController implements Initializable {
         EntityManager em = emf.createEntityManager();
         
         Turma tur = (Turma) cbox_tur_nome.getSelectionModel().getSelectedItem();
+        System.out.println(cbox_tur_nome.getSelectionModel().getSelectedItem());
         
-        Query query =em.createQuery("select t from Turma as t where t.tur_id = :tur_id");
+        Query query = em.createQuery("select t from Turma as t where t.tur_id = :tur_id");
         query.setParameter("tur_id", tur.getTur_id());
         
         if(query.getResultList().isEmpty()){
@@ -258,5 +278,33 @@ public class Editar_TurmaController implements Initializable {
 
     @FXML
     private void ata_de_resultados(ActionEvent event) {
+    }
+
+    @FXML
+    private void inserir_professor(ActionEvent event) {
+        String cbox_professor = cbox_tur_professor.getSelectionModel().getSelectedItem().toString();
+        ObservableList<Funcionario> ob_lastprofessor = FXCollections.observableArrayList(tb_tur_professores.getItems());
+        
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
+        EntityManager em = emf.createEntityManager();
+        
+        Query query = em.createQuery("select f from Funcionario as f where f.fun_nome = :fun_nome");
+        query.setParameter("fun_nome", cbox_professor);
+        
+        List<Funcionario> list_professor = query.getResultList();
+        list_professor.addAll(ob_lastprofessor);
+        
+        ObservableList<Funcionario> ob_professor = FXCollections.observableArrayList(list_professor);
+
+        tb_tur_professores.setItems(ob_professor);
+        
+        Funcionario p = cbox_tur_professor.getSelectionModel().getSelectedItem();
+        ObservableList a = cbox_tur_professor.getItems();
+        a.remove(p);
+        cbox_tur_professor.setItems(a);
+    }
+
+    @FXML
+    private void remover_professor(ActionEvent event) {
     }
 }

@@ -97,7 +97,7 @@ public class Listar_AlunosController implements Initializable, Essencial {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
         EntityManager em = emf.createEntityManager();
         
-        Query query = em.createQuery("select a from Aluno as a, Matricula m where a.alu_id = m.aluno and m.turma = :turma");
+        Query query = em.createQuery("select a from Aluno as a, Matricula m where a.alu_id = m.aluno and m.turma = :turma order by a.alu_nome");
         query.setParameter("turma", cbox_turma.getSelectionModel().getSelectedItem());
         List<Aluno> list_alunos = query.getResultList();
         

@@ -1,8 +1,6 @@
 package br.edu.ifro.control;
 
-import br.edu.ifro.model.Aluno;
 import br.edu.ifro.model.Funcionario;
-import br.edu.ifro.model.Matricula;
 import br.edu.ifro.util.Essencial;
 import br.edu.ifro.util.Open;
 import java.net.URL;

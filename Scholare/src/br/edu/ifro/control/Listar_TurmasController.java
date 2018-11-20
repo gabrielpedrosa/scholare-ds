@@ -1,8 +1,5 @@
 package br.edu.ifro.control;
 
-import br.edu.ifro.model.Aluno;
-import br.edu.ifro.model.Funcionario;
-import br.edu.ifro.model.Matricula;
 import br.edu.ifro.model.Turma;
 import br.edu.ifro.util.Essencial;
 import br.edu.ifro.util.Open;
@@ -220,7 +217,7 @@ public class Listar_TurmasController implements Initializable, Essencial{
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
         EntityManager em = emf.createEntityManager();
         
-        Query query = em.createQuery("select t from Turma as t");
+        Query query = em.createQuery("select t from Turma as t order by t.tur_nome");
         List<Turma> list_turma = query.getResultList();
         
         ObservableList<Turma> obturma = FXCollections.observableArrayList(list_turma);

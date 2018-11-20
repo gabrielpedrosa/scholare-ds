@@ -189,6 +189,8 @@ public class MatricularController implements Initializable {
         cbox_mat_aluno.setValue(null);
         cbox_mat_funcionario.setValue(null);
         cbox_mat_turma.setValue(null);
+        sim.setSelected(true);
+        cbox_mat_turma.setDisable(true);
     }
 
     @FXML

@@ -20,13 +20,14 @@ public class Turma implements Serializable {
     private String tur_turno;
     private String tur_tipo;
     private String tur_classe;
+    private String tur_nome;
     @Column
     @ManyToMany
     private List<Funcionario> professor;
 
     @Override
     public String toString() {
-        return "" + tur_ano + " - " + tur_serie_ano + " - " + tur_turno + " - " + tur_tipo;
+        return tur_nome;
     }
     
     public int getTur_id() {
@@ -84,4 +85,14 @@ public class Turma implements Serializable {
     public void setTur_classe(String tur_classe) {
         this.tur_classe = tur_classe;
     }
+
+    public String getTur_nome() {
+        return tur_nome;
+    }
+
+    public void setTur_nome(String tur_nome) {
+        this.tur_nome = tur_nome;
+    }
+    
+    
 }

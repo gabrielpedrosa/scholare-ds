@@ -40,7 +40,7 @@ public class Cadastrar_TurmaController implements Initializable, Essencial {
     @FXML
     private Button bot_tur_inserir;
     @FXML
-    private TableView tb_tur_professores;
+    private TableView<Funcionario> tb_tur_professores;
     @FXML
     private ToggleGroup tg_tur_turno;
     @FXML
@@ -70,7 +70,7 @@ public class Cadastrar_TurmaController implements Initializable, Essencial {
     @FXML
     private RadioButton rad_tur_f;
     @FXML
-    private ComboBox<?> cbox_tur_turno;
+    private ComboBox cbox_tur_turno;
     @FXML
     private Button bot_tur_remover;
     @FXML
@@ -161,6 +161,10 @@ public class Cadastrar_TurmaController implements Initializable, Essencial {
             t.setTur_classe(rad_tur_classe);
             t.setTur_turno(cbox_tur_turno.getSelectionModel().getSelectedItem().toString());
             t.setTur_tipo(cbox_tur_tipo.getSelectionModel().getSelectedItem().toString());
+            t.setTur_nome(cbox_tur_ano.getSelectionModel().getSelectedItem().toString()+" - "+
+                    cbox_tur_serie_ano.getSelectionModel().getSelectedItem().toString()+" - "+
+                    rad_tur_classe+" - "+cbox_tur_turno.getSelectionModel().getSelectedItem().toString()
+                    +" - "+cbox_tur_tipo.getSelectionModel().getSelectedItem().toString());
             
             ObservableList<Funcionario> ob_professores = FXCollections.observableArrayList(tb_tur_professores.getItems());
             List<Funcionario> lista_professor = ob_professores.subList(0, ob_professores.size());
@@ -190,6 +194,7 @@ public class Cadastrar_TurmaController implements Initializable, Essencial {
         cbox_tur_tipo.setValue("");
         cbox_tur_professor.setValue(null);
         tb_tur_professores.getItems().clear();
+        cbox_tur_turno.setValue("");
         rad_tur_a.setSelected(true);
     }
 
@@ -208,7 +213,7 @@ public class Cadastrar_TurmaController implements Initializable, Essencial {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
         EntityManager em = emf.createEntityManager();
         
-        Query query = em.createQuery("select f from Funcionario as f where f.fun_nome = :fun_nome");
+        Query query = em.createQuery("select f from Funcionario as f where f.fun_nome = :fun_nome order by f.fun_nome");
         query.setParameter("fun_nome", cbox_professor);
         
         List<Funcionario> list_professor = query.getResultList();
@@ -289,5 +294,12 @@ public class Cadastrar_TurmaController implements Initializable, Essencial {
 
     @FXML
     private void remover_professor(ActionEvent event) {
+        Funcionario f = tb_tur_professores.getSelectionModel().getSelectedItem();
+        ObservableList a = tb_tur_professores.getItems();
+        ObservableList b = cbox_tur_professor.getItems();
+        a.remove(f);
+        b.add(f);
+        tb_tur_professores.setItems(a);
+        cbox_tur_professor.setItems(b);
     }
 }

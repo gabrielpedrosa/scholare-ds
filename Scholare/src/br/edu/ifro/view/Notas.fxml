@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -15,11 +16,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.181" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifro.control.Listar_MatriculasController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.181" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifro.control.NotasController">
    <bottom>
       <Pane prefHeight="600.0" prefWidth="800.0" styleClass="cadastro-fundo" stylesheets="@../style/style.css" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="window_nome" layoutX="15.0" text="Listar Matriculas" textFill="#d3d3d3" textOverrun="CLIP">
+            <Label fx:id="window_nome" layoutX="15.0" text="Notas" textFill="#d3d3d3" textOverrun="CLIP">
                <font>
                   <Font name="System Bold" size="40.0" />
                </font>
@@ -27,35 +28,13 @@
                   <DropShadow />
                </effect>
             </Label>
-            <Separator layoutX="15.0" layoutY="60.0" prefHeight="1.0" prefWidth="770.0" />
+            <Separator layoutX="15.0" layoutY="130.0" prefHeight="1.0" prefWidth="770.0" />
             <Group layoutX="40.0" layoutY="470.0" />
-            <Group layoutX="240.0" layoutY="470.0">
+            <Group layoutX="240.0" layoutY="470.0" />
+            <Group layoutX="440.0" layoutY="470.0" />
+            <Group layoutX="450.0" layoutY="475.0">
                <children>
-                  <Button fx:id="bot_deletar" alignment="BOTTOM_CENTER" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#deletar_listar" prefHeight="80.0" prefWidth="120.0" styleClass="but-limpar" stylesheets="@../style/style.css" text="Deletar">
-                     <effect>
-                        <DropShadow color="#4d4d4d" />
-                     </effect>
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Button>
-               </children>
-            </Group>
-            <Group layoutX="440.0" layoutY="470.0">
-               <children>
-                  <Button fx:id="bot_editar" alignment="BOTTOM_CENTER" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#editar_listar" prefHeight="80.0" prefWidth="120.0" styleClass="but-editar" stylesheets="@../style/style.css" text="Editar">
-                     <effect>
-                        <DropShadow color="#4d4d4d" />
-                     </effect>
-                     <font>
-                        <Font name="Arial" size="18.0" />
-                     </font>
-                  </Button>
-               </children>
-            </Group>
-            <Group layoutX="640.0" layoutY="470.0">
-               <children>
-                  <Button fx:id="bot_cancelar" alignment="BOTTOM_CENTER" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#cancelar_listar" prefHeight="80.0" prefWidth="120.0" styleClass="but-cancelar" stylesheets="@../style/style.css" text="Voltar">
+                  <Button fx:id="bot_cancelar" alignment="BOTTOM_CENTER" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#cancelar_notas" prefHeight="80.0" prefWidth="120.0" styleClass="but-cancelar" stylesheets="@../style/style.css" text="Voltar">
                      <effect>
                         <DropShadow color="#4d4d4d" height="20.5" radius="9.625" width="20.0" />
                      </effect>
@@ -65,35 +44,70 @@
                   </Button>
                </children>
             </Group>
-            <TableView fx:id="tb_matriculas" layoutX="30.0" layoutY="80.0" prefHeight="350.0" prefWidth="740.0">
+            <Label layoutX="30.0" layoutY="65.0" text="Selecionar Turma:" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Label>
+            <ComboBox fx:id="cbox_turma" layoutX="30.0" layoutY="90.0" onAction="#selecionar_turma" prefHeight="30.0" prefWidth="250.0" />
+            <TableView fx:id="tb_alunos" layoutX="30.0" layoutY="150.0" prefHeight="300.0" prefWidth="740.0">
               <columns>
                 <TableColumn prefWidth="75.0" text="Código">
                 <cellValueFactory>
-                        <PropertyValueFactory property="mat_id" />
+                        <PropertyValueFactory property="alu_id" />
                   </cellValueFactory>
                 </TableColumn>
-                <TableColumn maxWidth="200.0" minWidth="200.0" prefWidth="200.0" text="Aluno">
+                <TableColumn maxWidth="250.0" minWidth="250.0" prefWidth="250.0" text="Nome">
                 <cellValueFactory>
                         <PropertyValueFactory property="alu_nome" />
                   </cellValueFactory>
                 </TableColumn>
-                  <TableColumn maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Turma">
+                  <TableColumn maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Nota 01">
                   <cellValueFactory>
-                        <PropertyValueFactory property="tur_id" />
+                        <PropertyValueFactory property="alu_sexo" />
                   </cellValueFactory>
                 </TableColumn>
-                  <TableColumn maxWidth="200.0" minWidth="200.0" prefWidth="200.0" text="Responsável" >
-                  <cellValueFactory>
-                        <PropertyValueFactory property="mat_responsavel" />
-                  </cellValueFactory>
-                </TableColumn>
-                  <TableColumn maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Data">
-                  <cellValueFactory>
-                        <PropertyValueFactory property="mat_data" />
-                  </cellValueFactory>
-                </TableColumn>
+                  <TableColumn maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Nota 02">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="alu_sexo" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Nota 03">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="alu_sexo" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Nota 04">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="alu_sexo" />
+                     </cellValueFactory>
+                  </TableColumn>
               </columns>
             </TableView>
+            <Label layoutX="328.0" layoutY="65.0" text="Selecionar Disciplina" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Label>
+            <ComboBox fx:id="cbox_disciplina" layoutX="328.0" layoutY="90.0" onAction="#selecionar_disciplina" prefHeight="30.0" prefWidth="250.0" />
+            <Group layoutX="200.0" layoutY="475.0">
+               <children>
+                  <Button fx:id="bot_salvar" alignment="BOTTOM_CENTER" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#salvar_notas" prefHeight="80.0" prefWidth="120.0" styleClass="but-salvar" stylesheets="@../style/style.css" text="Salvar">
+                     <effect>
+                        <DropShadow color="#4d4d4d" />
+                     </effect>
+                     <font>
+                        <Font name="Arial" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Group>
          </children></Pane>
    </bottom>
    <top>

@@ -228,7 +228,7 @@ public class Open {
         Scene cena = null;
         try{
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Cadastrar_Turma.fxml"));
+            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Notas.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             cena = scene;
         }

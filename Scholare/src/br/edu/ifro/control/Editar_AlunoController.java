@@ -127,7 +127,7 @@ public class Editar_AlunoController implements Initializable {
         ObservableList<Aluno> obaluno = FXCollections.observableArrayList(list_alunos);
         cbox_alu_nome.setItems(obaluno);*/
         
-        Query queryturma = em.createQuery("select t from Turma as t");
+        Query queryturma = em.createQuery("select t from Turma as t order by t.tur_nome");
         List<Turma> list_turma = queryturma.getResultList();
         
         ObservableList<Turma> obturma = FXCollections.observableArrayList(list_turma);

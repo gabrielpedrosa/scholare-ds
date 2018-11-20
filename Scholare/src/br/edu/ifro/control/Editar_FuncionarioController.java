@@ -56,7 +56,7 @@ public class Editar_FuncionarioController implements Initializable {
     @FXML
     private ComboBox cbox_fun_estado;
     @FXML
-    private ComboBox cbox_fun_nome;
+    private ComboBox<Funcionario> cbox_fun_nome;
     @FXML
     private TextField txt_fun_nome;
     @FXML
@@ -288,29 +288,32 @@ public class Editar_FuncionarioController implements Initializable {
         }
     }
     
-    public void editar(Funcionario f){;
-            txt_fun_nome.setText(f.getFun_nome());
-            if(f.getFun_sexo().equals("Feminino")){
-                rad_fun_feminino.setSelected(true);
-            }
-            else{
-                rad_fun_masculino.setSelected(true);
-            }
-            txt_fun_cpf.setText(f.getFun_nome());
-            txt_fun_rg.setText(f.getFun_rg());
-            txt_fun_telefone.setText(f.getFun_telefone());
-            txt_fun_datanascimento.setText(f.getFun_nascimento());
-            cbox_fun_funcao.setValue(f.getFun_funcao());
-            txt_fun_usuario.setText(f.getLog_usuario());
-            pw_fun_senha.setText(f.getLog_senha());
-            pw_fun_confirmarsenha.setText(f.getLog_senha());
-            txt_fun_logradouro.setText(f.getFun_logradouro());
-            txt_fun_bairro.setText(f.getFun_bairro());
-            txt_fun_numero.setText(f.getFun_numero());
-            txt_fun_cidade.setText(f.getFun_cidade());
-            cbox_fun_estado.setValue(f.getFun_estado());
-            txt_fun_email.setText(f.getFun_email());
-            bot_fun_deletar.setDisable(false);
+    public void editar(Funcionario f){
+        cbox_fun_nome.getSelectionModel().select(0);
+        cbox_fun_nome.getSelectionModel().select(f);
+        
+        txt_fun_nome.setText(f.getFun_nome());
+        if(f.getFun_sexo().equals("Feminino")){
+            rad_fun_feminino.setSelected(true);
+        }
+        else{
+            rad_fun_masculino.setSelected(true);
+        }
+        txt_fun_cpf.setText(f.getFun_nome());
+        txt_fun_rg.setText(f.getFun_rg());
+        txt_fun_telefone.setText(f.getFun_telefone());
+        txt_fun_datanascimento.setText(f.getFun_nascimento());
+        cbox_fun_funcao.setValue(f.getFun_funcao());
+        txt_fun_usuario.setText(f.getLog_usuario());
+        pw_fun_senha.setText(f.getLog_senha());
+        pw_fun_confirmarsenha.setText(f.getLog_senha());
+        txt_fun_logradouro.setText(f.getFun_logradouro());
+        txt_fun_bairro.setText(f.getFun_bairro());
+        txt_fun_numero.setText(f.getFun_numero());
+        txt_fun_cidade.setText(f.getFun_cidade());
+        cbox_fun_estado.setValue(f.getFun_estado());
+        txt_fun_email.setText(f.getFun_email());
+        bot_fun_deletar.setDisable(false);
         
     }
     //Funções FXML-->
