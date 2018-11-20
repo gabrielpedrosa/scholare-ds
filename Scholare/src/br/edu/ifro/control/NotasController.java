@@ -1,6 +1,7 @@
 package br.edu.ifro.control;
 
 import br.edu.ifro.model.Aluno;
+import br.edu.ifro.model.Disciplina;
 import br.edu.ifro.model.Turma;
 import br.edu.ifro.util.Essencial;
 import br.edu.ifro.util.Open;
@@ -68,13 +69,10 @@ public class NotasController implements Initializable, Essencial {
     @FXML
     private TableView<Aluno> tb_alunos;
     @FXML
-    private ComboBox<?> cbox_disciplina;
+    private ComboBox<Disciplina> cbox_disciplina;
     @FXML
     private Button bot_salvar;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         inicia();
@@ -151,20 +149,35 @@ public class NotasController implements Initializable, Essencial {
         ObservableList<Aluno> obaluno = FXCollections.observableArrayList(list_alunos);
         tb_alunos.setItems(obaluno);
         tb_alunos.setDisable(false);
+        
+        Turma t = (Turma)cbox_turma.getSelectionModel().getSelectedItem();
+        
+        Query querydis = em.createQuery("select d from Disciplina as d, Funcionario f, Matricula m where f.fun_id = m.funcionario and m.turma = :turma  ");
+        //querydis.setParameter("tur_fun", 1);
+        
+        List<Disciplina> list_disciplina = querydis.getResultList();
+        
+        ObservableList<Disciplina> obdis = FXCollections.observableArrayList(list_disciplina);
+        System.out.println(obdis);
+        cbox_disciplina.setItems(obdis);
     }
 
     @FXML
     private void selecionar_disciplina(ActionEvent event) {
-        /*EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
         EntityManager em = emf.createEntityManager();
         
-        Query query = em.createQuery("select d from Disciplina as d, Matricula m where a.alu_id = m.aluno and m.turma = :turma order by a.alu_nome");
-        query.setParameter("turma", cbox_turma.getSelectionModel().getSelectedItem());
-        List<Aluno> list_alunos = query.getResultList();
+        Turma t = (Turma)cbox_turma.getSelectionModel().getSelectedItem();
         
-        ObservableList<Aluno> obaluno = FXCollections.observableArrayList(list_alunos);
-        tb_alunos.setItems(obaluno);
-        tb_alunos.setDisable(false);*/
+        Query query = em.createQuery("select d from disciplina d");
+        //query.setParameter("tur_id", t.getTur_id());
+        
+        List<Disciplina> list_disciplina = query.getResultList();
+        
+        ObservableList<Disciplina> obdis = FXCollections.observableArrayList(list_disciplina);
+        System.out.println(obdis);
+        cbox_disciplina.setItems(obdis);
+        tb_alunos.setDisable(false);
     }
 
     @FXML
@@ -186,6 +199,8 @@ public class NotasController implements Initializable, Essencial {
         
         ObservableList<Turma> obturma = FXCollections.observableArrayList(list_turma);
         cbox_turma.setItems(obturma);
+        
+        
     }
     
 }
