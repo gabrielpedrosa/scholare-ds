@@ -10,16 +10,62 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.effect.Blend?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.181" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifro.control.Editar_FuncionarioController">
-   <center>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.191" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifro.control.Editar_FuncionarioController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+         <menus>
+            <Menu mnemonicParsing="false" text="Cadastros">
+               <items>
+                  <MenuItem fx:id="aluno" mnemonicParsing="false" onAction="#aluno" text="Aluno" />
+                  <MenuItem fx:id="funcionario" mnemonicParsing="false" onAction="#funcionario" text="Funcionario" />
+                  <MenuItem fx:id="turma" mnemonicParsing="false" onAction="#turma" text="Turma" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Listar">
+               <items>
+                  <MenuItem fx:id="listar_alunos" mnemonicParsing="false" onAction="#listar_alunos" text="Listar Alunos" />
+                  <MenuItem fx:id="listar_funcionarios" mnemonicParsing="false" onAction="#listar_funcionarios" text="Listar Funcionários" />
+                  <MenuItem fx:id="listar_turmas" mnemonicParsing="false" onAction="#listar_turmas" text="Listar Turmas" />
+                  <MenuItem fx:id="lsitar_matriculas" mnemonicParsing="false" onAction="#lsitar_matriculas" text="Listar Matriculas" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Exibir">
+               <items>
+                  <MenuItem fx:id="alunos" mnemonicParsing="false" onAction="#alunos" text="Alunos" />
+                  <MenuItem fx:id="funcionarios" mnemonicParsing="false" onAction="#funcionarios" text="Professores" />
+                  <MenuItem fx:id="turmas" mnemonicParsing="false" onAction="#turmas" text="Turmas" />
+                  <MenuItem fx:id="matriculas" mnemonicParsing="false" text="Matriculas" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Relatórios">
+               <items>
+                  <MenuItem fx:id="relatorio_diario" mnemonicParsing="false" onAction="#relatorio_diario" text="Relatório Diário" />
+                  <MenuItem fx:id="ata_de_resultados" mnemonicParsing="false" onAction="#ata_de_resultados" text="Ata de Resultados" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Ajuda">
+               <items>
+                  <MenuItem fx:id="sobre" mnemonicParsing="false" onAction="#sobre" text="Sobre" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+   </top>
+   <left>
       <Pane prefHeight="600.0" prefWidth="800.0" styleClass="cadastro-fundo" stylesheets="@../style/style.css" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="window_nome" layoutX="15.0" text="Exibir Funcionário" textFill="#d3d3d3" textOverrun="CLIP">
@@ -30,7 +76,7 @@
                   <DropShadow />
                </effect>
             </Label>
-            <Separator layoutX="15.0" layoutY="130.0" prefHeight="1.0" prefWidth="770.0" />
+            <Separator layoutX="15.0" layoutY="113.0" prefHeight="1.0" prefWidth="770.0" />
             <Group layoutX="40.0" layoutY="470.0">
                <children>
                   <Button fx:id="bot_fun_salvar" alignment="BOTTOM_CENTER" disable="true" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#salvar_editar_funcionario" prefHeight="80.0" prefWidth="120.0" styleClass="but-salvar" stylesheets="@../style/style.css" text="Salvar">
@@ -79,7 +125,7 @@
                   </Button>
                </children>
             </Group>
-            <Label layoutX="30.0" layoutY="65.0" text="Selecionar Funcionário:" textFill="WHITE">
+            <Label layoutX="30.0" layoutY="50.0" text="Selecionar Funcionário:" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
@@ -87,129 +133,6 @@
                   <DropShadow />
                </effect>
             </Label>
-            <Label layoutX="30.0" layoutY="210.0" text="CPF: *" textFill="#f5f5f5">
-               <font>
-                  <Font name="Arial Bold" size="18.0" />
-               </font>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Label>
-            <TextField fx:id="txt_fun_cpf" disable="true" layoutX="30.0" layoutY="235.0" prefHeight="30.0" prefWidth="180.0">
-               <font>
-                  <Font name="Arial" size="18.0" />
-               </font>
-            </TextField>
-            <Label layoutX="550.0" layoutY="145.0" text="Sexo: *" textFill="WHITE">
-               <font>
-                  <Font name="Arial Bold" size="18.0" />
-               </font>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Label>
-            <RadioButton fx:id="rad_fun_feminino" disable="true" layoutX="550.0" layoutY="170.0" mnemonicParsing="false" text="Feminino" textFill="WHITE">
-               <font>
-                  <Font name="Arial" size="16.0" />
-               </font>
-               <effect>
-                  <Blend />
-               </effect>
-               <toggleGroup>
-                  <ToggleGroup fx:id="tg_fun_sexo" />
-               </toggleGroup>
-            </RadioButton>
-            <RadioButton fx:id="rad_fun_masculino" disable="true" layoutX="660.0" layoutY="170.0" mnemonicParsing="false" text="Masculino" textFill="WHITE" toggleGroup="$tg_fun_sexo">
-               <font>
-                  <Font name="Arial" size="16.0" />
-               </font>
-               <effect>
-                  <Blend />
-               </effect>
-            </RadioButton>
-            <Label layoutX="230.0" layoutY="210.0" text="RG: *" textFill="WHITE">
-               <font>
-                  <Font name="Arial Bold" size="18.0" />
-               </font>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Label>
-            <TextField fx:id="txt_fun_rg" disable="true" layoutX="230.0" layoutY="235.0" prefHeight="30.0" prefWidth="160.0">
-               <font>
-                  <Font name="Arial" size="18.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="txt_fun_telefone" disable="true" layoutX="410.0" layoutY="235.0" prefHeight="30.0" prefWidth="160.0">
-               <font>
-                  <Font name="Arial" size="18.0" />
-               </font>
-            </TextField>
-            <Label layoutX="410.0" layoutY="210.0" text="Telefone:" textFill="WHITE">
-               <font>
-                  <Font name="Arial Bold" size="18.0" />
-               </font>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Label>
-            <TextField fx:id="txt_fun_datanascimento" disable="true" layoutX="590.0" layoutY="235.0" prefHeight="30.0" prefWidth="190.0">
-               <font>
-                  <Font name="Arial" size="18.0" />
-               </font>
-            </TextField>
-            <Label layoutX="30.0" layoutY="330.0" text="Logradouro:" textFill="WHITE">
-               <font>
-                  <Font name="Arial Bold" size="18.0" />
-               </font>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Label>
-            <TextField fx:id="txt_fun_logradouro" disable="true" layoutX="30.0" layoutY="355.0" prefHeight="30.0" prefWidth="360.0">
-               <font>
-                  <Font name="Arial" size="18.0" />
-               </font>
-            </TextField>
-            <Label layoutX="410.0" layoutY="330.0" text="Bairro: *" textFill="WHITE">
-               <font>
-                  <Font name="Arial Bold" size="18.0" />
-               </font>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Label>
-            <TextField fx:id="txt_fun_bairro" disable="true" layoutX="410.0" layoutY="355.0" prefHeight="30.0" prefWidth="230.0">
-               <font>
-                  <Font name="Arial" size="18.0" />
-               </font>
-            </TextField>
-            <Label layoutX="660.0" layoutY="330.0" text="Número *" textFill="WHITE">
-               <font>
-                  <Font name="Arial Bold" size="18.0" />
-               </font>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Label>
-            <TextField fx:id="txt_fun_numero" disable="true" layoutX="660.0" layoutY="355.0" prefHeight="30.0" prefWidth="120.0">
-               <font>
-                  <Font name="Arial" size="18.0" />
-               </font>
-            </TextField>
-            <Label layoutX="590.0" layoutY="210.0" text="Data Nascimento: *" textFill="WHITE">
-               <font>
-                  <Font name="Arial Bold" size="18.0" />
-               </font>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Label>
-            <TextField fx:id="txt_fun_email" disable="true" layoutX="410.0" layoutY="420.0" prefHeight="30.0" prefWidth="370.0">
-               <font>
-                  <Font name="Arial" size="18.0" />
-               </font>
-            </TextField>
             <TextField fx:id="txt_fun_datacadastro" alignment="CENTER" editable="false" layoutX="630.0" layoutY="20.0" prefHeight="30.0" prefWidth="150.0">
                <font>
                   <Font name="Arial Bold" size="18.0" />
@@ -223,7 +146,8 @@
                   <DropShadow />
                </effect>
             </Label>
-            <Label layoutX="410.0" layoutY="395.0" text="Email: *" textFill="WHITE">
+            <ComboBox fx:id="cbox_fun_nome" layoutX="30.0" layoutY="75.0" onAction="#selecionar" prefHeight="30.0" prefWidth="460.0" />
+            <Label layoutX="30.0" layoutY="115.0" text="Nome Funcionário: *" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
@@ -231,20 +155,12 @@
                   <DropShadow />
                </effect>
             </Label>
-            <Label layoutX="30.0" layoutY="395.0" text="Cidade: *" textFill="WHITE">
-               <font>
-                  <Font name="Arial Bold" size="18.0" />
-               </font>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Label>
-            <TextField fx:id="txt_fun_cidade" disable="true" layoutX="30.0" layoutY="420.0" prefHeight="30.0" prefWidth="200.0">
+            <TextField fx:id="txt_fun_nome" layoutX="30.0" layoutY="140.0" prefHeight="30.0" prefWidth="500.0">
                <font>
                   <Font name="Arial" size="18.0" />
                </font>
             </TextField>
-            <Label layoutX="248.0" layoutY="395.0" text="Estado: *" textFill="WHITE">
+            <Label layoutX="550.0" layoutY="115.0" text="Sexo: *" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
@@ -252,9 +168,29 @@
                   <DropShadow />
                </effect>
             </Label>
-            <ComboBox fx:id="cbox_fun_estado" disable="true" layoutX="248.0" layoutY="420.0" prefHeight="35.0" prefWidth="140.0" />
-            <ComboBox fx:id="cbox_fun_nome" layoutX="30.0" layoutY="90.0" onAction="#selecionar" prefHeight="30.0" prefWidth="460.0" />
-            <Label layoutX="30.0" layoutY="145.0" text="Nome Funcionário: *" textFill="#f5f5f5">
+            <RadioButton fx:id="rad_fun_feminino" layoutX="550.0" layoutY="140.0" mnemonicParsing="false" selected="true" text="Feminino" textFill="WHITE">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+               <effect>
+                  <Blend />
+               </effect>
+               <toggleGroup>
+                  <ToggleGroup fx:id="tg_fun_sexo" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="rad_fun_masculino" layoutX="660.0" layoutY="140.0" mnemonicParsing="false" text="Masculino" textFill="WHITE">
+               <toggleGroup>
+                  <ToggleGroup fx:id="tg_fun_sexo" />
+               </toggleGroup>
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+               <effect>
+                  <Blend />
+               </effect>
+            </RadioButton>
+            <Label layoutX="30.0" layoutY="175.0" text="CPF: *" textFill="#f5f5f5">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
@@ -262,12 +198,12 @@
                   <DropShadow />
                </effect>
             </Label>
-            <TextField fx:id="txt_fun_nome" disable="true" layoutX="30.0" layoutY="170.0" prefHeight="30.0" prefWidth="500.0">
+            <TextField fx:id="txt_fun_cpf" layoutX="30.0" layoutY="200.0" prefHeight="30.0" prefWidth="180.0">
                <font>
                   <Font name="Arial" size="18.0" />
                </font>
             </TextField>
-            <Label layoutX="30.0" layoutY="270.0" text="Função" textFill="WHITE">
+            <Label layoutX="230.0" layoutY="175.0" text="RG: *" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
@@ -275,21 +211,12 @@
                   <DropShadow />
                </effect>
             </Label>
-            <ComboBox fx:id="cbox_fun_funcao" disable="true" layoutX="30.0" layoutY="295.0" prefHeight="35.0" prefWidth="180.0" />
-            <Label layoutX="230.0" layoutY="270.0" text="Usuário:" textFill="WHITE">
-               <font>
-                  <Font name="Arial Bold" size="18.0" />
-               </font>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Label>
-            <TextField fx:id="txt_fun_usuario" disable="true" layoutX="230.0" layoutY="295.0" prefHeight="30.0" prefWidth="160.0">
+            <TextField fx:id="txt_fun_rg" layoutX="230.0" layoutY="200.0" prefHeight="30.0" prefWidth="160.0">
                <font>
                   <Font name="Arial" size="18.0" />
                </font>
             </TextField>
-            <Label layoutX="410.0" layoutY="270.0" text="Senha: *" textFill="WHITE">
+            <Label layoutX="410.0" layoutY="175.0" text="Telefone:" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
@@ -297,12 +224,12 @@
                   <DropShadow />
                </effect>
             </Label>
-            <PasswordField fx:id="pw_fun_senha" disable="true" layoutX="410.0" layoutY="295.0" prefHeight="30.0" prefWidth="175.0">
+            <TextField fx:id="txt_fun_telefone" layoutX="410.0" layoutY="200.0" prefHeight="30.0" prefWidth="160.0">
                <font>
                   <Font name="Arial" size="18.0" />
                </font>
-            </PasswordField>
-            <Label layoutX="610.0" layoutY="270.0" text="Confirmar Senha: *" textFill="WHITE">
+            </TextField>
+            <Label layoutX="590.0" layoutY="175.0" text="Data Nascimento: *" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="18.0" />
                </font>
@@ -310,51 +237,224 @@
                   <DropShadow />
                </effect>
             </Label>
-            <PasswordField fx:id="pw_fun_confirmarsenha" disable="true" layoutX="607.0" layoutY="295.0" prefHeight="30.0" prefWidth="175.0">
+            <TextField fx:id="txt_fun_datanascimento" layoutX="590.0" layoutY="200.0" prefHeight="30.0" prefWidth="190.0">
                <font>
                   <Font name="Arial" size="18.0" />
                </font>
-            </PasswordField>
+            </TextField>
+            <TabPane layoutX="30.0" layoutY="250.0" prefHeight="230.0" prefWidth="750.0" tabClosingPolicy="UNAVAILABLE">
+               <tabs>
+                  <Tab text="Logradouro">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Label layoutX="395.0" layoutY="80.0" text="Cidade: *" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                 </font>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                              </Label>
+                              <TextField fx:id="txt_fun_cidade" layoutX="395.0" layoutY="105.0" prefHeight="30.0" prefWidth="200.0">
+                                 <font>
+                                    <Font name="Arial" size="18.0" />
+                                 </font>
+                              </TextField>
+                              <Label layoutX="615.0" layoutY="80.0" text="Estado: *" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                 </font>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                              </Label>
+                              <ComboBox fx:id="cbox_fun_estado" layoutX="615.0" layoutY="105.0" prefHeight="35.0" prefWidth="120.0" />
+                              <Label layoutX="15.0" layoutY="7.0" text="Logradouro:" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                 </font>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                              </Label>
+                              <TextField fx:id="txt_fun_logradouro" layoutX="15.0" layoutY="32.0" prefHeight="30.0" prefWidth="360.0">
+                                 <font>
+                                    <Font name="Arial" size="18.0" />
+                                 </font>
+                              </TextField>
+                              <Label layoutX="395.0" layoutY="7.0" text="Bairro: *" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                 </font>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                              </Label>
+                              <TextField fx:id="txt_fun_bairro" layoutX="395.0" layoutY="32.0" prefHeight="30.0" prefWidth="230.0">
+                                 <font>
+                                    <Font name="Arial" size="18.0" />
+                                 </font>
+                              </TextField>
+                              <Label layoutX="645.0" layoutY="7.0" text="Número *" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                 </font>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                              </Label>
+                              <TextField fx:id="txt_fun_numero" layoutX="645.0" layoutY="32.0" prefHeight="30.0" prefWidth="90.0">
+                                 <font>
+                                    <Font name="Arial" size="18.0" />
+                                 </font>
+                              </TextField>
+                              <TextField fx:id="txt_fun_complemento" layoutX="15.0" layoutY="106.0" prefHeight="30.0" prefWidth="360.0">
+                                 <font>
+                                    <Font name="Arial" size="18.0" />
+                                 </font>
+                              </TextField>
+                              <Label layoutX="15.0" layoutY="80.0" text="Complemento:" textFill="WHITE">
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                                 <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Disciplinas">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="212.0" prefWidth="750.0">
+                           <children>
+                              <TableView fx:id="tb_fun_disciplina" disable="true" layoutX="380.0" layoutY="10.0" prefHeight="170.0" prefWidth="350.0">
+                                 <columns>
+                                    <TableColumn prefWidth="75.0" text="Código">
+                                       <cellValueFactory>
+                                          <PropertyValueFactory property="dis_id" />
+                                       </cellValueFactory>
+                                    </TableColumn>
+                                    <TableColumn prefWidth="200.0" text="Disciplina">
+                                       <cellValueFactory>
+                                          <PropertyValueFactory property="dis_nome" />
+                                       </cellValueFactory>
+                                    </TableColumn>
+                                 </columns>
+                              </TableView>
+                              <Label layoutX="15.0" layoutY="15.0" text="Função" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                 </font>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                              </Label>
+                              <ComboBox fx:id="cbox_fun_funcao" layoutX="15.0" layoutY="40.0" onAction="#verifica_funcao" prefHeight="35.0" prefWidth="330.0" />
+                              <ComboBox fx:id="cbox_fun_disciplina" disable="true" layoutX="15.0" layoutY="115.0" prefHeight="35.0" prefWidth="330.0" />
+                              <Label layoutX="15.0" layoutY="90.0" text="Disciplina" textFill="WHITE">
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                                 <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="bot_fun_disciplina" layoutX="220.0" layoutY="160.0" mnemonicParsing="false" onAction="#fun_inserir" styleClass="but" stylesheets="@../style/style.css" text="Inserir Disciplina">
+                                 <font>
+                                    <Font name="Arial" size="14.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Login">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <Label layoutX="15.0" layoutY="10.0" text="Usuário:*" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                 </font>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                              </Label>
+                              <TextField fx:id="txt_fun_usuario" layoutX="15.0" layoutY="35.0" prefHeight="30.0" prefWidth="250.0">
+                                 <font>
+                                    <Font name="Arial" size="18.0" />
+                                 </font>
+                              </TextField>
+                              <Label layoutX="15.0" layoutY="75.0" text="Senha: *" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                 </font>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                              </Label>
+                              <PasswordField fx:id="pw_fun_senha" layoutX="15.0" layoutY="100.0" prefHeight="30.0" prefWidth="250.0">
+                                 <font>
+                                    <Font name="Arial" size="18.0" />
+                                 </font>
+                              </PasswordField>
+                              <Label layoutX="15.0" layoutY="140.0" text="Confirmar Senha: *" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                 </font>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                              </Label>
+                              <PasswordField fx:id="pw_fun_confirmarsenha" layoutX="15.0" layoutY="165.0" prefHeight="30.0" prefWidth="250.0">
+                                 <font>
+                                    <Font name="Arial" size="18.0" />
+                                 </font>
+                              </PasswordField>
+                              <Label layoutX="300.0" layoutY="10.0" text="E-mail: *" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                 </font>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                              </Label>
+                              <TextField fx:id="txt_fun_email" layoutX="300.0" layoutY="35.0" prefHeight="30.0" prefWidth="400.0">
+                                 <font>
+                                    <Font name="Arial" size="18.0" />
+                                 </font>
+                              </TextField>
+                              <Label layoutX="300.0" layoutY="75.0" text="Pergunta de Segurança: *" textFill="WHITE">
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                                 <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="300.0" layoutY="140.0" text="Resposta: *" textFill="WHITE">
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
+                                 <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="txt_fun_resposta" layoutX="300.0" layoutY="165.0" prefHeight="30.0" prefWidth="400.0">
+                                 <font>
+                                    <Font name="Arial" size="18.0" />
+                                 </font>
+                              </TextField>
+                              <ComboBox fx:id="cbox_fun_pergunta" layoutX="300.0" layoutY="100.0" prefHeight="35.0" prefWidth="400.0" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </TabPane>
          </children></Pane>
-   </center>
-   <top>
-      <MenuBar BorderPane.alignment="CENTER">
-         <menus>
-            <Menu mnemonicParsing="false" text="Cadastros">
-               <items>
-                  <MenuItem fx:id="aluno" mnemonicParsing="false" onAction="#aluno" text="Aluno" />
-                  <MenuItem fx:id="funcionario" mnemonicParsing="false" onAction="#funcionario" text="Funcionario" />
-                  <MenuItem fx:id="turma" mnemonicParsing="false" onAction="#turma" text="Turma" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Listar">
-               <items>
-                  <MenuItem fx:id="listar_alunos" mnemonicParsing="false" onAction="#listar_alunos" text="Listar Alunos" />
-                  <MenuItem fx:id="listar_funcionarios" mnemonicParsing="false" onAction="#listar_funcionarios" text="Listar Funcionários" />
-                  <MenuItem fx:id="listar_turmas" mnemonicParsing="false" onAction="#listar_turmas" text="Listar Turmas" />
-                  <MenuItem fx:id="lsitar_matriculas" mnemonicParsing="false" onAction="#lsitar_matriculas" text="Listar Matriculas" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Exibir">
-               <items>
-                  <MenuItem fx:id="alunos" mnemonicParsing="false" onAction="#alunos" text="Alunos" />
-                  <MenuItem fx:id="funcionarios" mnemonicParsing="false" onAction="#funcionarios" text="Professores" />
-                  <MenuItem fx:id="turmas" mnemonicParsing="false" onAction="#turmas" text="Turmas" />
-                  <MenuItem fx:id="matriculas" mnemonicParsing="false" text="Matriculas" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Relatórios">
-               <items>
-                  <MenuItem fx:id="relatorio_diario" mnemonicParsing="false" onAction="#relatorio_diario" text="Relatório Diário" />
-                  <MenuItem fx:id="ata_de_resultados" mnemonicParsing="false" onAction="#ata_de_resultados" text="Ata de Resultados" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Ajuda">
-               <items>
-                  <MenuItem fx:id="sobre" mnemonicParsing="false" onAction="#sobre" text="Sobre" />
-               </items>
-            </Menu>
-         </menus>
-      </MenuBar>
-   </top>
+   </left>
 </BorderPane>

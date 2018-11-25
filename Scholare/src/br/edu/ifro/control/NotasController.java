@@ -2,6 +2,8 @@ package br.edu.ifro.control;
 
 import br.edu.ifro.model.Aluno;
 import br.edu.ifro.model.Disciplina;
+import br.edu.ifro.model.Matricula;
+import br.edu.ifro.model.Notas;
 import br.edu.ifro.model.Turma;
 import br.edu.ifro.util.Essencial;
 import br.edu.ifro.util.Open;
@@ -25,11 +27,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-/**
- * FXML Controller class
- *
- * @author Gabriel Pedrosa
- */
+//@author Gabriel Pedrosa
 public class NotasController implements Initializable, Essencial {
 
     @FXML
@@ -152,7 +150,7 @@ public class NotasController implements Initializable, Essencial {
         
         Turma t = (Turma)cbox_turma.getSelectionModel().getSelectedItem();
         
-        Query querydis = em.createQuery("select d from Disciplina as d, Funcionario f, Matricula m where f.fun_id = m.funcionario and m.turma = :turma  ");
+        Query querydis = em.createQuery("select d from Disciplina as d ");
         //querydis.setParameter("tur_fun", 1);
         
         List<Disciplina> list_disciplina = querydis.getResultList();
@@ -169,14 +167,11 @@ public class NotasController implements Initializable, Essencial {
         
         Turma t = (Turma)cbox_turma.getSelectionModel().getSelectedItem();
         
-        Query query = em.createQuery("select d from disciplina d");
-        //query.setParameter("tur_id", t.getTur_id());
+        Query query = em.createQuery("select n from Notas as n where n.disciplina = :disc ");
+        query.setParameter("disc", cbox_disciplina.getSelectionModel().getSelectedItem());
         
-        List<Disciplina> list_disciplina = query.getResultList();
-        
-        ObservableList<Disciplina> obdis = FXCollections.observableArrayList(list_disciplina);
-        System.out.println(obdis);
-        cbox_disciplina.setItems(obdis);
+        System.out.println(query.getResultList());
+
         tb_alunos.setDisable(false);
     }
 

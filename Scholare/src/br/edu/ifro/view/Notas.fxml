@@ -67,22 +67,27 @@
                 </TableColumn>
                   <TableColumn maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Nota 01">
                   <cellValueFactory>
-                        <PropertyValueFactory property="alu_sexo" />
+                        <PropertyValueFactory property="not_nota1" />
                   </cellValueFactory>
                 </TableColumn>
                   <TableColumn maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Nota 02">
                      <cellValueFactory>
-                        <PropertyValueFactory property="alu_sexo" />
+                        <PropertyValueFactory property="not_nota2" />
                      </cellValueFactory>
                   </TableColumn>
                   <TableColumn maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Nota 03">
                      <cellValueFactory>
-                        <PropertyValueFactory property="alu_sexo" />
+                        <PropertyValueFactory property="not_nota3" />
                      </cellValueFactory>
                   </TableColumn>
                   <TableColumn maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Nota 04">
                      <cellValueFactory>
-                        <PropertyValueFactory property="alu_sexo" />
+                        <PropertyValueFactory property="not_nota4" />
+                     </cellValueFactory>
+                  </TableColumn>
+                  <TableColumn maxWidth="100.0" minWidth="100.0" prefWidth="100.0" text="Disciplina">
+                     <cellValueFactory>
+                        <PropertyValueFactory property="disciplina" />
                      </cellValueFactory>
                   </TableColumn>
               </columns>

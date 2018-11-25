@@ -317,7 +317,7 @@ public class Editar_AlunoController implements Initializable {
         txt_alu_bairro.setText(a.getAlu_bairro());
         txt_alu_numero.setText(a.getAlu_numero());
         txt_alu_cidade.setText(a.getAlu_cidade());
-        cbox_alu_estado.setValue(a.getAlu_estado());
+        cbox_alu_estado.getSelectionModel().select(a.getAlu_estado());
         txt_alu_deficiencia.setText(a.getAlu_deficiencia());
         bot_alu_deletar.setDisable(false);
     }

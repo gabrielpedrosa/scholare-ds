@@ -121,6 +121,25 @@ public class Editar_TurmaController implements Initializable {
         
         ObservableList<Turma> obturma = FXCollections.observableArrayList(list_turma);
         cbox_tur_nome.setItems(obturma);
+        
+        ObservableList ob_anos = FXCollections.observableArrayList("2018");
+        cbox_tur_ano.setItems(ob_anos);
+        
+        ObservableList ob_tipo = FXCollections.observableArrayList("Educação Infantil", "Ensino Fundamental I", "EJA", "HFB");
+        cbox_tur_tipo.setItems(ob_tipo);
+        
+        ObservableList ob_serie = FXCollections.observableArrayList("1", "2", "3", "4");
+        cbox_tur_serie_ano.setItems(ob_serie);
+        
+        ObservableList ob_turno = FXCollections.observableArrayList("Matutino","Verpertino");
+        cbox_tur_turno.setItems(ob_turno);
+                
+        Query queryfun = em.createQuery("select f from Funcionario as f where f.fun_funcao=:tipo");
+        queryfun.setParameter("tipo", "Professor");
+        List<Funcionario> list_professor = queryfun.getResultList();
+        
+        ObservableList<Funcionario> ob_professor = FXCollections.observableArrayList(list_professor);
+        cbox_tur_professor.setItems(ob_professor);
     
     }
     
@@ -230,9 +249,11 @@ public class Editar_TurmaController implements Initializable {
     }
     
     public void editar(Turma t){
-        cbox_tur_ano.setValue(t.getTur_ano());
-        cbox_tur_serie_ano.setValue(t.getTur_serie_ano());
-        cbox_tur_tipo.setValue(t.getTur_tipo());
+        cbox_tur_ano.getSelectionModel().select(t.getTur_ano());
+        cbox_tur_ano.getSelectionModel().select(t.getTur_ano());
+        cbox_tur_serie_ano.getSelectionModel().select(t.getTur_serie_ano());
+        cbox_tur_tipo.getSelectionModel().select(t.getTur_tipo());
+        cbox_tur_turno.getSelectionModel().select(t.getTur_turno());
         switch (t.getTur_classe()) {
             case "A":
                 rad_tur_a.setSelected(true);

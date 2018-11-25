@@ -1,6 +1,5 @@
 package br.edu.ifro.util;
 
-//@author Gabriel Pedrosa
 import br.edu.ifro.control.Editar_AlunoController;
 import br.edu.ifro.control.Editar_FuncionarioController;
 import br.edu.ifro.control.Editar_MatriculaController;
@@ -15,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+//@author Gabriel Pedrosa
 public class Open {
     
     public static Scene abrirMenu(Class cls){

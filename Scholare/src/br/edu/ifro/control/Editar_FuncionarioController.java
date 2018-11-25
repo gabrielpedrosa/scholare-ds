@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
@@ -105,6 +106,18 @@ public class Editar_FuncionarioController implements Initializable {
     private MenuItem relatorio_diario;
     @FXML
     private MenuItem ata_de_resultados;
+    @FXML
+    private TextField txt_fun_complemento;
+    @FXML
+    private TableView<?> tb_fun_disciplina;
+    @FXML
+    private ComboBox<?> cbox_fun_disciplina;
+    @FXML
+    private Button bot_fun_disciplina;
+    @FXML
+    private TextField txt_fun_resposta;
+    @FXML
+    private ComboBox<?> cbox_fun_pergunta;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -289,8 +302,6 @@ public class Editar_FuncionarioController implements Initializable {
     }
     
     public void editar(Funcionario f){
-        cbox_fun_nome.getSelectionModel().select(0);
-        cbox_fun_nome.getSelectionModel().select(f);
         
         txt_fun_nome.setText(f.getFun_nome());
         if(f.getFun_sexo().equals("Feminino")){
@@ -303,7 +314,7 @@ public class Editar_FuncionarioController implements Initializable {
         txt_fun_rg.setText(f.getFun_rg());
         txt_fun_telefone.setText(f.getFun_telefone());
         txt_fun_datanascimento.setText(f.getFun_nascimento());
-        cbox_fun_funcao.setValue(f.getFun_funcao());
+        cbox_fun_funcao.getSelectionModel().select(f.getFun_funcao());
         txt_fun_usuario.setText(f.getLog_usuario());
         pw_fun_senha.setText(f.getLog_senha());
         pw_fun_confirmarsenha.setText(f.getLog_senha());
@@ -311,8 +322,9 @@ public class Editar_FuncionarioController implements Initializable {
         txt_fun_bairro.setText(f.getFun_bairro());
         txt_fun_numero.setText(f.getFun_numero());
         txt_fun_cidade.setText(f.getFun_cidade());
-        cbox_fun_estado.setValue(f.getFun_estado());
+        cbox_fun_estado.getSelectionModel().select(f.getFun_estado());
         txt_fun_email.setText(f.getFun_email());
+        
         bot_fun_deletar.setDisable(false);
         
     }
@@ -379,4 +391,12 @@ public class Editar_FuncionarioController implements Initializable {
     private void ata_de_resultados(ActionEvent event) {
     }
     //Funções Menu-->
+
+    @FXML
+    private void verifica_funcao(ActionEvent event) {
+    }
+
+    @FXML
+    private void fun_inserir(ActionEvent event) {
+    }
 }
