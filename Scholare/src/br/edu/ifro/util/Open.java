@@ -1,7 +1,6 @@
 package br.edu.ifro.util;
 
-// @author Gabriel
-
+//@author Gabriel Pedrosa
 import br.edu.ifro.control.Editar_AlunoController;
 import br.edu.ifro.control.Editar_FuncionarioController;
 import br.edu.ifro.control.Editar_MatriculaController;
@@ -198,7 +197,7 @@ public class Open {
         Scene cena = null ;
         try{
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Editar_Aluno.fxml"));
+            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Editar_Turma.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             cena = scene;
             Editar_TurmaController edc = fxmlLoader.getController();

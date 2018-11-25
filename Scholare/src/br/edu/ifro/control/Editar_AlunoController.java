@@ -294,9 +294,9 @@ public class Editar_AlunoController implements Initializable {
             }
             else{
                 Aluno a = (Aluno) query.getSingleResult();
+                System.out.println(query.getSingleResult());
                 editar(a);
             }
-        
     }
     
     public void editar(Aluno a){

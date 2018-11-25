@@ -103,7 +103,7 @@ public class Cadastrar_TurmaController implements Initializable, Essencial {
     
     @Override
     public void add_cbox(){
-        ObservableList ob_anos = FXCollections.observableArrayList("2015", "2016", "2017", "2018");
+        ObservableList ob_anos = FXCollections.observableArrayList("2018");
         cbox_tur_ano.setItems(ob_anos);
         
         ObservableList ob_tipo = FXCollections.observableArrayList("Educação Infantil", "Ensino Fundamental I", "EJA", "HFB");
@@ -129,7 +129,7 @@ public class Cadastrar_TurmaController implements Initializable, Essencial {
     public boolean verifica_vazio(){
         boolean preenchido;
         boolean cbox_preenchido = false;
-        ComboBox[] campo_cbox = {cbox_tur_ano, cbox_tur_tipo, cbox_tur_serie_ano};
+        ComboBox[] campo_cbox = {cbox_tur_ano, cbox_tur_tipo, cbox_tur_serie_ano, cbox_tur_turno};
         
         for (ComboBox campo_cbox1 : campo_cbox) {
             if (campo_cbox1.getSelectionModel().getSelectedIndex() == -1) {
@@ -207,14 +207,17 @@ public class Cadastrar_TurmaController implements Initializable, Essencial {
     
     @FXML
     private void inserir_professor(ActionEvent event) {
-        String cbox_professor = cbox_tur_professor.getSelectionModel().getSelectedItem().toString();
+        Funcionario f = cbox_tur_professor.getSelectionModel().getSelectedItem();
+        if(f == null){
+            System.out.println("Tabela Vazio");
+        }else{
         ObservableList<Funcionario> ob_lastprofessor = FXCollections.observableArrayList(tb_tur_professores.getItems());
         
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
         EntityManager em = emf.createEntityManager();
         
         Query query = em.createQuery("select f from Funcionario as f where f.fun_nome = :fun_nome order by f.fun_nome");
-        query.setParameter("fun_nome", cbox_professor);
+        query.setParameter("fun_nome", cbox_tur_professor.getSelectionModel().getSelectedItem().toString());
         
         List<Funcionario> list_professor = query.getResultList();
         list_professor.addAll(ob_lastprofessor);
@@ -227,6 +230,7 @@ public class Cadastrar_TurmaController implements Initializable, Essencial {
         ObservableList a = cbox_tur_professor.getItems();
         a.remove(p);
         cbox_tur_professor.setItems(a);
+        }
     }
     //Funções FXML-->
 
@@ -295,11 +299,15 @@ public class Cadastrar_TurmaController implements Initializable, Essencial {
     @FXML
     private void remover_professor(ActionEvent event) {
         Funcionario f = tb_tur_professores.getSelectionModel().getSelectedItem();
+        if(f == null){
+            System.out.println("Tabela Vazio");
+        }else{
         ObservableList a = tb_tur_professores.getItems();
         ObservableList b = cbox_tur_professor.getItems();
         a.remove(f);
         b.add(f);
         tb_tur_professores.setItems(a);
         cbox_tur_professor.setItems(b);
+        }
     }
 }

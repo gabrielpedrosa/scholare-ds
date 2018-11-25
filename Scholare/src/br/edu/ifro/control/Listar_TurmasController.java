@@ -23,11 +23,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-/**
- * FXML Controller class
- *
- * @author Gabriel Pedrosa
- */
+//@author Gabriel Pedrosa
 public class Listar_TurmasController implements Initializable, Essencial{
 
     @FXML
@@ -170,7 +166,7 @@ public class Listar_TurmasController implements Initializable, Essencial{
 
             Turma tur = (Turma) tb_turmas.getSelectionModel().getSelectedItem();
 
-            Query query = em.createQuery("select t from Turma as t where t.tur_id = :tur_id");
+            Query query = em.createQuery("select t from Turma as t where t.tur_id = :tur_id order by t.tur_nome");
             query.setParameter("tur_id", tur.getTur_id());
 
             Turma t = (Turma) query.getSingleResult();

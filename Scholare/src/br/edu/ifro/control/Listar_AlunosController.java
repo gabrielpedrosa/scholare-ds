@@ -18,10 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -90,6 +87,13 @@ public class Listar_AlunosController implements Initializable, Essencial {
         
         ObservableList<Turma> obturma = FXCollections.observableArrayList(list_turma);
         cbox_turma.setItems(obturma);
+        
+        Query queryaluno = em.createQuery("select a from Aluno as a order by a.alu_nome");
+        List<Aluno> list_alunos = queryaluno.getResultList();
+        
+        ObservableList<Aluno> obaluno = FXCollections.observableArrayList(list_alunos);
+        tb_alunos.setItems(obaluno);
+        tb_alunos.setDisable(false);
     }
 
     @FXML

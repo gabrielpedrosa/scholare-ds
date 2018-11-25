@@ -1,7 +1,6 @@
 package br.edu.ifro.control;
 
 import br.edu.ifro.model.Matricula;
-import br.edu.ifro.model.Turma;
 import br.edu.ifro.util.Essencial;
 import br.edu.ifro.util.Open;
 import java.net.URL;
@@ -14,7 +13,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableView;
@@ -24,11 +22,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-/**
- * FXML Controller class
- *
- * @author Gabriel Pedrosa
- */
+//@author Gabriel Pedrosa
 public class Listar_MatriculasController implements Initializable, Essencial {
 
     @FXML
@@ -70,9 +64,6 @@ public class Listar_MatriculasController implements Initializable, Essencial {
     @FXML
     private MenuItem listar_matriculas;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         inicia();
