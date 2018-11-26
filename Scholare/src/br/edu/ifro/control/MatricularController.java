@@ -167,12 +167,17 @@ public class MatricularController implements Initializable {
             else{
                 m.setTurma(cbox_mat_turma.getSelectionModel().getSelectedItem());
             }
+            em.getTransaction().begin();
+            em.persist(m);
+            em.getTransaction().commit();
             
             Turma tur = (Turma) cbox_mat_turma.getSelectionModel().getSelectedItem();
             
             Query queryfun = em.createQuery("select d from Disciplina as d ");
             
-            for(int i = 0; i < queryfun.getResultList().size(); i++){
+            List[] notas = {queryfun.getResultList()};
+            
+            for(int i = 0; i <= notas.length; i++){
                 Notas n = new Notas();
                 n.setMatriculaaluno(m);
                 n.setNot_nota1(0);
@@ -186,9 +191,7 @@ public class MatricularController implements Initializable {
             }
             limpar_matricula(event);
 
-            em.getTransaction().begin();
-            em.persist(m);
-            em.getTransaction().commit();
+            
             em.close();
             emf.close();
             

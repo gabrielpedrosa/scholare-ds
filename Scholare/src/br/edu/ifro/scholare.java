@@ -19,7 +19,6 @@ public class scholare extends Application {
         
         stage.setScene(scene);
         stage.setResizable(false);
-        
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setTitle("Scholare");
         stage.show();
