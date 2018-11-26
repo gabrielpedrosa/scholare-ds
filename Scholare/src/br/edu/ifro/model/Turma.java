@@ -23,7 +23,7 @@ public class Turma implements Serializable {
     private String tur_nome;
     @Column
     @ManyToMany
-    private List<Funcionario> professor;
+    private List<Funcionario> funcionario;
 
     @Override
     public String toString() {
@@ -70,12 +70,12 @@ public class Turma implements Serializable {
         this.tur_tipo = tur_tipo;
     }
 
-    public List<Funcionario> getProfessor() {
-        return professor;
+    public List<Funcionario> getFuncionario() {
+        return funcionario;
     }
 
-    public void setProfessor(List<Funcionario> professor) {
-        this.professor = professor;
+    public void setFuncionario(List<Funcionario> funcionario) {
+        this.funcionario = funcionario;
     }
 
     public String getTur_classe() {

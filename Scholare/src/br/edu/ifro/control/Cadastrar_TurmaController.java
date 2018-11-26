@@ -168,7 +168,7 @@ public class Cadastrar_TurmaController implements Initializable, Essencial {
             
             ObservableList<Funcionario> ob_professores = FXCollections.observableArrayList(tb_tur_professores.getItems());
             List<Funcionario> lista_professor = ob_professores.subList(0, ob_professores.size());
-            t.setProfessor(lista_professor);
+            t.setFuncionario(lista_professor);
             
             limpar_turma(event);
             

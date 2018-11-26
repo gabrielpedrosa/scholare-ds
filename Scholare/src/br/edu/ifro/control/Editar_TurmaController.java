@@ -273,7 +273,7 @@ public class Editar_TurmaController implements Initializable {
                 rad_tur_f.setSelected(true);
                 break;
         }
-        ObservableList<Funcionario> obfuncionario = FXCollections.observableArrayList(t.getProfessor());
+        ObservableList<Funcionario> obfuncionario = FXCollections.observableArrayList(t.getFuncionario());
         tb_tur_professores.setItems(obfuncionario);
         
     }

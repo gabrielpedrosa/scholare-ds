@@ -1,8 +1,10 @@
 package br.edu.ifro.control;
 
 import br.edu.ifro.model.Aluno;
+import br.edu.ifro.model.Disciplina;
 import br.edu.ifro.model.Funcionario;
 import br.edu.ifro.model.Matricula;
+import br.edu.ifro.model.Notas;
 import br.edu.ifro.model.Turma;
 import br.edu.ifro.util.Open;
 import br.eti.diegofonseca.MaskFieldUtil;
@@ -166,6 +168,22 @@ public class MatricularController implements Initializable {
                 m.setTurma(cbox_mat_turma.getSelectionModel().getSelectedItem());
             }
             
+            Turma tur = (Turma) cbox_mat_turma.getSelectionModel().getSelectedItem();
+            
+            Query queryfun = em.createQuery("select d from Disciplina as d ");
+            
+            for(int i = 0; i < queryfun.getResultList().size(); i++){
+                Notas n = new Notas();
+                n.setMatriculaaluno(m);
+                n.setNot_nota1(0);
+                n.setNot_nota2(0);
+                n.setNot_nota3(0);
+                n.setNot_nota4(0);
+                n.setDisciplina((Disciplina) queryfun.getResultList().get(i));
+                em.getTransaction().begin();
+                em.persist(n);
+                em.getTransaction().commit();
+            }
             limpar_matricula(event);
 
             em.getTransaction().begin();
@@ -209,6 +227,7 @@ public class MatricularController implements Initializable {
     private void nao(ActionEvent event) {
         cbox_mat_turma.setDisable(false);
     }
+    
     //Funções FXML-->
 
     //Funções Menu<--
