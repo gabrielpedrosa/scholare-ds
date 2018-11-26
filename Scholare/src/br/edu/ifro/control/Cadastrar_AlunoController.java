@@ -1,6 +1,7 @@
 package br.edu.ifro.control;
 
 import br.edu.ifro.model.Aluno;
+import br.edu.ifro.model.Notas;
 import br.edu.ifro.util.Essencial;
 import br.edu.ifro.util.Open;
 import br.eti.diegofonseca.MaskFieldUtil;

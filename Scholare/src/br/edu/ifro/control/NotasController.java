@@ -8,6 +8,7 @@ import br.edu.ifro.model.Turma;
 import br.edu.ifro.util.Essencial;
 import br.edu.ifro.util.Open;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -65,7 +66,7 @@ public class NotasController implements Initializable, Essencial {
     @FXML
     private ComboBox<Turma> cbox_turma;
     @FXML
-    private TableView<Aluno> tb_alunos;
+    private TableView<?> tb_alunos;
     @FXML
     private ComboBox<Disciplina> cbox_disciplina;
     @FXML
@@ -140,13 +141,7 @@ public class NotasController implements Initializable, Essencial {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
         EntityManager em = emf.createEntityManager();
         
-        Query query = em.createQuery("select a from Aluno as a, Matricula m where a.alu_id = m.aluno and m.turma = :turma order by a.alu_nome");
-        query.setParameter("turma", cbox_turma.getSelectionModel().getSelectedItem());
-        List<Aluno> list_alunos = query.getResultList();
         
-        ObservableList<Aluno> obaluno = FXCollections.observableArrayList(list_alunos);
-        tb_alunos.setItems(obaluno);
-        tb_alunos.setDisable(false);
         
         Turma t = (Turma)cbox_turma.getSelectionModel().getSelectedItem();
         
@@ -158,20 +153,43 @@ public class NotasController implements Initializable, Essencial {
         ObservableList<Disciplina> obdis = FXCollections.observableArrayList(list_disciplina);
         System.out.println(obdis);
         cbox_disciplina.setItems(obdis);
+        
+        /*Query querya = em.createQuery("select a, n from Notas as n LEFT JOIN n.aluno a");
+        //query.setParameter("disc", cbox_disciplina.getSelectionModel().getSelectedItem());
+        
+        
+        ObservableList ob = FXCollections.observableArrayList(querya.getResultList());
+        
+        tb_alunos.setItems(ob);
+        
+        tb_alunos.setDisable(false);*/
     }
 
     @FXML
     private void selecionar_disciplina(ActionEvent event) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
         EntityManager em = emf.createEntityManager();
+        Query query = em.createQuery("select a.alu_nome as nome, n.not_nota1 as nota1,n.not_nota2 as nota2, n.not_nota3 as nota3, n.not_nota4 as nota4, n.disciplina as disciplina from Aluno as a, Matricula m, Notas n where a.alu_id = m.aluno and m.turma = :turma and n.matriculaaluno = m.aluno and n.disciplina = :disciplina order by a.alu_nome");
+        query.setParameter("turma", cbox_turma.getSelectionModel().getSelectedItem());
+        query.setParameter("disciplina", cbox_disciplina.getSelectionModel().getSelectedItem());
         
-        Turma t = (Turma)cbox_turma.getSelectionModel().getSelectedItem();
+        List list_alunos = query.getResultList();
         
-        Query query = em.createQuery("select n from Notas as n where n.disciplina = :disc ");
-        query.setParameter("disc", cbox_disciplina.getSelectionModel().getSelectedItem());
-        
-        System.out.println(query.getResultList());
+        List r = new ArrayList();
+        for (Object a: list_alunos) {
+            Object[] objects = (Object[]) a;  
+            Teste t = new Teste();
+            t.setNome( (String) objects[0] );
+            t.setNota1( (Integer) objects[1] );
+            t.setNota2((Integer) objects[2]);
+            t.setNota3((Integer) objects[3]);
+            t.setNota4((Integer) objects[4]);
+            t.setDisciplina((Disciplina) objects[5]);
+            r.add(t);
+        }
 
+        ObservableList obaluno = FXCollections.observableArrayList(r);
+        tb_alunos.setItems(obaluno);
         tb_alunos.setDisable(false);
     }
 
@@ -199,3 +217,4 @@ public class NotasController implements Initializable, Essencial {
     }
     
 }
+

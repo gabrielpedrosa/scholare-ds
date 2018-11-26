@@ -21,7 +21,7 @@ public class Notas implements Serializable {
     private int not_nota3;
     private int not_nota4;
     @OneToOne
-    private Aluno aluno;
+    private Matricula matriculaaluno;
     @OneToOne
     private Disciplina disciplina;
 
@@ -65,13 +65,14 @@ public class Notas implements Serializable {
         this.not_nota4 = not_nota4;
     }
 
-    public Aluno getAluno() {
-        return aluno;
+    public Matricula getMatriculaaluno() {
+        return matriculaaluno;
     }
 
-    public void setAluno(Aluno aluno) {
-        this.aluno = aluno;
+    public void setMatriculaaluno(Matricula matriculaaluno) {
+        this.matriculaaluno = matriculaaluno;
     }
+
 
     public Disciplina getDisciplina() {
         return disciplina;
