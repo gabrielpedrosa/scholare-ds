@@ -106,6 +106,8 @@ public class Editar_AlunoController implements Initializable {
     private Button bot_alu_editar;
     @FXML
     private Button bot_alu_cancelar;
+    @FXML
+    private ComboBox<Aluno> nome_aluno;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         inicia();
@@ -132,6 +134,8 @@ public class Editar_AlunoController implements Initializable {
         
         ObservableList<Turma> obturma = FXCollections.observableArrayList(list_turma);
         cbox_alu_turma.setItems(obturma);
+        
+        cbox_alu_nome.getSelectionModel().select("Selecione");
     }
     
     public void add_mask(){
@@ -266,7 +270,7 @@ public class Editar_AlunoController implements Initializable {
 
     @FXML
     private void editar_editar_aluno(ActionEvent event) {
-        if(cbox_alu_nome.getSelectionModel().getSelectedIndex()==-1){
+        if(cbox_alu_nome.getSelectionModel().getSelectedItem().equals("Selecione") && (txt_alu_nome.getText().equals(""))){
             System.out.println("Selecione um Aluno");
         }
         else{
@@ -288,7 +292,8 @@ public class Editar_AlunoController implements Initializable {
 
             Query query = em.createQuery("select a from Aluno as a where a.alu_nome = :alu_nome");
             query.setParameter("alu_nome", cbox_alu_nome.getSelectionModel().getSelectedItem().toString());
-
+            
+            nome_aluno.setItems(ob_nulo);
             if(query.getResultList().isEmpty()){
                 System.out.println("Erro");
             }
@@ -296,10 +301,12 @@ public class Editar_AlunoController implements Initializable {
                 Aluno a = (Aluno) query.getSingleResult();
                 System.out.println(query.getSingleResult());
                 editar(a);
+                
             }
     }
     
     public void editar(Aluno a){
+        nome_aluno.getSelectionModel().select(a);
         txt_alu_nome.setText(a.getAlu_nome());
         if(a.getAlu_sexo().equals("Feminino")){
             rad_ed_alu_feminino.setSelected(true);
@@ -336,8 +343,6 @@ public class Editar_AlunoController implements Initializable {
         cbox_alu_nome.setItems(obaluno);
         cbox_alu_nome.setDisable(false);
     }
-    //Funções FXML-->
-    
     //Funções Menu<--
     @FXML
     private void aluno(ActionEvent event){
@@ -371,10 +376,16 @@ public class Editar_AlunoController implements Initializable {
     }
     @FXML
     private void turmas(ActionEvent event) {
+        Scene novascene = Open.abrirExibirTurma(getClass()); 
+        Stage stage = (Stage) bot_alu_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
         
     }
     @FXML
     private void sobre(ActionEvent event) {
+        Scene novascene = Open.abrirSobre(getClass()); 
+        Stage stage = (Stage) bot_alu_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
         
     }
     @FXML
@@ -385,18 +396,33 @@ public class Editar_AlunoController implements Initializable {
     }
     @FXML
     private void listar_funcionarios(ActionEvent event) {
+        Scene novascene = Open.abrirListarFuncionario(getClass()); 
+        Stage stage = (Stage) bot_alu_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
     }
     @FXML
     private void listar_turmas(ActionEvent event) {
+        Scene novascene = Open.abrirListarTurma(getClass()); 
+        Stage stage = (Stage) bot_alu_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
     }
     @FXML
     private void lsitar_matriculas(ActionEvent event) {
+        Scene novascene = Open.abrirListarMatricula(getClass()); 
+        Stage stage = (Stage) bot_alu_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
     }
     @FXML
     private void relatorio_diario(ActionEvent event) {
+        Scene novascene = Open.abrirDiario(getClass()); 
+        Stage stage = (Stage) bot_alu_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
     }
     @FXML
     private void ata_de_resultados(ActionEvent event) {
+        Scene novascene = Open.abrirAtadeResultado(getClass()); 
+        Stage stage = (Stage) bot_alu_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
     }
     //Funções Menu-->
 }

@@ -232,6 +232,20 @@ public class Cadastrar_TurmaController implements Initializable, Essencial {
         cbox_tur_professor.setItems(a);
         }
     }
+    @FXML
+    private void remover_professor(ActionEvent event) {
+        Funcionario f = tb_tur_professores.getSelectionModel().getSelectedItem();
+        if(f == null){
+            System.out.println("Tabela Vazio");
+        }else{
+        ObservableList a = tb_tur_professores.getItems();
+        ObservableList b = cbox_tur_professor.getItems();
+        a.remove(f);
+        b.add(f);
+        tb_tur_professores.setItems(a);
+        cbox_tur_professor.setItems(b);
+        }
+    }
     //Funções FXML-->
 
     //Funções Menu<--
@@ -267,10 +281,16 @@ public class Cadastrar_TurmaController implements Initializable, Essencial {
     }
     @FXML
     private void turmas(ActionEvent event) {
+        Scene novascene = Open.abrirExibirTurma(getClass()); 
+        Stage stage = (Stage) bot_tur_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
         
     }
     @FXML
     private void sobre(ActionEvent event) {
+        Scene novascene = Open.abrirSobre(getClass()); 
+        Stage stage = (Stage) bot_tur_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
         
     }
     @FXML
@@ -281,33 +301,35 @@ public class Cadastrar_TurmaController implements Initializable, Essencial {
     }
     @FXML
     private void listar_funcionarios(ActionEvent event) {
+        Scene novascene = Open.abrirListarFuncionario(getClass()); 
+        Stage stage = (Stage) bot_tur_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
     }
     @FXML
     private void listar_turmas(ActionEvent event) {
+        Scene novascene = Open.abrirListarTurma(getClass()); 
+        Stage stage = (Stage) bot_tur_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
     }
     @FXML
     private void lsitar_matriculas(ActionEvent event) {
+        Scene novascene = Open.abrirListarMatricula(getClass()); 
+        Stage stage = (Stage) bot_tur_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
     }
     @FXML
     private void relatorio_diario(ActionEvent event) {
+        Scene novascene = Open.abrirDiario(getClass()); 
+        Stage stage = (Stage) bot_tur_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
     }
     @FXML
     private void ata_de_resultados(ActionEvent event) {
+        Scene novascene = Open.abrirAtadeResultado(getClass()); 
+        Stage stage = (Stage) bot_tur_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
     }
     //Funções Menu-->
 
-    @FXML
-    private void remover_professor(ActionEvent event) {
-        Funcionario f = tb_tur_professores.getSelectionModel().getSelectedItem();
-        if(f == null){
-            System.out.println("Tabela Vazio");
-        }else{
-        ObservableList a = tb_tur_professores.getItems();
-        ObservableList b = cbox_tur_professor.getItems();
-        a.remove(f);
-        b.add(f);
-        tb_tur_professores.setItems(a);
-        cbox_tur_professor.setItems(b);
-        }
-    }
+    
 }

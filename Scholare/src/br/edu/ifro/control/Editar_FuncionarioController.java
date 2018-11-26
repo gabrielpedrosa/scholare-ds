@@ -57,7 +57,7 @@ public class Editar_FuncionarioController implements Initializable {
     @FXML
     private ComboBox cbox_fun_estado;
     @FXML
-    private ComboBox<Funcionario> cbox_fun_nome;
+    private ComboBox cbox_fun_nome;
     @FXML
     private TextField txt_fun_nome;
     @FXML
@@ -135,8 +135,9 @@ public class Editar_FuncionarioController implements Initializable {
         Query query = em.createQuery("select f from Funcionario as f");
         List<Funcionario> list_funcionario = query.getResultList();
         
-        ObservableList<Funcionario> obfuncionario = FXCollections.observableArrayList(list_funcionario);
+        ObservableList obfuncionario = FXCollections.observableArrayList(list_funcionario);
         cbox_fun_nome.setItems(obfuncionario);
+        cbox_fun_nome.getSelectionModel().select("Selecione");
     }
     
     public void deshabilita_campos(){
@@ -267,7 +268,7 @@ public class Editar_FuncionarioController implements Initializable {
 
     @FXML
     private void editar_editar_funcionario(ActionEvent event) {
-        if(cbox_fun_nome.getSelectionModel().getSelectedIndex()==-1){
+        if(cbox_fun_nome.getSelectionModel().getSelectedItem().equals("Selecione")){
             System.out.println("Selecione um Aluno");
         }
         else{
@@ -302,7 +303,7 @@ public class Editar_FuncionarioController implements Initializable {
     }
     
     public void editar(Funcionario f){
-        
+        cbox_fun_nome.setValue(f);
         txt_fun_nome.setText(f.getFun_nome());
         if(f.getFun_sexo().equals("Feminino")){
             rad_fun_feminino.setSelected(true);
@@ -334,61 +335,82 @@ public class Editar_FuncionarioController implements Initializable {
     @FXML
     private void aluno(ActionEvent event){
         Scene novascene = Open.abrirAluno(getClass()); 
-        Stage stage = (Stage) bot_fun_deletar.getScene().getWindow();
+        Stage stage = (Stage) bot_fun_cancelar.getScene().getWindow();
         stage.setScene(novascene);
     }
     @FXML
     private void funcionario(ActionEvent event) {
         Scene novascene = Open.abrirFuncionario(getClass()); 
-        Stage stage = (Stage) bot_fun_deletar.getScene().getWindow();
+        Stage stage = (Stage) bot_fun_cancelar.getScene().getWindow();
         stage.setScene(novascene);
     }
     @FXML
     private void turma(ActionEvent event) {
         Scene novascene = Open.abrirTurma(getClass()); 
-        Stage stage = (Stage) bot_fun_deletar.getScene().getWindow();
+        Stage stage = (Stage) bot_fun_cancelar.getScene().getWindow();
         stage.setScene(novascene);
     }
     @FXML
     private void alunos(ActionEvent event) {
         Scene novascene = Open.abrirExibirAluno(getClass()); 
-        Stage stage = (Stage) bot_fun_deletar.getScene().getWindow();
+        Stage stage = (Stage) bot_fun_cancelar.getScene().getWindow();
         stage.setScene(novascene);
     }
     @FXML
     private void funcionarios(ActionEvent event) {
         Scene novascene = Open.abrirExibirFuncionario(getClass()); 
-        Stage stage = (Stage) bot_fun_deletar.getScene().getWindow();
+        Stage stage = (Stage) bot_fun_cancelar.getScene().getWindow();
         stage.setScene(novascene);
     }
     @FXML
     private void turmas(ActionEvent event) {
+        Scene novascene = Open.abrirExibirTurma(getClass()); 
+        Stage stage = (Stage) bot_fun_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
         
     }
     @FXML
     private void sobre(ActionEvent event) {
+        Scene novascene = Open.abrirSobre(getClass()); 
+        Stage stage = (Stage) bot_fun_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
         
     }
     @FXML
     private void listar_alunos(ActionEvent event) {
         Scene novascene = Open.abrirListarAluno(getClass()); 
-        Stage stage = (Stage) bot_fun_deletar.getScene().getWindow();
+        Stage stage = (Stage) bot_fun_cancelar.getScene().getWindow();
         stage.setScene(novascene);
     }
     @FXML
     private void listar_funcionarios(ActionEvent event) {
+        Scene novascene = Open.abrirListarFuncionario(getClass()); 
+        Stage stage = (Stage) bot_fun_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
     }
     @FXML
     private void listar_turmas(ActionEvent event) {
+        Scene novascene = Open.abrirListarTurma(getClass()); 
+        Stage stage = (Stage) bot_fun_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
     }
     @FXML
     private void lsitar_matriculas(ActionEvent event) {
+        Scene novascene = Open.abrirListarMatricula(getClass()); 
+        Stage stage = (Stage) bot_fun_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
     }
     @FXML
     private void relatorio_diario(ActionEvent event) {
+        Scene novascene = Open.abrirDiario(getClass()); 
+        Stage stage = (Stage) bot_fun_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
     }
     @FXML
     private void ata_de_resultados(ActionEvent event) {
+        Scene novascene = Open.abrirAtadeResultado(getClass()); 
+        Stage stage = (Stage) bot_fun_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
     }
     //Funções Menu-->
 

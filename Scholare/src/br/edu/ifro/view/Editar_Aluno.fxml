@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.181" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifro.control.Editar_AlunoController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.191" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifro.control.Editar_AlunoController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
          <menus>
@@ -341,6 +341,7 @@
                </effect>
             </Label>
             <ComboBox fx:id="cbox_alu_turma" layoutX="30.0" layoutY="90.0" onAction="#selecionar_turma" prefHeight="30.0" prefWidth="250.0" />
+            <ComboBox fx:id="nome_aluno" disable="true" layoutX="270.0" layoutY="22.0" prefHeight="30.0" prefWidth="280.0" visible="false" />
          </children></Pane>
    </center>
 </BorderPane>
