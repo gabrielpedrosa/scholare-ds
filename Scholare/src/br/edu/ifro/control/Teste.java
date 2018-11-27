@@ -5,10 +5,10 @@ import br.edu.ifro.model.Disciplina;
 public class Teste {
     private int id;
     private String nome;
-    private int nota1;
-    private int nota2;
-    private int nota3;
-    private int nota4;
+    private String nota1;
+    private String nota2;
+    private String nota3;
+    private String nota4;
     private Disciplina disciplina;
 
     public int getId() {
@@ -27,35 +27,35 @@ public class Teste {
         this.nome = nome;
     }
 
-    public int getNota1() {
+    public String getNota1() {
         return nota1;
     }
 
-    public void setNota1(int nota1) {
+    public void setNota1(String nota1) {
         this.nota1 = nota1;
     }
 
-    public int getNota2() {
+    public String getNota2() {
         return nota2;
     }
 
-    public void setNota2(int nota2) {
+    public void setNota2(String nota2) {
         this.nota2 = nota2;
     }
 
-    public int getNota3() {
+    public String getNota3() {
         return nota3;
     }
 
-    public void setNota3(int nota3) {
+    public void setNota3(String nota3) {
         this.nota3 = nota3;
     }
 
-    public int getNota4() {
+    public String getNota4() {
         return nota4;
     }
 
-    public void setNota4(int nota4) {
+    public void setNota4(String nota4) {
         this.nota4 = nota4;
     }
 

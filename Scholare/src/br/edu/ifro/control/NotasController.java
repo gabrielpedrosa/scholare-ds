@@ -1,8 +1,6 @@
 package br.edu.ifro.control;
 
-import br.edu.ifro.model.Aluno;
 import br.edu.ifro.model.Disciplina;
-import br.edu.ifro.model.Matricula;
 import br.edu.ifro.model.Notas;
 import br.edu.ifro.model.Turma;
 import br.edu.ifro.util.Essencial;
@@ -14,6 +12,7 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -21,7 +20,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -71,6 +74,14 @@ public class NotasController implements Initializable, Essencial {
     private ComboBox<Disciplina> cbox_disciplina;
     @FXML
     private Button bot_salvar;
+    @FXML
+    private TableColumn<NotasController, String> nota1;
+    @FXML
+    private TableColumn nota2;
+    @FXML
+    private TableColumn nota3;
+    @FXML
+    private TableColumn nota4;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -169,7 +180,7 @@ public class NotasController implements Initializable, Essencial {
     private void selecionar_disciplina(ActionEvent event) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
         EntityManager em = emf.createEntityManager();
-        Query query = em.createQuery("select a.alu_nome as nome, n.not_nota1 as nota1,n.not_nota2 as nota2, n.not_nota3 as nota3, n.not_nota4 as nota4, n.disciplina as disciplina from Aluno as a, Matricula m, Notas n where a.alu_id = m.aluno and m.turma = :turma and n.matriculaaluno = m.aluno and n.disciplina = :disciplina order by a.alu_nome");
+        Query query = em.createQuery("select a.alu_id as id, a.alu_nome as nome, n.not_nota1 as nota1,n.not_nota2 as nota2, n.not_nota3 as nota3, n.not_nota4 as nota4, n.disciplina as disciplina from Aluno as a, Matricula m, Notas n where a.alu_id = m.aluno and m.turma = :turma and n.matriculaaluno = m.aluno and n.disciplina = :disciplina order by a.alu_nome");
         query.setParameter("turma", cbox_turma.getSelectionModel().getSelectedItem());
         query.setParameter("disciplina", cbox_disciplina.getSelectionModel().getSelectedItem());
         
@@ -179,18 +190,27 @@ public class NotasController implements Initializable, Essencial {
         for (Object a: list_alunos) {
             Object[] objects = (Object[]) a;  
             Teste t = new Teste();
-            t.setNome( (String) objects[0] );
-            t.setNota1( (Integer) objects[1] );
-            t.setNota2((Integer) objects[2]);
-            t.setNota3((Integer) objects[3]);
-            t.setNota4((Integer) objects[4]);
-            t.setDisciplina((Disciplina) objects[5]);
+            t.setId((int) objects[0]);
+            t.setNome((String) objects[1]);
+            t.setNota1((String) objects[2]);
+            t.setNota2((String) objects[3]);
+            t.setNota3((String) objects[4]);
+            t.setNota4((String) objects[5]);
+            t.setDisciplina((Disciplina) objects[6]);
             r.add(t);
         }
 
         ObservableList obaluno = FXCollections.observableArrayList(r);
         tb_alunos.setItems(obaluno);
         tb_alunos.setDisable(false);
+       
+        nota1.setCellFactory(TextFieldTableCell.forTableColumn());
+        Notas n = (Notas) tb_alunos.getSelectionModel().getSelectedItem();
+       /*nota1.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<NotasController, String>>() {
+        public void handle(TableColumn.CellEditEvent<NotasController, String> t) {
+            ( t.getTableView().getItems().get(t.getTablePosition().getRow())).setNota1( t.);
+        }});*/
+
     }
 
     @FXML
@@ -215,6 +235,42 @@ public class NotasController implements Initializable, Essencial {
         
         
     }
+
+    public TableColumn<NotasController, String> getNota1() {
+        return nota1;
+    }
+
+    public void setNota1(TableColumn<NotasController, String> nota1) {
+        this.nota1 = nota1;
+    }
+
+
+
+    public TableColumn getNota2() {
+        return nota2;
+    }
+
+    public void setNota2(TableColumn nota2) {
+        this.nota2 = nota2;
+    }
+
+    public TableColumn getNota3() {
+        return nota3;
+    }
+
+    public void setNota3(TableColumn nota3) {
+        this.nota3 = nota3;
+    }
+
+    public TableColumn getNota4() {
+        return nota4;
+    }
+
+    public void setNota4(TableColumn nota4) {
+        this.nota4 = nota4;
+    }
+    
+    
     
 }
 

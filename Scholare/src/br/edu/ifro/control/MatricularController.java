@@ -180,10 +180,10 @@ public class MatricularController implements Initializable {
             for(int i = 0; i <= notas.length; i++){
                 Notas n = new Notas();
                 n.setMatriculaaluno(m);
-                n.setNot_nota1(0);
-                n.setNot_nota2(0);
-                n.setNot_nota3(0);
-                n.setNot_nota4(0);
+                n.setNot_nota1("0");
+                n.setNot_nota2("0");
+                n.setNot_nota3("");
+                n.setNot_nota4("");
                 n.setDisciplina((Disciplina) queryfun.getResultList().get(i));
                 em.getTransaction().begin();
                 em.persist(n);
