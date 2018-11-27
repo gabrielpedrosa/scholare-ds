@@ -1,8 +1,7 @@
 package br.edu.ifro.control;
 
 import br.edu.ifro.model.Aluno;
-import br.edu.ifro.model.Notas;
-import br.edu.ifro.util.Essencial;
+import br.edu.ifro.util.Basico_Cadastro;
 import br.edu.ifro.util.Open;
 import br.eti.diegofonseca.MaskFieldUtil;
 import java.net.URL;
@@ -26,7 +25,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 //@author Gabriel Pedrosa
-public class Cadastrar_AlunoController implements Initializable, Essencial {
+public class Cadastrar_AlunoController implements Initializable, Basico_Cadastro {
     @FXML
     private TextField txt_alu_nome;
     @FXML
@@ -58,12 +57,6 @@ public class Cadastrar_AlunoController implements Initializable, Essencial {
     @FXML
     private TextField txt_alu_datacadastro;
     @FXML
-    private Button bot_alu_cadastrar;
-    @FXML
-    private Button bot_alu_limpar;
-    @FXML
-    private Button bot_alu_sair;
-    @FXML
     private TextField txt_alu_rua;
     @FXML
     private MenuItem aluno;
@@ -93,14 +86,15 @@ public class Cadastrar_AlunoController implements Initializable, Essencial {
     private MenuItem relatorio_diario;
     @FXML
     private MenuItem ata_de_resultados;
+    @FXML
+    private Button bot_cadastrar;
+    @FXML
+    private Button bot_limpar;
+    @FXML
+    private Button bot_cancelar;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       inicia();
-    }
-    
-    @Override
-    public void inicia(){
        add_mask();
        add_data();
        add_cbox();
@@ -111,7 +105,7 @@ public class Cadastrar_AlunoController implements Initializable, Essencial {
        ObservableList ob_estados = FXCollections.observableArrayList("ACRE", "RONDONIA", "MATO GROSSO", "MATO GROSSO DO SUL");
        cbox_alu_estado.setItems(ob_estados);
     }
-    
+    @Override
     public void add_mask(){
         MaskFieldUtil.cpfField(txt_alu_cpf);
         MaskFieldUtil.foneField(txt_alu_telefone);
@@ -120,13 +114,16 @@ public class Cadastrar_AlunoController implements Initializable, Essencial {
         MaskFieldUtil.dateField(txt_alu_datanascimento);
     }
     
-    private void add_data(){
+
+    @Override
+    public void add_data(){
        java.util.Date d = new java.util.Date();
        SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
        String datasrt = (String) f.format(d);
        txt_alu_datacadastro.setText(datasrt);
     }
     
+    @Override
     public boolean verifica_vazio(){
         boolean preenchido;
         boolean txt_preenchido = false;
@@ -220,7 +217,7 @@ public class Cadastrar_AlunoController implements Initializable, Essencial {
     @FXML
     private void sair_aluno(ActionEvent event) {
         Scene novascene = Open.abrirMenu(getClass()); 
-        Stage stage = (Stage) bot_alu_sair.getScene().getWindow();
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
         stage.setScene(novascene);
     }
     //Funções FXML-->
@@ -229,82 +226,90 @@ public class Cadastrar_AlunoController implements Initializable, Essencial {
     @FXML
     private void aluno(ActionEvent event){
         Scene novascene = Open.abrirAluno(getClass()); 
-        Stage stage = (Stage) bot_alu_sair.getScene().getWindow();
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
         stage.setScene(novascene);
     }
     @FXML
     private void funcionario(ActionEvent event) {
         Scene novascene = Open.abrirFuncionario(getClass()); 
-        Stage stage = (Stage) bot_alu_sair.getScene().getWindow();
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
         stage.setScene(novascene);
     }
     @FXML
     private void turma(ActionEvent event) {
         Scene novascene = Open.abrirTurma(getClass()); 
-        Stage stage = (Stage) bot_alu_sair.getScene().getWindow();
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
         stage.setScene(novascene);
     }
     @FXML
     private void alunos(ActionEvent event) {
         Scene novascene = Open.abrirExibirAluno(getClass()); 
-        Stage stage = (Stage) bot_alu_sair.getScene().getWindow();
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
         stage.setScene(novascene);
     }
     @FXML
     private void funcionarios(ActionEvent event) {
         Scene novascene = Open.abrirExibirFuncionario(getClass()); 
-        Stage stage = (Stage) bot_alu_sair.getScene().getWindow();
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
         stage.setScene(novascene);
     }
     @FXML
     private void turmas(ActionEvent event) {
         Scene novascene = Open.abrirExibirTurma(getClass()); 
-        Stage stage = (Stage) bot_alu_sair.getScene().getWindow();
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
         stage.setScene(novascene);
-        
+    }
+    
+    @FXML
+    private void matriculas(ActionEvent event) {
+        Scene novascene = Open.abrirExibirMatricula(getClass()); 
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
     }
     @FXML
     private void sobre(ActionEvent event) {
         Scene novascene = Open.abrirSobre(getClass()); 
-        Stage stage = (Stage) bot_alu_sair.getScene().getWindow();
-        stage.setScene(novascene);
-        
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
+        stage.setScene(novascene); 
     }
     @FXML
     private void listar_alunos(ActionEvent event) {
         Scene novascene = Open.abrirListarAluno(getClass()); 
-        Stage stage = (Stage) bot_alu_sair.getScene().getWindow();
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
         stage.setScene(novascene);
     }
     @FXML
     private void listar_funcionarios(ActionEvent event) {
         Scene novascene = Open.abrirListarFuncionario(getClass()); 
-        Stage stage = (Stage) bot_alu_sair.getScene().getWindow();
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
         stage.setScene(novascene);
     }
     @FXML
     private void listar_turmas(ActionEvent event) {
         Scene novascene = Open.abrirListarTurma(getClass()); 
-        Stage stage = (Stage) bot_alu_sair.getScene().getWindow();
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
         stage.setScene(novascene);
     }
-    @FXML
-    private void lsitar_matriculas(ActionEvent event) {
+    private void listar_matriculas(ActionEvent event) {
         Scene novascene = Open.abrirListarMatricula(getClass()); 
-        Stage stage = (Stage) bot_alu_sair.getScene().getWindow();
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
         stage.setScene(novascene);
     }
     @FXML
     private void relatorio_diario(ActionEvent event) {
         Scene novascene = Open.abrirDiario(getClass()); 
-        Stage stage = (Stage) bot_alu_sair.getScene().getWindow();
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
         stage.setScene(novascene);
     }
     @FXML
     private void ata_de_resultados(ActionEvent event) {
         Scene novascene = Open.abrirAtadeResultado(getClass()); 
-        Stage stage = (Stage) bot_alu_sair.getScene().getWindow();
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
         stage.setScene(novascene);
     }
     //Funções Menu-->
+
+    @FXML
+    private void lsitar_matriculas(ActionEvent event) {
+    }
 }

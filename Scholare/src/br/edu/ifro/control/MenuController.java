@@ -24,7 +24,6 @@ public class MenuController implements Initializable {
     private Button bot_sair;
     @FXML
     private Label lab_log_nome;
-    private String nome;
     @FXML
     private MenuItem aluno;
     @FXML
@@ -46,13 +45,13 @@ public class MenuController implements Initializable {
     @FXML
     private MenuItem listar_turmas;
     @FXML
-    private MenuItem lsitar_matriculas;
-    @FXML
     private MenuItem matriculas;
     @FXML
     private MenuItem relatorio_diario;
     @FXML
     private MenuItem ata_de_resultados;
+    @FXML
+    private MenuItem listar_matriculas;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -121,14 +120,19 @@ public class MenuController implements Initializable {
         Scene novascene = Open.abrirExibirTurma(getClass()); 
         Stage stage = (Stage) bot_marticula.getScene().getWindow();
         stage.setScene(novascene);
-        
+    }
+    
+    @FXML
+    private void matriculas(ActionEvent event) {
+        Scene novascene = Open.abrirExibirMatricula(getClass()); 
+        Stage stage = (Stage) bot_marticula.getScene().getWindow();
+        stage.setScene(novascene);
     }
     @FXML
     private void sobre(ActionEvent event) {
         Scene novascene = Open.abrirSobre(getClass()); 
         Stage stage = (Stage) bot_marticula.getScene().getWindow();
-        stage.setScene(novascene);
-        
+        stage.setScene(novascene); 
     }
     @FXML
     private void listar_alunos(ActionEvent event) {
@@ -149,7 +153,7 @@ public class MenuController implements Initializable {
         stage.setScene(novascene);
     }
     @FXML
-    private void lsitar_matriculas(ActionEvent event) {
+    private void listar_matriculas(ActionEvent event) {
         Scene novascene = Open.abrirListarMatricula(getClass()); 
         Stage stage = (Stage) bot_marticula.getScene().getWindow();
         stage.setScene(novascene);
@@ -166,5 +170,5 @@ public class MenuController implements Initializable {
         Stage stage = (Stage) bot_marticula.getScene().getWindow();
         stage.setScene(novascene);
     }
-    //Funções Menu-->
+    //Funções Menu--> 
 }

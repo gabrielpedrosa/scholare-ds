@@ -24,7 +24,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.191" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifro.control.Cadastrar_FuncionarioController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.181" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifro.control.Cadastrar_FuncionarioController">
    <center>
       <Pane prefHeight="600.0" prefWidth="800.0" styleClass="cadastro-fundo" stylesheets="@../style/style.css" BorderPane.alignment="CENTER">
          <children>
@@ -143,7 +143,7 @@
             </TextField>
             <Group layoutX="100.0" layoutY="470.0">
                <children>
-                  <Button fx:id="bot_pro_cadastrar" alignment="BOTTOM_CENTER" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#cadastrar_professor" prefHeight="80.0" prefWidth="120.0" styleClass="but-salvar" stylesheets="@../style/style.css" text="Cadastrar">
+                  <Button fx:id="bot_cadastrar" alignment="BOTTOM_CENTER" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#cadastrar_funcionario" prefHeight="80.0" prefWidth="120.0" styleClass="but-salvar" stylesheets="@../style/style.css" text="Cadastrar">
                      <effect>
                         <DropShadow color="#4d4d4d" />
                      </effect>
@@ -155,7 +155,7 @@
             </Group>
             <Group layoutX="330.0" layoutY="470.0">
                <children>
-                  <Button fx:id="bot_pro_limpar" alignment="BOTTOM_CENTER" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#limpar_professor" prefHeight="80.0" prefWidth="120.0" styleClass="but-limpar" stylesheets="@../style/style.css" text="Limpar">
+                  <Button fx:id="bot_limpar" alignment="BOTTOM_CENTER" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#limpar_professor" prefHeight="80.0" prefWidth="120.0" styleClass="but-limpar" stylesheets="@../style/style.css" text="Limpar">
                      <effect>
                         <DropShadow color="#4d4d4d" />
                      </effect>
@@ -167,7 +167,7 @@
             </Group>
             <Group layoutX="560.0" layoutY="470.0">
                <children>
-                  <Button fx:id="bot_pro_sair" alignment="BOTTOM_CENTER" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#sair_professor" prefHeight="80.0" prefWidth="120.0" styleClass="but-cancelar" stylesheets="@../style/style.css" text="Sair">
+                  <Button fx:id="bot_cancelar" alignment="BOTTOM_CENTER" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#sair_professor" prefHeight="80.0" prefWidth="120.0" styleClass="but-cancelar" stylesheets="@../style/style.css" text="Cancelar">
                      <effect>
                         <DropShadow color="#4d4d4d" height="20.5" radius="9.625" width="20.0" />
                      </effect>
@@ -407,7 +407,7 @@
                   <MenuItem fx:id="listar_alunos" mnemonicParsing="false" onAction="#listar_alunos" text="Listar Alunos" />
                   <MenuItem fx:id="listar_funcionarios" mnemonicParsing="false" onAction="#listar_funcionarios" text="Listar Funcionários" />
                   <MenuItem fx:id="listar_turmas" mnemonicParsing="false" onAction="#listar_turmas" text="Listar Turmas" />
-                  <MenuItem fx:id="lsitar_matriculas" mnemonicParsing="false" onAction="#lsitar_matriculas" text="Listar Matriculas" />
+                  <MenuItem fx:id="listar_matriculas" mnemonicParsing="false" onAction="#listar_matriculas" text="Listar Matriculas" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Exibir">
@@ -415,7 +415,7 @@
                   <MenuItem fx:id="alunos" mnemonicParsing="false" onAction="#alunos" text="Alunos" />
                   <MenuItem fx:id="funcionarios" mnemonicParsing="false" onAction="#funcionarios" text="Professores" />
                   <MenuItem fx:id="turmas" mnemonicParsing="false" onAction="#turmas" text="Turmas" />
-                  <MenuItem fx:id="matriculas" mnemonicParsing="false" text="Matriculas" />
+                  <MenuItem fx:id="matriculas" mnemonicParsing="false" onAction="#matriculas" text="Matriculas" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Relatórios">

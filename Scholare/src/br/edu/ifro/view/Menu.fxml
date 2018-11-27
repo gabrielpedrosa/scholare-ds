@@ -34,7 +34,7 @@
                             <MenuItem fx:id="listar_alunos" mnemonicParsing="false" onAction="#listar_alunos" text="Listar Alunos" />
                               <MenuItem fx:id="listar_funcionarios" mnemonicParsing="false" onAction="#listar_funcionarios" text="Listar Funcionários" />
                               <MenuItem fx:id="listar_turmas" mnemonicParsing="false" onAction="#listar_turmas" text="Listar Turmas" />
-                              <MenuItem fx:id="lsitar_matriculas" mnemonicParsing="false" onAction="#lsitar_matriculas" text="Listar Matriculas" />
+                              <MenuItem fx:id="listar_matriculas" mnemonicParsing="false" onAction="#listar_matriculas" text="Listar Matriculas" />
                           </items>
                         </Menu>
                       <Menu mnemonicParsing="false" text="Exibir">
@@ -42,7 +42,7 @@
                           <MenuItem fx:id="alunos" mnemonicParsing="false" onAction="#alunos" text="Alunos" />
                               <MenuItem fx:id="funcionarios" mnemonicParsing="false" onAction="#funcionarios" text="Professores" />
                               <MenuItem fx:id="turmas" mnemonicParsing="false" onAction="#turmas" text="Turmas" />
-                              <MenuItem fx:id="matriculas" mnemonicParsing="false" text="Matriculas" />
+                              <MenuItem fx:id="matriculas" mnemonicParsing="false" onAction="#matriculas" text="Matriculas" />
                         </items>
                       </Menu>
                         <Menu mnemonicParsing="false" text="Relatórios">

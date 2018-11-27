@@ -1,9 +1,14 @@
 package br.edu.ifro.control;
 
+import br.edu.ifro.model.Funcionario;
 import br.edu.ifro.model.Matricula;
+import br.edu.ifro.model.Turma;
 import br.edu.ifro.util.Open;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,13 +26,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-/**
- * FXML Controller class
- *
- * @author 80923755268
- */
+//@author Gabriel Pedrosa
 public class Editar_MatriculaController implements Initializable {
-
     @FXML
     private MenuItem aluno;
     @FXML
@@ -45,11 +45,9 @@ public class Editar_MatriculaController implements Initializable {
     @FXML
     private TextField txt_mat_responsavel;
     @FXML
-    private Button bot_mat_cancelar;
+    private ComboBox cbox_mat_aluno;
     @FXML
-    private ComboBox<?> cbox_mat_aluno;
-    @FXML
-    private ComboBox<?> cbox_mat_turma;
+    private ComboBox<Turma> cbox_mat_turma;
     @FXML
     private TextField txt_mat_datacadastro;
     @FXML
@@ -63,49 +61,73 @@ public class Editar_MatriculaController implements Initializable {
     @FXML
     private RadioButton nao;
     @FXML
-    private ComboBox<?> cbox_mat_funcionario;
+    private ComboBox<Funcionario> cbox_mat_funcionario;
     @FXML
-    private ComboBox<?> cbox_mat_matricula;
+    private ComboBox cbox_mat_matricula;
     @FXML
-    private Button bot_mat_salvar;
+    private MenuItem listar_alunos;
     @FXML
-    private Button bot_mat_editar;
+    private MenuItem listar_funcionarios;
     @FXML
-    private Button bot_mat_deletar;
-
+    private MenuItem listar_turmas;
+    @FXML
+    private MenuItem listar_matriculas;
+    @FXML
+    private MenuItem matriculas;
+    @FXML
+    private MenuItem relatorio_diario;
+    @FXML
+    private MenuItem ata_de_resultados;
+    @FXML
+    private Button bot_salvar;
+    @FXML
+    private Button bot_editar;
+    @FXML
+    private Button bot_cancelar;
+    @FXML
+    private Button bot_deletar;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-
-    @FXML
-    private void aluno(ActionEvent event) {
+        add_cbox();
+        
+        cbox_mat_matricula.getSelectionModel().select("Selecione");
+        cbox_mat_aluno.getSelectionModel().select("Selecione");
     }
-
-    @FXML
-    private void funcionario(ActionEvent event) {
+    
+    public void add_cbox(){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
+        EntityManager em = emf.createEntityManager();
+        
+        Query query = em.createQuery("select m from Matricula as m");
+        List<Matricula> list_matricula = query.getResultList();
+        
+        
+        ObservableList<Matricula> obmatricula = FXCollections.observableArrayList(list_matricula);
+        cbox_mat_matricula.setItems(obmatricula);
     }
-
-    @FXML
-    private void turma(ActionEvent event) {
+    
+    public void desabilita_campos(){
+        txa_mat_observacoes.setDisable(true);
+        txt_mat_responsavel.setDisable(true);
+        txt_mat_telefone.setDisable(true);
+        cbox_mat_turma.setDisable(true);
+        sim.setDisable(true);
+        nao.setDisable(true);
+        
+        bot_salvar.setDisable(true);
     }
-
-    @FXML
-    private void alunos(ActionEvent event) {
+    
+    public void habilita_campos(){
+        txa_mat_observacoes.setDisable(false);
+        txt_mat_responsavel.setDisable(false);
+        txt_mat_telefone.setDisable(false);
+        cbox_mat_turma.setDisable(false);
+        sim.setDisable(false);
+        nao.setDisable(false);
+        
+        bot_salvar.setDisable(false);
     }
-
-    @FXML
-    private void funcionarios(ActionEvent event) {
-    }
-
-    @FXML
-    private void turmas(ActionEvent event) {
-    }
-
-    @FXML
-    private void sobre(ActionEvent event) {
-    }
-
 
     @FXML
     private void sim(ActionEvent event) {
@@ -121,12 +143,18 @@ public class Editar_MatriculaController implements Initializable {
 
     @FXML
     private void editar_editar(ActionEvent event) {
+        if(cbox_mat_matricula.getSelectionModel().getSelectedItem().equals("Selecione") && (cbox_mat_aluno.getValue().equals(""))){
+            System.out.println("Selecione um Aluno");
+        }
+        else{
+            habilita_campos();
+        }
     }
 
     @FXML
     private void cancelar_editar(ActionEvent event) {
         Scene novascene = Open.abrirMenu(getClass()); 
-        Stage stage = (Stage) bot_mat_cancelar.getScene().getWindow();
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
         stage.setScene(novascene);
     }
 
@@ -135,7 +163,20 @@ public class Editar_MatriculaController implements Initializable {
     }
     
     public void editar(Matricula m){
+        cbox_mat_aluno.setValue(m.getAluno());
+        cbox_mat_turma.setValue(m.getTurma());
+        txt_mat_responsavel.setText(m.getMat_responsavel());
+        txt_mat_telefone.setText(m.getMat_telefone_responsavel());
+        txt_mat_datacadastro.setText(m.getMat_data());
+        cbox_mat_funcionario.setValue(m.getFuncionario());
+        if(m.getMat_triagem().equals("Sim")){
+            sim.setSelected(true);
+        }
+        else{
+            nao.setSelected(true);
+        }
         
+        bot_deletar.setDisable(false);
     }
 
     @FXML
@@ -158,5 +199,91 @@ public class Editar_MatriculaController implements Initializable {
             editar(m);
         }
     }
+    //Funções Menu<--
+    @FXML
+    private void aluno(ActionEvent event){
+        Scene novascene = Open.abrirAluno(getClass()); 
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void funcionario(ActionEvent event) {
+        Scene novascene = Open.abrirFuncionario(getClass()); 
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void turma(ActionEvent event) {
+        Scene novascene = Open.abrirTurma(getClass()); 
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void alunos(ActionEvent event) {
+        Scene novascene = Open.abrirExibirAluno(getClass()); 
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void funcionarios(ActionEvent event) {
+        Scene novascene = Open.abrirExibirFuncionario(getClass()); 
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void turmas(ActionEvent event) {
+        Scene novascene = Open.abrirExibirTurma(getClass()); 
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
     
+    @FXML
+    private void matriculas(ActionEvent event) {
+        Scene novascene = Open.abrirExibirMatricula(getClass()); 
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void sobre(ActionEvent event) {
+        Scene novascene = Open.abrirSobre(getClass()); 
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
+        stage.setScene(novascene); 
+    }
+    @FXML
+    private void listar_alunos(ActionEvent event) {
+        Scene novascene = Open.abrirListarAluno(getClass()); 
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void listar_funcionarios(ActionEvent event) {
+        Scene novascene = Open.abrirListarFuncionario(getClass()); 
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void listar_turmas(ActionEvent event) {
+        Scene novascene = Open.abrirListarTurma(getClass()); 
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void listar_matriculas(ActionEvent event) {
+        Scene novascene = Open.abrirListarMatricula(getClass()); 
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void relatorio_diario(ActionEvent event) {
+        Scene novascene = Open.abrirDiario(getClass()); 
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void ata_de_resultados(ActionEvent event) {
+        Scene novascene = Open.abrirAtadeResultado(getClass()); 
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    //Funções Menu-->
 }

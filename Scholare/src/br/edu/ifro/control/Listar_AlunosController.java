@@ -70,10 +70,6 @@ public class Listar_AlunosController implements Initializable, Essencial {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       inicia();
-    }
-    @Override
-    public void inicia() {
         add_cbox();
     }
 
@@ -95,7 +91,8 @@ public class Listar_AlunosController implements Initializable, Essencial {
         tb_alunos.setItems(obaluno);
         tb_alunos.setDisable(false);
     }
-
+    
+    //Funções FXML<--
     @FXML
     private void selecionar_turma(ActionEvent event) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
@@ -109,7 +106,6 @@ public class Listar_AlunosController implements Initializable, Essencial {
         tb_alunos.setItems(obaluno);
         tb_alunos.setDisable(false);
     }
-
     @FXML
     private void deletar_aluno(ActionEvent event) {
         if(tb_alunos.getSelectionModel().getSelectedItem() == null){
@@ -139,7 +135,6 @@ public class Listar_AlunosController implements Initializable, Essencial {
             selecionar_turma(event);
         }
     }
-
     @FXML
     private void editar_aluno(ActionEvent event) {
         if(tb_alunos.getSelectionModel().getSelectedItem() == null){
@@ -150,7 +145,6 @@ public class Listar_AlunosController implements Initializable, Essencial {
             Stage stage = (Stage) bot_cancelar.getScene().getWindow();
             stage.setScene(novascene);
         }
-        
     }
     @FXML
     private void cancelar_aluno(ActionEvent event) {
@@ -158,6 +152,8 @@ public class Listar_AlunosController implements Initializable, Essencial {
         Stage stage = (Stage) bot_cancelar.getScene().getWindow();
         stage.setScene(novascene);
     }
+    //Funções FXML-->
+    
     //Funções Menu<--
     @FXML
     private void aluno(ActionEvent event){
@@ -194,14 +190,19 @@ public class Listar_AlunosController implements Initializable, Essencial {
         Scene novascene = Open.abrirExibirTurma(getClass()); 
         Stage stage = (Stage) bot_cancelar.getScene().getWindow();
         stage.setScene(novascene);
-        
+    }
+    
+    @FXML
+    private void matriculas(ActionEvent event) {
+        Scene novascene = Open.abrirExibirMatricula(getClass()); 
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
     }
     @FXML
     private void sobre(ActionEvent event) {
         Scene novascene = Open.abrirSobre(getClass()); 
         Stage stage = (Stage) bot_cancelar.getScene().getWindow();
-        stage.setScene(novascene);
-        
+        stage.setScene(novascene); 
     }
     @FXML
     private void listar_alunos(ActionEvent event) {
@@ -239,4 +240,5 @@ public class Listar_AlunosController implements Initializable, Essencial {
         Stage stage = (Stage) bot_cancelar.getScene().getWindow();
         stage.setScene(novascene);
     }
+    //Funções Menu-->
 }

@@ -18,6 +18,7 @@ public class Matricula implements Serializable {
     private String mat_responsavel;
     private String mat_telefone_responsavel;
     private String mat_observacoes;
+    private String mat_matricula;
     @ManyToOne
     private Aluno aluno;
     @ManyToOne
@@ -25,6 +26,11 @@ public class Matricula implements Serializable {
     @ManyToOne
     private Funcionario funcionario;
 
+    @Override
+    public String toString() {
+        return "Matricula do aluno " + aluno + " na " + turma + "";
+    }
+    
     public int getMat_id() {
         return mat_id;
     }
@@ -96,4 +102,14 @@ public class Matricula implements Serializable {
     public void setFuncionario(Funcionario funcionario) {
         this.funcionario = funcionario;
     }
+
+    public String getMat_matricula() {
+        return mat_matricula;
+    }
+
+    public void setMat_matricula(String mat_matricula) {
+        this.mat_matricula = mat_matricula;
+    }
+    
+    
 }

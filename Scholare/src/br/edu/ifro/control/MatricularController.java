@@ -167,6 +167,7 @@ public class MatricularController implements Initializable {
             else{
                 m.setTurma(cbox_mat_turma.getSelectionModel().getSelectedItem());
             }
+            
             em.getTransaction().begin();
             em.persist(m);
             em.getTransaction().commit();

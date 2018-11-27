@@ -269,7 +269,7 @@ public class Open {
         Scene cena = null ;
         try{
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Editar_Aluno.fxml"));
+            fxmlLoader.setLocation(cls.getResource("/br/edu/ifro/view/Editar_Matricula.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             cena = scene;
             Editar_MatriculaController edc = fxmlLoader.getController();

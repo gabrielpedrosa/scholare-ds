@@ -3,7 +3,6 @@ package br.edu.ifro.control;
 import br.edu.ifro.model.Disciplina;
 import br.edu.ifro.model.Notas;
 import br.edu.ifro.model.Turma;
-import br.edu.ifro.util.Essencial;
 import br.edu.ifro.util.Open;
 import java.net.URL;
 import java.util.ArrayList;
@@ -12,7 +11,6 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -22,9 +20,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.stage.Stage;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -32,7 +28,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 //@author Gabriel Pedrosa
-public class NotasController implements Initializable, Essencial {
+public class NotasController implements Initializable {
 
     @FXML
     private MenuItem aluno;
@@ -75,71 +71,18 @@ public class NotasController implements Initializable, Essencial {
     @FXML
     private Button bot_salvar;
     @FXML
-    private TableColumn<NotasController, String> nota1;
+    private TableColumn<Teste, String> nota1;
     @FXML
-    private TableColumn nota2;
+    private TableColumn<Teste, String> nota2;
     @FXML
-    private TableColumn nota3;
+    private TableColumn<Teste, String> nota3;
     @FXML
-    private TableColumn nota4;
+    private TableColumn<Teste, String> nota4;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         inicia();
     }    
-
-    @FXML
-    private void aluno(ActionEvent event) {
-    }
-
-    @FXML
-    private void funcionario(ActionEvent event) {
-    }
-
-    @FXML
-    private void turma(ActionEvent event) {
-    }
-
-    @FXML
-    private void listar_alunos(ActionEvent event) {
-    }
-
-    @FXML
-    private void listar_funcionarios(ActionEvent event) {
-    }
-
-    @FXML
-    private void listar_turmas(ActionEvent event) {
-    }
-
-    @FXML
-    private void listar_matriculas(ActionEvent event) {
-    }
-
-    @FXML
-    private void alunos(ActionEvent event) {
-    }
-
-    @FXML
-    private void funcionarios(ActionEvent event) {
-    }
-
-    @FXML
-    private void turmas(ActionEvent event) {
-    }
-
-    @FXML
-    private void relatorio_diario(ActionEvent event) {
-    }
-
-    @FXML
-    private void ata_de_resultados(ActionEvent event) {
-    }
-
-    @FXML
-    private void sobre(ActionEvent event) {
-    }
-
     @FXML
     private void cancelar_notas(ActionEvent event) {
         Scene novascene = Open.abrirMenu(getClass()); 
@@ -151,8 +94,6 @@ public class NotasController implements Initializable, Essencial {
     private void selecionar_turma(ActionEvent event) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
         EntityManager em = emf.createEntityManager();
-        
-        
         
         Turma t = (Turma)cbox_turma.getSelectionModel().getSelectedItem();
         
@@ -205,24 +146,57 @@ public class NotasController implements Initializable, Essencial {
         tb_alunos.setDisable(false);
        
         nota1.setCellFactory(TextFieldTableCell.forTableColumn());
-        Notas n = (Notas) tb_alunos.getSelectionModel().getSelectedItem();
-       /*nota1.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<NotasController, String>>() {
-        public void handle(TableColumn.CellEditEvent<NotasController, String> t) {
-            ( t.getTableView().getItems().get(t.getTablePosition().getRow())).setNota1( t.);
-        }});*/
+        nota2.setCellFactory(TextFieldTableCell.forTableColumn());
+        nota3.setCellFactory(TextFieldTableCell.forTableColumn());
+        nota4.setCellFactory(TextFieldTableCell.forTableColumn());
+       
+        
+        nota1.setOnEditCommit((TableColumn.CellEditEvent<Teste, String> t) -> {
+        ((Teste) t.getTableView().getItems(). get(t.getTablePosition().getRow())).setNota1(t.getNewValue());});
+        nota2.setOnEditCommit((TableColumn.CellEditEvent<Teste, String> t) -> {
+        ((Teste) t.getTableView().getItems(). get(t.getTablePosition().getRow())).setNota2(t.getNewValue());});
+        nota3.setOnEditCommit((TableColumn.CellEditEvent<Teste, String> t) -> {
+        ((Teste) t.getTableView().getItems(). get(t.getTablePosition().getRow())).setNota3(t.getNewValue());});
+        nota4.setOnEditCommit((TableColumn.CellEditEvent<Teste, String> t) -> {
+        ((Teste) t.getTableView().getItems(). get(t.getTablePosition().getRow())).setNota4(t.getNewValue());});
 
     }
 
     @FXML
     private void salvar_notas(ActionEvent event) {
+       /**/
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
+        EntityManager em = emf.createEntityManager();
+        
+        List list = tb_alunos.getItems();
+         em.getTransaction().begin();       
+        for (Object a: list) {
+            Teste teste = (Teste) a;              
+            Query query = em.createQuery("select n from Notas as n, Matricula m where m.mat_id = :mat_id ");
+            query.setParameter("mat_id", teste.getId());
+            query.setMaxResults(1);
+            
+            Notas n1 = (Notas) query.getSingleResult();
+            
+            n1.setNot_nota1((String) teste.getNota1());
+            n1.setNot_nota2((String) teste.getNota2());
+            n1.setNot_nota3((String) teste.getNota3());
+            n1.setNot_nota4((String) teste.getNota4());
+            // TODO
+            
+            em.persist(n1);
+        }
+        em.getTransaction().commit();
+        em.close();
+        emf.close();
+        /**/
+        
     }
 
-    @Override
     public void inicia() {
         add_cbox();
     }
 
-    @Override
     public void add_cbox() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
         EntityManager em = emf.createEntityManager();
@@ -236,16 +210,15 @@ public class NotasController implements Initializable, Essencial {
         
     }
 
-    public TableColumn<NotasController, String> getNota1() {
+    public TableColumn<Teste, String> getNota1() {
         return nota1;
     }
 
-    public void setNota1(TableColumn<NotasController, String> nota1) {
+    public void setNota1(TableColumn<Teste, String> nota1) {
         this.nota1 = nota1;
     }
-
-
-
+    
+    
     public TableColumn getNota2() {
         return nota2;
     }
@@ -269,8 +242,93 @@ public class NotasController implements Initializable, Essencial {
     public void setNota4(TableColumn nota4) {
         this.nota4 = nota4;
     }
+    //Funções Menu<--
+    @FXML
+    private void aluno(ActionEvent event){
+        Scene novascene = Open.abrirAluno(getClass()); 
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void funcionario(ActionEvent event) {
+        Scene novascene = Open.abrirFuncionario(getClass()); 
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void turma(ActionEvent event) {
+        Scene novascene = Open.abrirTurma(getClass()); 
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void alunos(ActionEvent event) {
+        Scene novascene = Open.abrirExibirAluno(getClass()); 
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void funcionarios(ActionEvent event) {
+        Scene novascene = Open.abrirExibirFuncionario(getClass()); 
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void turmas(ActionEvent event) {
+        Scene novascene = Open.abrirExibirTurma(getClass()); 
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
     
-    
+    @FXML
+    private void matriculas(ActionEvent event) {
+        Scene novascene = Open.abrirExibirMatricula(getClass()); 
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void sobre(ActionEvent event) {
+        Scene novascene = Open.abrirSobre(getClass()); 
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
+        stage.setScene(novascene); 
+    }
+    @FXML
+    private void listar_alunos(ActionEvent event) {
+        Scene novascene = Open.abrirListarAluno(getClass()); 
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void listar_funcionarios(ActionEvent event) {
+        Scene novascene = Open.abrirListarFuncionario(getClass()); 
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void listar_turmas(ActionEvent event) {
+        Scene novascene = Open.abrirListarTurma(getClass()); 
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void listar_matriculas(ActionEvent event) {
+        Scene novascene = Open.abrirListarMatricula(getClass()); 
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void relatorio_diario(ActionEvent event) {
+        Scene novascene = Open.abrirDiario(getClass()); 
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    @FXML
+    private void ata_de_resultados(ActionEvent event) {
+        Scene novascene = Open.abrirAtadeResultado(getClass()); 
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
+    }
+    //Funções Menu-->
     
 }
 
