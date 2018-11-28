@@ -13,6 +13,7 @@
 }
 .fundo{
     -fx-background-color: lightgrey;
+    -fx-background-radius: 20px;/*Raio da Borda*/    
 }
 .login{
     -fx-background-color: lightgray;

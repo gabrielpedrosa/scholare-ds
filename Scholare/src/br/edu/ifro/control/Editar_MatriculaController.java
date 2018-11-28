@@ -86,6 +86,8 @@ public class Editar_MatriculaController implements Initializable {
     private Button bot_cancelar;
     @FXML
     private Button bot_deletar;
+    @FXML
+    private ComboBox<Matricula> nome_matricula;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -163,6 +165,7 @@ public class Editar_MatriculaController implements Initializable {
     }
     
     public void editar(Matricula m){
+        nome_matricula.setValue(m);
         cbox_mat_aluno.setValue(m.getAluno());
         cbox_mat_turma.setValue(m.getTurma());
         txt_mat_responsavel.setText(m.getMat_responsavel());

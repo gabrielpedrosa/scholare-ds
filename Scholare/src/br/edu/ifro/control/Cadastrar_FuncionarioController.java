@@ -3,7 +3,6 @@ package br.edu.ifro.control;
 import br.edu.ifro.model.Disciplina;
 import br.edu.ifro.model.Funcionario;
 import br.edu.ifro.util.Basico_Cadastro;
-import br.edu.ifro.util.Essencial;
 import br.edu.ifro.util.Open;
 import br.eti.diegofonseca.MaskFieldUtil;
 import java.net.URL;
@@ -234,6 +233,7 @@ public class Cadastrar_FuncionarioController implements Initializable, Basico_Ca
                 p.setFun_logradouro(txt_fun_logradouro.getText());
                 p.setFun_bairro(txt_fun_bairro.getText());
                 p.setFun_numero(txt_fun_numero.getText());
+                p.setFun_complemento(txt_fun_complemento.getText());
                 p.setFun_cidade(txt_fun_cidade.getText());
                 p.setFun_estado(cbox_fun_estado.getSelectionModel().getSelectedItem().toString());
                 p.setFun_datacadastro(txt_fun_datacadastro.getText());

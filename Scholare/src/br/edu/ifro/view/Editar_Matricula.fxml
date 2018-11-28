@@ -228,6 +228,7 @@
                   </Button>
                </children>
             </Group>
+            <ComboBox fx:id="nome_matricula" disable="true" layoutX="196.0" layoutY="19.0" prefHeight="30.0" prefWidth="280.0" />
          </children></Pane>
    </center>
 </BorderPane>

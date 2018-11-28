@@ -176,13 +176,10 @@
                   <Blend />
                </effect>
                <toggleGroup>
-                  <ToggleGroup fx:id="tg_fun_sexo" />
+                  <ToggleGroup fx:id="tg_sexo" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton fx:id="rad_fun_masculino" layoutX="660.0" layoutY="140.0" mnemonicParsing="false" text="Masculino" textFill="WHITE">
-               <toggleGroup>
-                  <ToggleGroup fx:id="tg_fun_sexo" />
-               </toggleGroup>
+            <RadioButton fx:id="rad_fun_masculino" layoutX="660.0" layoutY="140.0" mnemonicParsing="false" text="Masculino" textFill="WHITE" toggleGroup="$tg_sexo">
                <font>
                   <Font name="Arial" size="16.0" />
                </font>
@@ -455,6 +452,7 @@
                   </Tab>
                </tabs>
             </TabPane>
+            <ComboBox fx:id="nome_funcionario" disable="true" layoutX="500.0" layoutY="75.0" prefHeight="30.0" prefWidth="280.0" />
          </children></Pane>
    </center>
 </BorderPane>

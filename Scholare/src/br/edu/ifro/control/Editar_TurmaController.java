@@ -35,7 +35,7 @@ public class Editar_TurmaController implements Initializable {
     @FXML
     private TextField txt_tur_datacadastro;
     @FXML
-    private ComboBox<Turma> cbox_tur_nome;
+    private ComboBox cbox_tur_nome;
     @FXML
     private MenuItem aluno;
     @FXML
@@ -100,6 +100,8 @@ public class Editar_TurmaController implements Initializable {
     private Button bot_editar;
     @FXML
     private Button bot_cancelar;
+    @FXML
+    private ComboBox<Turma> nome_turma;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -138,10 +140,11 @@ public class Editar_TurmaController implements Initializable {
         
         ObservableList<Funcionario> ob_professor = FXCollections.observableArrayList(list_professor);
         cbox_tur_professor.setItems(ob_professor);
-    
+        
+        cbox_tur_nome.getSelectionModel().select("Selecione");
     }
     
-    public void desabilita_campos(){
+    public void deshabilita_campos(){
         cbox_tur_ano.setDisable(true);
         cbox_tur_serie_ano.setDisable(true);
         cbox_tur_tipo.setDisable(true);
@@ -154,8 +157,11 @@ public class Editar_TurmaController implements Initializable {
         rad_tur_f.setDisable(true);
         cbox_tur_professor.setDisable(true);
         tb_tur_professores.setDisable(true);
+        bot_salvar.setDisable(true);
         bot_deletar.setDisable(true);
         bot_editar.setDisable(true);
+        bot_tur_inserir.setDisable(true);
+        bot_tur_remover.setDisable(true);
     }
     
     public void habilita_campos(){
@@ -171,20 +177,66 @@ public class Editar_TurmaController implements Initializable {
         rad_tur_f.setDisable(false);
         cbox_tur_professor.setDisable(false);
         tb_tur_professores.setDisable(false);
+        bot_salvar.setDisable(false);
         bot_deletar.setDisable(false);
         bot_editar.setDisable(false);
+        bot_tur_inserir.setDisable(false);
+        bot_tur_remover.setDisable(false);
     }
     
-    public void limpar_turma(){
-        cbox_tur_ano.setValue(null);
-        cbox_tur_serie_ano.setValue(null);
-        cbox_tur_tipo.setValue(null);
+    private void limpar_turma() {
+        cbox_tur_serie_ano.setValue("");
+        cbox_tur_ano.setValue("");
+        cbox_tur_tipo.setValue("");
+        cbox_tur_professor.setValue(null);
+        tb_tur_professores.getItems().clear();
+        cbox_tur_turno.setValue("");
+        rad_tur_a.setSelected(true);
     }
     
 
     //Funções FXML<--
     @FXML
     private void salvar_editar_turma(ActionEvent event) {
+         EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
+        EntityManager em = emf.createEntityManager();
+        
+        Turma tur = (Turma) nome_turma.getSelectionModel().getSelectedItem();
+        
+        Query query =em.createQuery("select t from Turma as t where t.tur_id = :tur_id");
+        query.setParameter("tur_id", tur.getTur_id());
+        
+        Turma t = (Turma) query.getSingleResult();
+        
+        t.setTur_ano(cbox_tur_ano.getSelectionModel().getSelectedItem().toString());
+        
+        t.setTur_ano(cbox_tur_ano.getSelectionModel().getSelectedItem().toString());
+            t.setTur_serie_ano(cbox_tur_serie_ano.getSelectionModel().getSelectedItem().toString());
+            RadioButton radioselected = (RadioButton) tg_tur_turno.getSelectedToggle();
+            String rad_tur_classe = radioselected.getText();
+            t.setTur_classe(rad_tur_classe);
+            t.setTur_turno(cbox_tur_turno.getSelectionModel().getSelectedItem().toString());
+            t.setTur_tipo(cbox_tur_tipo.getSelectionModel().getSelectedItem().toString());
+            t.setTur_nome(cbox_tur_ano.getSelectionModel().getSelectedItem().toString()+" - "+
+                    cbox_tur_serie_ano.getSelectionModel().getSelectedItem().toString()+" - "+
+                    rad_tur_classe+" - "+cbox_tur_turno.getSelectionModel().getSelectedItem().toString()
+                    +" - "+cbox_tur_tipo.getSelectionModel().getSelectedItem().toString());
+            
+            ObservableList<Funcionario> ob_professores = FXCollections.observableArrayList(tb_tur_professores.getItems());
+            List<Funcionario> lista_professor = ob_professores.subList(0, ob_professores.size());
+            t.setFuncionario(lista_professor);
+            
+            limpar_turma();
+            
+            em.getTransaction().begin();
+            em.persist(t);
+            em.getTransaction().commit();
+            em.close();
+            emf.close();
+            
+            Open.abrirSucesso(getClass());
+            
+            add_cbox();
     }
 
     @FXML
@@ -192,7 +244,7 @@ public class Editar_TurmaController implements Initializable {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
         EntityManager em = emf.createEntityManager();
         
-        Turma tur = (Turma) cbox_tur_nome.getSelectionModel().getSelectedItem();
+        Turma tur = (Turma) nome_turma.getSelectionModel().getSelectedItem();
         
         Query query =em.createQuery("select t from Turma as t where t.tur_id = :tur_id");
         query.setParameter("tur_id", tur.getTur_id());
@@ -208,7 +260,7 @@ public class Editar_TurmaController implements Initializable {
 
     @FXML
     private void editar_editar_turma(ActionEvent event) {
-        if(cbox_tur_nome.getSelectionModel().getSelectedIndex()==-1){
+        if(cbox_tur_nome.getSelectionModel().getSelectedItem().equals("Selecione") && (cbox_tur_ano.getValue().equals(""))){
             System.out.println("Selecione uma Turma");
         }
         else{
@@ -238,7 +290,7 @@ public class Editar_TurmaController implements Initializable {
             System.out.println("Erro");
         }
         else{
-            //deshabilita_campos();
+            deshabilita_campos();
             
             Turma t = (Turma) query.getSingleResult();
             System.out.println(query.getSingleResult());
@@ -247,6 +299,7 @@ public class Editar_TurmaController implements Initializable {
     }
     
     public void editar(Turma t){
+        nome_turma.setValue(t);
         cbox_tur_ano.getSelectionModel().select(t.getTur_ano());
         cbox_tur_ano.getSelectionModel().select(t.getTur_ano());
         cbox_tur_serie_ano.getSelectionModel().select(t.getTur_serie_ano());
@@ -303,6 +356,17 @@ public class Editar_TurmaController implements Initializable {
 
     @FXML
     private void remover_professor(ActionEvent event) {
+        Funcionario f = tb_tur_professores.getSelectionModel().getSelectedItem();
+        if(f == null){
+            System.out.println("Tabela Vazio");
+        }else{
+        ObservableList a = tb_tur_professores.getItems();
+        ObservableList b = cbox_tur_professor.getItems();
+        a.remove(f);
+        b.add(f);
+        tb_tur_professores.setItems(a);
+        cbox_tur_professor.setItems(b);
+        }
     }
     //Funções FXML-->
 

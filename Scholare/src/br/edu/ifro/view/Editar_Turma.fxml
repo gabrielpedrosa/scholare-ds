@@ -231,6 +231,7 @@
                   <DropShadow />
                </effect>
             </Button>
+            <ComboBox fx:id="nome_turma" disable="true" layoutX="271.0" layoutY="22.0" prefHeight="30.0" prefWidth="280.0" />
          </children></Pane>
    </center>
    <top>

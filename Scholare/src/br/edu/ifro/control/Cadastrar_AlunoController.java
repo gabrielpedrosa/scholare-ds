@@ -79,8 +79,6 @@ public class Cadastrar_AlunoController implements Initializable, Basico_Cadastro
     @FXML
     private MenuItem listar_turmas;
     @FXML
-    private MenuItem lsitar_matriculas;
-    @FXML
     private MenuItem matriculas;
     @FXML
     private MenuItem relatorio_diario;
@@ -92,6 +90,8 @@ public class Cadastrar_AlunoController implements Initializable, Basico_Cadastro
     private Button bot_limpar;
     @FXML
     private Button bot_cancelar;
+    @FXML
+    private MenuItem listar_matriculas;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -222,7 +222,7 @@ public class Cadastrar_AlunoController implements Initializable, Basico_Cadastro
     }
     //Funções FXML-->
     
-    //Funções Menu<--
+     //Funções Menu<--
     @FXML
     private void aluno(ActionEvent event){
         Scene novascene = Open.abrirAluno(getClass()); 
@@ -290,6 +290,7 @@ public class Cadastrar_AlunoController implements Initializable, Basico_Cadastro
         Stage stage = (Stage) bot_cancelar.getScene().getWindow();
         stage.setScene(novascene);
     }
+    @FXML
     private void listar_matriculas(ActionEvent event) {
         Scene novascene = Open.abrirListarMatricula(getClass()); 
         Stage stage = (Stage) bot_cancelar.getScene().getWindow();
@@ -307,9 +308,5 @@ public class Cadastrar_AlunoController implements Initializable, Basico_Cadastro
         Stage stage = (Stage) bot_cancelar.getScene().getWindow();
         stage.setScene(novascene);
     }
-    //Funções Menu-->
-
-    @FXML
-    private void lsitar_matriculas(ActionEvent event) {
-    }
+    //Funções Menu--> 
 }

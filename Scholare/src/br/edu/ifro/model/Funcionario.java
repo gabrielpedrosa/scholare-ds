@@ -27,6 +27,7 @@ public class Funcionario implements Serializable {
     private String fun_logradouro;
     private String fun_bairro;
     private String fun_numero;
+    private String fun_complemento;
     private String fun_cidade;
     private String fun_estado;
     private String log_usuario;
@@ -144,6 +145,14 @@ public class Funcionario implements Serializable {
 
     public void setFun_numero(String fun_numero) {
         this.fun_numero = fun_numero;
+    }
+
+    public String getFun_complemento() {
+        return fun_complemento;
+    }
+
+    public void setFun_complemento(String fun_complemento) {
+        this.fun_complemento = fun_complemento;
     }
 
     public String getFun_cidade() {

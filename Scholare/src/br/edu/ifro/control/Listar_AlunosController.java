@@ -24,6 +24,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.swing.JOptionPane;
 
 //@author Gabriel Pedrosa
 public class Listar_AlunosController implements Initializable, Essencial {
@@ -71,6 +72,7 @@ public class Listar_AlunosController implements Initializable, Essencial {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         add_cbox();
+        bot_editar.setDisable(false);
     }
 
     @Override
@@ -111,28 +113,36 @@ public class Listar_AlunosController implements Initializable, Essencial {
         if(tb_alunos.getSelectionModel().getSelectedItem() == null){
             System.out.println("vazio");
         }
-        else{        
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
-            EntityManager em = emf.createEntityManager();
+        else{
+            Object[] options = { "Confirmar", "Cancelar" };
+            int retorno = JOptionPane.showOptionDialog(null, "Tem certeza que deseja Excluir", "Excluir", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+            
+            if(retorno == 0){
+                EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
+                EntityManager em = emf.createEntityManager();
 
-            Aluno alun = (Aluno) tb_alunos.getSelectionModel().getSelectedItem();
+                Aluno alun = (Aluno) tb_alunos.getSelectionModel().getSelectedItem();
 
-            Query query = em.createQuery("select a from Aluno as a where a.alu_id = :alu_id");
-            query.setParameter("alu_id", alun.getAlu_id());
+                Query query = em.createQuery("select a from Aluno as a where a.alu_id = :alu_id");
+                query.setParameter("alu_id", alun.getAlu_id());
 
-            Query querymatricula = em.createQuery("select m from Matricula as m where m.aluno = :alu_id");
-            querymatricula.setParameter("alu_id", tb_alunos.getSelectionModel().getSelectedItem());
+                Query querymatricula = em.createQuery("select m from Matricula as m where m.aluno = :alu_id");
+                querymatricula.setParameter("alu_id", tb_alunos.getSelectionModel().getSelectedItem());
 
-            Aluno a = (Aluno) query.getSingleResult();
-            Matricula m = (Matricula) querymatricula.getSingleResult();
+                Aluno a = (Aluno) query.getSingleResult();
+                Matricula m = (Matricula) querymatricula.getSingleResult();
 
-            em.getTransaction().begin();
-            em.remove(m);
-            em.remove(a);
-            em.getTransaction().commit();
+                em.getTransaction().begin();
+                em.remove(m);
+                em.remove(a);
+                em.getTransaction().commit();
 
-            em.close();
-            selecionar_turma(event);
+                em.close();
+                selecionar_turma(event);
+            }
+            else{
+                
+            }
         }
     }
     @FXML

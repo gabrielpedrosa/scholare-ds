@@ -164,6 +164,7 @@ public class Editar_AlunoController implements Initializable {
         cbox_alu_estado.setDisable(true);
         txt_alu_deficiencia.setDisable(true);
         bot_salvar.setDisable(true);
+        cbox_alu_nome.setDisable(true);
     }
     
     public void habilita_campos(){
@@ -209,7 +210,7 @@ public class Editar_AlunoController implements Initializable {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
         EntityManager em = emf.createEntityManager();
         
-        Aluno alu = (Aluno) cbox_alu_nome.getSelectionModel().getSelectedItem();
+        Aluno alu = (Aluno) nome_aluno.getSelectionModel().getSelectedItem();
         
         Query query = em.createQuery("select a from Aluno as a where a.alu_id = :alu_id");
         query.setParameter("alu_id", alu.getAlu_id());
@@ -249,13 +250,13 @@ public class Editar_AlunoController implements Initializable {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
         EntityManager em = emf.createEntityManager();
         
-        Aluno alun = (Aluno) cbox_alu_nome.getSelectionModel().getSelectedItem();
+        Aluno alun = (Aluno) nome_aluno.getSelectionModel().getSelectedItem();
         
         Query query = em.createQuery("select a from Aluno as a where a.alu_id = :alu_id");
         query.setParameter("alu_id", alun.getAlu_id());
         
         Query querymatricula = em.createQuery("select m from Matricula as m where m.aluno = :alu_id");
-        querymatricula.setParameter("alu_id", cbox_alu_nome.getSelectionModel().getSelectedItem());
+        querymatricula.setParameter("alu_id", nome_aluno.getSelectionModel().getSelectedItem());
         
         Aluno a = (Aluno) query.getSingleResult();
         Matricula m = (Matricula) querymatricula.getSingleResult();
@@ -300,9 +301,7 @@ public class Editar_AlunoController implements Initializable {
             }
             else{
                 Aluno a = (Aluno) query.getSingleResult();
-                System.out.println(query.getSingleResult());
                 editar(a);
-                
             }
     }
     

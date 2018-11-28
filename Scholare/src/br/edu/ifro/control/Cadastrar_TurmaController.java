@@ -252,7 +252,7 @@ public class Cadastrar_TurmaController implements Initializable, Basico_Cadastro
     }
     //Funções FXML-->
 
-    //Funções Menu<--
+   //Funções Menu<--
     @FXML
     private void aluno(ActionEvent event){
         Scene novascene = Open.abrirAluno(getClass()); 
@@ -288,14 +288,19 @@ public class Cadastrar_TurmaController implements Initializable, Basico_Cadastro
         Scene novascene = Open.abrirExibirTurma(getClass()); 
         Stage stage = (Stage) bot_cancelar.getScene().getWindow();
         stage.setScene(novascene);
-        
+    }
+    
+    @FXML
+    private void matriculas(ActionEvent event) {
+        Scene novascene = Open.abrirExibirMatricula(getClass()); 
+        Stage stage = (Stage) bot_cancelar.getScene().getWindow();
+        stage.setScene(novascene);
     }
     @FXML
     private void sobre(ActionEvent event) {
         Scene novascene = Open.abrirSobre(getClass()); 
         Stage stage = (Stage) bot_cancelar.getScene().getWindow();
-        stage.setScene(novascene);
-        
+        stage.setScene(novascene); 
     }
     @FXML
     private void listar_alunos(ActionEvent event) {
@@ -315,7 +320,8 @@ public class Cadastrar_TurmaController implements Initializable, Basico_Cadastro
         Stage stage = (Stage) bot_cancelar.getScene().getWindow();
         stage.setScene(novascene);
     }
-    private void lsitar_matriculas(ActionEvent event) {
+    @FXML
+    private void listar_matriculas(ActionEvent event) {
         Scene novascene = Open.abrirListarMatricula(getClass()); 
         Stage stage = (Stage) bot_cancelar.getScene().getWindow();
         stage.setScene(novascene);
@@ -332,13 +338,5 @@ public class Cadastrar_TurmaController implements Initializable, Basico_Cadastro
         Stage stage = (Stage) bot_cancelar.getScene().getWindow();
         stage.setScene(novascene);
     }
-    //Funções Menu-->
-
-    @FXML
-    private void listar_matriculas(ActionEvent event) {
-    }
-
-    @FXML
-    private void matriculas(ActionEvent event) {
-    }   
+    //Funções Menu--> 
 }

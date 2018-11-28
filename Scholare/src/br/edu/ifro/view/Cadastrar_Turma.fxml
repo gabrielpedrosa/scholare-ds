@@ -23,14 +23,6 @@
    <left>
       <Pane prefHeight="600.0" prefWidth="800.0" styleClass="cadastro-fundo" stylesheets="@../style/style.css" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="30.0" layoutY="90.0" text="Ano: *" textFill="WHITE">
-               <font>
-                  <Font name="Arial Bold" size="18.0" />
-               </font>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Label>
             <Label layoutX="15.0" layoutY="5.0" text="Cadastrar Turma" textFill="#d3d3d3" textOverrun="CLIP">
                <font>
                   <Font name="System Bold" size="40.0" />
@@ -40,6 +32,24 @@
                </effect>
             </Label>
             <Separator layoutX="15.0" layoutY="60.0" prefHeight="1.0" prefWidth="500.0" />
+            <Label layoutX="30.0" layoutY="90.0" text="Ano: *" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Label>
+            <ComboBox fx:id="cbox_tur_ano" layoutX="30.0" layoutY="120.0" prefHeight="35.0" prefWidth="100.0" />
+            <Label layoutX="140.0" layoutY="90.0" text="Nível de Educação: *" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Label>
+            <ComboBox fx:id="cbox_tur_tipo" layoutX="140.0" layoutY="120.0" prefHeight="35.0" prefWidth="200.0" />
             <Label layoutX="350.0" layoutY="90.0" text="Série/Ano: *" textFill="#f5f5f5">
                <font>
                   <Font name="Arial Bold" size="18.0" />
@@ -48,6 +58,7 @@
                   <DropShadow />
                </effect>
             </Label>
+            <ComboBox fx:id="cbox_tur_serie_ano" layoutX="350.0" layoutY="120.0" prefHeight="35.0" prefWidth="110.0" />
             <Label layoutX="475.0" layoutY="90.0" text="Classe: *" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="18.0" />
@@ -75,6 +86,80 @@
                   <Blend />
                </effect>
             </RadioButton>
+            <RadioButton fx:id="rad_tur_c" layoutX="575.0" layoutY="115.0" mnemonicParsing="false" text="C" textFill="WHITE" toggleGroup="$tg_tur_turno">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+               <effect>
+                  <Blend />
+               </effect>
+            </RadioButton>
+            <RadioButton fx:id="rad_tur_d" layoutX="475.0" layoutY="150.0" mnemonicParsing="false" text="D" textFill="WHITE" toggleGroup="$tg_tur_turno">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+               <effect>
+                  <Blend />
+               </effect>
+            </RadioButton>
+            <RadioButton fx:id="rad_tur_e" layoutX="525.0" layoutY="150.0" mnemonicParsing="false" text="E" textFill="WHITE" toggleGroup="$tg_tur_turno">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+               <effect>
+                  <Blend />
+               </effect>
+            </RadioButton>
+            <RadioButton fx:id="rad_tur_f" layoutX="575.0" layoutY="150.0" mnemonicParsing="false" text="F" textFill="WHITE" toggleGroup="$tg_tur_turno">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font>
+               <effect>
+                  <Blend />
+               </effect>
+            </RadioButton>
+            <Label layoutX="630.0" layoutY="87.0" text="Turno: *" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Label>
+            <ComboBox fx:id="cbox_tur_turno" layoutX="630.0" layoutY="117.0" prefHeight="35.0" prefWidth="140.0" />
+            <Label layoutX="30.0" layoutY="170.0" text="Professor: *" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="18.0" />
+               </font>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Label>
+            <ComboBox fx:id="cbox_tur_professor" layoutX="30.0" layoutY="200.0" prefHeight="35.0" prefWidth="450.0" />
+            <Button fx:id="bot_tur_inserir" layoutX="560.0" layoutY="200.0" mnemonicParsing="false" onAction="#inserir_professor" prefHeight="40.0" prefWidth="150.0" styleClass="but" stylesheets="@../style/style.css" text="Inserir Professor">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
+            <Button fx:id="bot_tur_remover" layoutX="560.0" layoutY="270.0" mnemonicParsing="false" onAction="#remover_professor" prefHeight="40.0" prefWidth="150.0" styleClass="but" stylesheets="@../style/style.css" text="Remover Professor">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
+            <TableView fx:id="tb_tur_professores" layoutX="30.0" layoutY="260.0" prefHeight="200.0" prefWidth="450.0">
+              <columns>
+                <TableColumn maxWidth="50.0" minWidth="50.0" prefWidth="50.0" text="Código">
+                <cellValueFactory>
+                        <PropertyValueFactory property="fun_id" />
+                  </cellValueFactory>
+                </TableColumn>
+                <TableColumn maxWidth="360.0" minWidth="360.0" prefWidth="360.0" text="Nome">
+                <cellValueFactory>
+                        <PropertyValueFactory property="fun_nome" />
+                  </cellValueFactory>
+                </TableColumn>
+              </columns>
+            </TableView>
             <Group layoutX="100.0" layoutY="470.0">
                <children>
                   <Button fx:id="bot_cadastrar" alignment="BOTTOM_CENTER" layoutX="9.0" layoutY="9.0" mnemonicParsing="false" onAction="#cadastrar_turma" prefHeight="80.0" prefWidth="120.0" styleClass="but-salvar" stylesheets="@../style/style.css" text="Cadastrar">
@@ -111,91 +196,6 @@
                   </Button>
                </children>
             </Group>
-            <ComboBox fx:id="cbox_tur_ano" layoutX="30.0" layoutY="120.0" prefHeight="35.0" prefWidth="100.0" />
-            <ComboBox fx:id="cbox_tur_tipo" layoutX="140.0" layoutY="120.0" prefHeight="35.0" prefWidth="200.0" />
-            <Label layoutX="140.0" layoutY="90.0" text="Nível de Educação: *" textFill="WHITE">
-               <font>
-                  <Font name="Arial Bold" size="18.0" />
-               </font>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Label>
-            <Label layoutX="30.0" layoutY="170.0" text="Professor: *" textFill="WHITE">
-               <font>
-                  <Font name="Arial Bold" size="18.0" />
-               </font>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Label>
-            <ComboBox fx:id="cbox_tur_professor" layoutX="30.0" layoutY="200.0" prefHeight="35.0" prefWidth="450.0" />
-            <Button fx:id="bot_tur_inserir" layoutX="560.0" layoutY="200.0" mnemonicParsing="false" onAction="#inserir_professor" prefHeight="40.0" prefWidth="150.0" styleClass="but" stylesheets="@../style/style.css" text="Inserir Professor">
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Button>
-            <TableView fx:id="tb_tur_professores" layoutX="30.0" layoutY="260.0" prefHeight="200.0" prefWidth="450.0">
-              <columns>
-                <TableColumn maxWidth="50.0" minWidth="50.0" prefWidth="50.0" text="Código">
-                <cellValueFactory>
-                        <PropertyValueFactory property="fun_id" />
-                  </cellValueFactory>
-                </TableColumn>
-                <TableColumn maxWidth="360.0" minWidth="360.0" prefWidth="360.0" text="Nome">
-                <cellValueFactory>
-                        <PropertyValueFactory property="fun_nome" />
-                  </cellValueFactory>
-                </TableColumn>
-              </columns>
-            </TableView>
-            <ComboBox fx:id="cbox_tur_serie_ano" layoutX="350.0" layoutY="120.0" prefHeight="35.0" prefWidth="110.0" />
-            <RadioButton fx:id="rad_tur_c" layoutX="575.0" layoutY="115.0" mnemonicParsing="false" text="C" textFill="WHITE" toggleGroup="$tg_tur_turno">
-               <font>
-                  <Font name="Arial" size="16.0" />
-               </font>
-               <effect>
-                  <Blend />
-               </effect>
-            </RadioButton>
-            <RadioButton fx:id="rad_tur_d" layoutX="475.0" layoutY="150.0" mnemonicParsing="false" text="D" textFill="WHITE" toggleGroup="$tg_tur_turno">
-               <font>
-                  <Font name="Arial" size="16.0" />
-               </font>
-               <effect>
-                  <Blend />
-               </effect>
-            </RadioButton>
-            <RadioButton fx:id="rad_tur_e" layoutX="525.0" layoutY="150.0" mnemonicParsing="false" text="E" textFill="WHITE" toggleGroup="$tg_tur_turno">
-               <font>
-                  <Font name="Arial" size="16.0" />
-               </font>
-               <effect>
-                  <Blend />
-               </effect>
-            </RadioButton>
-            <RadioButton fx:id="rad_tur_f" layoutX="575.0" layoutY="150.0" mnemonicParsing="false" text="F" textFill="WHITE" toggleGroup="$tg_tur_turno">
-               <font>
-                  <Font name="Arial" size="16.0" />
-               </font>
-               <effect>
-                  <Blend />
-               </effect>
-            </RadioButton>
-            <ComboBox fx:id="cbox_tur_turno" layoutX="630.0" layoutY="117.0" prefHeight="35.0" prefWidth="140.0" />
-            <Label layoutX="630.0" layoutY="87.0" text="Turno: *" textFill="WHITE">
-               <font>
-                  <Font name="Arial Bold" size="18.0" />
-               </font>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Label>
-            <Button fx:id="bot_tur_remover" layoutX="560.0" layoutY="270.0" mnemonicParsing="false" onAction="#remover_professor" prefHeight="40.0" prefWidth="150.0" styleClass="but" stylesheets="@../style/style.css" text="Remover Professor">
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Button>
          </children></Pane>
    </left>
    <top>

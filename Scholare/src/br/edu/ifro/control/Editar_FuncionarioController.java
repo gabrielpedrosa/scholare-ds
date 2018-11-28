@@ -1,5 +1,6 @@
 package br.edu.ifro.control;
 
+import br.edu.ifro.model.Disciplina;
 import br.edu.ifro.model.Funcionario;
 import br.edu.ifro.util.Open;
 import java.net.URL;
@@ -67,8 +68,6 @@ public class Editar_FuncionarioController implements Initializable {
     @FXML
     private PasswordField pw_fun_confirmarsenha;
     @FXML
-    private ToggleGroup tg_fun_sexo;
-    @FXML
     private MenuItem aluno;
     @FXML
     private MenuItem funcionario;
@@ -99,9 +98,9 @@ public class Editar_FuncionarioController implements Initializable {
     @FXML
     private TextField txt_fun_complemento;
     @FXML
-    private TableView<?> tb_fun_disciplina;
+    private TableView<Disciplina> tb_fun_disciplina;
     @FXML
-    private ComboBox<?> cbox_fun_disciplina;
+    private ComboBox<Disciplina> cbox_fun_disciplina;
     @FXML
     private Button bot_fun_disciplina;
     @FXML
@@ -118,10 +117,15 @@ public class Editar_FuncionarioController implements Initializable {
     private Button bot_editar;
     @FXML
     private Button bot_cancelar;
+    @FXML
+    private ComboBox nome_funcionario;
+    @FXML
+    private ToggleGroup tg_sexo;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         inicia();
+        deshabilita_campos();
     }
 
     public void inicia(){
@@ -155,6 +159,7 @@ public class Editar_FuncionarioController implements Initializable {
         txt_fun_logradouro.setDisable(true);
         txt_fun_bairro.setDisable(true);
         txt_fun_numero.setDisable(true);
+        txt_fun_complemento.setDisable(true);
         txt_fun_cidade.setDisable(true);
         cbox_fun_estado.setDisable(true);
         txt_fun_email.setDisable(true);
@@ -177,11 +182,13 @@ public class Editar_FuncionarioController implements Initializable {
         txt_fun_logradouro.setDisable(false);
         txt_fun_bairro.setDisable(false);
         txt_fun_numero.setDisable(false);
+        txt_fun_complemento.setDisable(false);
         txt_fun_cidade.setDisable(false);
         cbox_fun_estado.setDisable(false);
         txt_fun_email.setDisable(false);
         bot_deletar.setDisable(false);
         bot_salvar.setDisable(false);
+        
     }
     
     public void limpar_professor(ActionEvent event) {
@@ -208,7 +215,7 @@ public class Editar_FuncionarioController implements Initializable {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
         EntityManager em = emf.createEntityManager();
         
-        Funcionario fun = (Funcionario) cbox_fun_nome.getSelectionModel().getSelectedItem();
+        Funcionario fun = (Funcionario) nome_funcionario.getSelectionModel().getSelectedItem();
         
         Query query = em.createQuery("select f from Funcionario as f where f.fun_id = :fun_id");
         query.setParameter("fun_id", fun.getFun_id());
@@ -216,7 +223,7 @@ public class Editar_FuncionarioController implements Initializable {
         fun = (Funcionario) query.getSingleResult();
         
         fun.setFun_nome(txt_fun_nome.getText());
-        RadioButton radioselected = (RadioButton) tg_fun_sexo.getSelectedToggle();
+        RadioButton radioselected = (RadioButton) tg_sexo.getSelectedToggle();
         String rad_fun_sexo = radioselected.getText();
         fun.setFun_sexo(rad_fun_sexo);
         fun.setFun_cpf(txt_fun_cpf.getText());
@@ -227,6 +234,7 @@ public class Editar_FuncionarioController implements Initializable {
         fun.setFun_logradouro(txt_fun_logradouro.getText());
         fun.setFun_bairro(txt_fun_bairro.getText());
         fun.setFun_numero(txt_fun_numero.getText());
+        fun.setFun_complemento(txt_fun_complemento.getText());
         fun.setFun_cidade(txt_fun_cidade.getText());
         fun.setFun_estado(cbox_fun_estado.getSelectionModel().getSelectedItem().toString());
         fun.setFun_email(txt_fun_email.getText());
@@ -252,7 +260,7 @@ public class Editar_FuncionarioController implements Initializable {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
         EntityManager em = emf.createEntityManager();
         
-        Funcionario func = (Funcionario) cbox_fun_nome.getSelectionModel().getSelectedItem();
+        Funcionario func = (Funcionario) nome_funcionario.getSelectionModel().getSelectedItem();
         
         Query query =em.createQuery("select a from Aluno as a where a.alu_id = :alu_id");
         query.setParameter("alu_id", func.getFun_id());
@@ -268,8 +276,8 @@ public class Editar_FuncionarioController implements Initializable {
 
     @FXML
     private void editar_editar_funcionario(ActionEvent event) {
-        if(cbox_fun_nome.getSelectionModel().getSelectedItem().equals("Selecione")){
-            System.out.println("Selecione um Aluno");
+        if(cbox_fun_nome.getSelectionModel().getSelectedItem().equals("Selecione")&& (txt_fun_nome.getText().equals(""))){
+            System.out.println("Selecione um Funcionario");
         }
         else{
             habilita_campos();
@@ -303,13 +311,15 @@ public class Editar_FuncionarioController implements Initializable {
     }
     
     public void editar(Funcionario f){
-        cbox_fun_nome.setValue(f);
+        nome_funcionario.setValue(f);
         txt_fun_nome.setText(f.getFun_nome());
         if(f.getFun_sexo().equals("Feminino")){
             rad_fun_feminino.setSelected(true);
+            rad_fun_masculino.setSelected(false);
         }
         else{
             rad_fun_masculino.setSelected(true);
+            rad_fun_feminino.setSelected(false);
         }
         txt_fun_cpf.setText(f.getFun_nome());
         txt_fun_rg.setText(f.getFun_rg());
@@ -322,6 +332,7 @@ public class Editar_FuncionarioController implements Initializable {
         txt_fun_logradouro.setText(f.getFun_logradouro());
         txt_fun_bairro.setText(f.getFun_bairro());
         txt_fun_numero.setText(f.getFun_numero());
+        txt_fun_complemento.setText(f.getFun_complemento());
         txt_fun_cidade.setText(f.getFun_cidade());
         cbox_fun_estado.getSelectionModel().select(f.getFun_estado());
         txt_fun_email.setText(f.getFun_email());
@@ -332,10 +343,40 @@ public class Editar_FuncionarioController implements Initializable {
     
     @FXML
     private void verifica_funcao(ActionEvent event) {
+        if(cbox_fun_funcao.getSelectionModel().getSelectedItem().equals("Secretária")){
+            cbox_fun_disciplina.setDisable(true);
+            tb_fun_disciplina.setDisable(true);
+            bot_fun_disciplina.setDisable(true);
+        }
+        else{
+            cbox_fun_disciplina.setDisable(false);
+            tb_fun_disciplina.setDisable(false);
+            bot_fun_disciplina.setDisable(false);
+        }
     }
 
     @FXML
     private void fun_inserir(ActionEvent event) {
+        String cbox_disciplina = cbox_fun_disciplina.getSelectionModel().getSelectedItem().toString();
+        ObservableList<Disciplina> ob_lastdisciplina = FXCollections.observableArrayList(tb_fun_disciplina.getItems());
+        
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
+        EntityManager em = emf.createEntityManager();
+        
+        Query query = em.createQuery("select d from Disciplina as d where d.dis_nome = :dis_nome");
+        query.setParameter("dis_nome", cbox_disciplina);
+        
+        List<Disciplina> list_disciplina = query.getResultList();
+        list_disciplina.addAll(ob_lastdisciplina);
+        
+        ObservableList<Disciplina> ob_disciplina = FXCollections.observableArrayList(list_disciplina);
+
+        tb_fun_disciplina.setItems(ob_disciplina);
+        
+        Disciplina d = cbox_fun_disciplina.getSelectionModel().getSelectedItem();
+        ObservableList a = cbox_fun_disciplina.getItems();
+        a.remove(d);
+        cbox_fun_disciplina.setItems(a);
     }
     //Funções FXML-->
     

@@ -66,6 +66,7 @@ public class Listar_MatriculasController implements Initializable, Essencial {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         add_cbox();
+        bot_editar.setDisable(false);
     }
     
     @Override
