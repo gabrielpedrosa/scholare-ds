@@ -95,7 +95,6 @@ public class Cadastrar_FuncionarioController implements Initializable, Basico_Ca
     private MenuItem turmas;
     @FXML
     private MenuItem sobre;
-    private final ObservableList ob_nulo = FXCollections.observableArrayList("");
     @FXML
     private MenuItem listar_alunos;
     @FXML
@@ -116,6 +115,9 @@ public class Cadastrar_FuncionarioController implements Initializable, Basico_Ca
     private Button bot_limpar;
     @FXML
     private Button bot_cancelar;
+    @FXML
+    private Button bot_fun_disciplin;
+    private final ObservableList ob_nulo = FXCollections.observableArrayList("");
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -123,18 +125,26 @@ public class Cadastrar_FuncionarioController implements Initializable, Basico_Ca
         add_disciplinas();
         add_cbox();
         add_data();
+        txt_fun_nome.isFocused();
     }
     
     @Override
-    public void add_cbox(){
-        ObservableList ob_estados = FXCollections.observableArrayList("ACRE", "RONDONIA", "MATO GROSSO", "MATO GROSSO DO SUL");
-        cbox_fun_estado.setItems(ob_estados);
-        
+    public void add_cbox(){        
         ObservableList ob_funcao = FXCollections.observableArrayList("Secretária", "Professor");
         cbox_fun_funcao.setItems(ob_funcao);
                 
-        ObservableList ob_pergunta = FXCollections.observableArrayList("Pergunta", "Pergunta 02");
+        ObservableList ob_pergunta = FXCollections.observableArrayList("Qual o Nome do Seu Cachorro?", "Qual o nome da Sua Mãe?");
         cbox_fun_pergunta.setItems(ob_pergunta);
+        
+        add_estados();
+    }
+    
+    public void add_estados(){
+        ObservableList ob_estados = FXCollections.observableArrayList("Acre", "Alagoas", "Amapá", "Amazonas", "Bahia", "Ceará",
+                "Distrito Federal", "Espírito Santo", "Goiás", "Maranhão", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais",
+                "Pará", "Paraíba", "Paraná", "Pernambuco", "Piauí", "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul",
+                "Rondônia", "Roraima", "Santa Catarina", "São Paulo", "Sergipe", "Tocantins");
+        cbox_fun_estado.setItems(ob_estados);
     }
     
     @Override
@@ -292,7 +302,7 @@ public class Cadastrar_FuncionarioController implements Initializable, Basico_Ca
         pw_fun_confirmarsenha.setText("");
         cbox_fun_pergunta.setValue(null);
         txt_fun_resposta.setText("");
-        tb_fun_disciplina.setItems(ob_nulo);
+        tb_fun_disciplina.setItems(null);
         cbox_fun_disciplina.setDisable(true);
         tb_fun_disciplina.setDisable(true);
         bot_fun_disciplina.setDisable(true);
@@ -308,26 +318,30 @@ public class Cadastrar_FuncionarioController implements Initializable, Basico_Ca
     
     @FXML
     private void fun_inserir(ActionEvent event) {
+        ObservableList<Disciplina> ob_lastdisciplina = null;
+        List<Disciplina> list_disciplina = null;
         String cbox_disciplina = cbox_fun_disciplina.getSelectionModel().getSelectedItem().toString();
-        ObservableList<Disciplina> ob_lastdisciplina = FXCollections.observableArrayList(tb_fun_disciplina.getItems());
-        
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
-        EntityManager em = emf.createEntityManager();
-        
-        Query query = em.createQuery("select d from Disciplina as d where d.dis_nome = :dis_nome");
-        query.setParameter("dis_nome", cbox_disciplina);
-        
-        List<Disciplina> list_disciplina = query.getResultList();
-        list_disciplina.addAll(ob_lastdisciplina);
-        
-        ObservableList<Disciplina> ob_disciplina = FXCollections.observableArrayList(list_disciplina);
+        if(tb_fun_disciplina.getItems() != null){
+            ob_lastdisciplina = FXCollections.observableArrayList(tb_fun_disciplina.getItems());
+            
+        }else{
+            ob_lastdisciplina = ob_nulo;
+        }
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
+            EntityManager em = emf.createEntityManager();
 
-        tb_fun_disciplina.setItems(ob_disciplina);
-        
-        Disciplina d = cbox_fun_disciplina.getSelectionModel().getSelectedItem();
-        ObservableList a = cbox_fun_disciplina.getItems();
-        a.remove(d);
-        cbox_fun_disciplina.setItems(a);
+            Query query = em.createQuery("select d from Disciplina as d where d.dis_nome = :dis_nome");
+            query.setParameter("dis_nome", cbox_disciplina);
+
+            list_disciplina = query.getResultList();
+            list_disciplina.addAll(ob_lastdisciplina);
+            ObservableList<Disciplina> ob_disciplina = FXCollections.observableArrayList(list_disciplina);
+
+            tb_fun_disciplina.setItems(ob_disciplina);
+            Disciplina d = cbox_fun_disciplina.getSelectionModel().getSelectedItem();
+            ObservableList a = cbox_fun_disciplina.getItems();
+            a.remove(d);
+            cbox_fun_disciplina.setItems(a);
     }
 
     @FXML
@@ -432,4 +446,19 @@ public class Cadastrar_FuncionarioController implements Initializable, Basico_Ca
         stage.setScene(novascene);
     }
     //Funções Menu-->
+
+    @FXML
+    private void fun_remover(ActionEvent event) {
+        Disciplina d = tb_fun_disciplina.getSelectionModel().getSelectedItem();
+        if(d == null){
+            System.out.println("Tabela Vazio");
+        }else{
+        ObservableList a = tb_fun_disciplina.getItems();
+        ObservableList b = cbox_fun_disciplina.getItems();
+        a.remove(d);
+        b.add(d);
+        tb_fun_disciplina.setItems(a);
+        cbox_fun_disciplina.setItems(b);
+        }
+    }
 }

@@ -98,13 +98,21 @@ public class Cadastrar_AlunoController implements Initializable, Basico_Cadastro
        add_mask();
        add_data();
        add_cbox();
+       add_estados();
     }
     
     @Override
     public void add_cbox(){
-       ObservableList ob_estados = FXCollections.observableArrayList("ACRE", "RONDONIA", "MATO GROSSO", "MATO GROSSO DO SUL");
-       cbox_alu_estado.setItems(ob_estados);
+       
     }
+    public void add_estados(){
+        ObservableList ob_estados = FXCollections.observableArrayList("Acre", "Alagoas", "Amapá", "Amazonas", "Bahia", "Ceará",
+                "Distrito Federal", "Espírito Santo", "Goiás", "Maranhão", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais",
+                "Pará", "Paraíba", "Paraná", "Pernambuco", "Piauí", "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul",
+                "Rondônias", "Roraima", "Santa Catarina", "São Paulo", "Sergipe", "Tocantins");
+        cbox_alu_estado.setItems(ob_estados);
+    }
+    
     @Override
     public void add_mask(){
         MaskFieldUtil.cpfField(txt_alu_cpf);
@@ -114,7 +122,6 @@ public class Cadastrar_AlunoController implements Initializable, Basico_Cadastro
         MaskFieldUtil.dateField(txt_alu_datanascimento);
     }
     
-
     @Override
     public void add_data(){
        java.util.Date d = new java.util.Date();

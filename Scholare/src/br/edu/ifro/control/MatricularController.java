@@ -231,7 +231,6 @@ public class MatricularController implements Initializable {
     private void nao(ActionEvent event) {
         cbox_mat_turma.setDisable(false);
     }
-    
     //Funções FXML-->
 
     //Funções Menu<--

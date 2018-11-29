@@ -359,7 +359,12 @@
                                     <Font name="Arial Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="bot_fun_disciplina" layoutX="220.0" layoutY="160.0" mnemonicParsing="false" onAction="#fun_inserir" styleClass="but" stylesheets="@../style/style.css" text="Inserir Disciplina">
+                              <Button fx:id="bot_fun_disciplina" disable="true" layoutX="220.0" layoutY="160.0" mnemonicParsing="false" onAction="#fun_inserir" styleClass="but" stylesheets="@../style/style.css" text="Inserir Disciplina">
+                                 <font>
+                                    <Font name="Arial" size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="bot_fun_disciplin" disable="true" layoutX="73.0" layoutY="160.0" mnemonicParsing="false" onAction="#fun_remover" styleClass="but" stylesheets="@../style/style.css" text="Remover Disciplina">
                                  <font>
                                     <Font name="Arial" size="14.0" />
                                  </font>

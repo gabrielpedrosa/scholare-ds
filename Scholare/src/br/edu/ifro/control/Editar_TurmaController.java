@@ -1,5 +1,6 @@
 package br.edu.ifro.control;
 
+import br.edu.ifro.model.Disciplina;
 import br.edu.ifro.model.Funcionario;
 import br.edu.ifro.model.Turma;
 import br.edu.ifro.util.Open;
@@ -159,7 +160,6 @@ public class Editar_TurmaController implements Initializable {
         tb_tur_professores.setDisable(true);
         bot_salvar.setDisable(true);
         bot_deletar.setDisable(true);
-        bot_editar.setDisable(true);
         bot_tur_inserir.setDisable(true);
         bot_tur_remover.setDisable(true);
     }
@@ -179,7 +179,6 @@ public class Editar_TurmaController implements Initializable {
         tb_tur_professores.setDisable(false);
         bot_salvar.setDisable(false);
         bot_deletar.setDisable(false);
-        bot_editar.setDisable(false);
         bot_tur_inserir.setDisable(false);
         bot_tur_remover.setDisable(false);
     }
@@ -198,7 +197,7 @@ public class Editar_TurmaController implements Initializable {
     //Funções FXML<--
     @FXML
     private void salvar_editar_turma(ActionEvent event) {
-         EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
         EntityManager em = emf.createEntityManager();
         
         Turma tur = (Turma) nome_turma.getSelectionModel().getSelectedItem();
@@ -282,7 +281,6 @@ public class Editar_TurmaController implements Initializable {
         
         Turma tur = (Turma) cbox_tur_nome.getSelectionModel().getSelectedItem();
         
-        
         Query query = em.createQuery("select t from Turma as t where t.tur_nome = :tur_nome");
         query.setParameter("tur_nome", cbox_tur_nome.getSelectionModel().getSelectedItem().toString());
         
@@ -328,6 +326,23 @@ public class Editar_TurmaController implements Initializable {
         ObservableList<Funcionario> obfuncionario = FXCollections.observableArrayList(t.getFuncionario());
         tb_tur_professores.setItems(obfuncionario);
         
+        ObservableList<Funcionario> f = cbox_tur_professor.getItems();
+        
+        //List<Funcionario> a = t.getFuncionario();
+        //bservableList ab = FXCollections.observableArrayList(a);
+        //cbox_tur_professor.setItems(ab);
+        
+        for(Funcionario z :obfuncionario){
+            Funcionario h = null;
+            for(Funcionario y : f){
+                if(y.getFun_id() == z.getFun_id()){
+                    h = y;
+                }
+            }
+            if(h != null){
+            f.remove(h);
+            }
+        }
     }
     
     @FXML

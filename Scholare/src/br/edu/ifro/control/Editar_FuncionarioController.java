@@ -2,7 +2,9 @@ package br.edu.ifro.control;
 
 import br.edu.ifro.model.Disciplina;
 import br.edu.ifro.model.Funcionario;
+import br.edu.ifro.model.Turma;
 import br.edu.ifro.util.Open;
+import br.eti.diegofonseca.MaskFieldUtil;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -106,7 +108,7 @@ public class Editar_FuncionarioController implements Initializable {
     @FXML
     private TextField txt_fun_resposta;
     @FXML
-    private ComboBox<?> cbox_fun_pergunta;
+    private ComboBox cbox_fun_pergunta;
     @FXML
     private MenuItem listar_matriculas;
     @FXML
@@ -121,11 +123,14 @@ public class Editar_FuncionarioController implements Initializable {
     private ComboBox nome_funcionario;
     @FXML
     private ToggleGroup tg_sexo;
+    @FXML
+    private Button bot_fun_disciplin;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         inicia();
         deshabilita_campos();
+        add_disciplinas();
     }
 
     public void inicia(){
@@ -142,6 +147,40 @@ public class Editar_FuncionarioController implements Initializable {
         ObservableList obfuncionario = FXCollections.observableArrayList(list_funcionario);
         cbox_fun_nome.setItems(obfuncionario);
         cbox_fun_nome.getSelectionModel().select("Selecione");
+        
+        ObservableList ob_funcao = FXCollections.observableArrayList("Secretária", "Professor");
+        cbox_fun_funcao.setItems(ob_funcao);
+                
+        ObservableList ob_pergunta = FXCollections.observableArrayList("Qual o Nome do Seu Cachorro?", "Qual o nome da Sua Mãe?");
+        cbox_fun_pergunta.setItems(ob_pergunta);
+        
+        add_estados();
+    }
+    public void add_estados(){
+        ObservableList ob_estados = FXCollections.observableArrayList("Acre", "Alagoas", "Amapá", "Amazonas", "Bahia", "Ceará",
+                "Distrito Federal", "Espírito Santo", "Goiás", "Maranhão", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais",
+                "Pará", "Paraíba", "Paraná", "Pernambuco", "Piauí", "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul",
+                "Rondônias", "Roraima", "Santa Catarina", "São Paulo", "Sergipe", "Tocantins");
+        cbox_fun_estado.setItems(ob_estados);
+    }
+    
+    public void add_disciplinas(){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
+        EntityManager em = emf.createEntityManager();
+        
+        Query querydisciplina = em.createQuery("select d from Disciplina as d");
+        List<Disciplina> list_disciplina = querydisciplina.getResultList();
+        
+        ObservableList<Disciplina> obdisciplina = FXCollections.observableArrayList(list_disciplina);
+        cbox_fun_disciplina.setItems(obdisciplina);
+    }
+    
+    public void add_mask(){
+        MaskFieldUtil.cpfField(txt_fun_cpf);
+        MaskFieldUtil.foneField(txt_fun_telefone);
+        MaskFieldUtil.numericField(txt_fun_rg);
+        MaskFieldUtil.numericField(txt_fun_numero);
+        MaskFieldUtil.dateField(txt_fun_datanascimento);
     }
     
     public void deshabilita_campos(){
@@ -163,8 +202,14 @@ public class Editar_FuncionarioController implements Initializable {
         txt_fun_cidade.setDisable(true);
         cbox_fun_estado.setDisable(true);
         txt_fun_email.setDisable(true);
+        txt_fun_resposta.setDisable(true);
+        cbox_fun_pergunta.setDisable(true);
         bot_salvar.setDisable(true);
         bot_deletar.setDisable(true);
+        tb_fun_disciplina.setDisable(true);
+        cbox_fun_disciplina.setDisable(true);
+        bot_fun_disciplina.setDisable(true);
+        bot_fun_disciplin.setDisable(true);
     }
     
     public void habilita_campos(){
@@ -186,8 +231,14 @@ public class Editar_FuncionarioController implements Initializable {
         txt_fun_cidade.setDisable(false);
         cbox_fun_estado.setDisable(false);
         txt_fun_email.setDisable(false);
+        txt_fun_resposta.setDisable(false);
+        cbox_fun_pergunta.setDisable(false);
         bot_deletar.setDisable(false);
         bot_salvar.setDisable(false);
+        tb_fun_disciplina.setDisable(false);
+        cbox_fun_disciplina.setDisable(false);
+        bot_fun_disciplina.setDisable(false);
+        bot_fun_disciplin.setDisable(false);
         
     }
     
@@ -199,6 +250,7 @@ public class Editar_FuncionarioController implements Initializable {
         txt_fun_datanascimento.setText("");
         txt_fun_cidade.setText("");
         cbox_fun_estado.setValue(null);
+        cbox_fun_pergunta.setValue(null);
         txt_fun_email.setText("");
         txt_fun_logradouro.setText("");
         txt_fun_bairro.setText("");
@@ -206,7 +258,10 @@ public class Editar_FuncionarioController implements Initializable {
         cbox_fun_funcao.setValue(null);
         txt_fun_usuario.setText("");
         pw_fun_senha.setText("");
+        txt_fun_resposta.setText("");
+        txt_fun_complemento.setText("");
         pw_fun_confirmarsenha.setText("");
+        tb_fun_disciplina.setItems(null);
     }
     
     //Funções FXML<--
@@ -240,8 +295,17 @@ public class Editar_FuncionarioController implements Initializable {
         fun.setFun_email(txt_fun_email.getText());
         fun.setLog_usuario(txt_fun_usuario.getText());
         fun.setLog_senha(pw_fun_senha.getText());
-        fun.setLog_pergunta(null);
-        fun.setLog_resposta(null);
+        fun.setLog_pergunta(cbox_fun_pergunta.getSelectionModel().getSelectedItem().toString());
+        fun.setLog_resposta(txt_fun_resposta.getText());
+        
+        if(cbox_fun_funcao.getSelectionModel().getSelectedItem().equals("Secretária")){
+            fun.setDisciplina(null);
+        }else{
+            ObservableList<Disciplina> ob_disciplinas;
+            ob_disciplinas = FXCollections.observableArrayList(tb_fun_disciplina.getItems());
+            List<Disciplina> listaDis = ob_disciplinas.subList(0, ob_disciplinas.size());
+            fun.setDisciplina(listaDis);
+        }
         
         limpar_professor(event);
         
@@ -262,13 +326,35 @@ public class Editar_FuncionarioController implements Initializable {
         
         Funcionario func = (Funcionario) nome_funcionario.getSelectionModel().getSelectedItem();
         
-        Query query =em.createQuery("select a from Aluno as a where a.alu_id = :alu_id");
-        query.setParameter("alu_id", func.getFun_id());
+        Query query =em.createQuery("select f from Funcionario as f where f.fun_id = :fun_id");
+        query.setParameter("fun_id", func.getFun_id());
         
-        Funcionario f = (Funcionario) query.getSingleResult();
+        Query queryturma = em.createQuery("select t from Turma as t, Funcionario as f where f.fun_id = :id");
+        queryturma.setParameter("id", func.getFun_id()); 
+        
+        Turma t = (Turma) queryturma.getSingleResult();;
+        /*
+        
+        
+        Query queryfun = em.createQuery("select f from Funcionario as f, Turma as t where t.tur_id = :id and f.fun_id = :idd");
+        queryfun.setParameter("id", t.getTur_id());
+        queryfun.setParameter("idd", func.getFun_id());
+        
+        ObservableList<Funcionario> ob_fun= FXCollections.observableArrayList(queryfun.getResultList());
+        tb_turmas.setItems(ob_fun);
+        
+        ObservableList<Funcionario> ob_funcionario;
+        ob_funcionario = FXCollections.observableArrayList(tb_turmas.getItems());
+        List<Funcionario> listafun = ob_funcionario.subList(0, ob_funcionario.size());*/
+        t.setFuncionario(null);
         
         em.getTransaction().begin();
-        em.remove(f);
+        em.persist(t);
+        em.getTransaction().commit();
+        
+        em.getTransaction().begin();
+        Object c=em.merge(func);
+        em.remove(c);
         em.getTransaction().commit();
         
         em.close();
@@ -302,12 +388,11 @@ public class Editar_FuncionarioController implements Initializable {
         if(query.getResultList().isEmpty()){
             System.out.println("Erro");
         }
-        else{
-            deshabilita_campos();
-            
+        else{            
             Funcionario f = (Funcionario) query.getSingleResult();
             editar(f);
         }
+        deshabilita_campos();
     }
     
     public void editar(Funcionario f){
@@ -336,7 +421,26 @@ public class Editar_FuncionarioController implements Initializable {
         txt_fun_cidade.setText(f.getFun_cidade());
         cbox_fun_estado.getSelectionModel().select(f.getFun_estado());
         txt_fun_email.setText(f.getFun_email());
+        cbox_fun_pergunta.getSelectionModel().select(f.getLog_pergunta());
+        txt_fun_resposta.setText(f.getLog_resposta());
+        ObservableList<Disciplina> obdisciplina = FXCollections.observableArrayList(f.getDisciplina());
         
+        ObservableList<Disciplina> a = cbox_fun_disciplina.getItems();
+        cbox_fun_disciplina.setItems(a);
+        for(Disciplina z :obdisciplina){
+            Disciplina h = null;
+            for(Disciplina y : a){
+                if(y.getDis_id() == z.getDis_id()){
+                    h = y;
+                }
+            }
+            if(h != null){
+            a.remove(h);
+            }
+        }
+        
+        
+        tb_fun_disciplina.setItems(obdisciplina);
         bot_deletar.setDisable(false);
         
     }
@@ -378,6 +482,21 @@ public class Editar_FuncionarioController implements Initializable {
         a.remove(d);
         cbox_fun_disciplina.setItems(a);
     }
+    @FXML
+    private void fun_remover(ActionEvent event) {
+        Disciplina d = tb_fun_disciplina.getSelectionModel().getSelectedItem();
+        if(d == null){
+            System.out.println("Tabela Vazio");
+        }else{
+        ObservableList a = tb_fun_disciplina.getItems();
+        ObservableList b = cbox_fun_disciplina.getItems();
+        a.remove(d);
+        b.add(d);
+        tb_fun_disciplina.setItems(a);
+        cbox_fun_disciplina.setItems(b);
+        }
+    }
+    
     //Funções FXML-->
     
     //Funções Menu<--

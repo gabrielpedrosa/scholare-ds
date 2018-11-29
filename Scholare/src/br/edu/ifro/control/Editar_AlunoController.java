@@ -1,7 +1,9 @@
 package br.edu.ifro.control;
 
 import br.edu.ifro.model.Aluno;
+import br.edu.ifro.model.Funcionario;
 import br.edu.ifro.model.Matricula;
+import br.edu.ifro.model.Notas;
 import br.edu.ifro.model.Turma;
 import br.edu.ifro.util.Open;
 import br.eti.diegofonseca.MaskFieldUtil;
@@ -111,12 +113,9 @@ public class Editar_AlunoController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        inicia();
-    }
-    
-    public void inicia(){
         add_cbox();
         add_mask();
+        add_estados();
     }
     
     public void add_cbox(){
@@ -137,6 +136,14 @@ public class Editar_AlunoController implements Initializable {
         cbox_alu_turma.setItems(obturma);
         
         cbox_alu_nome.getSelectionModel().select("Selecione");
+    }
+    
+    public void add_estados(){
+        ObservableList ob_estados = FXCollections.observableArrayList("Acre", "Alagoas", "Amapá", "Amazonas", "Bahia", "Ceará",
+                "Distrito Federal", "Espírito Santo", "Goiás", "Maranhão", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais",
+                "Pará", "Paraíba", "Paraná", "Pernambuco", "Piauí", "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul",
+                "Rondônias", "Roraima", "Santa Catarina", "São Paulo", "Sergipe", "Tocantins");
+        cbox_alu_estado.setItems(ob_estados);
     }
     
     public void add_mask(){
@@ -255,13 +262,30 @@ public class Editar_AlunoController implements Initializable {
         Query query = em.createQuery("select a from Aluno as a where a.alu_id = :alu_id");
         query.setParameter("alu_id", alun.getAlu_id());
         
-        Query querymatricula = em.createQuery("select m from Matricula as m where m.aluno = :alu_id");
-        querymatricula.setParameter("alu_id", nome_aluno.getSelectionModel().getSelectedItem());
+        Query querymatricula = em.createQuery("select m from Matricula as m where m.aluno = :alu_i");
+        querymatricula.setParameter("alu_i", nome_aluno.getSelectionModel().getSelectedItem());
         
         Aluno a = (Aluno) query.getSingleResult();
         Matricula m = (Matricula) querymatricula.getSingleResult();
         
+        Query querynotas = em.createQuery("select n from Notas as n where n.matriculaaluno = :alu_i");
+        querynotas.setParameter("alu_i", m); 
+        
+        List listnotas = querynotas.getResultList();
+        ObservableList ob = FXCollections.observableArrayList(listnotas);
         em.getTransaction().begin();
+        
+        for(Object z :ob){
+            em.remove(z);
+        }
+        /*
+        for(int i = 0; i <= querynotas.getResultList().size(); i++){
+            Notas[] notas = (Notas[]) ob.get(i);
+            System.out.println(notas);
+            em.remove(notas);  
+        }*/
+        
+        
         em.remove(m);
         em.remove(a);
         em.getTransaction().commit();

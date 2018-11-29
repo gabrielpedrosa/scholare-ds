@@ -1,9 +1,11 @@
 package br.edu.ifro.control;
 
+import br.edu.ifro.model.Aluno;
 import br.edu.ifro.model.Funcionario;
 import br.edu.ifro.model.Matricula;
 import br.edu.ifro.model.Turma;
 import br.edu.ifro.util.Open;
+import br.eti.diegofonseca.MaskFieldUtil;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -45,7 +47,7 @@ public class Editar_MatriculaController implements Initializable {
     @FXML
     private TextField txt_mat_responsavel;
     @FXML
-    private ComboBox cbox_mat_aluno;
+    private ComboBox<Aluno> cbox_mat_aluno;
     @FXML
     private ComboBox<Turma> cbox_mat_turma;
     @FXML
@@ -94,7 +96,6 @@ public class Editar_MatriculaController implements Initializable {
         add_cbox();
         
         cbox_mat_matricula.getSelectionModel().select("Selecione");
-        cbox_mat_aluno.getSelectionModel().select("Selecione");
     }
     
     public void add_cbox(){
@@ -102,11 +103,28 @@ public class Editar_MatriculaController implements Initializable {
         EntityManager em = emf.createEntityManager();
         
         Query query = em.createQuery("select m from Matricula as m");
-        List<Matricula> list_matricula = query.getResultList();
-        
+        List<Matricula> list_matricula = query.getResultList();        
         
         ObservableList<Matricula> obmatricula = FXCollections.observableArrayList(list_matricula);
         cbox_mat_matricula.setItems(obmatricula);
+        
+        Query queryaluno = em.createQuery("select a from Aluno as a");
+        Query queryturma = em.createQuery("select t from Turma as t");
+        List<Aluno> list_alunos = queryaluno.getResultList();
+        List<Turma> list_turma = queryturma.getResultList();
+        
+        ObservableList<Aluno> obaluno = FXCollections.observableArrayList(list_alunos);
+        cbox_mat_aluno.setItems(obaluno);
+        
+        ObservableList ob_fun = FXCollections.observableArrayList("EU");
+        cbox_mat_funcionario.setItems(ob_fun);
+        
+        ObservableList<Turma> obturma = FXCollections.observableArrayList(list_turma);
+        cbox_mat_turma.setItems(obturma); 
+    }
+    
+    public void add_mask(){
+        MaskFieldUtil.foneField(txt_mat_telefone);
     }
     
     public void desabilita_campos(){
@@ -124,7 +142,12 @@ public class Editar_MatriculaController implements Initializable {
         txa_mat_observacoes.setDisable(false);
         txt_mat_responsavel.setDisable(false);
         txt_mat_telefone.setDisable(false);
-        cbox_mat_turma.setDisable(false);
+        if(sim.isSelected()){
+            cbox_mat_turma.setDisable(true);
+        }
+        else{
+            cbox_mat_turma.setDisable(false);
+        }
         sim.setDisable(false);
         nao.setDisable(false);
         
@@ -133,19 +156,58 @@ public class Editar_MatriculaController implements Initializable {
 
     @FXML
     private void sim(ActionEvent event) {
+        cbox_mat_turma.setDisable(true);
     }
 
     @FXML
     private void nao(ActionEvent event) {
+        cbox_mat_turma.setDisable(false);
     }
 
     @FXML
     private void salvar_editar(ActionEvent event) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
+            EntityManager em = emf.createEntityManager();
+            
+            Matricula mat = (Matricula) nome_matricula.getSelectionModel().getSelectedItem();
+        
+            Query query =em.createQuery("select m from Matricula as m where m.mat_id = :mat_id");
+            query.setParameter("mat_id", mat.getMat_id());
+
+            Matricula m = (Matricula) query.getSingleResult();
+
+            m.setAluno(cbox_mat_aluno.getSelectionModel().getSelectedItem());
+            m.setMat_data(txt_mat_datacadastro.getText());
+            RadioButton radioselected = (RadioButton) tg_mat_triagem.getSelectedToggle();
+            String rad_fun_triangem = radioselected.getText();
+            m.setMat_triagem(rad_fun_triangem);
+            m.setMat_telefone_responsavel(txt_mat_responsavel.getText());
+            m.setFuncionario(null);
+            m.setMat_observacoes(txa_mat_observacoes.getText());
+            m.setMat_responsavel(txt_mat_responsavel.getText());
+            if(radioselected.getText().equals("Sim")){
+                m.setTurma(null);
+            }
+            else{
+                m.setTurma(cbox_mat_turma.getSelectionModel().getSelectedItem());
+            }
+            
+            em.getTransaction().begin();
+            em.persist(m);
+            em.getTransaction().commit();
+            
+            limpar_matricula(event);
+
+            
+            em.close();
+            emf.close();
+            
+            Open.abrirSucesso(getClass());
     }
 
     @FXML
     private void editar_editar(ActionEvent event) {
-        if(cbox_mat_matricula.getSelectionModel().getSelectedItem().equals("Selecione") && (cbox_mat_aluno.getValue().equals(""))){
+        if(cbox_mat_matricula.getSelectionModel().getSelectedItem().equals("Selecione") && (cbox_mat_aluno.getValue() == null)){
             System.out.println("Selecione um Aluno");
         }
         else{
@@ -162,6 +224,21 @@ public class Editar_MatriculaController implements Initializable {
 
     @FXML
     private void deletar_editar(ActionEvent event) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("scholare");
+        EntityManager em = emf.createEntityManager();
+        
+        Matricula mat = (Matricula) nome_matricula.getSelectionModel().getSelectedItem();
+        
+        Query query =em.createQuery("select m from Matricula as m where m.mat_id = :mat_id");
+        query.setParameter("mat_id", mat.getMat_id());
+        
+        Matricula m = (Matricula) query.getSingleResult();
+        
+        em.getTransaction().begin();
+        em.remove(m);
+        em.getTransaction().commit();
+        
+        em.close();
     }
     
     public void editar(Matricula m){
@@ -180,6 +257,17 @@ public class Editar_MatriculaController implements Initializable {
         }
         
         bot_deletar.setDisable(false);
+    }
+    
+    private void limpar_matricula(ActionEvent event) {
+        txt_mat_responsavel.setText("");
+        txt_mat_telefone.setText("");
+        txa_mat_observacoes.setText("");
+        cbox_mat_aluno.setValue(null);
+        cbox_mat_funcionario.setValue(null);
+        cbox_mat_turma.setValue(null);
+        sim.setSelected(true);
+        cbox_mat_turma.setDisable(true);
     }
 
     @FXML
